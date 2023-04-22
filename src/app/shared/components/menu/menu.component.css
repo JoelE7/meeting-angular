@@ -1,0 +1,22 @@
+/* Menu - INICIO */
+
+p-menubarsub {
+  margin-left: auto;
+}
+
+.nav-background{
+  background: #5e268b !important;
+  border: 0;
+}
+
+.navbar-logo{
+  display: flex;
+}
+
+.navbar-logo img{
+  height: 80px;
+  margin-right: 10px;
+}
+
+
+/* Menu - FIN */
