@@ -1,0 +1,16 @@
+<p-carousel
+  [value]="technologies"
+  [numVisible]="7"
+  [numScroll]="3"
+  [circular]="true"
+  [autoplayInterval]="5000"
+>
+  <ng-template let-technologie pTemplate="item">
+    <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
+      <div>
+        <h6 class="mt-0 mb-3">{{ technologie.name }}</h6>
+        <h4 class="mb-1">{{ technologie.level }}</h4>
+      </div>
+    </div>
+  </ng-template>
+</p-carousel>
