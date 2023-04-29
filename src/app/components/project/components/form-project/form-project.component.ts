@@ -51,25 +51,29 @@ export class FormProjectComponent {
     );
     this.typeProject.push(
       {
-        type: 'FRONT-END',
+        type: 'Frontend',
         value: '1',
       },
       {
-        type: 'BACK-END',
+        type: 'Backend',
         value: '2',
+      },
+      {
+        type: 'Fullstack',
+        value: '3',
       }
     );
     this.complexityProject.push(
       {
-        level: 'BAJO',
+        level: 'Trainee',
         value: '1',
       },
       {
-        level: 'MEDIO',
+        level: 'Junior',
         value: '2',
       },
       {
-        level: 'ALTO',
+        level: 'Senior',
         value: '3',
       }
     );
