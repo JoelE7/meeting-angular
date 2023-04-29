@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 import { UserRoutingModule } from './user-routing.module';
 import { SeeMyProfileComponent } from './pages/see-my-profile/see-my-profile.component';
 
@@ -9,7 +9,8 @@ import { SeeMyProfileComponent } from './pages/see-my-profile/see-my-profile.com
   declarations: [SeeMyProfileComponent],
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    PrimengModule
   ],
   exports : [
     SeeMyProfileComponent
