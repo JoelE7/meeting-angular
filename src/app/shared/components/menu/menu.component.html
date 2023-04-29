@@ -1,44 +1,34 @@
-<nav class="nav-background navbar navbar-expand-lg bg-light" *ngIf="login()">
-    <div class="container-fluid">
-        <a class="navbar-logo" href="#"><img src=""/></a>
+<nav class="nav-background navbar navbar-expand-lg bg-light shadow-sm" *ngIf="login()">
+    <div class="container-fluid w-75">
+        <a class="navbar-brand" href="#">M</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0">
                 <li *ngFor="let item of menu" [pTooltip]="item.tooltip" [showDelay]="item.tooltipOptions.showDelay"
                     [autoHide]="item.tooltipOptions.autoHide" [tooltipEvent]="item.tooltipOptions.tooltipEvent"
-                    [tooltipPosition]="item.tooltipOptions.tooltipPosition">
+                    [tooltipPosition]="item.tooltipOptions.tooltipPosition" class="d-flex justify-content-center alig-content-center">
                     <a [class]="item.class" aria-current="page" [routerLink]="item.url"
                         [routerLinkActive]="item.urlActiveClass">
                         <i [class]="item.icon"></i>
                         {{item.name}}</a>
                 </li>
-                <!-- <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li> -->
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-primary" type="submit">Search</button>
+
+            <form class="d-flex w-25 justify-content-center" role="search" id="searcher">
+                <input class="form-control me-2 buscador" type="search" placeholder="Buscar" aria-label="Search">
             </form>
+            <div class="d-flex w-25" id="butt">
+              <p-button class="me-4" type="submit" label="Ingresar" styleClass="p-button-help" routerLink="/auth/login"></p-button>
+              <p-button class="" type="submit" label="Registrarse" styleClass= "p-button-outlined p-button-help" routerLink="/auth/register"></p-button>
+            </div>
         </div>
     </div>
 </nav>
 
-<div class="container-fluid">
+<div class="">
     <app-main></app-main>
 </div>
 
