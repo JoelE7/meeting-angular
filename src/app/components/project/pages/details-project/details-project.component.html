@@ -1,0 +1,45 @@
+<div class="container m-auto">
+    <div class="header text-center mt-5">
+      <h2 class="text-white">Detalle Proyecto</h2>
+    </div>
+    <p-table [scrollable]="true" scrollHeight="400px">
+      <ng-template pTemplate="header">
+          <tr>
+              <th style="min-width:100px">#</th>
+              <th style="min-width:200px">Nombre</th>
+              <th style="min-width:200px">Descripcion</th>
+              <th style="min-width:200px">Cantidad de participantes</th>
+              <th style="min-width:200px">Complejidad</th>
+              <th style="min-width:200px">Lider #</th>
+              <th style="min-width:200px">Lenguaje</th>
+              <th style="min-width:200px">Estado</th>
+              <th style="min-width:200px">Participantes #</th>
+              <th style="min-width:200px">Fecha inicial</th>
+              <th style="min-width:200px">Fecha final</th>
+              <th style="min-width:200px">Pedir soporte</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-customer>
+          <tr>
+              <td>{{searchProject._id}}</td>
+              <td>{{searchProject.name}}</td>
+              <td>{{searchProject.description}}</td>
+              <td>{{searchProject.amountParticipants}}</td>
+              <td>{{searchProject.complexity}}</td>
+              <td>{{searchProject.liderId}}</td>
+              <td>{{searchProject.languages}}</td>
+              <td>{{searchProject.status}}</td>
+              <td>{{searchProject.participantsId}}</td>
+              <td>{{searchProject.startDate}}</td>
+              <td>{{searchProject.endDate}}</td>
+              <td>{{searchProject.requestSupport}}</td>
+          </tr>
+      </ng-template>      
+  </p-table>
+  <br>
+  <br>
+  <tr>
+    <p-button label="Entrar" styleClass="p-button-raised p-button-success"></p-button>
+  </tr>
+  
+</div>

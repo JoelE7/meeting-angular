@@ -1,12 +1,17 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
-Component
+Component;
 
 @Component({
   selector: 'app-create-project',
   templateUrl: './create-project.component.html',
-  styleUrls: ['./create-project.component.css']
+  styleUrls: ['./create-project.component.css'],
 })
 export class CreateProjectComponent {
 
+
+  createProject(proyecto: any) {
+    console.log("Llego el proyecto desde el form");
+    
+  }
 }

@@ -25,6 +25,11 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'mvp',
+    loadChildren: () =>
+      import('./components/mvp/mvp.module').then((m) => m.MvpModule),
+  },
+  {
     path: '**',
     redirectTo: 'auth',
   },
