@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RequestSendModalComponent } from './request-send-modal.component';
+import { RequestSendModalComponent } from '../../../../components/project/shared/request-send-modal/request-send-modal.component';
 
 describe('RequestSendModalComponent', () => {
   let component: RequestSendModalComponent;

@@ -36,6 +36,8 @@ import { RequestAcceptModalComponent } from './shared/request-accept-modal/reque
     ListProjectComponent,
     CardProjectComponent,
     DetailsProjectComponent,
+    RequestSendModalComponent,
+    RequestAcceptModalComponent,
   ]
 })
 export class ProjectModule { }

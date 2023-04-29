@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RequestAcceptModalComponent } from './request-accept-modal.component';
+import { RequestAcceptModalComponent } from '../../../../components/project/shared/request-accept-modal/request-accept-modal.component';
 
 describe('RequestAcceptModalComponent', () => {
   let component: RequestAcceptModalComponent;
