@@ -18,7 +18,10 @@
             </ul>
 
             <form class="d-flex w-25 justify-content-center" role="search" id="searcher">
-                <input class="form-control me-2 buscador" type="search" placeholder="Buscar" aria-label="Search">
+                <span class="p-input-icon-left">
+                  <i class="pi pi-search"></i>
+                  <input type="text" pInputText placeholder="Buscar" aria-label="Search" class="buscador"/>
+              </span>
             </form>
             <div class="d-flex w-25" id="butt">
               <p-button class="me-2" type="submit" label="Ingresar" styleClass="p-button-help" routerLink="/auth/login"></p-button>

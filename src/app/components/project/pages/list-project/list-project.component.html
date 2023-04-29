@@ -21,7 +21,58 @@
     </div>
   </div>
 
-  <div class="row">
-    <app-card-project></app-card-project>
+  <div class="d-flex">
+<!----------------- COMPONENTE FILTRO -------------------->
+    <div class="w-25" id="filtro">
+      <h2>Filtros</h2>
+
+      <label for="complexity">Complejidad</label>
+      <p-cascadeSelect  optionLabel="complexity"
+                        optionGroupLabel="complexity"
+                        [options]="complexitys"
+                        [style]="{ minWidth: '14rem', marginBottom: '1rem' }"
+                        placeholder="Seleccione una opcion">
+      </p-cascadeSelect>
+
+      <label for="typeProyects">Tipo de proyecto</label>
+      <p-cascadeSelect  optionLabel="typeProyects"
+                        optionGroupLabel="typeProyects"
+                        [options]="typeProyects"
+                        [style]="{ minWidth: '14rem' }"
+                        placeholder="Seleccione una opcion">
+      </p-cascadeSelect>
+      <br><br>
+      <label>Lenguajes:</label><br>
+      <input type="checkbox" value="Javascript"/> Javascript
+      <br>
+      <input type="checkbox" value="C#"/> C#
+      <br>
+      <input type="checkbox" value="Java"/> Java
+      <br><br>
+      <label>Tecnologias:</label><br>
+      <input type="checkbox" value="Angular"/> Angular
+      <br>
+      <input type="checkbox" value="React"/> React
+      <br><br>
+      <label>Estado:</label><br>
+      <input type="checkbox" value="Javascript"/> To Do<br>
+      <input type="checkbox" value="Javascript"/> In Progress<br>
+      <input type="checkbox" value="Javascript"/> Solicitando Apoyo
+      <br><br>
+      <p-button
+      type="button"
+      [style]="{ width: '100%' }"
+      label="Filtrar"
+      class="float-start"
+      styleClass=" p-button-help"
+      routerLink="/project/create"
+      icon="pi pi-search"
+    ></p-button>
+    </div>
+<!------------------------------------->
+
+    <div class="w-75">
+      <app-card-project></app-card-project>
+    </div>
   </div>
 </div>
