@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormMvpComponent } from './form-mvp.component';
 
+import { CreateMvpComponent } from '../../../../../components/mvp/pages/create-mvp/create-mvp.component';
 
 describe('CreateMvpComponent', () => {
-  let component: FormMvpComponent;
-  let fixture: ComponentFixture<FormMvpComponent>;
+  let component: CreateMvpComponent;
+  let fixture: ComponentFixture<CreateMvpComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FormMvpComponent ]
+      declarations: [ CreateMvpComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FormMvpComponent);
+    fixture = TestBed.createComponent(CreateMvpComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
