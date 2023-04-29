@@ -1,0 +1,24 @@
+/* *{
+    background-color: rgb(69, 69, 69) !important;
+} */
+.login{
+  min-height: 500px;
+  background-color: rgb(241, 241, 241);
+}
+
+.p-card	{
+    background-color: #fff ;
+}
+.contenido {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100%;
+    width: 50%;
+    margin: 0 auto;
+  }
+
+
+.p-card-body{
+  padding-top: 0px !important;
+}
