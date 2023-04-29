@@ -16,16 +16,17 @@ export class SuggestionsProjectComponent {
   },
   {
     name:"Proyecto 2",
-    typeofProject:"Fronted",
-    languajes:"Angular",
-    complexity:"Junior",
-    technologies:""
-  },{
-    name:"Proyecto 3",
     typeofProject:"Backend",
     languajes:"Node.js",
     complexity:"Senior",
     technologies:""
+    
+  },{
+    name:"Proyecto 3",
+    typeofProject:"Fronted",
+    languajes:"Javascript",
+    complexity:"Senior",
+    technologies:"Angular"
   },{
     name:"Proyecto 4",
     typeofProject:"Fronted",
