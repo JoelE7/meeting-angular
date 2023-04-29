@@ -35,7 +35,7 @@ export class MenuComponent implements OnInit {
       {
         name: 'Proyectos',
         icon: 'bi bi-clipboard-minus text-center ',
-        url: '/url1',
+        url: '/project/list-project',
         urlActiveClass: 'active',
         tooltip: 'url1',
         tooltipOptions: {
