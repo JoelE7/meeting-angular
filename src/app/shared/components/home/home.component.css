@@ -1,0 +1,30 @@
+.banner{
+  min-height: 550px;
+  width: 100%;
+  background-image: url('../../../../assets/img_6.png');
+  background-size: cover;
+}
+
+.t1{
+  font-size: 80px;
+}
+
+.steps{
+  min-height: 500px;
+}
+
+.step{
+  width: 30%;
+}
+
+.image{
+  height: 60%;
+}
+
+.image img{
+  width: 90%;
+}
+
+.description{
+  height: 40%;
+}
