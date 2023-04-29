@@ -6,13 +6,15 @@ import { FormProjectComponent } from './components/form-project/form-project.com
 import { ListProjectComponent } from './pages/list-project/list-project.component';
 import { CardProjectComponent } from './components/card-project/card-project.component';
 import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
+import { SuggestionsProjectComponent } from './components/suggestions-project/suggestions-project.component';
 
 @NgModule({
   declarations: [
     CreateProjectComponent,
     ListProjectComponent,
     CardProjectComponent,
-    FormProjectComponent
+    FormProjectComponent,
+    SuggestionsProjectComponent
   ],
   imports: [
     CommonModule,

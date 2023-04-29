@@ -1,11 +1,23 @@
+
 <div class="container m-auto">
+  <div class="row">
+    <div class="col">
+      <app-suggestions-project></app-suggestions-project>
+    </div>
+  </div>
   <div class="row py-4">
     <div class="col-8">
       <h2 class="text-dark">Listado de Proyectos</h2>
     </div>
     <div class="col-4">
-      <p-button  type="button"  [style]="{'width' : '100%'}"
-      label="Crear Proyecto"  class="float-end" styleClass=" p-button-help" routerLink="/project/create"></p-button>  
+      <p-button
+        type="button"
+        [style]="{ width: '100%' }"
+        label="Crear Proyecto"
+        class="float-end"
+        styleClass=" p-button-help"
+        routerLink="/project/create"
+      ></p-button>
     </div>
   </div>
 

@@ -1,0 +1,30 @@
+<p-carousel
+  [value]="suggestions"
+  [numVisible]="3"
+  [numScroll]="3"
+  [circular]="true"
+  [responsiveOptions]="responsiveOptions"
+  [autoplayInterval]="5000"
+>
+  <ng-template let-suggestion pTemplate="item">
+    <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
+      <div>
+        <h4 class="mb-1">{{ suggestion.name }}</h4>
+        <h6 class="mt-0 mb-3">{{ suggestion.typeofProject }}</h6>
+        <!-- boton necesita ayuda<p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)"></p-tag> -->
+        <div class="class row">
+          <div class="car-buttons mt-5">
+            <p-button
+              type="button"
+              [style]="{ width: '100%' }"
+              label="Ver detalle"
+              class=""
+              styleClass="p-button-outlined p-button-help"
+              routerLink="/project/detail-project"
+            ></p-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-carousel>
