@@ -35,6 +35,8 @@ import { SidebarModule } from 'primeng/sidebar';
 import { TreeModule } from 'primeng/tree';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CarouselModule } from 'primeng/carousel';
+
 @NgModule({
   providers: [ConfirmationService],
   declarations: [],
@@ -75,6 +77,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     FormsModule,
     ReactiveFormsModule,
     InputTextareaModule,
+    CarouselModule ,
   ],
 })
 export class PrimengModule {}
