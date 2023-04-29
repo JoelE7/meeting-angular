@@ -19,6 +19,11 @@
             <p-button class="" icon="pi pi-file-edit" type="submit" [style]="{'width' : '100%'}"
             label="Editar" styleClass="p-button-help"></p-button>
         </p-tabPanel>
+        <p-tabPanel header="Proyectos">
+          <div class="row">
+              <app-card-project></app-card-project>
+          </div>
+        </p-tabPanel>
         <p-tabPanel header="Estadisticas">
           <div class="row">
             <p-table [value]="[metrics]">
@@ -75,9 +80,10 @@
             </p-table>
           </div>
         </p-tabPanel>
-        <p-tabPanel header="Proyectos">
+        <p-tabPanel header="Contacto">
           <div class="row">
-              <app-card-project></app-card-project>
+            <p><b>Email:</b> ezequiel.sanson@hotmail.com</p>
+
           </div>
         </p-tabPanel>
     </p-tabView>
