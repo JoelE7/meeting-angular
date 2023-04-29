@@ -1,0 +1,8 @@
+<div class="container m-auto">
+  <div class="header text-center mt-5">
+    <h2 class="text-dark">Editar Proyecto</h2>
+  </div>
+  <div class="card m-auto mb-5">
+    <app-form-project [project]="editProject" (emitProject)="updateProject($event)"></app-form-project> 
+  </div>
+</div>

@@ -7,14 +7,18 @@ import { ListProjectComponent } from './pages/list-project/list-project.componen
 import { CardProjectComponent } from './components/card-project/card-project.component';
 import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 import { SuggestionsProjectComponent } from './components/suggestions-project/suggestions-project.component';
+import { DetailsProjectComponent } from './pages/details-project/details-project.component';
+import { UpdateProjectComponent } from './pages/update-project/update-project.component';
 
 @NgModule({
   declarations: [
     CreateProjectComponent,
+    UpdateProjectComponent,
     ListProjectComponent,
     CardProjectComponent,
     FormProjectComponent,
-    SuggestionsProjectComponent
+    SuggestionsProjectComponent,
+    DetailsProjectComponent,
   ],
   imports: [
     CommonModule,
@@ -23,10 +27,11 @@ import { SuggestionsProjectComponent } from './components/suggestions-project/su
   ],
   exports:[
     CreateProjectComponent,
+    UpdateProjectComponent,
     FormProjectComponent,
     ListProjectComponent,
     CardProjectComponent,
-
+    DetailsProjectComponent,
   ]
 })
 export class ProjectModule { }
