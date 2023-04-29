@@ -1,6 +1,15 @@
 <div class="container m-auto">
-  <div class="header text-center mt-5">
-    <h2 class="text-dark ">Listado de Proyectos</h2>
+  <div class="row py-4">
+    <div class="col-8">
+      <h2 class="text-dark">Listado de Proyectos</h2>
+    </div>
+    <div class="col-4">
+      <p-button  type="button"  [style]="{'width' : '100%'}"
+      label="Crear Proyecto"  class="float-end" styleClass=" p-button-help" routerLink="/project/create"></p-button>  
+    </div>
   </div>
-  <app-card-project></app-card-project>
+
+  <div class="row">
+    <app-card-project></app-card-project>
+  </div>
 </div>
