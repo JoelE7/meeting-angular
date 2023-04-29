@@ -9,6 +9,8 @@ import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 import { SuggestionsProjectComponent } from './components/suggestions-project/suggestions-project.component';
 import { DetailsProjectComponent } from './pages/details-project/details-project.component';
 import { UpdateProjectComponent } from './pages/update-project/update-project.component';
+import { RequestSendModalComponent } from './shared/request-send-modal/request-send-modal.component';
+import { RequestAcceptModalComponent } from './shared/request-accept-modal/request-accept-modal.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { UpdateProjectComponent } from './pages/update-project/update-project.co
     FormProjectComponent,
     SuggestionsProjectComponent,
     DetailsProjectComponent,
+    RequestSendModalComponent,
+    RequestAcceptModalComponent,
   ],
   imports: [
     CommonModule,
