@@ -1,15 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 import { UserRoutingModule } from './user-routing.module';
 import { SeeMyProfileComponent } from './pages/see-my-profile/see-my-profile.component';
+import {ProjectModule} from "../project/project.module";
+import { TechnologiesComponent } from './components/technologies/technologies.component';
+import { ListUserComponent } from './pages/list-user/list-user.component';
 
 
 @NgModule({
-  declarations: [SeeMyProfileComponent],
+  declarations: [SeeMyProfileComponent, TechnologiesComponent, ListUserComponent],
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    PrimengModule,
+    ProjectModule
   ],
   exports : [
     SeeMyProfileComponent

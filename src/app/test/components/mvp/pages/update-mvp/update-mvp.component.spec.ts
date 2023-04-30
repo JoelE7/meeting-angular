@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UpdateMvpComponent } from './update-mvp.component';
+import { UpdateMvpComponent } from '../../../../../components/mvp/pages/update-mvp/update-mvp.component';
 
 describe('UpdateMvpComponent', () => {
   let component: UpdateMvpComponent;

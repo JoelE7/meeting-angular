@@ -8,8 +8,8 @@
   [autoplayInterval]="5000"
 >
   <ng-template let-suggestion pTemplate="item">
-    <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
-      <div>
+    <div class="m-2 text-center py-3 px-3 d-flex justify-content-center">
+      <div class="w-75 item-suggestion">
         <h4 class="mb-1">{{ suggestion.name }}</h4>
         <p class="mt-1 mb-3">*{{ suggestion.typeofProject }}</p>
         <!-- boton necesita ayuda<p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)"></p-tag> -->
