@@ -5,10 +5,11 @@ import { UserRoutingModule } from './user-routing.module';
 import { SeeMyProfileComponent } from './pages/see-my-profile/see-my-profile.component';
 import {ProjectModule} from "../project/project.module";
 import { TechnologiesComponent } from './components/technologies/technologies.component';
+import { ListUserComponent } from './pages/list-user/list-user.component';
 
 
 @NgModule({
-  declarations: [SeeMyProfileComponent, TechnologiesComponent],
+  declarations: [SeeMyProfileComponent, TechnologiesComponent, ListUserComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

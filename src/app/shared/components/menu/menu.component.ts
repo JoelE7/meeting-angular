@@ -50,7 +50,7 @@ export class MenuComponent implements OnInit {
       {
         name: 'Usuarios',
         icon: 'bi bi-people',
-        url: '/url2',
+        url: '/user/list-users',
         urlActiveClass: 'active',
         tooltip: 'url2',
         tooltipOptions: {
