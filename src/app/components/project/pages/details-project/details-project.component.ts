@@ -8,23 +8,29 @@ import { Project } from 'src/app/shared/models/project/project.class';
   templateUrl: './details-project.component.html',
   styleUrls: ['./details-project.component.css']
 })
-export class DetailsProjectComponent implements OnInit{
+// export class DetailsProjectComponent implements OnInit{
+//
+//   id:number;
+//   searchProject:Project = new Project();
+//
+//   constructor(private projectService:ProjectService,private activatedRoute:ActivatedRoute){
+//
+//   }
+//
+//   ngOnInit(): void {
+//     let {id} = this.activatedRoute.snapshot.params
+//
+//     this.projectService.detailsProject(id).subscribe((project)=>{
+//       this.searchProject = project;
+//     },(err)=>{
+//       console.log(err);
+//     })
+//   }
+//
+// }
+export class DetailsProjectComponent{
 
-  id:number;
-  searchProject:Project = new Project();
+  constructor(){
 
-  constructor(private projectService:ProjectService,private activatedRoute:ActivatedRoute){
-      
   }
-
-  ngOnInit(): void {
-    let {id} = this.activatedRoute.snapshot.params
-
-    this.projectService.detailsProject(id).subscribe((project)=>{
-      this.searchProject = project;
-    },(err)=>{
-      console.log(err);
-    })
-  }
-
 }
