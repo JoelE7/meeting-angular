@@ -19,13 +19,14 @@ Component;
   selector: 'app-form-project',
   templateUrl: './form-project.component.html',
   styleUrls: ['./form-project.component.css'],
+  encapsulation:ViewEncapsulation.None
 })
 export class FormProjectComponent {
   title: string = 'Crear proyecto';
 
-  @Input() // de padre a hijo
+  @Input() 
   project: Project = new Project();
-  //de hijo a padre
+  
   @Output()
   emitProject: EventEmitter<Project> = new EventEmitter();
 
@@ -51,25 +52,29 @@ export class FormProjectComponent {
     );
     this.typeProject.push(
       {
-        type: 'FRONT-END',
+        type: 'Frontend',
         value: '1',
       },
       {
-        type: 'BACK-END',
+        type: 'Backend',
         value: '2',
+      },
+      {
+        type: 'Fullstack',
+        value: '3',
       }
     );
     this.complexityProject.push(
       {
-        level: 'BAJO',
+        level: 'Trainee',
         value: '1',
       },
       {
-        level: 'MEDIO',
+        level: 'Junior',
         value: '2',
       },
       {
-        level: 'ALTO',
+        level: 'Senior',
         value: '3',
       }
     );
@@ -80,7 +85,7 @@ export class FormProjectComponent {
       this.title = 'Editar proyecto';
     }
     this.startFrom();
-    this.form.get('startDate').disable();
+    //this.form.get('startDate').disable();
   }
 
   startFrom() {
@@ -90,9 +95,12 @@ export class FormProjectComponent {
         Validators.required,
         Validators.minLength(10),
       ]),
-      startDate: new FormControl(this.project.startDate || new Date(), [
+      startDate: new FormControl(this.project.startDate, [
         Validators.required,
       ]),
+      // startDate: new FormControl(this.project.startDate || new Date(), [
+      //   Validators.required,
+      // ]),
       endDate: new FormControl(this.project.endDate, [Validators.required]),
       typeProject: new FormControl(this.project.typeProject, [
         Validators.required,
@@ -119,9 +127,9 @@ export class FormProjectComponent {
     this.newproject.typeProject = this.form.get('typeProject').value;
     this.newproject.amountParticipants =
       this.form.get('amountParticipants').value;
-    this.newproject.status = this.form.get('status').value;
+    //this.newproject.status = this.form.get('status').value;
     this.newproject.liderId = this.form.get('lider').value;
-    this.newproject.requestSupport = this.form.get('requestSupport').value;
+    //this.newproject.requestSupport = this.form.get('requestSupport').value;
 
     this.emitProject.emit(this.newproject);
   }
