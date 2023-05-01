@@ -1,50 +1,121 @@
 <div class="profile">
   <div class="container rounded ">
     <div class="card" style="width:100%; min-height: 700px;">
-    <app-banner [title]="'Proyecto 1'" [subtitle]="'Subtitle'"></app-banner>
+      <app-banner [title]="'Proyecto 1'" [subtitle]="'Subtitle'"></app-banner>
+      <p-tabView class="p-3">
+        <p-tabPanel header="Datos del proyecto">
+          <div class="row">
+            <div class="col-12">
+              <p> Nombre del proyecto:
+                <span>{{searchProject.name}}</span>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <p> Fecha inicio:
+                <span>{{searchProject.startDate | date:'dd/MM/YYYY'}}</span>
+              </p>
+            </div>
+            <div class="col-6">
+              <p> Fecha Fin:
+                <span>{{searchProject.startDate | date:'dd/MM/YYYY'}}</span>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <p> Tipo de proyecto:
+                <span>{{searchProject.typeProject}}</span>
+              </p>
+            </div>
+            <div class="col-6">
+              <p>Cantidad de participantes:
+                <span>{{searchProject.amountParticipants}}</span>
+              </p>
+            </div>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel header="Descripcion">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dapibus massa id tellus dignissim, vel
+            dignissim nulla lacinia. In at varius diam. Aliquam finibus ex et sem pulvinar eleifend. Cras non eros
+            laoreet, fringilla ex non, pulvinar libero. In a odio in risus ultricies elementum. Duis dapibus sapien ac
+            ante venenatis, vitae accumsan ex lacinia. Nullam varius et est quis imperdiet. Ut eget lobortis orci.
+            Suspendisse sodales feugiat metus, quis accumsan eros pretium eu. Nam pharetra aliquam quam. Pellentesque ac
+            cursus nisl, sit amet pulvinar quam. Vivamus sed augue purus. Maecenas dolor orci, rhoncus sed aliquam at,
+            consectetur quis sem. In in tortor sit amet tellus lacinia lobortis id vel ex. Suspendisse sapien tortor,
+            maximus at laoreet sit amet, iaculis sed massa. In hac habitasse platea dictumst.
 
-
-    <p-tabView class="p-3">
-      <p-tabPanel header="Descripcion">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dapibus massa id tellus dignissim, vel dignissim nulla lacinia. In at varius diam. Aliquam finibus ex et sem pulvinar eleifend. Cras non eros laoreet, fringilla ex non, pulvinar libero. In a odio in risus ultricies elementum. Duis dapibus sapien ac ante venenatis, vitae accumsan ex lacinia. Nullam varius et est quis imperdiet. Ut eget lobortis orci. Suspendisse sodales feugiat metus, quis accumsan eros pretium eu. Nam pharetra aliquam quam. Pellentesque ac cursus nisl, sit amet pulvinar quam. Vivamus sed augue purus. Maecenas dolor orci, rhoncus sed aliquam at, consectetur quis sem. In in tortor sit amet tellus lacinia lobortis id vel ex. Suspendisse sapien tortor, maximus at laoreet sit amet, iaculis sed massa. In hac habitasse platea dictumst.
-
-          Ut quis est id lectus vulputate tempus at posuere urna. Sed faucibus malesuada augue egestas volutpat. Curabitur viverra ultricies urna, at sodales mi porttitor non. Cras ac mauris in ante faucibus suscipit. Proin sit amet laoreet purus. Sed tristique pharetra ullamcorper. Maecenas eu nulla nunc. Quisque fermentum, sapien ut consectetur laoreet, tortor mi pulvinar mauris, eu condimentum tellus nunc quis orci. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer commodo nec nulla eu mattis. Etiam luctus mauris non dictum suscipit. Quisque eu ante id risus ornare tincidunt. Praesent ante metus, venenatis ac suscipit ut, maximus vitae augue. Nullam id tellus placerat, hendrerit quam et, varius turpis. Proin sit amet consectetur orci, nec ultricies magna. Cras nec dictum dolor, at sollicitudin purus.</p>
-      </p-tabPanel>
-      <p-tabPanel header="Tecnologias">
-        <p>Angular</p>
-        <p>Javascript</p>
-        <p>HTML</p>
-        <p>CSS</p>
-        <p>Nodejs</p>
-        <p>MongoDb</p>
-      </p-tabPanel>
-      <p-tabPanel header="Integrantes">
-        <div class="row">
-          <h5>Ezequiel</h5>
+            Ut quis est id lectus vulputate tempus at posuere urna. Sed faucibus malesuada augue egestas volutpat.
+            Curabitur viverra ultricies urna, at sodales mi porttitor non. Cras ac mauris in ante faucibus suscipit.
+            Proin sit amet laoreet purus. Sed tristique pharetra ullamcorper. Maecenas eu nulla nunc. Quisque fermentum,
+            sapien ut consectetur laoreet, tortor mi pulvinar mauris, eu condimentum tellus nunc quis orci. Class aptent
+            taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer commodo nec nulla eu
+            mattis. Etiam luctus mauris non dictum suscipit. Quisque eu ante id risus ornare tincidunt. Praesent ante
+            metus, venenatis ac suscipit ut, maximus vitae augue. Nullam id tellus placerat, hendrerit quam et, varius
+            turpis. Proin sit amet consectetur orci, nec ultricies magna. Cras nec dictum dolor, at sollicitudin purus.
+          </p>
+        </p-tabPanel>
+        <p-tabPanel header="Tecnologias">
+          <p>Angular</p>
+          <p>Javascript</p>
+          <p>HTML</p>
+          <p>CSS</p>
+          <p>Nodejs</p>
+          <p>MongoDb</p>
+        </p-tabPanel>
+        <p-tabPanel header="Integrantes" *ngIf="projectAccept == true">
+          <div class="row mt-3">
+            <div class="col-2">
+              <img width="100" height="100" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user"
+                class="rounded-circle">
+            </div>
+            <div class="col-7">
+              <h1>Joel Escobar</h1>
+              <h4>Front-end developer</h4>
+            </div>
+            <div class="col-3 text-center">
+              <p-button type="button" [style]="{ width: '100%' }" label="Ver perfil" class=""
+                styleClass="p-button-outlined p-button-help" routerLink="/user/see-my-profile"></p-button>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-2">
+              <img width="100" height="100" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="user"
+                class="rounded-circle">
+            </div>
+            <div class="col-7">
+              <h1>Ezequiel Sanson</h1>
+              <h4>Back-end developer</h4>
+            </div>
+            <div class="col-3 text-center">
+              <p-button type="button" [style]="{ width: '100%' }" label="Ver perfil" class=""
+                styleClass="p-button-outlined p-button-help" routerLink="/project/create"></p-button>
+            </div>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel header="Tareas" *ngIf="projectAccept == true">
+          <div class="row">
+            <div class="col-12">
+              <app-table-task-list [tasks]="tasks"></app-table-task-list>
+            </div>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel header="MVPs" *ngIf="projectAccept == true">
+          <div class="row">
+            <p>MVP 0 - Crear pantallas que describen las funcionalidades</p>
+            <p>MVP 1 - Crear funcionalidades core</p>
+            <p>MVP 2 - Agregar metricas y coneccion Github</p>
+            <p>MVP 3 - Entrega de proyecto</p>
+          </div>
+        </p-tabPanel>
+        <div class="row text-end mt-5">
+          <div class="col-12">
+            <p-button (click)="joinAProject()" *ngIf="projectAccept == false" type="button" [style]="{ width: '100%' }"
+              label="Entrar" class="" styleClass=" p-button-help"></p-button>
+          </div>
         </div>
-        <div class="row">
-          <h5>Joel</h5>
-        </div>
-        <div class="row">
-          <h5>Jessi</h5>
-        </div>
-        <div class="row">
-          <h5>Nahue</h5>
-        </div>
-        <div class="row">
-          <h5>Diego</h5>
-        </div>
-      </p-tabPanel>
-      <p-tabPanel header="MVPs">
-        <div class="row">
-          <p>MVP 0 - Crear pantallas que describen las funcionalidades</p>
-          <p>MVP 1 - Crear funcionalidades core</p>
-          <p>MVP 2 - Agregar metricas y coneccion Github</p>
-          <p>MVP 3 - Entrega de proyecto</p>
-        </div>
-      </p-tabPanel>
-    </p-tabView>
-
+      </p-tabView>
     </div>
   </div>
 </div>
