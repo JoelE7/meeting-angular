@@ -38,6 +38,9 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CarouselModule } from 'primeng/carousel';
 import { TabViewModule } from 'primeng/tabview';
 import { CascadeSelectModule } from 'primeng/cascadeselect';
+import { ChartModule } from 'primeng/chart';
+import { ImageModule } from 'primeng/image';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   providers: [ConfirmationService],
@@ -82,6 +85,9 @@ import { CascadeSelectModule } from 'primeng/cascadeselect';
     CarouselModule,
     TabViewModule,
     CascadeSelectModule,
+    ChartModule,
+    ImageModule,
+    TagModule,
   ],
 })
 export class PrimengModule {}
