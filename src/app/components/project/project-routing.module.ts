@@ -12,6 +12,7 @@ const routes: Routes = [
       { path: 'create', component: CreateProjectComponent },
       { path: 'update', component: UpdateProjectComponent },
       { path: 'list-project', component: ListProjectComponent },
+      { path: 'list-project-support', component: ListProjectComponent },
       { path: 'details-project/1', component: DetailsProjectComponent },
     ],
   },
