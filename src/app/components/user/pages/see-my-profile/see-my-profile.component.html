@@ -1,0 +1,102 @@
+<div class="profile">
+  <div class="container rounded ">
+    <div class="card" style="width:100%; min-height: 700px;">
+      <div class="d-flex banner-profile">
+        <img src="../../../../../assets/img/profile.jfif" alt="Foto de usuario" id="profile" class="mt-2 ms-5">
+        <div class="p-5">
+          <h3 class="text-white">Ezequiel Sanson</h3>
+          <h6 class="fst-italic text-secondary">Software Developer</h6>
+          <span class="fst-italic text-secondary small">1500pts - Semi Senior</span>
+        </div>
+      </div>
+      <p-tabView class="p-3">
+        <p-tabPanel header="Mi Perfil">
+            <h5>Conocimientos:</h5>
+            <app-technologies></app-technologies>
+            <h5>Experiencia Laboral:</h5>
+            <p>Mercado Libre</p>
+            <p>Accenture</p>
+            <p-button class="" icon="pi pi-file-edit" type="submit" [style]="{'width' : '100%'}"
+            label="Editar" styleClass="p-button-help"></p-button>
+        </p-tabPanel>
+        <p-tabPanel header="Proyectos">
+          <div class="row">
+              <app-card-project></app-card-project>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel header="Estadísticas">
+          <div class="row">
+            <p-table [value]="[metrics]">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Contribuciones</th>
+                  <th>Frecuencia de contribuciones</th>
+                  <th>Comentarios en el código</th>
+                  <th>Uso de herramientas de control de calidad</th>
+                  <th>Uso de ramas</th>
+                  <th>Tiempo de respuesta</th>
+                  <th>Popularidad del proyecto</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-metric>
+                <tr>
+                  <td [ngClass]="{'good': metric.contributions > 100, 'bad': metric.contributions <= 100}">
+                    {{metric.contributions}}
+                    <i *ngIf="metric.contributions > 100" class="pi pi-check"></i>
+                    <i *ngIf="metric.contributions <= 100" class="pi pi-times"></i>
+                  </td>
+                  <td [ngClass]="{'good': metric.contributionFrequency > 5, 'bad': metric.contributionFrequency <= 5}">
+                    {{metric.contributionFrequency}}
+                    <i *ngIf="metric.contributionFrequency > 5" class="pi pi-check"></i>
+                    <i *ngIf="metric.contributionFrequency <= 5" class="pi pi-times"></i>
+                  </td>
+                  <td [ngClass]="{'good': metric.codeComments, 'bad': !metric.codeComments}">
+                    {{metric.codeComments ? 'Sí' : 'No'}}
+                    <i *ngIf="metric.codeComments" class="pi pi-check"></i>
+                    <i *ngIf="!metric.codeComments" class="pi pi-times"></i>
+                  </td>
+                  <td [ngClass]="{'good': metric.qualityToolsUsed, 'bad': !metric.qualityToolsUsed}">
+                    {{metric.qualityToolsUsed ? 'Sí' : 'No'}}
+                    <i *ngIf="metric.qualityToolsUsed" class="pi pi-check"></i>
+                    <i *ngIf="!metric.qualityToolsUsed" class="pi pi-times"></i>
+                  </td>
+                  <td [ngClass]="{'good': metric.branchUsage > 3, 'bad': metric.branchUsage <= 3}">
+                    {{metric.branchUsage}}
+                    <i *ngIf="metric.branchUsage > 3" class="pi pi-check"></i>
+                    <i *ngIf="metric.branchUsage <= 3" class="pi pi-times"></i>
+                  </td>
+                  <td [ngClass]="{'good': metric.responseTime < 24, 'bad': metric.responseTime >= 24}">
+                    {{metric.responseTime}} horas
+                    <i *ngIf="metric.responseTime < 24" class="pi pi-check"></i>
+                    <i *ngIf="metric.responseTime >= 24" class="pi pi-times"></i>
+                  </td>
+                  <td [ngClass]="{'good': metric.popularity > 1000, 'bad': metric.popularity <= 1000}">
+                    {{metric.popularity}}
+                    <i *ngIf="metric.popularity > 1000" class="pi pi-check"></i>
+                    <i *ngIf="metric.popularity <= 1000" class="pi pi-times"></i>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+          <div class="row p-2">
+            <app-chart-bar></app-chart-bar>
+            <div class="col-6">
+              <app-chart-doughnut></app-chart-doughnut>
+            </div>
+            <div class="col-6">
+              <app-chart-line></app-chart-line>
+            </div>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel header="Contacto">
+          <div class="row">
+            <p><b>Email:</b> ezequiel.sanson@hotmail.com</p>
+
+          </div>
+        </p-tabPanel>
+    </p-tabView>
+    </div>
+  </div>
+</div>
+

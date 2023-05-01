@@ -1,0 +1,14 @@
+<form [formGroup]="form" (ngSubmit)="submitMvp()" class="form">
+    <div class="row mt-5 p-0">
+        <div class="offset-0 col-sm-12 col-md-10 offset-md-1">
+            <label for="name" class="pl-5">Nombre </label>
+            <input type="text" pInputText formControlName="name" class="form-control" />
+            <span class="danger" *ngIf="
+              form.get('name').hasError('required') &&
+              form.get('name').touched
+            ">
+                <small class="p-error">Este campo es <strong>requerido</strong></small>
+            </span>
+        </div>
+    </div>
+</form>

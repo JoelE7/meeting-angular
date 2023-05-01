@@ -1,6 +1,6 @@
 <nav class="nav-background navbar navbar-expand-lg bg-light shadow-sm" *ngIf="login()">
     <div class="container-fluid w-75">
-        <a class="navbar-brand" href="#">M</a>
+        <a class="navbar-brand" routerLink="/home"><img src="../../../../assets/img/logo.png" alt="Logo" width="40"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -18,11 +18,15 @@
             </ul>
 
             <form class="d-flex w-25 justify-content-center" role="search" id="searcher">
-                <input class="form-control me-2 buscador" type="search" placeholder="Buscar" aria-label="Search">
+                <span class="p-input-icon-left">
+                  <i class="pi pi-search"></i>
+                  <input type="text" pInputText placeholder="Buscar" aria-label="Search" class="buscador"/>
+              </span>
             </form>
             <div class="d-flex w-25" id="butt">
-              <p-button class="me-4" type="submit" label="Ingresar" styleClass="p-button-help" routerLink="/auth/login"></p-button>
-              <p-button class="" type="submit" label="Registrarse" styleClass= "p-button-outlined p-button-help" routerLink="/auth/register"></p-button>
+              <p-button class="me-2" type="submit" label="Ingresar" styleClass="p-button-help" routerLink="/auth/login"></p-button>
+              <p-button class="me-2" type="submit" label="Registrarse" styleClass= "p-button-outlined p-button-help" routerLink="/auth/register"></p-button>
+              <p-button class="" type="submit" label="Perfil" styleClass= "p-button-outlined p-button-help" routerLink="/user/see-my-profile"></p-button>
             </div>
         </div>
     </div>

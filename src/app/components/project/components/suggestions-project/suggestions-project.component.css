@@ -1,0 +1,9 @@
+.p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
+  background-color: #a855f7 !important;
+}
+
+.item-suggestion{
+  border: 1px solid #a855f7 !important;
+  border-radius: 10px;
+  padding: 20px 0px;
+}
