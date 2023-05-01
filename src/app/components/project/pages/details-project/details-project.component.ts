@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from 'src/app/api/services/project/project.service';
 import { Project } from 'src/app/shared/models/project/project.class';
+import { Task } from '../../interfaces/tasks.interface';
 
 @Component({
   selector: 'app-details-project',
   templateUrl: './details-project.component.html',
-  styleUrls: ['./details-project.component.css']
+  styleUrls: ['./details-project.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 // export class DetailsProjectComponent implements OnInit{
 //
 //   id:number;
-//   searchProject:Project = new Project();
 //
 //   constructor(private projectService:ProjectService,private activatedRoute:ActivatedRoute){
 //
@@ -28,9 +29,34 @@ import { Project } from 'src/app/shared/models/project/project.class';
 //   }
 //
 // }
-export class DetailsProjectComponent{
+export class DetailsProjectComponent {
+  tasks: Task[] = [
+    {
+      numberTask: '1',
+      name: 'crud de tareas',
+      status: 'IN_PROCESS',
+      assignedMember: 'Joel',
+    },
+    {
+      numberTask: '2',
+      name: 'crud de mvp',
+      status: 'FINALIZED',
+      assignedMember: 'Ezequiel',
+    },
+    {
+      numberTask: '3',
+      name: 'crud de usuarios',
+      status: 'NOTASSIGNED',
+    },
+  ];
 
-  constructor(){
+  projectAccept = false;
 
+  searchProject: Project = new Project();
+
+  constructor() {}
+
+  joinAProject() {
+    this.projectAccept = true;
   }
 }
