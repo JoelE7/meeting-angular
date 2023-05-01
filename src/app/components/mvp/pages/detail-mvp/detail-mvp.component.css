@@ -1,0 +1,61 @@
+.user-info {
+  display: flex;
+  align-items: center;
+  background-color: #f2f2f2;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-avatar {
+  margin-right: 10px;
+}
+
+.user-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.commits-info {
+  margin-top: 10px;
+}
+
+.commits-info ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.commits-info li {
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #666;
+  border-left: 3px solid #007bff;
+  padding-left: 10px;
+}
+
+.commits-info li a {
+  text-decoration: none;
+  color: #666;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+}
+
+.task-list li {
+  margin-bottom: 10px;
+}
+
+.task-list label {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #333;
+}
+
+.task-list input[type="checkbox"] {
+  margin-right: 10px;
+}
