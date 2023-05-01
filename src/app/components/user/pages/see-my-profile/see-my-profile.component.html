@@ -24,7 +24,7 @@
               <app-card-project></app-card-project>
           </div>
         </p-tabPanel>
-        <p-tabPanel header="Estadisticas">
+        <p-tabPanel header="Estadísticas">
           <div class="row">
             <p-table [value]="[metrics]">
               <ng-template pTemplate="header">
@@ -78,6 +78,15 @@
                 </tr>
               </ng-template>
             </p-table>
+          </div>
+          <div class="row p-2">
+            <app-chart-bar></app-chart-bar>
+            <div class="col-6">
+              <app-chart-doughnut></app-chart-doughnut>
+            </div>
+            <div class="col-6">
+              <app-chart-line></app-chart-line>
+            </div>
           </div>
         </p-tabPanel>
         <p-tabPanel header="Contacto">

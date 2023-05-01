@@ -6,10 +6,13 @@ import { SeeMyProfileComponent } from './pages/see-my-profile/see-my-profile.com
 import {ProjectModule} from "../project/project.module";
 import { TechnologiesComponent } from './components/technologies/technologies.component';
 import { ListUserComponent } from './pages/list-user/list-user.component';
+import { ChartBarComponent } from './components/chart-bar/chart-bar.component';
+import { ChartDoughnutComponent } from './components/chart-doughnut/chart-doughnut.component';
+import { ChartLineComponent } from './components/chart-line/chart-line.component';
 
 
 @NgModule({
-  declarations: [SeeMyProfileComponent, TechnologiesComponent, ListUserComponent],
+  declarations: [SeeMyProfileComponent, TechnologiesComponent, ListUserComponent, ChartBarComponent, ChartDoughnutComponent, ChartLineComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -17,7 +20,7 @@ import { ListUserComponent } from './pages/list-user/list-user.component';
     ProjectModule
   ],
   exports : [
-    SeeMyProfileComponent
+    SeeMyProfileComponent, ChartBarComponent, ChartDoughnutComponent, ChartLineComponent
   ]
 })
 export class UserModule { }
