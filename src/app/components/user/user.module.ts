@@ -9,6 +9,7 @@ import { ListUserComponent } from './pages/list-user/list-user.component';
 import { ChartBarComponent } from './components/chart-bar/chart-bar.component';
 import { ChartDoughnutComponent } from './components/chart-doughnut/chart-doughnut.component';
 import { ChartLineComponent } from './components/chart-line/chart-line.component';
+import {AvatarModule} from "primeng/avatar";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ChartLineComponent } from './components/chart-line/chart-line.component
     CommonModule,
     UserRoutingModule,
     PrimengModule,
-    ProjectModule
+    ProjectModule,
+    AvatarModule
   ],
   exports : [
     SeeMyProfileComponent, ChartBarComponent, ChartDoughnutComponent, ChartLineComponent

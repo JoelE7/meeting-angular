@@ -4,184 +4,34 @@
     <div class="col-8">
       <h2 class="text-dark">Usuarios por ranking</h2>
     </div>
-    <div class="col-4">
-      <p-button
-        type="button"
-        [style]="{ width: '100%' }"
-        label="Crear Proyecto"
-        class="float-end"
-        styleClass=" p-button-help"
-        routerLink="/project/create"
-      ></p-button>
-    </div>
   </div>
 
-  <div class="card-container">
-    <div class="card">
-<!--      Crear componente card-->
-      <p-card>
-        <ng-template pTemplate="header">
-          <div class="header-container">
-            <img src="https://via.placeholder.com/150x150" alt="Foto de perfil" class="profile-picture">
-            <div class="header-info">
-              <div class="name">Nombre del usuario</div>
-              <div class="profession">Profesión del usuario</div>
-              <div class="score">1500 pts</div>
+    <p-table [value]="developers" [paginator]="true" [rows]="10">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Foto</th>
+          <th>Nombre</th>
+          <th>Puntaje</th>
+          <th>Tecnologías/Lenguajes</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-developer>
+        <tr>
+          <td>
+            <div class="developer-avatar">
+              <p-avatar [image]="developer.avatarUrl" size="large" shape="circle"></p-avatar>
             </div>
-          </div>
-        </ng-template>
-        <ng-template pTemplate="content">
-          <div class="description">
-            <p>Lenguajes y tecnologías utilizadas:</p>
-            <div class="technology-list">
-              <div class="technology-item">
-                <i class="fab fa-js technology-icon"></i>
-                <div class="technology-name">JavaScript</div>
-              </div>
-              <div class="technology-item">
-                <i class="fab fa-angular technology-icon"></i>
-                <div class="technology-name">Angular</div>
-              </div>
-              <div class="technology-item">
-                <i class="fab fa-react technology-icon"></i>
-                <div class="technology-name">React</div>
-              </div>
-            </div>
-          </div>
-        </ng-template>
-      </p-card>
-    </div>
-    <div class="card">
-      <p-card>
-        <ng-template pTemplate="header">
-          <div class="header-container">
-            <img src="https://via.placeholder.com/150x150" alt="Foto de perfil" class="profile-picture">
-            <div class="header-info">
-              <div class="name">Nombre del usuario</div>
-              <div class="profession">Profesión del usuario</div>
-              <div class="score">1400 pts</div>
-            </div>
-          </div>
-        </ng-template>
-        <ng-template pTemplate="content">
-          <div class="description">
-            <p>Lenguajes y tecnologías utilizadas:</p>
-            <div class="technology-list">
-              <div class="technology-item">
-                <i class="fab fa-js technology-icon"></i>
-                <div class="technology-name">JavaScript</div>
-              </div>
-              <div class="technology-item">
-                <i class="fab fa-angular technology-icon"></i>
-                <div class="technology-name">Angular</div>
-              </div>
-              <div class="technology-item">
-                <i class="fab fa-react technology-icon"></i>
-                <div class="technology-name">React</div>
-              </div>
-            </div>
-          </div>
-        </ng-template>
-      </p-card>
-    </div>
-    <div class="card">
-      <p-card>
-        <ng-template pTemplate="header">
-          <div class="header-container">
-            <img src="https://via.placeholder.com/150x150" alt="Foto de perfil" class="profile-picture">
-            <div class="header-info">
-              <div class="name">Nombre del usuario</div>
-              <div class="profession">Profesión del usuario</div>
-              <div class="score">1300 pts</div>
-            </div>
-          </div>
-        </ng-template>
-        <ng-template pTemplate="content">
-          <div class="description">
-            <p>Lenguajes y tecnologías utilizadas:</p>
-            <div class="technology-list">
-              <div class="technology-item">
-                <i class="fab fa-js technology-icon"></i>
-                <div class="technology-name">JavaScript</div>
-              </div>
-              <div class="technology-item">
-                <i class="fab fa-angular technology-icon"></i>
-                <div class="technology-name">Angular</div>
-              </div>
-              <div class="technology-item">
-                <i class="fab fa-react technology-icon"></i>
-                <div class="technology-name">React</div>
-              </div>
-            </div>
-          </div>
-        </ng-template>
-      </p-card>
-    </div>
-    <div class="card">
-      <p-card>
-        <ng-template pTemplate="header">
-          <div class="header-container">
-            <img src="https://via.placeholder.com/150x150" alt="Foto de perfil" class="profile-picture">
-            <div class="header-info">
-              <div class="name">Nombre del usuario</div>
-              <div class="profession">Profesión del usuario</div>
-              <div class="score">1300 pts</div>
-            </div>
-          </div>
-        </ng-template>
-        <ng-template pTemplate="content">
-          <div class="description">
-            <p>Lenguajes y tecnologías utilizadas:</p>
-            <div class="technology-list">
-              <div class="technology-item">
-                <i class="fab fa-js technology-icon"></i>
-                <div class="technology-name">JavaScript</div>
-              </div>
-              <div class="technology-item">
-                <i class="fab fa-angular technology-icon"></i>
-                <div class="technology-name">Angular</div>
-              </div>
-              <div class="technology-item">
-                <i class="fab fa-react technology-icon"></i>
-                <div class="technology-name">React</div>
-              </div>
-            </div>
-          </div>
-        </ng-template>
-      </p-card>
-    </div>
-    <div class="card">
-      <p-card>
-        <ng-template pTemplate="header">
-          <div class="header-container">
-            <img src="https://via.placeholder.com/150x150" alt="Foto de perfil" class="profile-picture">
-            <div class="header-info">
-              <div class="name">Nombre del usuario</div>
-              <div class="profession">Profesión del usuario</div>
-              <div class="score">800 pts</div>
-            </div>
-          </div>
-        </ng-template>
-        <ng-template pTemplate="content">
-          <div class="description">
-            <p>Lenguajes y tecnologías utilizadas:</p>
-            <div class="technology-list">
-              <div class="technology-item">
-                <i class="fab fa-js technology-icon"></i>
-                <div class="technology-name">JavaScript</div>
-              </div>
-              <div class="technology-item">
-                <i class="fab fa-angular technology-icon"></i>
-                <div class="technology-name">Angular</div>
-              </div>
-              <div class="technology-item">
-                <i class="fab fa-react technology-icon"></i>
-                <div class="technology-name">React</div>
-              </div>
-            </div>
-          </div>
-        </ng-template>
-      </p-card>
-    </div>
-  </div>
+          </td>
+          <td>{{ developer.name }}</td>
+          <td>{{ developer.score }}</td>
+          <td>
+            <ul class="developer-skills">
+              <li *ngFor="let skill of developer.skills">
+                <i class="{{skill}}"></i>
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
   </div>
