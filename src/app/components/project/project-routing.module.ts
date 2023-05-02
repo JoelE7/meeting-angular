@@ -5,6 +5,7 @@ import { ListProjectComponent } from 'src/app/components/project/pages/list-proj
 import { DetailsProjectComponent } from './pages/details-project/details-project.component';
 import { UpdateProjectComponent } from './pages/update-project/update-project.component';
 
+
 const routes: Routes = [
   {
     path: '',
@@ -13,6 +14,7 @@ const routes: Routes = [
       { path: 'update', component: UpdateProjectComponent },
       { path: 'list-project', component: ListProjectComponent },
       { path: 'details-project/1', component: DetailsProjectComponent },
+     
     ],
   },
 ];
