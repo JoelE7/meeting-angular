@@ -13,12 +13,12 @@
           </div>
           <div class="row">
             <div class="col-6">
-              <p> Fecha inicio: 4/1/2023
+              <p> <b>Fecha inicio:</b> 4/1/2023
                 <span>{{searchProject.startDate | date:'dd/MM/YYYY'}}</span>
               </p>
             </div>
             <div class="col-6">
-              <p> Fecha Fin: 6/2/2023
+              <p> <b>Fecha Fin:</b> 6/2/2023
                 <span>{{searchProject.startDate | date:'dd/MM/YYYY'}}</span>
               </p>
             </div>
@@ -30,7 +30,7 @@
               </p>
             </div> -->
             <div class="col-12">
-              <p>Cantidad de participantes: 6
+              <p><b>Cantidad de participantes:</b> 6
                 <span>{{searchProject.amountParticipants}}</span>
               </p>
             </div>
@@ -44,59 +44,47 @@
           </p>
         </p-tabPanel>
         <p-tabPanel header="Perfiles">
-          <div class="w-50 d-flex justify-content-between">
-            <p>Front End Developer Angular</p>
+          <div class="w-50 d-flex justify-content-between align-items-center">
+            <div class="d-flex">
+              <p-radioButton name="profile" value="front-1" inputId="1" class="me-1" [(ngModel)]="profile"></p-radioButton>
+              <p style="margin: 0">Front End Developer Angular</p>
+            </div>
             <p-tag [severity]="'warning'" value="SIN ASIGNAR"></p-tag>
           </div>
           <div class="w-50 d-flex justify-content-between">
-            <p>Front End Developer Angular</p>
+            <div class="d-flex">
+              <p-radioButton name="profile" value="front-2" inputId="2" class="me-1" [(ngModel)]="profile"></p-radioButton>
+              <p style="margin: 0">Front End Developer Angular</p>
+            </div>
             <p-tag [severity]="'warning'" value="SIN ASIGNAR"></p-tag>
           </div>
           <div class="w-50 d-flex justify-content-between">
-            <p>Back End Developer Node JS</p>
+            <div class="d-flex">
+              <p-radioButton name="profile" value="back-1" inputId="3" class="me-1" [(ngModel)]="profile"></p-radioButton>
+              <p style="margin: 0">Back End Developer Node JS</p>
+            </div>
             <p-tag [severity]="'warning'" value="SIN ASIGNAR"></p-tag>
           </div>
           <div class="w-50 d-flex justify-content-between">
-            <p>Back End Developer Node JS</p>
+            <div class="d-flex">
+              <p-radioButton name="profile" value="back-2" inputId="4" class="me-1" [(ngModel)]="profile"></p-radioButton>
+              <p style="margin: 0">Back End Developer Node JS</p>
+            </div>
             <p-tag [severity]="'warning'" value="SIN ASIGNAR"></p-tag>
           </div>
           <div class="w-50 d-flex justify-content-between">
-            <p>UX Designer</p>
+            <div class="d-flex">
+              <p-radioButton name="profile" value="ux" inputId="2" class="me-1" [(ngModel)]="profile"></p-radioButton>
+              <p style="margin: 0">UX Designer</p>
+            </div>
             <p-tag [severity]="'warning'" value="SIN ASIGNAR"></p-tag>
           </div>
           <div class="w-50 d-flex justify-content-between">
-            <p>Gestor de Base de Datos MongoDB</p>
+            <div class="d-flex">
+              <p-radioButton name="profile" value="bbd" inputId="2" class="me-1" [(ngModel)]="profile"></p-radioButton>
+              <p style="margin: 0">Gestor de Base de Datos MongoDB</p>
+            </div>
             <p-tag [severity]="'warning'" value="SIN ASIGNAR"></p-tag>
-          </div>
-        </p-tabPanel>
-        <p-tabPanel header="Integrantes" *ngIf="projectAccept == true">
-          <div class="row mt-3">
-            <div class="col-2">
-              <img width="100" height="100" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user"
-                class="rounded-circle">
-            </div>
-            <div class="col-7">
-              <h1>Joel Escobar</h1>
-              <h4>Front-end developer</h4>
-            </div>
-            <div class="col-3 text-center">
-              <p-button type="button" [style]="{ width: '100%' }" label="Ver perfil" class=""
-                styleClass="p-button-outlined p-button-help" routerLink="/user/see-my-profile"></p-button>
-            </div>
-          </div>
-          <div class="row mt-3">
-            <div class="col-2">
-              <img width="100" height="100" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="user"
-                class="rounded-circle">
-            </div>
-            <div class="col-7">
-              <h1>Ezequiel Sanson</h1>
-              <h4>Back-end developer</h4>
-            </div>
-            <div class="col-3 text-center">
-              <p-button type="button" [style]="{ width: '100%' }" label="Ver perfil" class=""
-                styleClass="p-button-outlined p-button-help" routerLink="/project/create"></p-button>
-            </div>
           </div>
         </p-tabPanel>
         <p-tabPanel header="Colaborar">
@@ -112,13 +100,43 @@
                       label="Colaborar con proyecto" class="" styleClass=" p-button-help"><i class="m-1 fas fa-hands-helping"></i></p-button>
           </div>
         </p-tabPanel>
-        <!-- <p-tabPanel header="Tareas" *ngIf="projectAccept == true">
+        <p-tabPanel header="Integrantes" *ngIf="projectAccept == true">
+          <div class="row mt-3">
+            <div class="col-2 d-flex justify-content-center">
+              <img width="60" height="60" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user"
+                class="rounded-circle">
+            </div>
+            <div class="col-7">
+              <h4>Joel Escobar</h4>
+              <h6>Front-end developer</h6>
+            </div>
+            <div class="col-3 text-center">
+              <p-button type="button" [style]="{ width: '100%' }" label="Ver perfil" class=""
+                styleClass="p-button-outlined p-button-help" routerLink="/user/see-my-profile"></p-button>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-2 d-flex justify-content-center">
+              <img width="60" height="60" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="user"
+                class="rounded-circle">
+            </div>
+            <div class="col-7">
+              <h4>Ezequiel Sanson</h4>
+              <h6>Back-end developer</h6>
+            </div>
+            <div class="col-3 text-center">
+              <p-button type="button" [style]="{ width: '100%' }" label="Ver perfil" class=""
+                styleClass="p-button-outlined p-button-help" routerLink="/project/create"></p-button>
+            </div>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel header="Tareas" *ngIf="projectAccept == true">
           <div class="row">
             <div class="col-12">
               <app-table-task-list [tasks]="tasks"></app-table-task-list>
             </div>
           </div>
-        </p-tabPanel> -->
+        </p-tabPanel>
         <p-tabPanel header="MVPs" *ngIf="projectAccept == true">
           <div class="row">
             <div class="d-flex justify-content-between mb-1">
@@ -126,8 +144,8 @@
                 <p [style]="{ margin: '0 !important'}">MVP 0 - Crear pantallas que describen las funcionalidades</p>
               </div>
               <div>
-                <p-button icon="pi pi-file-edit" type="button" [style]="{ width: '100%', height: '40px' }" label="Editar" class="" styleClass=" p-button-help" ></p-button>
-                <p-button icon="pi pi-search" type="button" [style]="{ width: '100%', height: '40px' }" label="Ver" class="ms-1" styleClass=" p-button-help" routerLink="/mvp/details-mvp/1"></p-button>
+                <p-button icon="pi pi-file-edit" type="button" [style]="{ width: '40px', height: '40px' }" label="" class="" styleClass=" p-button-warning" routerLink="/mvp/update"></p-button>
+                <p-button icon="pi pi-search" type="button" [style]="{ width: '40px', height: '40px' }" label="" class="ms-1" styleClass=" p-button-primary" routerLink="/mvp/details-mvp/1"></p-button>
               </div>
             </div>
             <div class="d-flex justify-content-between mb-1">
@@ -135,8 +153,8 @@
                 <p [style]="{ margin: '0 !important'}">MVP 1 - Presentar funcionalidades Core</p>
               </div>
               <div>
-                <p-button icon="pi pi-file-edit" type="button" [style]="{ width: '100%', height: '40px' }" label="Editar" class="" styleClass=" p-button-help" routerLink="/mvp/update"></p-button>
-                <p-button icon="pi pi-search" type="button" [style]="{ width: '100%', height: '40px' }" label="Ver" class="ms-1" styleClass=" p-button-help" routerLink="/mvp/details-mvp/1"></p-button>
+                <p-button icon="pi pi-file-edit" type="button" [style]="{ width: '40px', height: '40px' }" label="" class="" styleClass=" p-button-warning" routerLink="/mvp/update"></p-button>
+                <p-button icon="pi pi-search" type="button" [style]="{ width: '40px', height: '40px' }" label="" class="ms-1" styleClass=" p-button-primary" routerLink="/mvp/details-mvp/1"></p-button>
               </div>
             </div>
             <div class="d-flex justify-content-between mb-1">
@@ -144,8 +162,8 @@
                 <p [style]="{ margin: '0 !important'}">MVP 2 - Agregar funcionalidades de Valor</p>
               </div>
               <div>
-                <p-button icon="pi pi-file-edit" type="button" [style]="{ width: '100%', height: '40px' }" label="Editar" class="" styleClass=" p-button-help" routerLink="/mvp/update"></p-button>
-                <p-button icon="pi pi-search" type="button" [style]="{ width: '100%', height: '40px' }" label="Ver" class="ms-1" styleClass=" p-button-help" routerLink="/mvp/details-mvp/1"></p-button>
+                <p-button icon="pi pi-file-edit" type="button" [style]="{ width: '40px', height: '40px' }" label="" class="" styleClass=" p-button-warning" routerLink="/mvp/update"></p-button>
+                <p-button icon="pi pi-search" type="button" [style]="{ width: '40px', height: '40px' }" label="" class="ms-1" styleClass=" p-button-primary" routerLink="/mvp/details-mvp/1"></p-button>
               </div>
             </div>
           </div>
@@ -159,7 +177,8 @@
         <div class="row text-end mt-5">
           <div class="col-12">
             <p-button (click)="joinAProject()" *ngIf="projectAccept == false" type="button" [style]="{ width: '100%' }"
-              label="Unirse al Proyecto" class="" styleClass=" p-button-help"></p-button>
+              label="Unirse al Proyecto" class="" styleClass="p-button-help"></p-button>
+            <p-button class="ms-2" type="button" styleClass="p-button-success" label="Finalizar Proyecto" [style]="{ heigth: '30px !important' }"></p-button>
           </div>
         </div>
       </p-tabView>

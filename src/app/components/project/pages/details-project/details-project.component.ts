@@ -30,22 +30,23 @@ import { Task } from '../../interfaces/tasks.interface';
 //
 // }
 export class DetailsProjectComponent {
+  profile: []
   tasks: Task[] = [
     {
       numberTask: '1',
-      name: 'crud de tareas',
+      name: 'CRUD de tareas',
       status: 'IN_PROCESS',
       assignedMember: 'Joel',
     },
     {
       numberTask: '2',
-      name: 'crud de mvp',
+      name: 'CRUD de mvp',
       status: 'FINALIZED',
       assignedMember: 'Ezequiel',
     },
     {
       numberTask: '3',
-      name: 'crud de usuarios',
+      name: 'CRUD de usuarios',
       status: 'NOTASSIGNED',
     },
   ];

@@ -8,16 +8,20 @@ import { Component } from '@angular/core';
 export class TechnologiesComponent {
   technologies = [{
     name:"PHP",
-    level:"Medio"
+    level:"Medio",
+    icon: "fab fa-php"
   },
     {
       name:"Larevel",
-      level:"Medio"
+      level:"Medio",
+      icon: "fab fa-laravel"
     },{
       name:"React",
-      level:"Basico"
+      level:"Basico",
+      icon: "fab fa-react"
     },{
       name:"Angular",
-      level:"Basico"
+      level:"Basico",
+      icon: "fab fa-angular"
     }]
 }

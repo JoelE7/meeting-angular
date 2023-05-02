@@ -4,15 +4,18 @@
     <div class="col-8">
       <h2 class="text-dark">Usuarios por ranking</h2>
     </div>
+    <div>
+
+    </div>
   </div>
 
     <p-table [value]="developers" [paginator]="true" [rows]="10">
       <ng-template pTemplate="header">
         <tr>
-          <th>Foto</th>
-          <th>Nombre</th>
-          <th>Puntaje</th>
-          <th>Tecnologías/Lenguajes</th>
+          <th class="text-center">Foto</th>
+          <th class="text-center">Nombre</th>
+          <th class="text-center">Puntaje</th>
+          <th class="text-center">Tecnologías/Lenguajes</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-developer>
@@ -22,15 +25,15 @@
               <p-avatar [image]="developer.avatarUrl" size="large" shape="circle"></p-avatar>
             </div>
           </td>
-          <td>{{ developer.name }}</td>
-          <td>{{ developer.score }}</td>
-          <td>
+          <td  class="text-center">{{ developer.name }}</td>
+          <td  class="text-center">
             <ul class="developer-skills">
               <li *ngFor="let skill of developer.skills">
                 <i class="{{skill}}"></i>
               </li>
             </ul>
           </td>
+          <td  class="text-center">{{ developer.score }}</td>
         </tr>
       </ng-template>
     </p-table>

@@ -14,6 +14,7 @@ import { RequestAcceptModalComponent } from './shared/request-accept-modal/reque
 import {StartModule} from "../../shared/start.module";
 import { TableTaskListComponent } from './components/table-task-list/table-task-list.component';
 
+
 @NgModule({
   declarations: [
     CreateProjectComponent,

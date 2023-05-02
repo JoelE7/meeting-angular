@@ -10,7 +10,7 @@ p-menubarsub {
   padding: 0;
 }
 
-.p-button-help{
+.p-button-help, .p-button-success{
     padding: 0.60rem 1.15rem !important;
 }
 

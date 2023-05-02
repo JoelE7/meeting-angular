@@ -14,19 +14,19 @@ interface Developer {
 export class ListUserComponent {
   developers: Developer[] = [
     {
-      "name": "Desarrollador 1",
+      "name": "Ezequiel Sanson",
       "avatarUrl": "https://via.placeholder.com/150x150",
       "score": 100,
       "skills": ["fab fa-js", "fab fa-angular", "fab fa-node-js"]
     },
     {
-      "name": "Desarrollador 2",
+      "name": "Nahuel Savedra",
       "avatarUrl": "https://via.placeholder.com/150x150",
       "score": 90,
       "skills": ["fab fa-java", "fas fa-database", "fab fa-spring"]
     },
     {
-      "name": "Desarrollador 3",
+      "name": "Jessica Delgado",
       "avatarUrl": "https://via.placeholder.com/150x150",
       "score": 80,
       "skills": ["fab fa-python", "fas fa-database", "fab fa-php"]
