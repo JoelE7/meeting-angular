@@ -7,6 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./form-mvp.component.css'],
 })
 export class FormMvpComponent implements OnInit {
+  integrants: ['Ezequiel', 'Joel', 'Nahuel', 'Jessica', 'Diego']
   @Input() // de padre a hijo
   mvp: any = ""
   //de hijo a padre
@@ -23,7 +24,6 @@ export class FormMvpComponent implements OnInit {
 
   submitMvp() {
     this.mvp.name = this.form.get('name').value;
-
 
     this.emitMvp.emit(this.mvp);
   }

@@ -59,3 +59,9 @@
 .task-list input[type="checkbox"] {
   margin-right: 10px;
 }
+
+.p-tabview-nav-container{
+  margin-bottom: 15px !important;
+  padding-bottom: 15px !important;
+}
+

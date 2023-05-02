@@ -1,68 +1,73 @@
 <div class="profile">
-  <div class="container rounded ">
-    <div class="card" style="width:100%; min-height: 700px;">
-      <app-banner [title]="'Proyecto 1'" [subtitle]="'Subtitle'"></app-banner>
+  <div class="container rounded">
+    <div class="card shadow-sm" style="width:100%; min-height: 700px;">
+      <app-banner [title]="'Turisteando'" [subtitle]="'Aplicacion Web'"></app-banner>
       <p-tabView class="p-3">
         <p-tabPanel header="Datos del proyecto">
           <div class="row">
-            <div class="col-12">
+            <!-- <div class="col-12">
               <p> Nombre del proyecto:
                 <span>{{searchProject.name}}</span>
               </p>
-            </div>
+            </div> -->
           </div>
           <div class="row">
             <div class="col-6">
-              <p> Fecha inicio:
+              <p> Fecha inicio: 4/1/2023
                 <span>{{searchProject.startDate | date:'dd/MM/YYYY'}}</span>
               </p>
             </div>
             <div class="col-6">
-              <p> Fecha Fin:
+              <p> Fecha Fin: 6/2/2023
                 <span>{{searchProject.startDate | date:'dd/MM/YYYY'}}</span>
               </p>
             </div>
           </div>
           <div class="row">
-            <div class="col-6">
+            <!-- <div class="col-6">
               <p> Tipo de proyecto:
                 <span>{{searchProject.typeProject}}</span>
               </p>
-            </div>
-            <div class="col-6">
-              <p>Cantidad de participantes:
+            </div> -->
+            <div class="col-12">
+              <p>Cantidad de participantes: 6
                 <span>{{searchProject.amountParticipants}}</span>
               </p>
             </div>
           </div>
         </p-tabPanel>
         <p-tabPanel header="Descripcion">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dapibus massa id tellus dignissim, vel
-            dignissim nulla lacinia. In at varius diam. Aliquam finibus ex et sem pulvinar eleifend. Cras non eros
-            laoreet, fringilla ex non, pulvinar libero. In a odio in risus ultricies elementum. Duis dapibus sapien ac
-            ante venenatis, vitae accumsan ex lacinia. Nullam varius et est quis imperdiet. Ut eget lobortis orci.
-            Suspendisse sodales feugiat metus, quis accumsan eros pretium eu. Nam pharetra aliquam quam. Pellentesque ac
-            cursus nisl, sit amet pulvinar quam. Vivamus sed augue purus. Maecenas dolor orci, rhoncus sed aliquam at,
-            consectetur quis sem. In in tortor sit amet tellus lacinia lobortis id vel ex. Suspendisse sapien tortor,
-            maximus at laoreet sit amet, iaculis sed massa. In hac habitasse platea dictumst.
-
-            Ut quis est id lectus vulputate tempus at posuere urna. Sed faucibus malesuada augue egestas volutpat.
-            Curabitur viverra ultricies urna, at sodales mi porttitor non. Cras ac mauris in ante faucibus suscipit.
-            Proin sit amet laoreet purus. Sed tristique pharetra ullamcorper. Maecenas eu nulla nunc. Quisque fermentum,
-            sapien ut consectetur laoreet, tortor mi pulvinar mauris, eu condimentum tellus nunc quis orci. Class aptent
-            taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer commodo nec nulla eu
-            mattis. Etiam luctus mauris non dictum suscipit. Quisque eu ante id risus ornare tincidunt. Praesent ante
-            metus, venenatis ac suscipit ut, maximus vitae augue. Nullam id tellus placerat, hendrerit quam et, varius
-            turpis. Proin sit amet consectetur orci, nec ultricies magna. Cras nec dictum dolor, at sollicitudin purus.
+          <p>El proyecto consiste en el desarrollo de una plataforma web de reservaciones para destinos turísticos. Utilizando técnicas de programación modernas, como inteligencia artificial y aprendizaje automático, nuestra plataforma brindará una experiencia personalizada al usuario. Además, se implementará un sistema de recomendaciones basado en las preferencias de cada cliente, así como también un módulo de pago seguro y un chatbot para brindar atención al cliente en tiempo real.
+            Nuestro equipo trabajará en colaboración con diferentes agencias turísticas para ofrecer una amplia gama de opciones de alojamiento, tours y actividades en cada destino. Se integrará un mapa interactivo para que los usuarios puedan explorar y conocer la zona antes de realizar su reserva.<br><br>
+            La plataforma contará con una interfaz amigable y responsive, adaptada a diferentes dispositivos móviles y sistemas operativos. Además, se implementará un sistema de retroalimentación para que los usuarios puedan calificar su experiencia y brindar sugerencias para futuras mejoras.
+            En resumen, nuestro proyecto de turismo tiene como objetivo mejorar la experiencia del usuario al momento de planear y reservar su viaje, utilizando tecnología de vanguardia para brindar una experiencia personalizada y segura.
           </p>
         </p-tabPanel>
-        <p-tabPanel header="Tecnologias">
-          <p>Angular</p>
-          <p>Javascript</p>
-          <p>HTML</p>
-          <p>CSS</p>
-          <p>Nodejs</p>
-          <p>MongoDb</p>
+        <p-tabPanel header="Perfiles">
+          <div class="w-50 d-flex justify-content-between">
+            <p>Front End Developer Angular</p>
+            <p-tag [severity]="'warning'" value="SIN ASIGNAR"></p-tag>
+          </div>
+          <div class="w-50 d-flex justify-content-between">
+            <p>Front End Developer Angular</p>
+            <p-tag [severity]="'warning'" value="SIN ASIGNAR"></p-tag>
+          </div>
+          <div class="w-50 d-flex justify-content-between">
+            <p>Back End Developer Node JS</p>
+            <p-tag [severity]="'warning'" value="SIN ASIGNAR"></p-tag>
+          </div>
+          <div class="w-50 d-flex justify-content-between">
+            <p>Back End Developer Node JS</p>
+            <p-tag [severity]="'warning'" value="SIN ASIGNAR"></p-tag>
+          </div>
+          <div class="w-50 d-flex justify-content-between">
+            <p>UX Designer</p>
+            <p-tag [severity]="'warning'" value="SIN ASIGNAR"></p-tag>
+          </div>
+          <div class="w-50 d-flex justify-content-between">
+            <p>Gestor de Base de Datos MongoDB</p>
+            <p-tag [severity]="'warning'" value="SIN ASIGNAR"></p-tag>
+          </div>
         </p-tabPanel>
         <p-tabPanel header="Integrantes" *ngIf="projectAccept == true">
           <div class="row mt-3">
@@ -107,25 +112,54 @@
                       label="Colaborar con proyecto" class="" styleClass=" p-button-help"><i class="m-1 fas fa-hands-helping"></i></p-button>
           </div>
         </p-tabPanel>
-        <p-tabPanel header="Tareas" *ngIf="projectAccept == true">
+        <!-- <p-tabPanel header="Tareas" *ngIf="projectAccept == true">
           <div class="row">
             <div class="col-12">
               <app-table-task-list [tasks]="tasks"></app-table-task-list>
             </div>
           </div>
-        </p-tabPanel>
+        </p-tabPanel> -->
         <p-tabPanel header="MVPs" *ngIf="projectAccept == true">
           <div class="row">
-            <p>MVP 0 - Crear pantallas que describen las funcionalidades</p>
-            <p>MVP 1 - Crear funcionalidades core</p>
-            <p>MVP 2 - Agregar metricas y coneccion Github</p>
-            <p>MVP 3 - Entrega de proyecto</p>
+            <div class="d-flex justify-content-between mb-1">
+              <div class="d-flex align-items-center justify-content-center">
+                <p [style]="{ margin: '0 !important'}">MVP 0 - Crear pantallas que describen las funcionalidades</p>
+              </div>
+              <div>
+                <p-button icon="pi pi-file-edit" type="button" [style]="{ width: '100%', height: '40px' }" label="Editar" class="" styleClass=" p-button-help" ></p-button>
+                <p-button icon="pi pi-search" type="button" [style]="{ width: '100%', height: '40px' }" label="Ver" class="ms-1" styleClass=" p-button-help" routerLink="/mvp/details-mvp/1"></p-button>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between mb-1">
+              <div class="d-flex align-items-center justify-content-center">
+                <p [style]="{ margin: '0 !important'}">MVP 1 - Presentar funcionalidades Core</p>
+              </div>
+              <div>
+                <p-button icon="pi pi-file-edit" type="button" [style]="{ width: '100%', height: '40px' }" label="Editar" class="" styleClass=" p-button-help" routerLink="/mvp/update"></p-button>
+                <p-button icon="pi pi-search" type="button" [style]="{ width: '100%', height: '40px' }" label="Ver" class="ms-1" styleClass=" p-button-help" routerLink="/mvp/details-mvp/1"></p-button>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between mb-1">
+              <div class="d-flex align-items-center justify-content-center">
+                <p [style]="{ margin: '0 !important'}">MVP 2 - Agregar funcionalidades de Valor</p>
+              </div>
+              <div>
+                <p-button icon="pi pi-file-edit" type="button" [style]="{ width: '100%', height: '40px' }" label="Editar" class="" styleClass=" p-button-help" routerLink="/mvp/update"></p-button>
+                <p-button icon="pi pi-search" type="button" [style]="{ width: '100%', height: '40px' }" label="Ver" class="ms-1" styleClass=" p-button-help" routerLink="/mvp/details-mvp/1"></p-button>
+              </div>
+            </div>
+          </div>
+          <div class="row text-end mt-5">
+            <div class="col-12">
+              <p-button type="button" [style]="{ width: '100%' }"
+                label="Crear MVP" class="" styleClass=" p-button-help" routerLink="/mvp/create"></p-button>
+            </div>
           </div>
         </p-tabPanel>
         <div class="row text-end mt-5">
           <div class="col-12">
             <p-button (click)="joinAProject()" *ngIf="projectAccept == false" type="button" [style]="{ width: '100%' }"
-              label="Entrar" class="" styleClass=" p-button-help"></p-button>
+              label="Unirse al Proyecto" class="" styleClass=" p-button-help"></p-button>
           </div>
         </div>
       </p-tabView>

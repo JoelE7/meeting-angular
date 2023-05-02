@@ -24,9 +24,9 @@ Component;
 export class FormProjectComponent {
   title: string = 'Crear proyecto';
 
-  @Input() 
+  @Input()
   project: Project = new Project();
-  
+
   @Output()
   emitProject: EventEmitter<Project> = new EventEmitter();
 
@@ -52,15 +52,15 @@ export class FormProjectComponent {
     );
     this.typeProject.push(
       {
-        type: 'Frontend',
+        type: 'Web',
         value: '1',
       },
       {
-        type: 'Backend',
+        type: 'Mobile',
         value: '2',
       },
       {
-        type: 'Fullstack',
+        type: 'VideoGames',
         value: '3',
       }
     );

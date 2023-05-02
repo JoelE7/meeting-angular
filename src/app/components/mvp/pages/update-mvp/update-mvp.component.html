@@ -1,8 +1,6 @@
-<div class="container m-auto">
-    <div class="header text-center mt-5">
-      <h2 class="text-dark">Actualizar MVP</h2>
-    </div>
-    <div class="card m-auto mb-5">
-      <app-form-mvp  [mvp]="editMvp"  (emitMvp)="updateMvp($event)"></app-form-mvp>
-    </div>
+<div class="mvp">
+  <div class="container card shadow-sm">
+    <h2 class="text-dark text-center mt-3">Editar MVP</h2>
+      <app-form-mvp  [mvp]="editMvp"  (emitMvp)="updateMvp($event)" class="pb-3"></app-form-mvp>
   </div>
+</div>

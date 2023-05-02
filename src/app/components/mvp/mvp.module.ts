@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 import { MvpRoutingModule } from './mvp-routing.module';
 import { FormMvpComponent } from './components/form-mvp/form-mvp.component';
 import { CreateMvpComponent } from './pages/create-mvp/create-mvp.component';
@@ -15,12 +15,14 @@ import {TableModule} from "primeng/table";
 import {AvatarModule} from "primeng/avatar";
 import {BadgeModule} from "primeng/badge";
 import {AccordionModule} from "primeng/accordion";
+import { UserModule } from '../user/user.module';
+
 @NgModule({
   declarations: [
     FormMvpComponent,
     CreateMvpComponent,
     UpdateMvpComponent,
-    DetailMvpComponent
+    DetailMvpComponent,
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,9 @@ import {AccordionModule} from "primeng/accordion";
     TableModule,
     AvatarModule,
     BadgeModule,
-    AccordionModule
+    AccordionModule,
+    PrimengModule,
+    UserModule
   ]
 })
 export class MvpModule { }

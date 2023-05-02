@@ -5,6 +5,7 @@
         <th class="text-white">Tarea</th>
         <th class="text-white">Miembro asignado</th>
         <th class="text-white">Estado</th>
+        <th class="text-white"></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-task>
@@ -17,6 +18,10 @@
         <td *ngIf="task.status === 'NOTASSIGNED'"><p-tag [severity]="'warning'" value="SIN ASIGNAR"></p-tag>
         </td>
         <td *ngIf="task.status === 'FINALIZED'"><p-tag [severity]="'success'" value="FINALIZADO"></p-tag>
+        </td>
+        <td class="d-flex justify-content-center">
+          <p-button icon="pi pi-file-edit" type="button" [style]="{ width: '40px', height: '40px' }" label="" class="" styleClass=" p-button-warning"></p-button>
+          <p-button icon="pi pi-trash" type="button" [style]="{ width: '40px', height: '40px' }" label="" class="ms-1" styleClass=" p-button-danger" routerLink="/mvp/details-mvp/1"></p-button>
         </td>
         <ng-template #defecto>
           <td>-</td>

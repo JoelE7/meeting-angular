@@ -1,6 +1,6 @@
 <div class="profile">
-  <div class="container rounded ">
-    <div class="card" style="width:100%; min-height: 700px;">
+  <div class="container rounded">
+    <div class="card shadow-sm" style="width:100%; min-height: 700px;">
       <div class="d-flex banner-profile">
         <img src="../../../../../assets/img/profile.jfif" alt="Foto de usuario" id="profile" class="mt-2 ms-5">
         <div class="p-5">
@@ -80,7 +80,11 @@
             </p-table>
           </div>
           <div class="row p-2">
-            <app-chart-bar></app-chart-bar>
+            <div class="d-flex justify-content-center">
+              <div class="w-75">
+                <app-chart-bar></app-chart-bar>
+              </div>
+            </div>
             <div class="col-6">
               <app-chart-doughnut></app-chart-doughnut>
             </div>

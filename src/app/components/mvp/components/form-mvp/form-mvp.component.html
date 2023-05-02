@@ -1,7 +1,18 @@
 <form [formGroup]="form" (ngSubmit)="submitMvp()" class="form">
     <div class="row mt-5 p-0">
         <div class="offset-0 col-sm-12 col-md-10 offset-md-1">
-            <label for="name" class="pl-5">Nombre </label>
+            <label for="name" class="pl-5">Nombre:</label>
+            <input type="text" pInputText formControlName="name" class="form-control" placeholder="MVP0 - Crear Estructura..."/>
+            <span class="danger" *ngIf="
+              form.get('name').hasError('required') &&
+              form.get('name').touched
+            ">
+                <small class="p-error">Este campo es <strong>requerido</strong></small>
+            </span>
+        </div>
+
+        <div class="offset-0 col-sm-6 col-md-5 offset-md-1 mt-3">
+            <label for="name" class="pl-5">Tareas:</label>
             <input type="text" pInputText formControlName="name" class="form-control" />
             <span class="danger" *ngIf="
               form.get('name').hasError('required') &&
@@ -10,5 +21,33 @@
                 <small class="p-error">Este campo es <strong>requerido</strong></small>
             </span>
         </div>
+        <div class="offset-0 col-sm-6 col-md-2 mt-3">
+          <label for="integrants" class="pl-5">Estado:</label><br>
+          <p-cascadeSelect  optionLabel="integrants"
+                            optionGroupLabel="integrants"
+                            [options]="integrants"
+                            [style]="{ width: '100%', marginBottom: '1rem' }"
+                            placeholder="Seleccione una opcion">
+          </p-cascadeSelect>
+        </div>
+        <div class="offset-0 col-sm-6 col-md-3 mt-3">
+            <label for="integrants" class="pl-5">Asignado:</label><br>
+            <p-cascadeSelect  optionLabel="integrants"
+                              optionGroupLabel="integrants"
+                              [options]="integrants"
+                              [style]="{ width: '100%', marginBottom: '1rem' }"
+                              placeholder="Seleccione una opcion">
+            </p-cascadeSelect>
+        </div>
+
+
+        <div class="offset-0 col-sm-12 col-md-10 offset-md-1">
+          <p-button icon="pi pi-plus-circle" class="" type="submit" label="Agregar Tarea" styleClass= "p-button-outlined p-button-help" routerLink="/"></p-button>
+        </div>
+
+        <div class="offset-0 col-sm-12 col-md-10 offset-md-1 mt-3 text-end">
+          <p-button icon="pi pi-check" class="" type="submit" label="Crear" styleClass= "p-button-help p-button-help" routerLink="/"></p-button>
+        </div>
+
     </div>
 </form>
