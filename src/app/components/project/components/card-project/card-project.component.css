@@ -1,0 +1,8 @@
+.card-header{
+  background-color: #f1bcd173 !important;
+  border-bottom: 0 !important;
+}
+
+.card{
+  border: 1px solid #f1bcd173 !important;
+}

@@ -6,25 +6,44 @@ import { FormProjectComponent } from './components/form-project/form-project.com
 import { ListProjectComponent } from './pages/list-project/list-project.component';
 import { CardProjectComponent } from './components/card-project/card-project.component';
 import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
+import { SuggestionsProjectComponent } from './components/suggestions-project/suggestions-project.component';
+import { DetailsProjectComponent } from './pages/details-project/details-project.component';
+import { UpdateProjectComponent } from './pages/update-project/update-project.component';
+import { RequestSendModalComponent } from './shared/request-send-modal/request-send-modal.component';
+import { RequestAcceptModalComponent } from './shared/request-accept-modal/request-accept-modal.component';
+import {StartModule} from "../../shared/start.module";
+import { TableTaskListComponent } from './components/table-task-list/table-task-list.component';
+
 
 @NgModule({
   declarations: [
     CreateProjectComponent,
+    UpdateProjectComponent,
     ListProjectComponent,
     CardProjectComponent,
-    FormProjectComponent
+    FormProjectComponent,
+    SuggestionsProjectComponent,
+    DetailsProjectComponent,
+    RequestSendModalComponent,
+    RequestAcceptModalComponent,
+    TableTaskListComponent,
   ],
   imports: [
     CommonModule,
     ProjectRoutingModule,
     PrimengModule,
+    StartModule,
   ],
   exports:[
     CreateProjectComponent,
+    UpdateProjectComponent,
     FormProjectComponent,
     ListProjectComponent,
     CardProjectComponent,
-
+    DetailsProjectComponent,
+    RequestSendModalComponent,
+    RequestAcceptModalComponent,
+    TableTaskListComponent
   ]
 })
 export class ProjectModule { }

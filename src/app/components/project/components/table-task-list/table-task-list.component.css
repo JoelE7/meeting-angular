@@ -1,0 +1,18 @@
+.p-datatable .p-datatable-thead > tr > th{
+    background-color: #c42e6c !important;
+  }
+
+  .p-tabview .p-tabview-panels {
+    padding: 0 !important
+  }
+
+  .p-button-outlined-2{
+    border: 2px solid #ff9ec5 !important;
+    background-color: white !important;
+    color: #ff9ec5 !important;
+  }
+  .p-button-outlined-2:hover{
+    border: 2px solid #ff9ec5 !important;
+    background-color: #ff9ec5 !important;
+    color: white !important;
+  }

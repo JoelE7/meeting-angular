@@ -36,6 +36,11 @@ import { TreeModule } from 'primeng/tree';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CarouselModule } from 'primeng/carousel';
+import { TabViewModule } from 'primeng/tabview';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
+import { ChartModule } from 'primeng/chart';
+import { ImageModule } from 'primeng/image';
+import { TagModule } from 'primeng/tag';
 
 @NgModule({
   providers: [ConfirmationService],
@@ -77,7 +82,12 @@ import { CarouselModule } from 'primeng/carousel';
     FormsModule,
     ReactiveFormsModule,
     InputTextareaModule,
-    CarouselModule ,
+    CarouselModule,
+    TabViewModule,
+    CascadeSelectModule,
+    ChartModule,
+    ImageModule,
+    TagModule,
   ],
 })
 export class PrimengModule {}

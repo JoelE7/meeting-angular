@@ -1,7 +1,7 @@
 .banner{
   min-height: 550px;
   width: 100%;
-  background-image: url('../../../../assets/img_6.png');
+  background-image: url('../../../../assets/img/img_6.png');
   background-size: cover;
 }
 
@@ -27,4 +27,11 @@
 
 .description{
   height: 40%;
+}
+
+.integrants{
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 2px solid rgb(71, 71, 71);
 }

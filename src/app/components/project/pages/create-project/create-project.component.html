@@ -1,1 +1,8 @@
-<p>create-projects works!</p>
+<div class="project">
+  <div class="container card m-auto mb-5 shadow-sm">
+      <div class="header text-center mt-5">
+        <h2 class="text-dark">Crear Proyecto</h2>
+      </div>
+      <app-form-project (emitProject)="createProject($event)"></app-form-project>
+    </div>
+  </div>

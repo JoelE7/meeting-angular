@@ -1,0 +1,35 @@
+<h4 class="text-center my-4">Creemos que podria interesarte</h4>
+<p-carousel
+  [value]="suggestions"
+  [numVisible]="3"
+  [numScroll]="3"
+  [circular]="true"
+  [responsiveOptions]="responsiveOptions"
+  [autoplayInterval]="5000"
+>
+  <ng-template let-suggestion pTemplate="item">
+    <div class="m-2 text-center py-3 px-3 d-flex justify-content-center">
+      <div class="w-75 item-suggestion d-flex flex-column justify-content-center align-items-center">
+        <h4 class="mb-1 title-suggestion">{{ suggestion.name }}</h4>
+        <div class="w-75" style="border-bottom: 1px solid rgb(224, 224, 224);"></div>
+        <p class="mt-1 mb-1 fst-italic"><b>Tipo: </b>{{ suggestion.typeofProject }}</p>
+        <!-- boton necesita ayuda<p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)"></p-tag> -->
+        <p class="mt-0 mb-1 fst-italic"><b>Lenguaje: </b>{{ suggestion.languajes }}</p>
+        <p class="mt-0 mb-1 fst-italic"><b>Complejidad: </b>{{ suggestion.complexity }}</p>
+
+        <div class="row">
+          <div class="car-buttons mt-2">
+            <p-button
+              type="button"
+              [style]="{ width: '100%' }"
+              label="Ver detalle"
+              class=""
+              styleClass="p-button-outlined p-button-help"
+              routerLink="/project/details-project/1"
+            ></p-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-carousel>

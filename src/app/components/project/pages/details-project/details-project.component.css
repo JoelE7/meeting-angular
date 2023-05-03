@@ -1,0 +1,92 @@
+.profile{
+  min-height: 500px;
+  background-color: rgb(241, 241, 241);
+  padding: 40px 0px;
+}
+
+.banner-profile{
+  background: #A855F7;
+  background: linear-gradient(153deg, rgba(0,0,0,1) 0%, rgba(123,25,147,1) 46%, rgba(168,85,247,1) 100%);
+  width: 100%;
+  height: 200px;
+  border-radius: 5px 5px 0px 0px;
+}
+
+#profile{
+  width: 13%;
+  height: 180px;
+  border-radius: 50%;
+  border: 2px solid rgb(71, 71, 71);
+}
+
+.problem-section {
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.problem-section h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.problem-section p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.problem-section ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.problem-section li {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.problem-section li strong {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.p-tabview-nav-container{
+  margin-bottom: 15px;
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  border-color: #DB27CC !important;
+  color: #DB27CC !important;
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
+  box-shadow: inset 0 0 0 0.2rem #f792ee;
+}
+
+.p-button-help-2{
+  background-color: #DB27CC !important;
+  border: 1px solid #DB27CC !important;
+}
+
+.p-button-outlined-2{
+  border: 2px solid #DB27CC;
+  background-color: white;
+  color: #DB27CC;
+}
+.p-button-outlined-2:hover{
+  border: 2px solid #DB27CC !important;
+  background-color: #DB27CC !important;
+  color: white !important;
+}
+
+.p-button-outlined-3{
+  border: 2px solid #f86a6a;
+  background-color: white;
+  color: #f86a6a;
+}
+.p-button-outlined-3:hover{
+  border: 2px solid #f86a6a !important;
+  background-color: #f86a6a !important;
+  color: white !important;
+}

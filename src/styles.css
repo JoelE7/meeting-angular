@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+.card{
+  border: none !important;
+}
+
+.p-button-outlined-2{
+  border: 2px solid #ff9ec5 !important;
+  background-color: white !important;
+  color: #ff9ec5 !important;
+}
+.p-button-outlined-2:hover{
+  border: 2px solid #ff9ec5 !important;
+  background-color: #ff9ec5 !important;
+  color: white !important;
+}

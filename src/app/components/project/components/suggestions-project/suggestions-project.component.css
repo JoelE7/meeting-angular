@@ -1,0 +1,19 @@
+.p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
+  background-color: #c42e6c !important;
+}
+
+.item-suggestion{
+  border-radius: 5px;
+  padding: 20px 0px;
+  transition: all 1s ease-in-out;
+  border: 2px solid #f1bcd173 !important;
+}
+
+.item-suggestion:hover{
+  transform: scale(1.1);
+}
+
+.title-suggestion{
+
+}
+
