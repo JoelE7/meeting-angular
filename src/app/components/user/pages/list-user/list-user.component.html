@@ -4,8 +4,10 @@
     <div class="col-8">
       <h2 class="text-dark">Usuarios por ranking</h2>
     </div>
-    <div>
 
+    <div class="col-4 d-flex align-items-center justify-content-end">
+      <p style="margin: 0">Ordenar por:</p>
+      <p-button class="d-block ms-2" type="submit" [style]="{'width' : ''}"label="Puntaje ^" styleClass="p-button-help"></p-button>
     </div>
   </div>
 
@@ -14,8 +16,8 @@
         <tr>
           <th class="text-center">Foto</th>
           <th class="text-center">Nombre</th>
-          <th class="text-center">Puntaje</th>
           <th class="text-center">Tecnologías/Lenguajes</th>
+          <th class="text-center">Puntaje</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-developer>

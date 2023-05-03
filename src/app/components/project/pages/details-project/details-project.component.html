@@ -1,7 +1,8 @@
 <div class="profile">
   <div class="container rounded">
+    <span class="fst-italic text-secondary small" ><a href="" class="text-secondary" style="text-decoration: none;" routerLink="/project/list-project">Volver</a> | <a routerLink="/project/details-project/1" class="text-secondary" style="text-decoration: none;">Turisteando</a></span>
     <div class="card shadow-sm" style="width:100%; min-height: 700px;">
-      <app-banner [title]="'Turisteando'" [subtitle]="'Aplicacion Web'"></app-banner>
+      <app-banner [title]="'Turisteando'" [subtitle]="'Aplicacion Web'" [short]="true"></app-banner>
       <p-tabView class="p-3">
         <p-tabPanel header="Datos del proyecto">
           <div class="row">
@@ -100,7 +101,7 @@
                       label="Colaborar con proyecto" class="" styleClass=" p-button-help"><i class="m-1 fas fa-hands-helping"></i></p-button>
           </div>
         </p-tabPanel>
-        <p-tabPanel header="Integrantes" *ngIf="projectAccept == true">
+        <p-tabPanel header="Integrantes">
           <div class="row mt-3">
             <div class="col-2 d-flex justify-content-center">
               <img width="60" height="60" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user"
@@ -126,7 +127,7 @@
             </div>
             <div class="col-3 text-center">
               <p-button type="button" [style]="{ width: '100%' }" label="Ver perfil" class=""
-                styleClass="p-button-outlined p-button-help" routerLink="/project/create"></p-button>
+                styleClass="p-button-outlined" routerLink="/project/create"></p-button>
             </div>
           </div>
         </p-tabPanel>
@@ -144,8 +145,8 @@
                 <p [style]="{ margin: '0 !important'}">MVP 0 - Crear pantallas que describen las funcionalidades</p>
               </div>
               <div>
-                <p-button icon="pi pi-file-edit" type="button" [style]="{ width: '40px', height: '40px' }" label="" class="" styleClass=" p-button-warning" routerLink="/mvp/update"></p-button>
-                <p-button icon="pi pi-search" type="button" [style]="{ width: '40px', height: '40px' }" label="" class="ms-1" styleClass=" p-button-primary" routerLink="/mvp/details-mvp/1"></p-button>
+                <p-button icon="pi pi-file-edit" type="button" [style]="{ width: '40px', height: '40px' }" label="" class="" styleClass="p-button-outlined-2" routerLink="/mvp/update"></p-button>
+                <p-button icon="pi pi-desktop" type="button" [style]="{ width: '40px', height: '40px' }" label="" class="ms-1" styleClass="p-button-outlined-3" routerLink="/mvp/details-mvp/1"></p-button>
               </div>
             </div>
             <div class="d-flex justify-content-between mb-1">
@@ -153,8 +154,8 @@
                 <p [style]="{ margin: '0 !important'}">MVP 1 - Presentar funcionalidades Core</p>
               </div>
               <div>
-                <p-button icon="pi pi-file-edit" type="button" [style]="{ width: '40px', height: '40px' }" label="" class="" styleClass=" p-button-warning" routerLink="/mvp/update"></p-button>
-                <p-button icon="pi pi-search" type="button" [style]="{ width: '40px', height: '40px' }" label="" class="ms-1" styleClass=" p-button-primary" routerLink="/mvp/details-mvp/1"></p-button>
+                <p-button icon="pi pi-file-edit" type="button" [style]="{ width: '40px', height: '40px' }" label="" class="" styleClass="p-button-outlined-2" routerLink="/mvp/update"></p-button>
+                <p-button icon="pi pi-desktop" type="button" [style]="{ width: '40px', height: '40px' }" label="" class="ms-1" styleClass="p-button-outlined-3" routerLink="/mvp/details-mvp/1"></p-button>
               </div>
             </div>
             <div class="d-flex justify-content-between mb-1">
@@ -162,8 +163,8 @@
                 <p [style]="{ margin: '0 !important'}">MVP 2 - Agregar funcionalidades de Valor</p>
               </div>
               <div>
-                <p-button icon="pi pi-file-edit" type="button" [style]="{ width: '40px', height: '40px' }" label="" class="" styleClass=" p-button-warning" routerLink="/mvp/update"></p-button>
-                <p-button icon="pi pi-search" type="button" [style]="{ width: '40px', height: '40px' }" label="" class="ms-1" styleClass=" p-button-primary" routerLink="/mvp/details-mvp/1"></p-button>
+                <p-button icon="pi pi-file-edit" type="button" [style]="{ width: '40px', height: '40px' }" label="" class="" styleClass="p-button-outlined-2" routerLink="/mvp/update"></p-button>
+                <p-button icon="pi pi-desktop" type="button" [style]="{ width: '40px', height: '40px' }" label="" class="ms-1" styleClass="p-button-outlined-3" routerLink="/mvp/details-mvp/1"></p-button>
               </div>
             </div>
           </div>
@@ -178,7 +179,7 @@
           <div class="col-12">
             <p-button (click)="joinAProject()" *ngIf="projectAccept == false" type="button" [style]="{ width: '100%' }"
               label="Unirse al Proyecto" class="" styleClass="p-button-help"></p-button>
-            <p-button class="ms-2" type="button" styleClass="p-button-success" label="Finalizar Proyecto" [style]="{ heigth: '30px !important' }"></p-button>
+            <p-button class="ms-2" type="button" styleClass="p-button-outlined p-button-help" label="Finalizar Proyecto" [style]="{ heigth: '30px !important' }"></p-button>
           </div>
         </div>
       </p-tabView>

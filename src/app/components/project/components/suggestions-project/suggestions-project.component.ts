@@ -8,28 +8,28 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class SuggestionsProjectComponent {
   suggestions = [{
-    name:"Proyecto 1 ",
-    typeofProject:"Fronted",
+    name:"ABM Despegar",
+    typeofProject:"Web",
     languajes:"Javascript",
     complexity:"Junior",
     technologies:"Angular"
   },
   {
-    name:"Proyecto 2",
-    typeofProject:"Backend",
+    name:"Clon Meli",
+    typeofProject:"Mobile",
     languajes:"Node.js",
     complexity:"Senior",
     technologies:""
-    
+
   },{
-    name:"Proyecto 3",
-    typeofProject:"Fronted",
+    name:"Menu Facil",
+    typeofProject:"Web",
     languajes:"Javascript",
     complexity:"Senior",
     technologies:"Angular"
   },{
-    name:"Proyecto 4",
-    typeofProject:"Fronted",
+    name:"Netflix 2",
+    typeofProject:"Web",
     languajes:"Javascript",
     complexity:"Junior",
     technologies:"React"

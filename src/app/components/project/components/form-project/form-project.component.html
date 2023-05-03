@@ -20,16 +20,19 @@
     </div>
     <div class="offset-0 mt-1 col-sm-12 mt-md-0 col-md-5 mt-md-0">
         <label for="amountParticipants" class="pl-5"
-        >*Cantidad de participantes
+        >Cantidad de participantes
       </label>
-      <input
+      <div class="d-flex align-items-center h-75">
+        <i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i>
+      </div>
+      <!--<input
         pInputText
         type="number"
         formControlName="amountParticipants"
         id=""
         class="form-control"
       />
-      <span
+       <span
         class="danger"
         *ngIf="
           form.get('amountParticipants').hasError('required') &&
@@ -48,7 +51,7 @@
         <small class="p-error"
           >Debe tener al menos <strong>1 </strong>participante</small
         >
-      </span>
+      </span> -->
     </div>
   </div>
   <div class="row mt-5">
@@ -89,7 +92,7 @@
   </div>
   <div class="row mt-5 p-0">
     <div class="offset-0 col-sm-12 col-md-5 offset-md-1">
-      
+
         <label for="complexity" class="pl-5 mt-5 mt-md-0">*Fecha Inicial </label>
         <p-calendar [showIcon]="true"  [style]="{ width: '100%' }"
         formControlName="startDate"
@@ -102,7 +105,7 @@
           "
         >
           <small class="p-error">Este campo es <strong>requerido</strong></small>
-        </span>  
+        </span>
     </div>
     <div class="offset-0 col-sm-12 col-md-5">
       <label for="complexity" class="pl-5 mt-5 mt-md-0">*Fecha Fin </label>
@@ -194,7 +197,7 @@
           ">
             <small class="p-error">Este campo es <strong>requerido</strong></small>
         </span>
-        </div> 
+        </div>
     </div>-->
   <div class="row mt-5 p-0">
     <div class="offset-0 col-sm-12 col-md-5 offset-md-1">
@@ -206,7 +209,7 @@
         value="Si" inputId="Si"></p-radioButton>
         <label for="Si" class="ml-2">Si</label>
     </div>
-    
+
     <div class="col-4">
         <p-radioButton formControlName="requestSupport"
         value="No"  inputId="No"></p-radioButton>

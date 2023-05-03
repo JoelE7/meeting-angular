@@ -1,5 +1,5 @@
-      <div class="d-flex banner-profile">
-        <div class="p-5">
+      <div class="d-flex banner-profile" [ngClass]="{'short':short}">
+        <div [ngClass]="{'short-p':short}" class="p-5" >
           <h3 class="text-white">{{title}}</h3>
           <h6 class="fst-italic text-secondary">{{subtitle}}</h6>
         </div>

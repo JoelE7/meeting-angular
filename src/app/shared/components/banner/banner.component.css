@@ -4,6 +4,14 @@
   padding: 40px 0px;
 }
 
+.short{
+  height: 130px !important;
+}
+
+.short-p{
+  padding: 30px !important;
+}
+
 .banner-profile{
   background: rgb(0,0,0);
   background: linear-gradient(153deg, rgba(0,0,0,1) 0%, rgba(123,25,147,1) 46%, rgba(168,85,247,1) 100%);

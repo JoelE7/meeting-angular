@@ -20,7 +20,15 @@
 }
 
 .recommendation{
-  border: 1px solid #a855f7;
+  border: 1px solid #c42e6c;
   border-radius: 10px;
+}
 
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  border-color: #DB27CC !important;
+  color: #DB27CC !important;
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
+  box-shadow: inset 0 0 0 0.2rem #f792ee;
 }

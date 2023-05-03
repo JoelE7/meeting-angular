@@ -28,3 +28,10 @@
 .description{
   height: 40%;
 }
+
+.integrants{
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 2px solid rgb(71, 71, 71);
+}

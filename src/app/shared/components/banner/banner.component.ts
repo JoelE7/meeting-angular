@@ -14,4 +14,7 @@ export class BannerComponent {
   @Input()
   subtitle: string = "";
 
+  @Input()
+  short: boolean = false;
+
 }
