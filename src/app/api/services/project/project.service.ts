@@ -25,4 +25,13 @@ export class ProjectService {
         })
       );
   }
+
+  createProject(data: Project) {
+    return this.http.post(`${enviroment.apiUrl}/projects/`, data)
+    .pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
 }
