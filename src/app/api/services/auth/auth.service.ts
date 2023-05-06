@@ -24,5 +24,13 @@ export class AuthService {
     );
   }
 
+  registerUser(data: User){
+    return this.http.post(`${enviroment.apiUrl}/users`, data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+
 
 }
