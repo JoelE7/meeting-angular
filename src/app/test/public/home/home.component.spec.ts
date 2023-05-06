@@ -2,8 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MessageService } from 'primeng/api';
 import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from 'src/app/shared/components/home/home.component';
 import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
+import { HomeComponent } from 'src/app/public/home/home.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;

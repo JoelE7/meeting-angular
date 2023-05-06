@@ -41,6 +41,7 @@ import { CascadeSelectModule } from 'primeng/cascadeselect';
 import { ChartModule } from 'primeng/chart';
 import { ImageModule } from 'primeng/image';
 import { TagModule } from 'primeng/tag';
+import {AvatarModule} from "primeng/avatar";
 
 @NgModule({
   providers: [ConfirmationService],
@@ -88,6 +89,7 @@ import { TagModule } from 'primeng/tag';
     ChartModule,
     ImageModule,
     TagModule,
+    AvatarModule
   ],
 })
 export class PrimengModule {}

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FooterComponent } from 'src/app/shared/components/footer/footer.component';
 
+import { ChartBarComponent } from '../../../../shared/components/chart-bar/chart-bar.component';
 
-describe('FooterComponent', () => {
-  let component: FooterComponent;
-  let fixture: ComponentFixture<FooterComponent>;
+describe('ChartBarComponent', () => {
+  let component: ChartBarComponent;
+  let fixture: ComponentFixture<ChartBarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FooterComponent ]
+      declarations: [ ChartBarComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FooterComponent);
+    fixture = TestBed.createComponent(ChartBarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
