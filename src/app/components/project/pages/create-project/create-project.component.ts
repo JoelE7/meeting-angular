@@ -20,7 +20,7 @@ export class CreateProjectComponent {
     private router: Router
   ) {}
 
-  createProject(proyecto: any) {
+  createProject(proyecto: Project) {
     this.newProject = proyecto;
     this.projectService.createProject(this.newProject).subscribe(
       (resp) => {
