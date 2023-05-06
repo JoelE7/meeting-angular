@@ -51,18 +51,13 @@
           <p-button type="button" [style]="{ width: '100%' }" label="Filtrar" class="float-start"
             styleClass=" p-button-help" routerLink="/project/create" icon="pi pi-search"></p-button>
         </div>
-
-        <div class="questions">
-          <b>¿Te gustaria participar en un proyecto en React?</b>
-          <div class="d-flex justify-content-around">
-            <p-button icon="pi pi-check" type="button" [style]="{ width: '50px', height: '25px' }" label="" class=""
-              styleClass="p-button-outlined-2"></p-button>
-            <p-button icon="pi pi-times" type="button" [style]="{ width: '50px', height: '25px' }" label="" class=""
-              styleClass="p-button-outlined-2"></p-button>
-          </div>
-        </div>
       </div>
       <div class="w-75">
+        <p-dialog [header]="question" [(visible)]="visiblePopUpQuestion" [position]="'right'"
+          [style]="{ width: '40vw', height : '12.5vw'}" [transitionOptions]="'1000ms'">
+          <app-modal-question (eventEmitterHiddenPopUpQuestion)="hiddenPopUpQuestion($event)" (eventEmitterAnswer)="answerQuestion($event)"></app-modal-question>
+        </p-dialog>
+
         <app-card-project *ngFor="let project of listProject" [project]="project"></app-card-project>
       </div>
     </div>
