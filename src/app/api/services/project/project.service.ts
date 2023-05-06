@@ -34,4 +34,13 @@ export class ProjectService {
       })
     );
   }
+
+  updateProject(data: Project) {
+    return this.http.post(`${enviroment.apiUrl}/projects/update`, data)
+    .pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
 }
