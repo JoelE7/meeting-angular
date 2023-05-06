@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from 'src/app/api/services/project/project.service';
 import { Project } from 'src/app/shared/models/project/project.class';
 import { Task } from '../../interfaces/tasks.interface';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-details-project',
@@ -10,52 +11,36 @@ import { Task } from '../../interfaces/tasks.interface';
   styleUrls: ['./details-project.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-// export class DetailsProjectComponent implements OnInit{
-//
-//   id:number;
-//
-//   constructor(private projectService:ProjectService,private activatedRoute:ActivatedRoute){
-//
-//   }
-//
-//   ngOnInit(): void {
-//     let {id} = this.activatedRoute.snapshot.params
-//
-//     this.projectService.detailsProject(id).subscribe((project)=>{
-//       this.searchProject = project;
-//     },(err)=>{
-//       console.log(err);
-//     })
-//   }
-//
-// }
-export class DetailsProjectComponent {
-  profile: []
-  tasks: Task[] = [
-    {
-      numberTask: '1',
-      name: 'CRUD de tareas',
-      status: 'IN_PROCESS',
-      assignedMember: 'Joel',
-    },
-    {
-      numberTask: '2',
-      name: 'CRUD de mvp',
-      status: 'FINALIZED',
-      assignedMember: 'Ezequiel',
-    },
-    {
-      numberTask: '3',
-      name: 'CRUD de usuarios',
-      status: 'NOTASSIGNED',
-    },
-  ];
+export class DetailsProjectComponent implements OnInit {
+  profile: [];
 
   projectAccept = false;
 
   searchProject: Project = new Project();
 
-  constructor() {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private messageService: MessageService,
+    private projectService: ProjectService
+  ) {}
+
+  ngOnInit(): void {
+    let { id } = this.activatedRoute.snapshot.params;
+
+    this.projectService.detailsProject(id).subscribe(
+      (project) => {
+        this.searchProject = project;
+      },
+      (err) => {
+        this.messageService.add({
+          key: 'msg',
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+        });
+      }
+    );
+  }
 
   joinAProject() {
     this.projectAccept = true;

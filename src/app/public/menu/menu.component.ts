@@ -12,6 +12,8 @@ import { Menu } from './interfaces/menu.interface';
 export class MenuComponent implements OnInit {
   menu: Menu[] = [];
   url: string = '';
+  session:any = localStorage.getItem('token')
+
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
