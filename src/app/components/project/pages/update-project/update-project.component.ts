@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ProjectService } from 'src/app/api/services/project/project.service';
 import { Project } from 'src/app/shared/models/project/project.class';
@@ -15,16 +15,50 @@ export class UpdateProjectComponent {
 
   constructor(
     private router: Router,
+    private activatedRouter: ActivatedRoute,
     private messageService: MessageService,
     private projectService: ProjectService
   ) {}
 
   ngOnInit(): void {
-    this.editProject._id = 1;
-    this.editProject.name = 'Jessica';
+    let { id } = this.activatedRouter.snapshot.params;
+
+    this.projectService.detailsProject(id).subscribe(
+      (project) => {
+        this.editProject = project;
+      },
+      (err) => {
+        console.log(err);
+        this.messageService.add({
+          key: 'msg',
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Recargue o contacte con el administrador del sistema',
+        });
+      }
+    );
   }
 
-  updateProject(proyecto: any) {
-    console.log('Llego el proyecto desde el form');
+  updateProject(proyecto: Project) {
+    this.editProject = proyecto;
+    this.projectService.updateProject(this.editProject).subscribe(
+      (resp) => {
+        this.messageService.add({
+          key: 'msg',
+          severity: 'success',
+          summary: 'Editado',
+          detail: '¡El Proyecto fue editado con exito!',
+        });
+        this.router.navigate(['/list-project']);
+      },
+      (err) => {
+        this.messageService.add({
+          key: 'msg',
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+        });
+      }
+    );
   }
 }

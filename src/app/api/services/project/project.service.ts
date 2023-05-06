@@ -25,4 +25,48 @@ export class ProjectService {
         })
       );
   }
+
+  createProject(data: Project) {
+    let headers = new HttpHeaders();
+    // headers = headers.append(
+    //   'Authorization',
+    //   'Bearer' + localStorage.getItem('token')
+    // );
+    return this.http.post(`${enviroment.apiUrl}/projects/`, data,{ headers: headers })
+    .pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+
+  updateProject(data: Project) {
+    let headers = new HttpHeaders();
+    // headers = headers.append(
+    //   'Authorization',
+    //   'Bearer' + localStorage.getItem('token')
+    // );
+    return this.http.post(`${enviroment.apiUrl}/projects/update`, data,{ headers: headers })
+    .pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+
+  getAllProjects() {
+    let headers = new HttpHeaders();
+    // headers = headers.append(
+    //   'Authorization',
+    //   'Bearer' + localStorage.getItem('token')
+    // );
+
+    return this.http
+      .get(`${enviroment.apiUrl}/projects`, { headers: headers })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
 }

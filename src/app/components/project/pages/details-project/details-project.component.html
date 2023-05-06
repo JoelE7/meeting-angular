@@ -1,47 +1,32 @@
 <div class="profile">
   <div class="container rounded">
-    <span class="fst-italic text-secondary small" ><a href="" class="text-secondary" style="text-decoration: none;" routerLink="/project/list-project">Volver</a> | <a routerLink="/project/details-project/1" class="text-secondary" style="text-decoration: none;">Turisteando</a></span>
+    <span class="fst-italic text-secondary small" ><a href="" class="text-secondary" style="text-decoration: none;" routerLink="/project/list-project">Volver</a> | <a routerLink="/project/details-project/1" class="text-secondary" style="text-decoration: none;">{{searchProject.name}}</a></span>
     <div class="card shadow-sm" style="width:100%; min-height: 700px;">
-      <app-banner [title]="'Turisteando'" [subtitle]="'Aplicacion Web'" [short]="true"></app-banner>
+      <app-banner [title]="searchProject.name" [subtitle]="'Aplicacion ' + searchProject.type" [short]="true"></app-banner>
       <p-tabView class="p-3">
         <p-tabPanel header="Datos del proyecto">
           <div class="row">
-            <!-- <div class="col-12">
-              <p> Nombre del proyecto:
-                <span>{{searchProject.name}}</span>
-              </p>
-            </div> -->
-          </div>
-          <div class="row">
             <div class="col-6">
-              <p> <b>Fecha inicio:</b> 4/1/2023
+              <p> <b>Fecha inicio: </b> 
                 <span>{{searchProject.startDate | date:'dd/MM/YYYY'}}</span>
               </p>
             </div>
             <div class="col-6">
-              <p> <b>Fecha Fin:</b> 6/2/2023
+              <p> <b>Fecha Fin: </b> 
                 <span>{{searchProject.startDate | date:'dd/MM/YYYY'}}</span>
               </p>
             </div>
           </div>
           <div class="row">
-            <!-- <div class="col-6">
-              <p> Tipo de proyecto:
-                <span>{{searchProject.typeProject}}</span>
-              </p>
-            </div> -->
             <div class="col-12">
-              <p><b>Cantidad de participantes:</b> 6
+              <p><b>Cantidad de participantes: </b> 
                 <span>{{searchProject.amountParticipants}}</span>
               </p>
             </div>
           </div>
         </p-tabPanel>
         <p-tabPanel header="Descripcion">
-          <p>El proyecto consiste en el desarrollo de una plataforma web de reservaciones para destinos turísticos. Utilizando técnicas de programación modernas, como inteligencia artificial y aprendizaje automático, nuestra plataforma brindará una experiencia personalizada al usuario. Además, se implementará un sistema de recomendaciones basado en las preferencias de cada cliente, así como también un módulo de pago seguro y un chatbot para brindar atención al cliente en tiempo real.
-            Nuestro equipo trabajará en colaboración con diferentes agencias turísticas para ofrecer una amplia gama de opciones de alojamiento, tours y actividades en cada destino. Se integrará un mapa interactivo para que los usuarios puedan explorar y conocer la zona antes de realizar su reserva.<br><br>
-            La plataforma contará con una interfaz amigable y responsive, adaptada a diferentes dispositivos móviles y sistemas operativos. Además, se implementará un sistema de retroalimentación para que los usuarios puedan calificar su experiencia y brindar sugerencias para futuras mejoras.
-            En resumen, nuestro proyecto de turismo tiene como objetivo mejorar la experiencia del usuario al momento de planear y reservar su viaje, utilizando tecnología de vanguardia para brindar una experiencia personalizada y segura.
+          <p>{{searchProject.description}}
           </p>
         </p-tabPanel>
         <p-tabPanel header="Perfiles">
