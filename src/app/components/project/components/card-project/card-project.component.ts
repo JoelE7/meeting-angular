@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Project } from 'src/app/shared/models/project/project.class';
 
 @Component({
   selector: 'app-card-project',
@@ -7,16 +8,13 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./card-project.component.css'],
 })
 export class CardProjectComponent implements OnInit {
-  support: boolean = false;
 
-  constructor(private activatedRoute: ActivatedRoute) {}
+  @Input()
+  project:Project = new Project();
+
+  constructor() {}
 
   ngOnInit(): void {
-    if (
-      this.activatedRoute.snapshot.routeConfig.path ==
-      'list-project-support'
-    ) {
-      this.support = true;
-    }
+
   }
 }

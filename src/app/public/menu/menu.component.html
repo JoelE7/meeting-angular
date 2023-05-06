@@ -9,7 +9,8 @@
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li *ngFor="let item of menu" [pTooltip]="item.tooltip" [showDelay]="item.tooltipOptions.showDelay"
                     [autoHide]="item.tooltipOptions.autoHide" [tooltipEvent]="item.tooltipOptions.tooltipEvent"
-                    [tooltipPosition]="item.tooltipOptions.tooltipPosition" class="d-flex justify-content-center alig-content-center">
+                    [tooltipPosition]="item.tooltipOptions.tooltipPosition"
+                    class="d-flex justify-content-center alig-content-center">
                     <a [class]="item.class" aria-current="page" [routerLink]="item.url"
                         [routerLinkActive]="item.urlActiveClass">
                         <i [class]="item.icon"></i>
@@ -19,14 +20,17 @@
 
             <form class="d-flex w-25 justify-content-center" role="search" id="searcher">
                 <span class="p-input-icon-left">
-                  <i class="pi pi-search"></i>
-                  <input type="text" pInputText placeholder="Buscar" aria-label="Search" class="buscador"/>
-              </span>
+                    <i class="pi pi-search"></i>
+                    <input type="text" pInputText placeholder="Buscar" aria-label="Search" class="buscador" />
+                </span>
             </form>
             <div class="d-flex w-25" id="butt">
-              <p-button class="me-2" type="submit" label="Ingresar" styleClass="p-button-help" routerLink="/auth/login"></p-button>
-              <p-button class="me-2" type="submit" label="Registrarse" styleClass= "p-button-outlined p-button-help" routerLink="/auth/register"></p-button>
-              <p-button class="" type="submit" label="Perfil" styleClass= "p-button-outlined p-button-help" routerLink="/user/see-my-profile"></p-button>
+                <p-button class="me-2" type="submit" label="Ingresar" styleClass="p-button-help"
+                    routerLink="/auth/login"></p-button>
+                <p-button class="me-2" type="submit" label="Registrarse" styleClass="p-button-outlined p-button-help"
+                    routerLink="/auth/register"></p-button>
+                <p-button class="" type="submit" label="Perfil" styleClass="p-button-outlined p-button-help"
+                    routerLink="/user/see-my-profile"></p-button>
             </div>
         </div>
     </div>

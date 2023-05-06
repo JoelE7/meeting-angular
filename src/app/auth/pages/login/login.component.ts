@@ -32,6 +32,9 @@ export class LoginComponent implements OnInit {
     this.userLogin.email = this.form.get('email').value;
     this.userLogin.password = this.form.get('pass').value;
 
+    console.log(this.userLogin);
+    
+
     this.authService.loginUser(this.userLogin).subscribe(
       (data) => {
         this.messageService.add({
@@ -39,6 +42,7 @@ export class LoginComponent implements OnInit {
           summary: '¡Hecho!',
           detail: '¡Inicio de sesión exitoso!',
         });
+        localStorage.setItem('token',"login");
         this.router.navigate(['/home']);
       },
       (err) => {
