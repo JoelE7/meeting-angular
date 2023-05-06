@@ -9,13 +9,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DetailMvpComponent } from './pages/detail-mvp/detail-mvp.component';
 import {ButtonModule} from "primeng/button";
 import {ProjectModule} from "../project/project.module";
-import {StartModule} from "../../shared/start.module";
 import {TabViewModule} from "primeng/tabview";
 import {TableModule} from "primeng/table";
 import {AvatarModule} from "primeng/avatar";
 import {BadgeModule} from "primeng/badge";
 import {AccordionModule} from "primeng/accordion";
 import { UserModule } from '../user/user.module';
+import { StartModule } from 'src/app/public/start.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { UserModule } from '../user/user.module';
     BadgeModule,
     AccordionModule,
     PrimengModule,
-    UserModule
+    UserModule,
+    SharedModule
   ]
 })
 export class MvpModule { }

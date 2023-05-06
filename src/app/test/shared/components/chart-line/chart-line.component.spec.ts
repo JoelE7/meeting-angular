@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChartLineComponent } from '../../../../components/user/components/chart-line/chart-line.component';
+import { ChartLineComponent } from '../../../../shared/components/chart-line/chart-line.component';
 
 describe('ChartLineComponent', () => {
   let component: ChartLineComponent;

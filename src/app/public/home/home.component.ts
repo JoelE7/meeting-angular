@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { User } from '../../models/user/user.class';
+import { User } from 'src/app/shared/models/user/user.class';
 
 @Component({
   selector: 'app-home',

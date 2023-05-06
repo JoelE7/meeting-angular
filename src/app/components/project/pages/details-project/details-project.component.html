@@ -131,13 +131,6 @@
             </div>
           </div>
         </p-tabPanel>
-        <p-tabPanel header="Tareas" *ngIf="projectAccept == true">
-          <div class="row">
-            <div class="col-12">
-              <app-table-task-list [tasks]="tasks"></app-table-task-list>
-            </div>
-          </div>
-        </p-tabPanel>
         <p-tabPanel header="MVPs" *ngIf="projectAccept == true">
           <div class="row">
             <div class="d-flex justify-content-between mb-1">
