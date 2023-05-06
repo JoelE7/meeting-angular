@@ -1,7 +1,7 @@
 .banner{
   min-height: 550px;
   width: 100%;
-  background-image: url('../../../../assets/img/img_6.png');
+  background-image: url('../../../assets/img/img_6.png');
   background-size: cover;
 }
 

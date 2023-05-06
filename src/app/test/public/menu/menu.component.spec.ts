@@ -3,9 +3,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AuthService } from 'src/app/api/services/auth/auth.service';
-import { MenuComponent } from 'src/app/shared/components/menu/menu.component';
-import { MainComponent } from 'src/app/shared/components/main/main.component';
 import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
+import { MenuComponent } from 'src/app/public/menu/menu.component';
+import { MainComponent } from 'src/app/public/main/main.component';
 
 describe('MenuComponent', () => {
   let component: MenuComponent;

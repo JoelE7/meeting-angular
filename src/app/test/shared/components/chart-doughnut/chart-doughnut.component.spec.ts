@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChartDoughnutComponent } from '../../../../components/user/components/chart-doughnut/chart-doughnut.component';
+import { ChartDoughnutComponent } from '../../../../shared/components/chart-doughnut/chart-doughnut.component';
 
 describe('ChartDoughnutComponent', () => {
   let component: ChartDoughnutComponent;

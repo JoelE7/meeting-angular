@@ -11,8 +11,7 @@ import { DetailsProjectComponent } from './pages/details-project/details-project
 import { UpdateProjectComponent } from './pages/update-project/update-project.component';
 import { RequestSendModalComponent } from './shared/request-send-modal/request-send-modal.component';
 import { RequestAcceptModalComponent } from './shared/request-accept-modal/request-accept-modal.component';
-import {StartModule} from "../../shared/start.module";
-import { TableTaskListComponent } from './components/table-task-list/table-task-list.component';
+import { StartModule } from 'src/app/public/start.module';
 
 
 @NgModule({
@@ -26,7 +25,6 @@ import { TableTaskListComponent } from './components/table-task-list/table-task-
     DetailsProjectComponent,
     RequestSendModalComponent,
     RequestAcceptModalComponent,
-    TableTaskListComponent,
   ],
   imports: [
     CommonModule,
@@ -43,7 +41,6 @@ import { TableTaskListComponent } from './components/table-task-list/table-task-
     DetailsProjectComponent,
     RequestSendModalComponent,
     RequestAcceptModalComponent,
-    TableTaskListComponent
   ]
 })
 export class ProjectModule { }

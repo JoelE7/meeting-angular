@@ -42,13 +42,24 @@
                 </div>
                 <div class="row mt-3">
                   <div class="offset-1 col-10">
-                    <select class="form-select" name="role" id="select-role" [style]="{'width' : '100%', 'height' : '50px'}" formControlName="role" >
-                      <option value="" disabled selected>Seleccione un rol</option>
-                      <option value="">Usuario IT</option>
-                      <option value="">Empresa</option>
-                      <option value="">Recruiter</option>
-                      <option value="">Otro</option>
-                    </select>
+                    <p-dropdown
+                    [style]="{ width: '100%' }"
+                    formControlName="role"
+                    optionValue="valueRol"
+                    [options]="roles"
+                    placeholder="Seleccione una opción..."
+                    optionLabel="description"
+                  >
+                    <ng-template let-option pTemplate="item">
+                      <span [class]="'description-' + option.valueRol">
+                        {{ option.description }}
+                      </span>
+                    </ng-template>
+                  </p-dropdown>
+                <span class="text-danger"
+                    *ngIf="form.get('role').hasError('required') && form.get('role').touched">
+                    Este campo es obligatorio
+                </span>
                   </div>
                 </div>
             </ng-template>

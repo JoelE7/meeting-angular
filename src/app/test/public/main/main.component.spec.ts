@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RouterTestingModule } from '@angular/router/testing';
-import { MainComponent } from 'src/app/shared/components/main/main.component';
+import { MainComponent } from 'src/app/public/main/main.component';
 
 describe('MainComponent', () => {
   let component: MainComponent;
