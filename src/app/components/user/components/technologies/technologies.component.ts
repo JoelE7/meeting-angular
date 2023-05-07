@@ -17,11 +17,11 @@ export class TechnologiesComponent {
       icon: "fab fa-laravel"
     },{
       name:"React",
-      level:"Basico",
+      level:"Básico",
       icon: "fab fa-react"
     },{
       name:"Angular",
-      level:"Basico",
+      level:"Básico",
       icon: "fab fa-angular"
     }]
 }

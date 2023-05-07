@@ -16,17 +16,6 @@
   padding: 20px;
 }
 
-
-.questions{
-  width: 90%;
-  height: 80px;
-  border: 2px solid #f1bcd173;
-  border-radius: 10px;
-  margin: 10px 0px;
-  font-size: 13px;
-  text-align: center;
-}
-
 .p-button-outlined-2{
   padding: 0 !important;
   border: 2px solid #ff9ec5 !important;
@@ -43,3 +32,4 @@
   background-color: white;
   border-radius: 10px;
 }
+

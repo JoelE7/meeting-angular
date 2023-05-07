@@ -38,14 +38,14 @@
           <br>
           <input type="checkbox" value="Java" /> Java
           <br><br>
-          <label>Tecnologias:</label><br>
+          <label>Tecnologías:</label><br>
           <input type="checkbox" value="Angular" /> Angular
           <br>
           <input type="checkbox" value="React" /> React
           <br><br>
           <label>Estado:</label><br>
-          <input type="checkbox" value="Javascript" /> To Do<br>
-          <input type="checkbox" value="Javascript" /> In Progress<br>
+          <input type="checkbox" value="Javascript" /> Inicial<br>
+          <input type="checkbox" value="Javascript" /> En progreso<br>
           <input type="checkbox" value="Javascript" /> Solicitando Apoyo
           <br><br>
           <p-button type="button" [style]="{ width: '100%' }" label="Filtrar" class="float-start"
@@ -54,7 +54,7 @@
       </div>
       <div class="w-75">
         <p-dialog [header]="question" [(visible)]="visiblePopUpQuestion" [position]="'right'"
-          [style]="{ width: '40vw', height : '12.5vw'}" [transitionOptions]="'1000ms'">
+          [transitionOptions]="'1000ms'">
           <app-modal-question (eventEmitterHiddenPopUpQuestion)="hiddenPopUpQuestion($event)" (eventEmitterAnswer)="answerQuestion($event)"></app-modal-question>
         </p-dialog>
 
