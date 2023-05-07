@@ -14,7 +14,7 @@ export class ListProjectComponent implements OnInit {
   typeProyects = [];
   complexitys = [];
 
-  visiblePopUpQuestion:Boolean = false;
+  visiblePopUpQuestion:Boolean = true;
 
   question: string = '¿Te gustaría participar en un proyecto de react?';
 
