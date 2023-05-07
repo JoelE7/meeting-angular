@@ -14,12 +14,21 @@ export class ListProjectComponent implements OnInit {
   typeProyects = [];
   complexitys = [];
 
+  visiblePopUpQuestion:Boolean = false;
+
+  question: string = '¿Te gustaría participar en un proyecto de react?';
+
   constructor(
     private messageService: MessageService,
     private projectService: ProjectService
   ) {}
 
   ngOnInit(): void {
+    let modal = parseInt(String(Math.random() * 2));
+    if (modal == 1) {
+      this.visiblePopUpQuestion = true;
+    }
+
     this.projectService.getAllProjects().subscribe(
       (data) => {
         this.listProject = data;
@@ -33,5 +42,14 @@ export class ListProjectComponent implements OnInit {
         });
       }
     );
+  }
+
+  answerQuestion(answer: Boolean) {
+    console.log('Llego la respuesta a la pregunta del usuario');
+    console.log(answer);
+  }
+
+  hiddenPopUpQuestion(hidden:Boolean){
+    this.visiblePopUpQuestion = hidden;
   }
 }

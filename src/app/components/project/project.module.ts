@@ -12,6 +12,7 @@ import { UpdateProjectComponent } from './pages/update-project/update-project.co
 import { RequestSendModalComponent } from './shared/request-send-modal/request-send-modal.component';
 import { RequestAcceptModalComponent } from './shared/request-accept-modal/request-accept-modal.component';
 import { StartModule } from 'src/app/public/start.module';
+import { ModalQuestionComponent } from './shared/question-modal/modal-question.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { StartModule } from 'src/app/public/start.module';
     DetailsProjectComponent,
     RequestSendModalComponent,
     RequestAcceptModalComponent,
+    ModalQuestionComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +43,7 @@ import { StartModule } from 'src/app/public/start.module';
     DetailsProjectComponent,
     RequestSendModalComponent,
     RequestAcceptModalComponent,
+    ModalQuestionComponent,
   ]
 })
 export class ProjectModule { }
