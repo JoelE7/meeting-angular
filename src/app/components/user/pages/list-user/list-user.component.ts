@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 interface Developer {
   name: string;
@@ -9,7 +9,8 @@ interface Developer {
 @Component({
   selector: 'app-list-user',
   templateUrl: './list-user.component.html',
-  styleUrls: ['./list-user.component.css']
+  styleUrls: ['./list-user.component.css'],
+  encapsulation:ViewEncapsulation.None
 })
 export class ListUserComponent {
   developers: Developer[] = [

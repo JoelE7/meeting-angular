@@ -42,6 +42,8 @@ import { ChartModule } from 'primeng/chart';
 import { ImageModule } from 'primeng/image';
 import { TagModule } from 'primeng/tag';
 import {AvatarModule} from "primeng/avatar";
+import {SkeletonModule} from "primeng/skeleton";
+ 
 
 @NgModule({
   providers: [ConfirmationService],
@@ -89,7 +91,8 @@ import {AvatarModule} from "primeng/avatar";
     ChartModule,
     ImageModule,
     TagModule,
-    AvatarModule
+    AvatarModule,
+    SkeletonModule 
   ],
 })
 export class PrimengModule {}
