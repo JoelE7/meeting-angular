@@ -33,3 +33,8 @@
   border-radius: 10px;
 }
 
+
+ .p-dialog .p-dialog-header{
+  background-color: #ced4da !important;
+  padding:1rem;
+} 

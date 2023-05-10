@@ -1,0 +1,140 @@
+<div class="container-fluid">
+  <div class="w-100 d-flex">
+    <div class="w-25">
+      <div class="aside">
+        <h2 class="py-2">Foro</h2>
+        <p class="py-1">
+          <i class="pi pi-user"></i> 
+          Presentaciones
+        </p>
+        
+        <p class="py-1"><i class="pi pi-megaphone"></i> General</p>
+      </div>
+    </div>
+    <div class="forum row shadow-sm">
+      <!-- titulo y acciones -->
+      <div class="col-8">
+        <h3 class="text-start pt-4 m-0">Tema: Presentaciones</h3>
+      </div>
+      <div class="col-4">
+        <p-button
+          type="button"
+          [style]="{ width: '100%' }"
+          label="Nuevo mensaje"
+          class="float-end pt-4"
+          styleClass=" p-button-help"
+          routerLink="/forum/createPost"
+        ></p-button>
+      </div>
+      <!-- titulo y acciones -->
+      <div class="">
+        <h5 class="text-start py-2 m-0">Presentación oficial</h5>
+      </div>
+      <!-- subtitulo -->
+
+      <!-- barra de busqueda -->
+      <form class="w-100" role="search">
+        <div class="p-inputgroup">
+          <input
+            type="text"
+            pInputText
+            placeholder="Ingrese el texto a buscar..."
+            id="searchForum"
+          />
+          <button
+            type="button"
+            pButton
+            icon="pi pi-search"
+            id="searchFButon"
+            styleClass="p-button-warn"
+          ></button>
+        </div>
+      </form>
+      <!-- barra de busqueda -->
+
+      <!-- card de template -->
+      <div class="col-12">
+        <div class="">
+          <div class="cardPost p-2">
+            <div class="row">
+              <div class="col-3">
+                <img
+                  src="assets/img/jessica.jpeg"
+                  alt="imagenJesi"
+                  class="rounded my-2"
+                  width="50"
+                  height="50"
+                />
+                <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+              </div>
+              <div class="col-9">
+                <p-skeleton width="100%" height="150px"></p-skeleton>
+              </div>
+            </div>
+            <!-- botones -->
+            <div class="text-end">
+              <p-button
+                type="button"
+                [style]="{ width: '100%' }"
+                label="Responder"
+                class="py-2"
+                styleClass="p-button-outlined p-button-help"
+                routerLink=""
+              ></p-button>
+              <p-button
+                type="button"
+                styleClass="p-button-rounded p-button-help  mx-2"
+                icon="pi pi-thumbs-up-fill"
+              ></p-button>
+            </div>
+            <!-- botones -->
+          </div>
+        </div>
+      </div>
+      <!-- card de template -->
+
+      <!-- card de template 2 -->
+      <div class="col-12">
+        <div class="surface-border surface-card">
+          <div class="cardPost p-2">
+            <div class="row">
+              <div class="col-3">
+                <img
+                  src="assets/img/jessica.jpeg"
+                  alt="imagenJesi"
+                  class="rounded my-2"
+                  width="50"
+                  height="50"
+                />
+                <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+              </div>
+              <div class="col-9">
+                <p-skeleton width="100%" height="150px"></p-skeleton>
+              </div>
+            </div>
+            <!-- botones -->
+            <div class="text-end m-3">
+              <p-button
+                type="button"
+                [style]="{ width: '100%' }"
+                label="Responder"
+                class="py-2"
+                styleClass="p-button-outlined p-button-help"
+                routerLink=""
+              ></p-button>
+              <p-button
+                type="button"
+                styleClass="p-button-rounded p-button-help  mx-2"
+                icon="pi pi-thumbs-up-fill"
+              ></p-button>
+            </div>
+            <!-- botones -->
+          </div>
+        </div>
+      </div>
+      <!-- card de template 2 -->
+    </div>
+  </div>
+</div>

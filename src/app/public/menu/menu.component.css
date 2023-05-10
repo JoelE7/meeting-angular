@@ -30,7 +30,9 @@ p-menubarsub {
   height: 40px;
 }
 
-
+.buscador:hover{
+  border: 1px solid #c42e6c !important;
+}
 
 .p-button-help{
   background-color: #c42e6c !important;
