@@ -1,5 +1,8 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MessageService } from 'primeng/api';
 import { SuggestionsProjectComponent } from 'src/app/components/project/components/suggestions-project/suggestions-project.component';
+import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 
 
 describe('SuggestionsProjectComponent', () => {
@@ -8,7 +11,9 @@ describe('SuggestionsProjectComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SuggestionsProjectComponent ]
+      declarations: [ SuggestionsProjectComponent ],
+      providers : [MessageService],
+      imports : [HttpClientTestingModule,PrimengModule]
     })
     .compileComponents();
 

@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { FormProjectComponent } from 'src/app/components/project/components/form-project/form-project.component';
+import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 
 
 describe('FormProjectComponent', () => {
@@ -8,7 +10,9 @@ describe('FormProjectComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FormProjectComponent ]
+      declarations: [ FormProjectComponent ],
+      providers : [],
+      imports : [PrimengModule,RouterTestingModule]
     })
     .compileComponents();
 
