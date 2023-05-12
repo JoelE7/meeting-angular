@@ -1,0 +1,30 @@
+.forum {
+  background-color: rgb(241, 241, 241);
+}
+
+.aside {
+  background-color: #f1bcd173;
+  width: 100%;
+  height: 950px;
+  padding: 20px;
+}
+
+#searchForum {
+  height: 40px;
+  background-color: #fff !important;
+}
+#searchForum:hover{
+  border: 1px solid #c42e6c !important;
+}
+
+#searchFButon {
+  height: 40px;
+  background-color: #c42e6c !important;
+  border: 1px solid #c42e6c !important;
+}
+
+.cardPost {
+  border-radius: 10px;
+  background-color: white;
+  border: 1px solid #f1bcd173 !important;
+}

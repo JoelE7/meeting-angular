@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModalQuestionComponent } from '../../../../../components/project/shared/question-modal/modal-question.component';
+import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 
 describe('ModalQuestionComponent', () => {
   let component: ModalQuestionComponent;
@@ -8,7 +9,9 @@ describe('ModalQuestionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModalQuestionComponent ]
+      declarations: [ ModalQuestionComponent ],
+      providers : [],
+      imports : [PrimengModule]
     })
     .compileComponents();
 

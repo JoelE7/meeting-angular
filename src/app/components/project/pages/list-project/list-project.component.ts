@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { ProjectService } from 'src/app/api/services/project/project.service';
 import { Project } from 'src/app/shared/models/project/project.class';
@@ -7,6 +7,7 @@ import { Project } from 'src/app/shared/models/project/project.class';
   selector: 'app-list-project',
   templateUrl: './list-project.component.html',
   styleUrls: ['./list-project.component.css'],
+  encapsulation:ViewEncapsulation.None
 })
 export class ListProjectComponent implements OnInit {
   listProject: Project[] = [];
@@ -14,7 +15,7 @@ export class ListProjectComponent implements OnInit {
   typeProyects = [];
   complexitys = [];
 
-  visiblePopUpQuestion:Boolean = false;
+  visiblePopUpQuestion:Boolean = true;
 
   question: string = '¿Te gustaría participar en un proyecto de react?';
 

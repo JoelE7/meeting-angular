@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { RequestAcceptModalComponent } from 'src/app/components/project/shared/request-accept-modal/request-accept-modal.component';
+import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 
-import { RequestAcceptModalComponent } from '../../../../components/project/shared/request-accept-modal/request-accept-modal.component';
 
 describe('RequestAcceptModalComponent', () => {
   let component: RequestAcceptModalComponent;
@@ -8,7 +10,9 @@ describe('RequestAcceptModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RequestAcceptModalComponent ]
+      declarations: [ RequestAcceptModalComponent ],
+      providers : [ConfirmationService,MessageService],
+      imports : [PrimengModule]
     })
     .compileComponents();
 

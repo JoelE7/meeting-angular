@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MessageService } from 'primeng/api';
+import { RequestSendModalComponent } from 'src/app/components/project/shared/request-send-modal/request-send-modal.component';
+import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 
-import { RequestSendModalComponent } from '../../../../components/project/shared/request-send-modal/request-send-modal.component';
 
 describe('RequestSendModalComponent', () => {
   let component: RequestSendModalComponent;
@@ -8,7 +10,9 @@ describe('RequestSendModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RequestSendModalComponent ]
+      declarations: [ RequestSendModalComponent ],
+      providers : [MessageService],
+      imports : [PrimengModule]
     })
     .compileComponents();
 

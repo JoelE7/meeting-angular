@@ -18,3 +18,11 @@
   padding: 5px 10px;
   border-radius: 5px;
 }
+.rankingBackground {
+  background-color: rgb(241, 241, 241);
+}
+
+.p-datatable .p-datatable-thead tr th {
+   border: 1px solid #f1bcd173;
+   background: #f1bcd173 !important;
+}

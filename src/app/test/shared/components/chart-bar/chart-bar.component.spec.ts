@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChartBarComponent } from '../../../../shared/components/chart-bar/chart-bar.component';
+import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 
 describe('ChartBarComponent', () => {
   let component: ChartBarComponent;
@@ -8,7 +9,8 @@ describe('ChartBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChartBarComponent ]
+      declarations: [ ChartBarComponent ],
+      imports : [PrimengModule]
     })
     .compileComponents();
 

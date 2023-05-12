@@ -1,30 +1,29 @@
-<!-- login -->
 <div class="login">
     <form (ngSubmit)="login()" [formGroup]="form" class="">
         <p-card class="contenido shadow-sm">
             <ng-template pTemplate="header">
-                <h2 class="text-dark text-center mt-3">Iniciar Sesion</h2>
-                <p class="text-center fst-italic">Mantenete al dia de los avances de tus proyectos</p>
+                <h2 class="text-dark text-center mt-3">Iniciar Sesión</h2>
+                <p class="text-center fst-italic">Mantente al día de los avances de tus proyectos</p>
             </ng-template>
             <ng-template pTemplate="content">
                 <div class="row mt-3">
                     <div class="offset-1 col-10">
                         <input appenTo="body" [style]="{width : '100%'}" pInputText type="text" formControlName="email"
-                            placeholder="Email">
+                            placeholder="Email" class="borderInput">
                         <span class="text-danger"
                             *ngIf="form.get('email').hasError('required') && form.get('email').touched">
                             Este campo es obligatorio
                         </span>
                         <span class="text-danger"
                             *ngIf="form.get('email').hasError('email') && form.get('email').touched">
-                            El formato de email debe ser uno valido
+                            El formato de email debe ser uno válido
                         </span>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="offset-1 col-10">
                         <input appenTo="body" [style]="{'width' : '100%'}" pInputText type="password" formControlName="pass"
-                            placeholder="Contraseña">
+                            placeholder="Contraseña" class="borderInput">
                         <span class="text-danger"
                             *ngIf="form.get('pass').hasError('required') && form.get('pass').touched">
                             Este campo es obligatorio
@@ -39,7 +38,7 @@
                             label="Ingresar" styleClass="p-button-help"></p-button>
                     </div>
                     <div class="offset-1 col-10 mt-3">
-                        <p class="text-dark text-center">¿No tienes cuenta?
+                        <p class="text-dark text-center link">¿No tienes una cuenta?
                             <a routerLink="/auth/register" class="text-primary">Registrate</a>
                         </p>
                     </div>
@@ -48,5 +47,4 @@
         </p-card>
     </form>
 </div>
-<!-- login -->
 

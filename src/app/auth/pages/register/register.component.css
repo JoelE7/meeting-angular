@@ -20,6 +20,12 @@
   padding-top: 0px !important;
 }
 
-
-
-
+.borderInput:hover{
+  border: 1px solid #c42e6c !important;
+}
+.p-dropdown:not(.p-disabled):hover {
+  border: 1px solid #c42e6c !important;
+}
+.link a{
+  color: #c42e6c !important;
+}

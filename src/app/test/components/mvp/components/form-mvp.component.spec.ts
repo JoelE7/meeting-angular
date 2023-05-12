@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormMvpComponent } from '../../../../components/mvp/components/form-mvp/form-mvp.component';
+import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 
 describe('CreateMvpComponent', () => {
@@ -8,7 +10,8 @@ describe('CreateMvpComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FormMvpComponent ]
+      declarations: [ FormMvpComponent ],
+      imports : [PrimengModule,RouterTestingModule]
     })
     .compileComponents();
 
