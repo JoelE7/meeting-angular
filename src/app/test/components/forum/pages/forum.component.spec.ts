@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ForumComponent } from '../../../../components/forum/pages/forum.component';
+import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ForumComponent', () => {
@@ -10,7 +11,7 @@ describe('ForumComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ForumComponent ],
-      imports : [RouterTestingModule]
+      imports : [PrimengModule,RouterTestingModule]
     })
     .compileComponents();
 
