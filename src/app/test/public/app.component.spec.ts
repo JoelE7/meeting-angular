@@ -1,12 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from '../../app.component';
+import { MenuComponent } from 'src/app/public/menu/menu.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
+import { MessageService } from 'primeng/api';
+import { MainComponent } from 'src/app/public/main/main.component';
+import { FooterComponent } from 'src/app/public/footer/footer.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,MenuComponent,MainComponent,FooterComponent
       ],
+      providers : [MessageService],
+      imports : [RouterTestingModule,PrimengModule]
     }).compileComponents();
   });
 
@@ -14,18 +22,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'meeting-frontend'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('meeting-frontend');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('meeting-frontend app is running!');
   });
 });

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ChartDoughnutComponent } from '../../../../shared/components/chart-doughnut/chart-doughnut.component';
+import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 
 describe('ChartDoughnutComponent', () => {
   let component: ChartDoughnutComponent;
@@ -8,7 +9,8 @@ describe('ChartDoughnutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChartDoughnutComponent ]
+      declarations: [ ChartDoughnutComponent ],
+      imports : [PrimengModule]
     })
     .compileComponents();
 
