@@ -28,12 +28,11 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  login() {
+  login():void {
+    console.log("Se llamo");
+    
     this.userLogin.email = this.form.get('email').value;
     this.userLogin.password = this.form.get('pass').value;
-
-    console.log(this.userLogin);
-    
 
     this.authService.loginUser(this.userLogin).subscribe(
       (data) => {
