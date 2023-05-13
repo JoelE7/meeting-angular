@@ -13,6 +13,7 @@ import { RequestSendModalComponent } from './shared/request-send-modal/request-s
 import { RequestAcceptModalComponent } from './shared/request-accept-modal/request-accept-modal.component';
 import { StartModule } from 'src/app/public/start.module';
 import { ModalQuestionComponent } from './shared/question-modal/modal-question.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { ModalQuestionComponent } from './shared/question-modal/modal-question.c
     ProjectRoutingModule,
     PrimengModule,
     StartModule,
+    SharedModule
   ],
   exports:[
     CreateProjectComponent,

@@ -25,11 +25,6 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'mvp',
-    loadChildren: () =>
-      import('./components/mvp/mvp.module').then((m) => m.MvpModule),
-  },
-  {
     path: 'forum',
     loadChildren: () =>
       import('./components/forum/forum.module').then((m) => m.ForumModule),

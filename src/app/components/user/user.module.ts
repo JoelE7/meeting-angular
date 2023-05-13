@@ -7,12 +7,14 @@ import { TechnologiesComponent } from './components/technologies/technologies.co
 import { ListUserComponent } from './pages/list-user/list-user.component';
 import { ProjectModule } from '../project/project.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { TableUserComponent } from './components/table-user/table-user.component';
 
 @NgModule({
   declarations: [
     SeeMyProfileComponent,
     TechnologiesComponent,
     ListUserComponent,
+    TableUserComponent
   ],
   imports: [
     CommonModule,
@@ -21,6 +23,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     PrimengModule,
     ProjectModule,
   ],
-  exports: [SeeMyProfileComponent],
+  exports: [SeeMyProfileComponent,TableUserComponent],
 })
 export class UserModule {}

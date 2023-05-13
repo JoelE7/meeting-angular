@@ -43,6 +43,7 @@ import { ImageModule } from 'primeng/image';
 import { TagModule } from 'primeng/tag';
 import {AvatarModule} from "primeng/avatar";
 import {SkeletonModule} from "primeng/skeleton";
+import { AccordionModule } from 'primeng/accordion';
  
 
 @NgModule({
@@ -92,7 +93,8 @@ import {SkeletonModule} from "primeng/skeleton";
     ImageModule,
     TagModule,
     AvatarModule,
-    SkeletonModule 
+    SkeletonModule,
+    AccordionModule,
   ],
 })
 export class PrimengModule {}
