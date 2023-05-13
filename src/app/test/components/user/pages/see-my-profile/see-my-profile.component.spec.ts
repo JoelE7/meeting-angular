@@ -9,8 +9,9 @@ import { SharedModule } from 'primeng/api';
 import { ChartBarComponent } from 'src/app/shared/components/chart-bar/chart-bar.component';
 import { ChartDoughnutComponent } from 'src/app/shared/components/chart-doughnut/chart-doughnut.component';
 import { ChartLineComponent } from 'src/app/shared/components/chart-line/chart-line.component';
+import { HttpClientModule } from '@angular/common/http';
 
-describe('ForumComponent', () => {
+describe('See my profile', () => {
   let component: SeeMyProfileComponent;
   let fixture: ComponentFixture<SeeMyProfileComponent>;
 
@@ -24,7 +25,7 @@ describe('ForumComponent', () => {
         ChartDoughnutComponent,
         ChartLineComponent
       ],
-      imports: [PrimengModule, RouterTestingModule, SharedModule],
+      imports: [PrimengModule, RouterTestingModule, SharedModule,HttpClientModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SeeMyProfileComponent);

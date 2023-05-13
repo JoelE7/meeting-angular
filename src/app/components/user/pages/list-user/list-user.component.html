@@ -7,47 +7,12 @@
 
       <div class="col-4 d-flex align-items-center justify-content-end">
         <p style="margin: 0">Ordenar por:</p>
-        <p-button
-          class="d-block ms-2"
-          type="submit"
-          [style]="{ width: '' }"
-          label="Puntaje ^"
-          styleClass="p-button-help"
-        ></p-button>
+        <p-button class="d-block ms-2" type="submit" [style]="{ width: '' }" label="Puntaje ^"
+          styleClass="p-button-help"></p-button>
       </div>
     </div>
 
-    <p-table [value]="developers" [paginator]="true" [rows]="10">
-      <ng-template pTemplate="header">
-        <tr>
-          <th class="text-center">Foto</th>
-          <th class="text-center">Nombre</th>
-          <th class="text-center">Tecnologías/Lenguajes</th>
-          <th class="text-center">Puntaje</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-developer>
-        <tr>
-          <td>
-            <div class="developer-avatar">
-              <p-avatar
-                [image]="developer.avatarUrl"
-                size="large"
-                shape="circle"
-              ></p-avatar>
-            </div>
-          </td>
-          <td class="text-center">{{ developer.name }}</td>
-          <td class="text-center">
-            <ul class="developer-skills">
-              <li *ngFor="let skill of developer.skills">
-                <i class="{{ skill }}"></i>
-              </li>
-            </ul>
-          </td>
-          <td class="text-center">{{ developer.score }}</td>
-        </tr>
-      </ng-template>
-    </p-table>
+    <app-table-user [totalRecords]="totalRecords" [size]="size" [paginate]="paginate" [developers]="developers"
+      (eventEmitterPaginate)="paginateFunction($event)"></app-table-user>
   </div>
 </div>
