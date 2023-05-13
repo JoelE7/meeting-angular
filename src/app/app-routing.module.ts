@@ -25,11 +25,6 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'forum',
-    loadChildren: () =>
-      import('./components/forum/forum.module').then((m) => m.ForumModule),
-  },
-  {
     path: '**',
     redirectTo: 'auth',
   },

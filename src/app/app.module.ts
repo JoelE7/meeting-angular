@@ -12,7 +12,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
 import { MessageService, SharedModule } from 'primeng/api';
 import { StartModule } from './public/start.module';
-import { ForumModule } from './components/forum/forum.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,9 +28,6 @@ import { ForumModule } from './components/forum/forum.module';
     AuthModule,
     ReactiveFormsModule,
     ProjectModule,
-    ForumModule,
-
-
   ],
   providers: [MessageService],
   bootstrap: [AppComponent],

@@ -31,8 +31,6 @@ export class TableUserComponent {
   @Output()
   eventEmitterPaginate: EventEmitter<any> = new EventEmitter();
 
-
-
   paginateEmit(event: any) {
     this.eventEmitterPaginate.emit(event);
   }
