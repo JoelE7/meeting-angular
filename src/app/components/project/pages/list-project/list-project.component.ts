@@ -1,27 +1,191 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { ProjectService } from 'src/app/api/services/project/project.service';
+import { FilterEnum } from 'src/app/shared/filters/enum/filters.enum';
+import { FiltersComponent } from 'src/app/shared/filters/filters.component';
+import { Filters } from 'src/app/shared/filters/interface/filters.interface';
+import { FilterService } from 'src/app/shared/filters/services/filter.service';
 import { Project } from 'src/app/shared/models/project/project.class';
 
 @Component({
   selector: 'app-list-project',
   templateUrl: './list-project.component.html',
   styleUrls: ['./list-project.component.css'],
-  encapsulation:ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class ListProjectComponent implements OnInit {
+  @ViewChild('app-filters') filtroComponent: FiltersComponent;
+
   listProject: Project[] = [];
 
   typeProyects = [];
   complexitys = [];
 
-  visiblePopUpQuestion:Boolean = true;
+  visiblePopUpQuestion: Boolean = false;
+
+  query: any[] = [];
 
   question: string = '¿Te gustaría participar en un proyecto de react?';
 
+  filters: Filters = {
+    autoSend: false,
+    filtersCustom: [
+      {
+        type: FilterEnum.DROPDOWN,
+        col: 'col-12 m-0 p-0',
+        title: 'Complejidad',
+        nameFilter: 'complexity',
+        valueFilter: '',
+        items: {
+          label: 'label',
+          value: 'value',
+          items: [
+            {
+              label: 'Trainee',
+              value: 'trainee',
+            },
+            {
+              label: 'Junior',
+              value: 'junior',
+            },
+            {
+              label: 'Semisenior',
+              value: 'semisenior',
+            },
+            {
+              label: 'Senior',
+              value: 'senior',
+            },
+          ],
+        },
+      },
+      {
+        type: FilterEnum.DROPDOWN,
+        col: 'col-12 m-0 p-0',
+        title: 'Tipo de aplicación',
+        nameFilter: 'type',
+        valueFilter: '',
+        items: {
+          label: 'label',
+          value: 'value',
+          items: [
+            {
+              label: 'Web',
+              value: 'web',
+            },
+            {
+              label: 'Movil',
+              value: 'mobile',
+            },
+            {
+              label: 'Videojuegos',
+              value: 'videogames',
+            },
+            {
+              label: 'Escritorio',
+              value: 'desktop',
+            },
+          ],
+        },
+      },
+      {
+        type: FilterEnum.RADIO,
+        col: 'col-12 mt-3 mt-md-2',
+        title: 'Técnologias',
+        nameFilter: 'technologies',
+        valueFilter: '',
+        radioItems: {
+          column: false,
+          name: 'technologies',
+          items: [
+            {
+              label: 'Angular',
+              value: 'angular',
+            },
+            {
+              label: 'React',
+              value: 'react',
+            },
+            {
+              label: 'Vue',
+              value: 'vue',
+            },
+            {
+              label: 'Spring',
+              value: 'spring',
+            },
+            {
+              label: 'Node.js',
+              value: 'nodejs',
+            },
+          ],
+        },
+      },
+      {
+        type: FilterEnum.RADIO,
+        col: 'col-12 mt-3 mt-md-2',
+        title: 'Lenguajes',
+        nameFilter: 'languages',
+        valueFilter: '',
+        radioItems: {
+          column: false,
+          name: 'languages',
+          items: [
+            {
+              label: 'Javascript',
+              value: 'javascript',
+            },
+            {
+              label: 'Java',
+              value: 'java',
+            },
+            {
+              label: 'Python',
+              value: 'python',
+            },
+            {
+              label: 'C',
+              value: 'c',
+            },
+            {
+              label: 'Typescript',
+              value: 'typescript',
+            },
+          ],
+        },
+      },
+      {
+        type: FilterEnum.RADIO,
+        col: 'col-12 mt-3 mt-md-2',
+        title: 'Estado',
+        nameFilter: 'status',
+        valueFilter: '',
+        radioItems: {
+          column: false,
+          name: 'languages',
+          items: [
+            {
+              label: 'Por hacer',
+              value: 'to do',
+            },
+            {
+              label: 'En progreso',
+              value: 'in progress',
+            },
+            {
+              label: 'Hecho',
+              value: 'dome',
+            },
+          ],
+        },
+      },
+    ],
+  };
+
   constructor(
     private messageService: MessageService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private filtersService: FilterService
   ) {}
 
   ngOnInit(): void {
@@ -30,8 +194,13 @@ export class ListProjectComponent implements OnInit {
       this.visiblePopUpQuestion = true;
     }
 
-    this.projectService.getAllProjects().subscribe(
+    this.getProjects();
+  }
+
+  getProjects() {
+    this.projectService.getAllProjects(this.query).subscribe(
       (data) => {
+        console.log(data);
         this.listProject = data;
       },
       (err) => {
@@ -50,7 +219,12 @@ export class ListProjectComponent implements OnInit {
     console.log(answer);
   }
 
-  hiddenPopUpQuestion(hidden:Boolean){
+  hiddenPopUpQuestion(hidden: Boolean) {
     this.visiblePopUpQuestion = hidden;
+  }
+
+  getFilters() {
+    this.query = this.filtersService.getFilters();
+    this.getProjects();
   }
 }

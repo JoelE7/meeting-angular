@@ -32,12 +32,13 @@ export class ProjectService {
     //   'Authorization',
     //   'Bearer' + localStorage.getItem('token')
     // );
-    return this.http.post(`${enviroment.apiUrl}/projects/`, data,{ headers: headers })
-    .pipe(
-      map((res: any) => {
-        return res;
-      })
-    );
+    return this.http
+      .post(`${enviroment.apiUrl}/projects/`, data, { headers: headers })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
   }
 
   updateProject(data: Project) {
@@ -46,23 +47,50 @@ export class ProjectService {
     //   'Authorization',
     //   'Bearer' + localStorage.getItem('token')
     // );
-    return this.http.post(`${enviroment.apiUrl}/projects/update`, data,{ headers: headers })
-    .pipe(
-      map((res: any) => {
-        return res;
-      })
-    );
+    return this.http
+      .post(`${enviroment.apiUrl}/projects/update`, data, { headers: headers })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
   }
 
-  getAllProjects() {
+  getAllProjects(query: any = []) {
+    let filtersAccept = [
+      'name',
+      'description',
+      'type',
+      'complexity',
+      'amountParticipants',
+      'leaderId',
+      'startDate',
+      'endDate',
+      'participantsId',
+      'languages',
+      'technologies',
+      'status',
+      'requestSupport',
+    ];
+
+    let queryBuild = '';
+    query.forEach((q) => {
+      if (filtersAccept.find((element) => element === q.col)) {
+        queryBuild = queryBuild + q.col + '=' + q.value;
+      }
+    });
+
     let headers = new HttpHeaders();
     // headers = headers.append(
     //   'Authorization',
     //   'Bearer' + localStorage.getItem('token')
     // );
 
+
     return this.http
-      .get(`${enviroment.apiUrl}/projects`, { headers: headers })
+      .get(`${enviroment.apiUrl}/projects/filter?${queryBuild}`, {
+        headers: headers,
+      })
       .pipe(
         map((res: any) => {
           return res;

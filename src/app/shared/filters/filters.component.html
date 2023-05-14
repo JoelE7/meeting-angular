@@ -1,0 +1,91 @@
+    <div class="row">
+        <div *ngFor="let filter of filters.filtersCustom" class="{{filter.col}} order-{{filter.order}}">
+            <div *ngIf="filter.type === types.INPUTTEXT">
+                <label [class]="filter.titleClass"><span>{{filter.title}}</span></label>
+                <input (input)="filterCustom(filter.nameFilter,filter.valueFilter)" [(ngModel)]="filter.valueFilter"
+                    type="text" pInputText [class]="filter.inputClass" [style]="" />
+            </div>
+            <div *ngIf="filter.type === types.INPUTNUMBER">
+                <label [class]="filter.titleClass"><span>{{filter.title}}</span></label>
+                <input (input)="filterCustom(filter.nameFilter,filter.valueFilter)" [(ngModel)]="filter.valueFilter"
+                    pInputText type="number" id="" class="">
+            </div>
+            <div *ngIf="filter.type === types.INPUTPASSWORD">
+                <label [class]="filter.titleClass"><span>{{filter.title}}</span></label>
+                <input (input)="filterCustom(filter.nameFilter,filter.valueFilter)" [(ngModel)]="filter.valueFilter"
+                    pInputText type="password">
+            </div>
+            <div *ngIf="filter.type === types.DATE">
+                <label [class]="filter.titleClass"><span>{{filter.title}}</span></label>
+                <p-calendar (onInput)="filterCustom(filter.nameFilter,filter.valueFilter)"
+                    (onClear)="filterCustom(filter.nameFilter,filter.valueFilter)"
+                    (onSelect)="filterCustom(filter.nameFilter,filter.valueFilter)" [(ngModel)]="filter.valueFilter"
+                    dateFormat="yy/mm/dd"> ></p-calendar>
+            </div>
+            <div *ngIf="filter.type === types.DROPDOWN">
+                <label [class]="filter.titleClass"><span>{{filter.title}}</span></label>
+                <p-dropdown [showClear]="true" (onChange)="filterCustom(filter.nameFilter,filter.valueFilter)"
+                    [(ngModel)]="filter.valueFilter" [style]="{width: '100%'}" [optionLabel]="filter.items.label"
+                    [optionValue]="filter.items.value" [options]="filter.items.items" placeholder="-- SELECCIONE --">
+                    <ng-template let-option pTemplate="item">
+                        <span [class]="'item-' + option.value">
+                            {{option.label}}
+                        </span>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+            <div *ngIf="filter.type === types.MULTISELECT">
+                <label [class]="filter.titleClass"><span>{{filter.title}}</span></label>
+                <p-multiSelect (onChange)="filterCustom(filter.nameFilter,filter.valueFilter,true)"
+                    [(ngModel)]="filter.valueFilter" [style]="{width: '100%'}" [filter]="false" [options]="filter.items.items"
+                    [optionLabel]="filter.items.label" [optionValue]="filter.items.value"></p-multiSelect>
+            </div>
+            <div *ngIf="filter.type === types.SWITCH">
+                <label [class]="filter.titleClass"><span>{{filter.title}}</span></label>
+                <p-inputSwitch (onChange)="filterCustom(filter.nameFilter,filter.valueFilter)"
+                    [(ngModel)]="filter.valueFilter"></p-inputSwitch>
+            </div>
+            <div *ngIf="filter.type === types.CHECKBOX">
+                <label [class]="filter.titleClass"><span>{{filter.title}}</span></label>
+                <div class="row mt-3" *ngIf="filter.checkboxItems.column">
+                    <div class="col-6" *ngFor="let check of filter.checkboxItems.items;let j = index">
+                        <p-checkbox (click)="filterCustom(filter.nameFilter,filter.valueFilter,true)"
+                            [inputId]="'check' + j" [label]="check.label" [value]="check.value"
+                            [(ngModel)]="filter.valueFilter">
+                        </p-checkbox>
+                    </div>
+                </div>
+                <div *ngIf="!filter.checkboxItems.column">
+                    <div class="row mt-3" *ngFor="let check of filter.checkboxItems.items;let j = index">
+                        <div class="col-12">
+                            <p-checkbox (click)="filterCustom(filter.nameFilter,filter.valueFilter,true)"
+                                [inputId]="'check' + j" [label]="check.label" [value]="check.value"
+                                [(ngModel)]="filter.valueFilter">
+                            </p-checkbox>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="filter.type === types.RADIO">
+                <label [class]="filter.titleClass"><span>{{filter.title}}</span></label>
+                <div class="row mt-3" *ngIf="filter.radioItems.column">
+                    <div class="col-6" *ngFor="let radio of filter.radioItems.items;let j = index">
+                        <p-radioButton (onClick)="filterCustom(filter.nameFilter,filter.valueFilter)"
+                            [name]="radio.name" [inputId]="'radio' + j" [label]="radio.label" [value]="radio.value"
+                            [(ngModel)]="filter.valueFilter">
+                        </p-radioButton>
+                    </div>
+                </div>
+                <div *ngIf="!filter.radioItems.column">
+                    <div class="row mt-3" *ngFor="let radio of filter.radioItems.items;let j = index">
+                        <div class="col-12">
+                            <p-radioButton (onClick)="filterCustom(filter.nameFilter,filter.valueFilter)"
+                                [name]="radio.name" [inputId]="'radio' + j" [label]="radio.label" [value]="radio.value"
+                                [(ngModel)]="filter.valueFilter">
+                            </p-radioButton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
