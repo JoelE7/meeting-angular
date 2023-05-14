@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { FilterService } from 'primeng/api';
+import { FilterService } from 'src/app/shared/filters/services/filter.service';
 
 
 describe('FilterService', () => {

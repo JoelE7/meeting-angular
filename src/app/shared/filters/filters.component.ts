@@ -20,8 +20,6 @@ export class FiltersComponent {
 
   filterValueReturn: any[] = [];
 
-  // <app-filters [filters]="filters" (eventFilterEmitter)="filterHome($event)"></app-filters>
-
   @Input()
   autoSend: any = true;
 
@@ -29,18 +27,18 @@ export class FiltersComponent {
   filters: Filters = {
     autoSend: false,
     filtersCustom: [
-      {
-        type: FilterEnum.INPUTTEXT,
-        col: 'col-12 col-md-6 mt-3 mt-md-2',
-        title: 'Input text 1',
-        inputStyle: {
-          // 'margin-left' : "5px"
-        },
-        order: 1,
-        inputClass: 'form-control ml-5',
-        nameFilter: 'text',
-        valueFilter: '',
-      },
+      // {
+      //   type: FilterEnum.INPUTTEXT,
+      //   col: 'col-12 col-md-6 mt-3 mt-md-2',
+      //   title: 'Input text 1',
+      //   inputStyle: {
+      //     // 'margin-left' : "5px"
+      //   },
+      //   order: 1,
+      //   inputClass: 'form-control ml-5',
+      //   nameFilter: 'text',
+      //   valueFilter: '',
+      // },
       // {
       //   type: FilterEnum.INPUTTEXT,
       //   col: 'col-12 col-md-6 mt-3 mt-md-2',
@@ -68,7 +66,6 @@ export class FiltersComponent {
       // {
       //   type: FilterEnum.INPUTNUMBER,
       //   col: 'col-12 col-md-6 mt-3 mt-md-2',
-      //   newRow: false,
       //   title: 'Input number',
       //   nameFilter: 'number',
       //   valueFilter: '',
@@ -76,7 +73,6 @@ export class FiltersComponent {
       // {
       //   type: FilterEnum.INPUTPASSWORD,
       //   col: 'col-12 col-md-6 mt-3 mt-md-2',
-      //   newRow: false,
       //   title: 'Input password',
       //   nameFilter: 'password',
       //   valueFilter: '',
@@ -84,7 +80,6 @@ export class FiltersComponent {
       // {
       //   type: FilterEnum.DATE,
       //   col: 'col-12 col-md-6 mt-3 mt-md-2',
-      //   newRow: false,
       //   title: 'Fecha Inicio',
       //   nameFilter: 'startDate',
       //   valueFilter: '',
@@ -92,10 +87,7 @@ export class FiltersComponent {
       // {
       //   type: FilterEnum.DROPDOWN,
       //   col: 'col-12 col-md-6 mt-3 mt-md-2',
-      //   newRow: true,
       //   title: 'Dropdown',
-      //   row: '',
-      //   columnas : 6,
       //   nameFilter: 'MULTI',
       //   valueFilter: '',
       //   items: {
@@ -116,7 +108,6 @@ export class FiltersComponent {
       // {
       //   type: FilterEnum.MULTISELECT,
       //   col: 'col-12 col-md-6 mt-3 mt-md-2',
-      //   newRow: false,
       //   title: 'Multiselect',
       //   nameFilter: 'MULTI',
       //   valueFilter: '',
@@ -138,7 +129,6 @@ export class FiltersComponent {
       // {
       //   type: FilterEnum.SWITCH,
       //   col: 'col-12 col-md-6 mt-3 mt-md-2',
-      //   newRow: true,
       //   title: 'Pass',
       //   nameFilter: 'SWITCH',
       //   valueFilter: '',
@@ -146,7 +136,6 @@ export class FiltersComponent {
       // {
       //   type: FilterEnum.CHECKBOX,
       //   col: 'col-12 mt-3 mt-md-2',
-      //   newRow: false,
       //   title: 'Prueba Checkbox',
       //   nameFilter: 'CHECKBOX',
       //   valueFilter: '',

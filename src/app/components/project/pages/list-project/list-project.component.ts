@@ -14,7 +14,6 @@ import { Project } from 'src/app/shared/models/project/project.class';
   encapsulation: ViewEncapsulation.None,
 })
 export class ListProjectComponent implements OnInit {
-  @ViewChild('app-filters') filtroComponent: FiltersComponent;
 
   listProject: Project[] = [];
 
