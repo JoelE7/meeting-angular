@@ -25,6 +25,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'post',
+    loadChildren: () =>
+      import('./components/post/post.module').then(
+        (m) => m.PostModule
+      ),
+  },
+  {
     path: '**',
     redirectTo: 'auth',
   },

@@ -33,18 +33,25 @@ p-menubarsub {
 .buscador:hover{
   border: 1px solid #c42e6c !important;
 }
-
-.p-button-help{
-  background-color: #c42e6c !important;
+.p-button{
+ padding:  0.60rem 1.15rem !important;
+ background-color: #c42e6c !important;
+ border: 1px solid #ad2c73 !important;
+}
+.p-button:hover{
+  background-color: #ad2c73 !important;
   border: 1px solid #ad2c73 !important;
 }
-
 .p-button-outlined{
   color: #c42e6c !important;
   background-color: white !important;
-  border: 2px solid #c42e6c !important;
+  border: 2px solid #c42e6c !important; 
 }
-
+.p-button-outlined:hover{
+  background-color: #ad2c73 !important;
+  border: 1px solid #ad2c73 !important;
+  color: #fff !important;;
+}
 
 @media (max-width: 991px) {
   #searcher{
