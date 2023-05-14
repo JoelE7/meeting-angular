@@ -19,10 +19,10 @@
 .p-card-body{
   padding-top: 0px !important;
 }
-
 .borderInput:hover{
-  border: 1px solid #c42e6c !important;
+  border: 1px solid #ad2c73 !important;
 }
+
 .p-dropdown:not(.p-disabled):hover {
   border: 1px solid #c42e6c !important;
 }

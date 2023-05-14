@@ -1,0 +1,12 @@
+.postBackground{
+  min-height: 500px;
+  background-color: rgb(241, 241, 241);
+  padding: 80px 0px;
+}
+.borderInput:hover{
+  border: 1px solid #ad2c73 !important;
+}
+/* .card p-editor {
+  height: '320px' !important;
+  width:'5rem'!important ;
+} */

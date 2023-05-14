@@ -44,7 +44,8 @@ import { TagModule } from 'primeng/tag';
 import {AvatarModule} from "primeng/avatar";
 import {SkeletonModule} from "primeng/skeleton";
 import { AccordionModule } from 'primeng/accordion';
- 
+import { ChipModule } from 'primeng/chip';
+import { EditorModule } from 'primeng/editor';
 
 @NgModule({
   providers: [ConfirmationService],
@@ -95,6 +96,8 @@ import { AccordionModule } from 'primeng/accordion';
     AvatarModule,
     SkeletonModule,
     AccordionModule,
+    ChipModule,
+    EditorModule,
   ],
 })
 export class PrimengModule {}

@@ -52,7 +52,7 @@ export class MenuComponent implements OnInit {
       {
         name: 'Foro',
         icon: 'bi bi-chat-right-text',
-        url: '/forum',
+        url: '/post/list-post',
         urlActiveClass: 'active',
         tooltip: 'Foro',
         tooltipOptions: {
