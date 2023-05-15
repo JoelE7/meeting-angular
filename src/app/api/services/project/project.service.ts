@@ -73,10 +73,10 @@ export class ProjectService {
       'requestSupport',
     ];
 
-    let queryBuild = '';
+    let queryBuild = {};
     query.forEach((q) => {
       if (filtersAccept.find((element) => element === q.col)) {
-        queryBuild = queryBuild + q.col + '=' + q.value;
+        queryBuild[q.col] = q.value;
       }
     });
 
@@ -86,9 +86,8 @@ export class ProjectService {
     //   'Bearer' + localStorage.getItem('token')
     // );
 
-
     return this.http
-      .get(`${enviroment.apiUrl}/projects/filter?${queryBuild}`, {
+      .post(`${enviroment.apiUrl}/projects/filter`, queryBuild, {
         headers: headers,
       })
       .pipe(

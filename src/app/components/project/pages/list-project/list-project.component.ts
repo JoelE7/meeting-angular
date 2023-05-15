@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { ProjectService } from 'src/app/api/services/project/project.service';
 import { FilterEnum } from 'src/app/shared/filters/enum/filters.enum';
+import { Method } from 'src/app/shared/filters/enum/method.enum';
 import { FiltersComponent } from 'src/app/shared/filters/filters.component';
 import { Filters } from 'src/app/shared/filters/interface/filters.interface';
 import { FilterService } from 'src/app/shared/filters/services/filter.service';
@@ -14,7 +15,6 @@ import { Project } from 'src/app/shared/models/project/project.class';
   encapsulation: ViewEncapsulation.None,
 })
 export class ListProjectComponent implements OnInit {
-
   listProject: Project[] = [];
 
   typeProyects = [];
@@ -22,12 +22,13 @@ export class ListProjectComponent implements OnInit {
 
   visiblePopUpQuestion: Boolean = false;
 
-  query: any[] = [];
+  query;
 
   question: string = '¿Te gustaría participar en un proyecto de react?';
 
   filters: Filters = {
     autoSend: false,
+    method: Method.POST,
     filtersCustom: [
       {
         type: FilterEnum.DROPDOWN,
@@ -88,14 +89,13 @@ export class ListProjectComponent implements OnInit {
         },
       },
       {
-        type: FilterEnum.RADIO,
+        type: FilterEnum.CHECKBOX,
         col: 'col-12 mt-3 mt-md-2',
         title: 'Técnologias',
         nameFilter: 'technologies',
         valueFilter: '',
-        radioItems: {
+        checkboxItems: {
           column: false,
-          name: 'technologies',
           items: [
             {
               label: 'Angular',
@@ -117,19 +117,6 @@ export class ListProjectComponent implements OnInit {
               label: 'Node.js',
               value: 'nodejs',
             },
-          ],
-        },
-      },
-      {
-        type: FilterEnum.RADIO,
-        col: 'col-12 mt-3 mt-md-2',
-        title: 'Lenguajes',
-        nameFilter: 'languages',
-        valueFilter: '',
-        radioItems: {
-          column: false,
-          name: 'languages',
-          items: [
             {
               label: 'Javascript',
               value: 'javascript',
@@ -199,7 +186,6 @@ export class ListProjectComponent implements OnInit {
   getProjects() {
     this.projectService.getAllProjects(this.query).subscribe(
       (data) => {
-        console.log(data);
         this.listProject = data;
       },
       (err) => {

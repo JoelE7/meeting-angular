@@ -44,9 +44,6 @@ export class RegisterComponent {
     this.userRegister.role = this.form.get('role').value;
     this.userRegister.password = this.form.get('pass').value;
 
-    console.log(this.userRegister);
-    
-
     this.authService.registerUser(this.userRegister).subscribe(
       async (data) => {
         this.messageService.add({

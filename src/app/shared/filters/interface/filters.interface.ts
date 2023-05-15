@@ -1,8 +1,10 @@
 import { Item } from '../../models/model-forms/item-form.interface';
 import { FilterEnum } from '../enum/filters.enum';
+import { Method } from '../enum/method.enum';
 
 export interface Filters{
   autoSend:boolean;
+  method:Method
   filtersCustom:FilterCustom[];
 }
 
