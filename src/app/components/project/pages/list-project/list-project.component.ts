@@ -210,6 +210,7 @@ export class ListProjectComponent implements OnInit {
 
   getFilters() {
     this.query = this.filtersService.getFilters();
+    this.query.method = this.filters.method;
     this.getProjects();
   }
 }
