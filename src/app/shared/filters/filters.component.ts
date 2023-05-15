@@ -22,9 +22,6 @@ export class FiltersComponent {
   filterValueReturn: any[] = [];
 
   @Input()
-  autoSend: any = true;
-
-  @Input()
   filters: Filters = {
     autoSend: false,
     method: Method.GET,
