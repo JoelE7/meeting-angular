@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormPostComponent } from '../../../../../components/post/components/form-post/form-post.component';
+import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('FormPostComponent', () => {
   let component: FormPostComponent;
@@ -8,7 +11,9 @@ describe('FormPostComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FormPostComponent ]
+      declarations: [ FormPostComponent ],
+      providers:[],
+      imports:[ PrimengModule,HttpClientTestingModule,RouterTestingModule],
     })
     .compileComponents();
 
