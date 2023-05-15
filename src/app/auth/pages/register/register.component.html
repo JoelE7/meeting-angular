@@ -44,20 +44,20 @@
                   <div class="offset-1 col-10">
                     <p-dropdown
                     [style]="{ width: '100%' }"
-                    formControlName="role"
-                    optionValue="valueRol"
-                    [options]="roles"
+                    formControlName="profile"
+                    optionValue="valueProfile"
+                    [options]="profiles"
                     placeholder="Seleccione una opción..."
                     optionLabel="description"
                   >
                     <ng-template let-option pTemplate="item">
-                      <span [class]="'description-' + option.valueRol">
+                      <span [class]="'description-' + option.valueProfile">
                         {{ option.description }}
                       </span>
                     </ng-template>
                   </p-dropdown>
                 <span class="text-danger"
-                    *ngIf="form.get('role').hasError('required') && form.get('role').touched">
+                    *ngIf="form.get('profile').hasError('required') && form.get('profile').touched">
                     Este campo es obligatorio
                 </span>
                   </div>

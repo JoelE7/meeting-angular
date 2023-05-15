@@ -3,8 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/api/services/auth/auth.service';
-import { Rol } from 'src/app/shared/models/rol/role.class';
 import { User } from 'src/app/shared/models/user/user.class';
+import { Profile } from 'src/app/shared/models/profile/profile.class';
+
 
 @Component({
   selector: 'app-register',
@@ -16,11 +17,14 @@ export class RegisterComponent {
   userRegister: User = new User();
   form: FormGroup;
 
-  roles:Rol[] = [
-    {description : "Usuario IT",valueRol : "USERIT"},
-    {description : "Recruiter",valueRol : "RECRUITER"},
-    {description : "EMPRESA",valueRol : "COMPANY"},
-    {description : "Usuario IT",valueRol : "OTHER"},
+  profiles:Profile[] = [
+    {description : "FullStack",valueProfile : "FullStack"},
+    {description : "Frontend",valueProfile : "Frontend"},
+    {description : "Backend",valueProfile : "Backend"},
+    {description : "Diseñador/a",valueProfile : "Diseñador/a"},
+    {description : "QA",valueProfile : "QA"},
+    {description : "Analista Funcional",valueProfile : "Analista Funcional"},
+
   ]
 
   constructor(
@@ -34,15 +38,15 @@ export class RegisterComponent {
       name: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       pass: new FormControl('', Validators.required),
-      role: new FormControl('', Validators.required)
+      profile: new FormControl('', Validators.required)
     });
   }
 
   register() {
     this.userRegister.name = this.form.get('name').value;
     this.userRegister.email = this.form.get('email').value;
-    this.userRegister.role = this.form.get('role').value;
     this.userRegister.password = this.form.get('pass').value;
+    this.userRegister.role = this.form.get('profile').value;
 
     console.log(this.userRegister);
     
@@ -60,7 +64,7 @@ export class RegisterComponent {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Usuario o contraseña incorretos',
+          detail: 'Usuario o contraseña incorrectos',
         });
       }
     );

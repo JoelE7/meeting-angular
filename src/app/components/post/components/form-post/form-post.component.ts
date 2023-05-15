@@ -11,6 +11,10 @@ import { Item } from 'src/app/shared/models/model-forms/item-form.interface';
 import { Post } from 'src/app/shared/models/post/post.class';
 import { User } from 'src/app/shared/models/user/user.class';
 
+// interface City {
+//   name: string,
+//   code: string
+// }
 
 @Component({
   selector: 'app-form-post',
@@ -40,8 +44,28 @@ export class FormPostComponent implements OnInit {
       value:"collaborative"
     },
    ]
-   languages: Item[] = [
+  //  cities: City[];
+
+  //  selectedCities: City[];
+
+  
+   technologies: Item[] = [
     {
+      label:"Angular", 
+      value:"Angular"
+    },
+    {
+      label:"React", 
+      value:"React"
+    },
+    {
+      label:"Vue", 
+      value:"Vue"
+    },
+    {
+      label:"Svelte", 
+      value:"Svelte"
+    },{
       label:"java", 
       value:"java"
     },
@@ -60,29 +84,18 @@ export class FormPostComponent implements OnInit {
       label:"kotlin", 
       value:"kotlin"
     }
-   ]
-   technologies: Item[] = [
-    {
-      label:"Angular", 
-      value:"Angular"
-    },
-    {
-      label:"React", 
-      value:"React"
-    },
-    {
-      label:"Vue", 
-      value:"Vue"
-    },
-    {
-      label:"Svelte", 
-      value:"Svelte"
-    }
   ]
   
 
   ngOnInit(): void {  
     this.startFrom();
+  //   this.cities = [
+  //     { name: 'New York', code: 'NY' },
+  //     { name: 'Rome', code: 'RM' },
+  //     { name: 'London', code: 'LDN' },
+  //     { name: 'Istanbul', code: 'IST' },
+  //     { name: 'Paris', code: 'PRS' }
+  // ];
   }  
   
   startFrom() {

@@ -90,7 +90,7 @@ export class ListProjectComponent implements OnInit {
       {
         type: FilterEnum.RADIO,
         col: 'col-12 mt-3 mt-md-2',
-        title: 'Técnologias',
+        title: 'Tecnologías',
         nameFilter: 'technologies',
         valueFilter: '',
         radioItems: {
