@@ -1,0 +1,155 @@
+<!-- componente insertado extraer en form-post -->
+<form (ngSubmit)="submitPost()" [formGroup]="form" class="mt-4 p-3">
+  <div class="row p-0">
+    <div class="offset-0 col-sm-12 col-md-10 offset-md-1">
+      <label for="title" class="">*Titulo </label>
+      <input
+        type="text"
+        pInputText
+        formControlName="title"
+        class="form-control borderInput"
+        placeholder="Ingrese titulo "
+      />
+      <span
+        class="danger"
+        *ngIf="
+          form.get('title').hasError('required') && form.get('title').touched
+        "
+      >
+        <small class="p-error">Este campo es <strong>requerido</strong></small>
+      </span>
+    </div>
+  </div>
+  <!-- textarea de edicion  -->
+
+  <div class="row">
+    <div class="offset-0 col-sm-12 col-md-10 offset-md-1">
+      <label for="body" class="mt-3">*Descripción </label>
+      <!-- componente textare de  -->
+      <div class="editor">
+        <p-editor formControlName="body"></p-editor>
+      </div>
+      <span
+        class="danger"
+        *ngIf="
+          form.get('body').hasError('required') && form.get('body').touched
+        "
+      >
+        <small class="p-error"
+          >Debe agregar una <strong>descripción</strong></small
+        >
+      </span>
+      <span
+        class="danger"
+        *ngIf="
+          form.get('body').hasError('minlength') && form.get('body').touched
+        "
+      >
+        <small class="p-error"
+          >Debe agregar minimo <strong>10</strong> caracteres</small
+        >
+      </span>
+    </div>
+  </div>
+  <!-- type -->
+  <div class="row mt-5 p-0">
+    <div class="offset-0 col-sm-12 col-md-10 offset-md-1">
+      <label for="typePost" class="mt-3 mt-md-0">*Tipo de post</label>
+      <p-dropdown
+        [style]="{ width: '100%' }"
+        formControlName="type"
+        placeholder="Seleccione una opción..."
+        [options]="type"
+        optionValue="value"
+        optionLabel="label"
+      >
+        <ng-template let-option pTemplate="item">
+          <span [class]="'type-' + option.value">
+            {{ option.label }}
+          </span>
+        </ng-template>
+      </p-dropdown>
+      <span
+        class="danger"
+        *ngIf="
+          form.get('type').hasError('required') && form.get('type').touched
+        "
+      >
+        <small class="p-error">Este campo es <strong>requerido</strong></small>
+      </span>
+    </div>
+  </div>
+  <!-- type -->
+
+  <!-- LANGUAGES -->
+
+  <div class="row p-0">
+    <div class="offset-0 col-sm-12 col-md-5 offset-md-1">
+      <label for="name" class="mt-3">*Lenguaje </label>
+      <p-dropdown
+        [style]="{ width: '100%' }"
+        formControlName="languages"
+        placeholder="Seleccione una opción..."
+        [options]="languages"
+        optionValue="value"
+        optionLabel="label"
+      >
+        <ng-template let-option pTemplate="item">
+          <span [class]="'languages-' + option.value">
+            {{ option.label }}
+          </span>
+        </ng-template>
+      </p-dropdown>
+      <span
+        class="danger"
+        *ngIf="
+          form.get('languages').hasError('required') &&
+          form.get('languages').touched
+        "
+      >
+        <small class="p-error">Este campo es <strong>requerido</strong></small>
+      </span>
+    </div>
+    <!-- LANGUAGES -->
+
+    <!-- TECNOLOGIAS -->
+    <div class="offset-0 col-sm-12 col-md-5">
+      <label for="name" class="mt-3">*Tecnología </label>
+      <p-dropdown
+        [style]="{ width: '100%' }"
+        formControlName="technologies"
+        placeholder="Seleccione una opción..."
+        [options]="technologies"
+        optionValue="value"
+        optionLabel="label"
+      >
+        <ng-template let-option pTemplate="item">
+          <span [class]="'technologies-' + option.value">
+            {{ option.label }}
+          </span>
+        </ng-template>
+      </p-dropdown>
+      <span
+        class="danger"
+        *ngIf="
+          form.get('technologies').hasError('required') &&
+          form.get('technologies').touched
+        "
+      >
+        <small class="p-error">Este campo es <strong>requerido</strong></small>
+      </span>
+    </div>
+  </div>
+  <!-- TECNOLOGIAS -->
+  <div class="text-center mt-3">
+    <p-button
+      type="submit"
+      [style]="{ width: '80%' }"
+      label="Crear"
+      class="text-center d-block"
+      styleClass="p-button-help mx-2"
+    ></p-button>
+  </div>
+</form>
+
+<!-- componente form insertado -->
