@@ -4,6 +4,7 @@ import { CreateProjectComponent } from './pages/create-project/create-project.co
 import { ListProjectComponent } from 'src/app/components/project/pages/list-project/list-project.component';
 import { DetailsProjectComponent } from './pages/details-project/details-project.component';
 import { UpdateProjectComponent } from './pages/update-project/update-project.component';
+import { SearchProjectComponent } from './pages/search-project/search-project.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
       { path: 'list-project', component: ListProjectComponent },
       { path: 'list-project-support', component: ListProjectComponent },
       { path: 'details-project/:id', component: DetailsProjectComponent },
+      { path: 'search-project', component: SearchProjectComponent },
     ],
   },
 ];
