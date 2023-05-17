@@ -1,4 +1,3 @@
-import { ListPostComponent } from 'src/app/components/post/pages/list-post/list-post.component';
 import { User } from '../user/user.class';
 
 export class Post {

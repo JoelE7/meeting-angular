@@ -87,7 +87,7 @@ export class ProjectService {
     );
 
     return this.http
-      .post(`${enviroment.apiUrl}/projects/filter`, queryBuild, {
+      .post(`${enviroment.apiUrl}/projects/filter`,queryBuild ,{
         headers: headers,
       })
       .pipe(
