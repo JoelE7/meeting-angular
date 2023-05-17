@@ -1,0 +1,28 @@
+.developer-avatar {
+  display: flex;
+  justify-content: center;
+}
+
+.developer-skills {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.developer-skills li {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 25px;
+  color: #666;
+  color: #0f0f0f;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.rankingBackground {
+  background-color: rgb(241, 241, 241);
+}
+
+.p-datatable .p-datatable-thead tr th {
+   border: 1px solid #f1bcd173;
+   background: #f1bcd173 !important;
+}

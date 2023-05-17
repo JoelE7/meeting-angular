@@ -5,13 +5,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PrimengModule } from './shared/primeng/primeng.module';
-import { ProjectModule } from './components/project/project.module';
-import { UserModule } from './components/user/user.module';
+import { ProjectModule } from './modules/project/project.module';
+import { UserModule } from './modules/user/user.module';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { MessageService, SharedModule } from 'primeng/api';
 import { StartModule } from './public/start.module';
+import { PostModule } from './modules/post/post.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +29,7 @@ import { StartModule } from './public/start.module';
     AuthModule,
     ReactiveFormsModule,
     ProjectModule,
+    PostModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent],

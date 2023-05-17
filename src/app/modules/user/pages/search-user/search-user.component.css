@@ -1,0 +1,36 @@
+.signupFrm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+  }
+.form {
+    display: flexbox;
+    justify-items: center;
+    background-color: white;
+    width: 400px;
+    border-radius: 8px;
+    padding: 20px 40px;
+    box-shadow: 0 10px 25px rgba(92, 99, 105, .2);
+    border: 1px solid purple;
+
+  }
+  .title {
+    font-size: 50px;
+    margin-bottom: 50px;
+  }  
+  .input:focus {
+    border: 2px solid purple;
+  }
+  submitBtn {
+    display: block;
+    margin-left: auto;
+    padding: 15px 30px;
+    border: none;
+    background-color: purple;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 30px;
+  }

@@ -10,24 +10,26 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+    loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: 'user',
     loadChildren: () =>
-      import('./components/user/user.module').then((m) => m.UserModule),
+      import('./modules/user/user.module').then((m) => m.UserModule),
   },
   {
     path: 'project',
     loadChildren: () =>
-      import('./components/project/project.module').then(
+      import('./modules//project/project.module').then(
         (m) => m.ProjectModule
       ),
   },
   {
-    path: 'mvp',
+    path: 'post',
     loadChildren: () =>
-      import('./components/mvp/mvp.module').then((m) => m.MvpModule),
+      import('./modules//post/post.module').then(
+        (m) => m.PostModule
+      ),
   },
   {
     path: '**',
