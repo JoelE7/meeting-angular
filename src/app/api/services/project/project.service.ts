@@ -3,12 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Project } from 'src/app/shared/models/project/project.class';
 import { enviroment } from 'src/environments/enviroment.prod';
+import { Method } from '../../../shared/filters/enum/method.enum';
+import { FilterService } from 'src/app/shared/filters/services/filter.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProjectService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private filterService: FilterService) {}
 
   detailsProject(id: number): Observable<Project> {
     let headers = new HttpHeaders();
@@ -73,22 +75,19 @@ export class ProjectService {
       'requestSupport',
     ];
 
-    let queryBuild = '';
-    query.forEach((q) => {
-      if (filtersAccept.find((element) => element === q.col)) {
-        queryBuild = queryBuild + q.col + '=' + q.value;
-      }
-    });
+    let queryBuild =
+      query.method === Method.POST
+        ? this.filterService.getFiltersForPost(query, filtersAccept)
+        : this.filterService.getFiltersForGet(query, filtersAccept);
 
     let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
-
+    headers = headers.append(
+      'Authorization',
+      'Bearer' + localStorage.getItem('token')
+    );
 
     return this.http
-      .get(`${enviroment.apiUrl}/projects/filter?${queryBuild}`, {
+      .post(`${enviroment.apiUrl}/projects/filter`,queryBuild ,{
         headers: headers,
       })
       .pipe(

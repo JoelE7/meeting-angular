@@ -8,6 +8,7 @@ import {
 import { Filters } from './interface/filters.interface';
 import { FilterEnum } from './enum/filters.enum';
 import { FilterService } from './services/filter.service';
+import { Method } from './enum/method.enum';
 
 @Component({
   selector: 'app-filters',
@@ -21,11 +22,9 @@ export class FiltersComponent {
   filterValueReturn: any[] = [];
 
   @Input()
-  autoSend: any = true;
-
-  @Input()
   filters: Filters = {
     autoSend: false,
+    method: Method.GET,
     filtersCustom: [
       // {
       //   type: FilterEnum.INPUTTEXT,
@@ -195,28 +194,21 @@ export class FiltersComponent {
     filterValue: any,
     arrayValue: boolean = false
   ) {
-    let filterExist = this.filterValueReturn.find(
-      (fil) => fil.col == filterName
-    );
-
+    const filterExist = this.filterValueReturn.find(fil => fil.col === filterName);
+  
     if (filterExist) {
-      let index = this.filterValueReturn.indexOf(filterExist);
+      const index = this.filterValueReturn.indexOf(filterExist);
       this.filterValueReturn.splice(index, 1);
     }
-
-    if (filterValue && arrayValue == false) {
-      this.filterValueReturn.push({
-        col: filterName,
-        value: filterValue,
-      });
-    } else if (filterValue.length > 0 && arrayValue == true) {
-      this.filterValueReturn.push({
-        col: filterName,
-        value: filterValue,
-      });
+  
+    if (filterValue && !arrayValue) {
+      this.filterValueReturn.push({ col: filterName, value: filterValue });
+    } else if (filterValue.length > 0 && arrayValue) {
+      const value = (this.filters.method === Method.POST) ? { $all: filterValue } : filterValue;
+      this.filterValueReturn.push({ col: filterName, value });
     }
-
-    if (this.filters.autoSend === true) {
+  
+    if (this.filters.autoSend) {
       this.sendFilter();
     } else {
       this.filterService.setFilters(this.filterValueReturn);
