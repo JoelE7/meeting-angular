@@ -58,6 +58,7 @@ export class ProjectService {
       );
   }
 
+  //TODO: REVISAR ESTO, LA ENTIDAD CAMBIO
   getAllProjects(query: any = []) {
     let filtersAccept = [
       'name',

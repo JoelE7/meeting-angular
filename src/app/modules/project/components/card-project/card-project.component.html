@@ -11,7 +11,8 @@
         <b>Tipo de proyecto: </b><cite title="Source Title">{{project.type}}</cite>
       </footer>
       <footer class="blockquote-footer">
-        <b>Lenguajes</b>
+        <b>Tecnologías: </b>
+        <!-- TODO: Aca habria que cambiar la variable cuando lo adapten -->
         <cite *ngFor="let language of project.languages; let l = last" title="Source Title"> {{language}} -</cite>
       </footer>
       <footer class="blockquote-footer">
