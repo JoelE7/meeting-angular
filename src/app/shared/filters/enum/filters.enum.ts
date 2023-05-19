@@ -1,0 +1,11 @@
+export enum FilterEnum {
+  INPUTTEXT,
+  INPUTNUMBER,
+  INPUTPASSWORD,
+  DATE,
+  DROPDOWN,
+  MULTISELECT,
+  SWITCH,
+  CHECKBOX,
+  RADIO,
+}

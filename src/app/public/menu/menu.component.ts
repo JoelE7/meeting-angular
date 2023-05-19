@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MenuItem } from 'primeng/api';
 import { Menu } from './interfaces/menu.interface';
+import { User } from '../../shared/models/user/user.class';
+import { MessageService } from 'primeng/api';
+import { AuthService } from 'src/app/api/services/auth/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -12,10 +14,15 @@ import { Menu } from './interfaces/menu.interface';
 export class MenuComponent implements OnInit {
   menu: Menu[] = [];
   url: string = '';
-  session:any = localStorage.getItem('token')
+  session: any = localStorage.getItem('token');
+  currentUser: boolean = JSON.parse(localStorage.getItem('user')) ? true : false;
 
-
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private messageService: MessageService,
+    private authService:AuthService
+  ) {}
 
   ngOnInit(): void {
     this.menu = [
@@ -28,11 +35,11 @@ export class MenuComponent implements OnInit {
         tooltipOptions: {
           showDelay: 1000,
           autoHide: false,
-          tooltipEvent: "hover",
-          tooltipPosition : "bottom"
+          tooltipEvent: 'hover',
+          tooltipPosition: 'bottom',
         },
         visible: false,
-        class : "nav-link items-nav d-flex flex-column"
+        class: 'nav-link items-nav d-flex flex-column',
       },
       {
         name: 'Usuarios',
@@ -43,26 +50,26 @@ export class MenuComponent implements OnInit {
         tooltipOptions: {
           showDelay: 1000,
           autoHide: false,
-          tooltipEvent: "hover",
-          tooltipPosition : "bottom"
+          tooltipEvent: 'hover',
+          tooltipPosition: 'bottom',
         },
         visible: false,
-        class : "nav-link items-nav d-flex flex-column"
+        class: 'nav-link items-nav d-flex flex-column',
       },
       {
         name: 'Foro',
         icon: 'bi bi-chat-right-text',
-        url: '/forum',
+        url: '/post/list-post',
         urlActiveClass: 'active',
         tooltip: 'Foro',
         tooltipOptions: {
           showDelay: 1000,
           autoHide: false,
-          tooltipEvent: "hover",
-          tooltipPosition : "bottom"
+          tooltipEvent: 'hover',
+          tooltipPosition: 'bottom',
         },
         visible: false,
-        class : "nav-link items-nav d-flex flex-column"
+        class: 'nav-link items-nav d-flex flex-column',
       },
     ];
   }
@@ -71,7 +78,18 @@ export class MenuComponent implements OnInit {
     this.url = url;
   }
 
-  login(){
-    return true;
+  login():boolean {
+    return this.authService.getLogin;
+  }
+
+  signOut() {
+    localStorage.removeItem('user');
+    this.messageService.add({
+      severity: 'success',
+      summary: '¡Hecho!',
+      detail: '¡Cierre de sesión exitoso!',
+    });
+    this.authService.setLogin(false);
+    this.router.navigate(['/login']);
   }
 }

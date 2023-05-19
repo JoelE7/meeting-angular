@@ -11,7 +11,7 @@ export class Project {
   startDate: Date;
   endDate: Date;
   languages: string[];
-  technologies: string;
+  technologies: string[];
   status: string;
   requestSupport: Boolean;
 }

@@ -1,0 +1,34 @@
+.p-card	{
+  background-color: #fff ;
+}
+.borderInput:hover{
+  border: 1px solid #c42e6c !important;
+}
+.p-dropdown:not(.p-disabled):hover {
+  border: 1px solid #ad2c73 !important;
+}
+.p-editor-container {
+  height: 200px;
+  margin-bottom: 20px;
+}
+.p-editor-toolbar {
+   /* background-color: #0c0c0c !important;  */
+}
+/* .ql-toolbar.ql-snow{
+  color: #fff !important; 
+
+}
+.ql-formats{
+  color: #fff !important; 
+
+} */
+.p-editor-container:hover {
+  border-radius:6px;
+}
+.p-editor-container .p-editor-content.ql-snow:hover{
+  border: 1px solid #ad2c73 !important;
+}
+/* .p-editor-toolbar:hover{
+  border: 1px solid #ad2c73 !important;
+} */
+

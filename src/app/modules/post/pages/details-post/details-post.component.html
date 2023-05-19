@@ -1,0 +1,88 @@
+<div class="postBackground">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-md-10 col-lg-6">
+        <div class="card p-3">
+          <p-chip
+            label="Analia Martinez"
+            image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+          ></p-chip>
+          <small>Posteo 30 abril</small>
+          <h3 class="titulo">
+            Easy Installation Guide for Age and Postgresql with minute changes.
+          </h3>
+          <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+          <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+          <p-skeleton width="100%" height="150px"></p-skeleton>
+          <p>
+            <strong> Reference: </strong>
+            <a class="text-dark"
+              >dev.to/mahinash26/easy-installation-guide-for-age-and-postgresql-with-minute-changes-j07</a
+            >
+          </p>
+
+          <!--  seccion comentarios del post -->
+          <hr />
+          <div class="Comments">
+            <h4>Comentarios(0)</h4>
+            <span class="p-float-label">
+              <textarea
+                id="float-input"
+                rows="5"
+                cols="60"
+                pInputTextarea
+                class="borderInput"
+              ></textarea>
+              <label for="float-input">Añade un comentario..</label>
+            </span>
+            <p-button
+              type="button"
+              [style]="{ width: '100%' }"
+              label="Comentar"
+              class="d-block py-2"
+              styleClass="p-button"
+              routerLink="/post/details-post/1"
+            ></p-button>
+          </div>
+          <!--  seccion comentarios del post -->
+        </div>
+      </div>
+      <!-- segunda columna -->
+      <div class="col-sm-12 col-md-10 col-lg-4">
+        <div class="card">
+          <div class="card flex align-items-center py-3 flex-wrap">
+            <p-chip
+              label="Analia Martinez"
+              image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+            ></p-chip>
+          </div>
+          <p class="m-2">
+            Hola soy Analia Martinez me encuentro en último año de Ingeniería de
+            Software en la Unlam y soy pasante en Globant. También soy exalumna
+            del Programa de Intercambio Global UGRAD Primavera 2023.
+          </p>
+          <div class="boton text-end m-3">
+            <p-button
+              type="button"
+              [style]="{ width: '100%' }"
+              label="Conectar"
+              class="d-block py-2"
+              styleClass="p-button-outlined"
+              routerLink="/post/details-post/1"
+            ></p-button>
+          </div>
+        </div>
+
+        <!-- mas datos del autor -->
+        <div class="card mt-4 cardPost p-3">
+          <h6>Otros post de Analia Martinez</h6>
+          <p class="text-dark my-2">Sobre POSTGRESQL</p>
+          <small>#apacheage #postgres #database</small>
+          <p class="text-dark my-2">Que es Apache Age?</p>
+          <small>#blog #apacheage #postgres #database</small>
+        </div>
+        <!-- mas datos del autor -->
+      </div>
+    </div>
+  </div>
+</div>
