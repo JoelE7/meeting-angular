@@ -180,7 +180,7 @@ export class ListProjectComponent implements OnInit {
 
   ngOnInit(): void {
     let modal = parseInt(String(Math.random() * 2));
-    if (modal == 1) {
+    if (modal == 1 && this.currentUser) {
       this.visiblePopUpQuestion = true;
     }
 
