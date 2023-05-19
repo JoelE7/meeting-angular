@@ -15,14 +15,14 @@
           styleClass=" p-button-help" routerLink="/project/create"></p-button>
       </div>
     </div>
-    <!----------------- COMPONENTE FILTRO extraer-------------------->
+    <!----------------- COMPONENTE FILTRO-------------------->
     <div class="container">
       <div class="row">
         <div class="col-4">
           <div class="" id="filtro">
             <h2>Filtros</h2>
             <app-filters [filters]="filters"></app-filters>
-            <p-button type="button" [style]="{ width: '100%' }" label="Filtrar" class="float-start mt-5 d-block"
+            <p-button type="button" [style]="{ width: '100%' }" label="Filtrar" class="float-center mt-3 d-block"
               styleClass="p-button-help" icon="pi pi-search" (click)="getFilters()"></p-button>
           </div>
         </div>

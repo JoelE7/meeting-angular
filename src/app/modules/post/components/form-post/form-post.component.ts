@@ -11,11 +11,6 @@ import { Item } from 'src/app/shared/models/model-forms/item-form.interface';
 import { Post } from 'src/app/shared/models/post/post.class';
 import { User } from 'src/app/shared/models/user/user.class';
 
-// interface City {
-//   name: string,
-//   code: string
-// }
-
 @Component({
   selector: 'app-form-post',
   templateUrl: './form-post.component.html',
@@ -36,11 +31,11 @@ export class FormPostComponent implements OnInit {
 
   type:Item[] = [
     {
-      label:"informativo", 
+      label:"Informativo", 
       value:"informative"
     },
     {
-      label:"colaborativo", 
+      label:"Colaborativo", 
       value:"collaborative"
     },
    ]
