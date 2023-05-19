@@ -16,7 +16,7 @@ import { User } from 'src/app/shared/models/user/user.class';
   encapsulation: ViewEncapsulation.None,
 })
 export class ListProjectComponent implements OnInit {
-  currentUser: User = JSON.parse(localStorage.getItem('user'));
+  currentUser: User = JSON.parse(localStorage.getItem('user')) || undefined;
 
   listProject: Project[] = [];
 
@@ -185,7 +185,9 @@ export class ListProjectComponent implements OnInit {
     }
 
     this.getProjects();
-    this.getQuestion();
+    if (this.currentUser) {
+      this.getQuestion();
+    }
   }
 
   getProjects() {
@@ -216,7 +218,7 @@ export class ListProjectComponent implements OnInit {
       : this.currentUser.disinterest.push(lastWord);
 
     this.userService
-      .updateUser(this.currentUser,{
+      .updateUser(this.currentUser, {
         $push: {
           preferences: this.currentUser.preferences,
           disinterest: this.currentUser.disinterest,
