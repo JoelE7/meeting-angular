@@ -1,4 +1,17 @@
-
+.postBackground{
+  min-height: 500px;
+  background-color: rgb(241, 241, 241); 
+  padding: 80px 0px;
+}
+#filtro{
+  background-color: #f1bcd173;
+  border-radius: 10px;
+  width: 90%;
+  height: 98%;
+  margin-top: 22px;
+  margin-right: 30px;
+  padding: 20px;
+}
 
 @media screen and (max-width: 480px) {
   p {
