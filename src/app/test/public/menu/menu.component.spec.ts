@@ -7,6 +7,7 @@ import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 import { MenuComponent } from 'src/app/public/menu/menu.component';
 import { MainComponent } from 'src/app/public/main/main.component';
 import { FooterComponent } from 'src/app/public/footer/footer.component';
+import { MessageService } from 'primeng/api';
 
 describe('MenuComponent', () => {
   let component: MenuComponent;
@@ -15,7 +16,7 @@ describe('MenuComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ MenuComponent,MainComponent,FooterComponent ],
-      providers : [AuthService],
+      providers : [AuthService,MessageService],
       imports : [HttpClientTestingModule,RouterTestingModule,PrimengModule]
     })
     .compileComponents();

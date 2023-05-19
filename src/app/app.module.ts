@@ -14,6 +14,10 @@ import { MessageService, SharedModule } from 'primeng/api';
 import { StartModule } from './public/start.module';
 import { PostModule } from './modules/post/post.module';
 
+import localeEs from "@angular/common/locales/es";
+import { registerLocaleData } from "@angular/common";
+registerLocaleData(localeEs, "es");
+
 @NgModule({
   declarations: [AppComponent],
   imports: [

@@ -33,14 +33,16 @@ export class LoginComponent implements OnInit {
     this.userLogin.password = this.form.get('pass').value;
 
     this.authService.loginUser(this.userLogin).subscribe(
-      (data) => {
+      (data:User) => {
         this.messageService.add({
           severity: 'success',
           summary: '¡Hecho!',
           detail: '¡Inicio de sesión exitoso!',
         });
         localStorage.setItem('token',"login");
-        this.router.navigate(['/home']);
+        localStorage.setItem('user',JSON.stringify(data));
+        this.router.navigate(['/home']);    
+        this.authService.setLogin(true);
       },
       (err) => {
         this.messageService.add({
