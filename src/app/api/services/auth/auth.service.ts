@@ -8,12 +8,17 @@ import { enviroment } from 'src/environments/enviroment.prod';
   providedIn: 'root',
 })
 export class AuthService {
-  menuVisible = false;
+
+  login:boolean = false;
 
   constructor(private http: HttpClient) {}
 
-  get getMenuVisible() {
-    return this.menuVisible;
+  setLogin(login:boolean){
+    this.login = login;
+  }
+
+  get getLogin():boolean{
+    return this.login
   }
 
   loginUser(data: User) {

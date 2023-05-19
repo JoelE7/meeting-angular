@@ -1,4 +1,4 @@
-<nav class="nav-background navbar navbar-expand-lg bg-light shadow-sm" *ngIf="login()">
+<nav class="nav-background navbar navbar-expand-lg bg-light shadow-sm">
     <div class="container-fluid w-75">
         <a class="navbar-brand" routerLink="/home"><img src="../../../../assets/img/logo.png" alt="Logo" width="40"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -25,12 +25,14 @@
                 </span>
             </form>
             <div class="d-flex w-25" id="butt">
-                <p-button class="me-2" type="submit" label="Ingresar" styleClass="p-button-help"
-                    routerLink="/auth/login"></p-button>
-                <p-button class="me-2" type="submit" label="Registrarse" styleClass="p-button-outlined p-button-help"
-                    routerLink="/auth/register"></p-button>
-                <p-button class="" type="submit" label="Perfil" styleClass="p-button-outlined p-button-help"
+                <p-button class="me-2" *ngIf="!login()" type="submit" label="Ingresar" styleClass="p-button-help"
+                    routerLink="/auth/login" ></p-button>
+                <p-button class="me-2" *ngIf="!login()" type="submit" label="Registrarse" styleClass="p-button-outlined p-button-help"
+                    routerLink="/auth/register" ></p-button>
+                <p-button class="me-2" *ngIf="login()" type="submit" label="Perfil" styleClass="p-button-outlined p-button-help"
                     routerLink="/user/see-my-profile"></p-button>
+                <p-button class="me-2" *ngIf="login()"  type="submit" label="Cerrar sesión" styleClass="p-button-outlined p-button-help"
+                     (click)="signOut()"></p-button>
             </div>
         </div>
     </div>

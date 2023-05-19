@@ -6,6 +6,7 @@ import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 import { MessageService } from 'primeng/api';
 import { MainComponent } from 'src/app/public/main/main.component';
 import { FooterComponent } from 'src/app/public/footer/footer.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -14,7 +15,7 @@ describe('AppComponent', () => {
         AppComponent,MenuComponent,MainComponent,FooterComponent
       ],
       providers : [MessageService],
-      imports : [RouterTestingModule,PrimengModule]
+      imports : [RouterTestingModule,PrimengModule,HttpClientTestingModule]
     }).compileComponents();
   });
 

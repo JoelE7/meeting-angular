@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { ProjectService } from 'src/app/api/services/project/project.service';
+import { UserService } from 'src/app/api/services/user/user.service';
 import { FilterEnum } from 'src/app/shared/filters/enum/filters.enum';
 import { Method } from 'src/app/shared/filters/enum/method.enum';
 import { Filters } from 'src/app/shared/filters/interface/filters.interface';
 import { FilterService } from 'src/app/shared/filters/services/filter.service';
 import { Project } from 'src/app/shared/models/project/project.class';
+import { User } from 'src/app/shared/models/user/user.class';
 
 @Component({
   selector: 'app-list-project',
@@ -14,6 +16,8 @@ import { Project } from 'src/app/shared/models/project/project.class';
   encapsulation: ViewEncapsulation.None,
 })
 export class ListProjectComponent implements OnInit {
+  currentUser: User = JSON.parse(localStorage.getItem('user')) || undefined;
+
   listProject: Project[] = [];
 
   typeProyects = [];
@@ -170,16 +174,20 @@ export class ListProjectComponent implements OnInit {
   constructor(
     private messageService: MessageService,
     private projectService: ProjectService,
+    private userService: UserService,
     private filtersService: FilterService
   ) {}
 
   ngOnInit(): void {
     let modal = parseInt(String(Math.random() * 2));
-    if (modal == 1) {
+    if (modal == 1 && this.currentUser) {
       this.visiblePopUpQuestion = true;
     }
 
     this.getProjects();
+    if (this.currentUser) {
+      this.getQuestion();
+    }
   }
 
   getProjects() {
@@ -189,7 +197,6 @@ export class ListProjectComponent implements OnInit {
       },
       (err) => {
         this.messageService.add({
-          key: 'msg',
           severity: 'error',
           summary: 'Error',
           detail: err.error ? err.error.message : 'Ups! ocurrio un error',
@@ -200,7 +207,39 @@ export class ListProjectComponent implements OnInit {
 
   answerQuestion(answer: Boolean) {
     console.log('Llego la respuesta a la pregunta del usuario');
-    console.log(answer);
+    let technology = this.question.split(' ');
+    let lastWord: string = technology[technology.length - 1].replace(
+      /[.,;?!]/g,
+      ''
+    );
+
+    answer
+      ? this.currentUser.preferences.push(lastWord)
+      : this.currentUser.disinterest.push(lastWord);
+
+    this.userService
+      .updateUser(this.currentUser, {
+        $push: {
+          preferences: this.currentUser.preferences,
+          disinterest: this.currentUser.disinterest,
+        },
+      })
+      .subscribe(
+        (data) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Hecho',
+            detail: 'Gracias por respondernos, actualizaremos tus preferencias',
+          });
+        },
+        (err) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+          });
+        }
+      );
   }
 
   hiddenPopUpQuestion(hidden: Boolean) {
@@ -211,5 +250,21 @@ export class ListProjectComponent implements OnInit {
     this.query = this.filtersService.getFilters();
     this.query.method = this.filters.method;
     this.getProjects();
+  }
+
+  getQuestion() {
+    this.userService.getRecommendationQuestionUser(this.currentUser).subscribe(
+      (question) => {
+        let { result } = question;
+        this.question = result;
+      },
+      (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+        });
+      }
+    );
   }
 }
