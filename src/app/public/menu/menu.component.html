@@ -5,25 +5,29 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li *ngFor="let item of menu" [pTooltip]="item.tooltip" [showDelay]="item.tooltipOptions.showDelay"
                     [autoHide]="item.tooltipOptions.autoHide" [tooltipEvent]="item.tooltipOptions.tooltipEvent"
                     [tooltipPosition]="item.tooltipOptions.tooltipPosition"
                     class="d-flex justify-content-center alig-content-center">
+
                     <a [class]="item.class" aria-current="page" [routerLink]="item.url"
                         [routerLinkActive]="item.urlActiveClass">
                         <i [class]="item.icon"></i>
-                        {{item.name}}</a>
+                        {{item.name}}
+                    </a>
+                    <p-badge *ngIf="item.badge" [value]="item.badge" severity="success"></p-badge>
+
                 </li>
             </ul>
 
-            <form class="d-flex w-25 justify-content-center" role="search" id="searcher">
+            <!-- <form class="d-flex w-25 justify-content-center" role="search" id="searcher">
                 <span class="p-input-icon-left">
                     <i class="pi pi-search"></i>
                     <input type="text" pInputText placeholder="Buscar" aria-label="Search" class="buscador" />
                 </span>
-            </form>
+            </form> -->
             <div class="d-flex w-25" id="butt">
                 <p-button class="me-2" *ngIf="!login()" type="submit" label="Ingresar" styleClass="p-button-help"
                     routerLink="/auth/login" ></p-button>

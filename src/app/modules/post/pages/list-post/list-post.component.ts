@@ -55,31 +55,31 @@ export class ListPostComponent implements OnInit {
           items: [
             {
               label: 'Angular',
-              value: 'angular',
+              value: 'Angular',
             },
             {
               label: 'React',
-              value: 'react',
+              value: 'React',
             },
             {
               label: 'Vue',
-              value: 'vue',
+              value: 'Vue',
             },
             {
               label: 'Spring',
-              value: 'spring',
+              value: 'Spring',
             },
             {
               label: 'Node.js',
-              value: 'nodejs',
+              value: 'Nodejs',
             },
             {
               label: 'Javascript',
-              value: 'javascript',
+              value: 'Javascript',
             },
             {
               label: 'Java',
-              value: 'java',
+              value: 'Java',
             },
             {
               label: 'Python',
@@ -133,6 +133,8 @@ export class ListPostComponent implements OnInit {
 
   getFilters() {
     this.query = this.filtersService.getFilters();
+    console.log(this.query);
+    
     this.query.method = this.filters.method;
     this.getAllPosts();
   }
