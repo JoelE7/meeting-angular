@@ -19,3 +19,7 @@ a{
 .cardPost p,small{
   cursor: pointer
 }
+.cardCommentPost{
+  border: 1px solid #ad2c73 !important;
+
+}

@@ -22,6 +22,18 @@ export class PostService{
       })
     );
   }
+  createMessage(data: any) {
+    console.log(data);
+    
+    let headers = new HttpHeaders();
+  
+    return this.http.post(`${enviroment.apiUrl}/messages`, data,{ headers: headers })
+    .pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
 
   getAllPost(query: any = []) {
     let filtersAccept = [
@@ -31,6 +43,7 @@ export class PostService{
       'date',
       'author',
       'messages',
+      'technologies'
     ];
 
     let queryBuild =

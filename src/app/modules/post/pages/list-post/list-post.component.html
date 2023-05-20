@@ -1,25 +1,27 @@
 <div class="postBackground">
   <div class="container card p-3 mb-2 shadow-sm">
     <div class="row justify-content-around">
-      <div class="col-sm-6 col-md-6 col-lg-6">
-        <h3 class="text-end p-0 m-0">{{ title }}</h3>
-      </div>
-      <div class="col-sm-6 col-md-6 col-lg-6">
-        <p-button
-        type="button"
-        [style]="{ width: '100%' }"
-        label="Crear nuevo post"
-        class="float-end"
-        styleClass=" p-button-help"
-        routerLink="/post/create"
-      ></p-button>
-      </div>
 
+      <div class="w-100 d-flex">
+        <div class="col-sm-9 col-md-9 col-lg-9">
+          <h3 class=" titlePosts p-0">{{ title }}</h3>
+        </div>
+        <div class="col-sm-9 col-md-9 col-lg-3">
+          <p-button
+          type="button"
+          [style]="{ width: '100%' }"
+          label="Crear nuevo post"
+          class="float-end"
+          styleClass=" p-button-help"
+          routerLink="/post/create"
+        ></p-button>
+        </div>
+      </div>
      
       <!----------------- COMPONENTE FILTRO-------------------->
       <div class="container">
         <div class="row">
-          <div class="col-4">
+          <div class="col-sm-12 col-md-4 col-lg-4 ">
             <div class="" id="filtro">
               <h2>Filtros</h2>
               <app-filters [filters]="filters" ></app-filters>
@@ -34,7 +36,7 @@
               ></p-button>
             </div>
           </div>
-          <div class="col-8">
+          <div class="col-sm-12 col-md-8 col-lg-8">
             <!-- componente de card -->
             <app-card-post
               *ngFor="let post of listPost"

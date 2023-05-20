@@ -80,43 +80,30 @@
     </div>
       <!-- type -->
     <!-- TECNOLOGIAS -->
-
-    <!-- custom de varias elecciones -->
-    
-<!-- <div class="card flex justify-content-center">
-  <span class="p-float-label">
-      <p-multiSelect [options]="cities" [(ngModel)]="selectedCities" optionLabel="name"></p-multiSelect>
-      <label for="ms-cities">Select Cities</label>
-  </span>
-</div> -->
-    <!-- custom de varias elecciones -->
-
-  
     <div class="offset-0 col-sm-12 col-md-5">
       <label for="name" class="mt-3 ">*Tecnología </label>
-      <p-dropdown
+      <p-multiSelect
         [style]="{ width: '100%' }"
-        formControlName="technologies"
+        formControlName="technologie"
         placeholder="Seleccione una opción..."
         [options]="technologies"
         optionValue="value"
         optionLabel="label"
       >
         <ng-template let-option pTemplate="item">
-          <span [class]="'technologies-' + option.value">
+          <span [class]="'type-' + option.value">
             {{ option.label }}
           </span>
-        </ng-template>
-      </p-dropdown>
+        </ng-template>          
+      </p-multiSelect>
       <span
         class="danger"
         *ngIf="
-          form.get('technologies').hasError('required') &&
-          form.get('technologies').touched
+          form.get('type').hasError('required') && form.get('type').touched
         "
       >
         <small class="p-error">Este campo es <strong>requerido</strong></small>
-      </span>      
+      </span> 
     </div>
   </div>
       <!-- TECNOLOGIAS -->

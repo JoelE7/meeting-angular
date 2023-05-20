@@ -39,11 +39,7 @@ export class FormPostComponent implements OnInit {
       value:"collaborative"
     },
    ]
-  //  cities: City[];
-
-  //  selectedCities: City[];
-
-  
+    
    technologies: Item[] = [
     {
       label:"Angular", 
@@ -61,36 +57,30 @@ export class FormPostComponent implements OnInit {
       label:"Svelte", 
       value:"Svelte"
     },{
-      label:"java", 
-      value:"java"
-    },
-    {
-      label:"php", 
-      value:"php"
-    },
-    {
-      label:"javascript", 
-      value:"javascript"
-    },
-    {
-      label:"go", 
-      value:"go"
+      label:"Java", 
+      value:"Java"
     },{
-      label:"kotlin", 
-      value:"kotlin"
+      label:"Php", 
+      value:"Php"
+    },{
+      label:"Javascript", 
+      value:"Javascript"
+    },{
+      label:"Go", 
+      value:"Go"
+    },{
+      label:"Kotlin", 
+      value:"Kotlin"
+    },{
+      label:"Node.js", 
+      value:"Nodejs"
     }
+
   ]
   
 
   ngOnInit(): void {  
     this.startFrom();
-  //   this.cities = [
-  //     { name: 'New York', code: 'NY' },
-  //     { name: 'Rome', code: 'RM' },
-  //     { name: 'London', code: 'LDN' },
-  //     { name: 'Istanbul', code: 'IST' },
-  //     { name: 'Paris', code: 'PRS' }
-  // ];
   }  
   
   startFrom() {
@@ -101,8 +91,7 @@ export class FormPostComponent implements OnInit {
         Validators.minLength(10),
       ]),
       type: new FormControl(this.post.type, [Validators.required]),
-      languages: new FormControl(this.post.languages,[Validators.required]),
-      technologies: new FormControl(this.post.technologies,[Validators.required]),
+      technologie: new FormControl(this.post.technologies,[Validators.required]),
     });
   }
    submitPost(){
@@ -111,11 +100,12 @@ export class FormPostComponent implements OnInit {
     this.newPost.body = this.form.get('body').value;
     this.newPost.type = this.form.get('type').value;
     this.newPost.date = new Date();
-    this.newPost.author= new User();
-    this.newPost.author._id="6445c859e5c80b2eec56cc77"
-    // this.newPost.languages = this.form.get('languages').value;
-    // this.newPost.technologies = this.form.get('technologies').value;
+    // this.newPost.author= new User();
+    this.newPost.author="64584dfc6e91980ca4954f0c"
+    this.newPost.technologies = this.form.get('technologie').value;
 
     this.emitPost.emit(this.newPost);
+    console.log(this.newPost);
+
   }
 }

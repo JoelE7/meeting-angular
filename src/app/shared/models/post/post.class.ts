@@ -1,3 +1,4 @@
+import { Message } from '../message/message.interface';
 import { User } from '../user/user.class';
 
 export class Post {
@@ -6,10 +7,8 @@ export class Post {
   body: string;
   type: string;
   date: Date;
-  author:User;
-  messages:string[];
-  languages:string[];
-  technologies: string;
+  author: any  ;
+  messages: Message[];
+  technologies: string[];
 }
 
-// routerLink="/post/details-post/{{post._id}}"
