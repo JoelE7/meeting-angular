@@ -32,6 +32,7 @@ SharedModule
     ListPostComponent,
     FormPostComponent,
     SuggestionsPostComponent,
+    CardPostComponent
   ],
 })
 

@@ -1,18 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { PostService } from 'src/app/api/services/post/post.service';
 import { Post } from 'src/app/shared/models/post/post.class';
+import { User } from 'src/app/shared/models/user/user.class';
 
 @Component({
   selector: 'app-details-post',
   templateUrl: './details-post.component.html',
   styleUrls: ['./details-post.component.css'],
+  encapsulation : ViewEncapsulation.None
 })
 export class DetailsPostComponent {
   searchPost: Post = new Post();
   form: FormGroup;
+
+  currentUser: User = JSON.parse(localStorage.getItem('user')) || undefined;
+
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -24,11 +29,14 @@ export class DetailsPostComponent {
     let { id } = this.activatedRoute.snapshot.params;
     this.getDetail(id);
     this.startFrom();
+    if(!this.currentUser){
+      this.form.get('comment').disable()
+    }
   }
 
   startFrom() {
     this.form = new FormGroup({
-      comment: new FormControl('', [Validators.required]),
+      comment: new FormControl(this.currentUser ? "" : "Para poder comentar este post, logueate o registrate", [Validators.required]),
     });
   }
 

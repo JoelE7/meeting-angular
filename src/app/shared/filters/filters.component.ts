@@ -203,10 +203,11 @@ export class FiltersComponent {
   
     if (filterValue && !arrayValue) {
       this.filterValueReturn.push({ col: filterName, value: filterValue });
-    } else if (filterValue.length > 0 && arrayValue) {
+    } else if (arrayValue) {
       const value = (this.filters.method === Method.POST) ? { $all: filterValue } : filterValue;
       this.filterValueReturn.push({ col: filterName, value });
     }
+
   
     if (this.filters.autoSend) {
       this.sendFilter();

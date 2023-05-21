@@ -13,6 +13,7 @@ import { ChartLineComponent } from 'src/app/shared/components/chart-line/chart-l
 import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 import { Project } from 'src/app/shared/models/project/project.class';
 import { mockProjectDetails, mockProjectService } from 'src/app/test/__mocks__/services/project/project.service.mock';
+import { ModalScoreComponent } from 'src/app/modules/project/shared/modal-score/modal-score.component';
 
 describe('DetailsProjectComponent', () => {
   let component: DetailsProjectComponent;
@@ -26,6 +27,7 @@ describe('DetailsProjectComponent', () => {
         ChartBarComponent,
         ChartLineComponent,
         ChartDoughnutComponent,
+        ModalScoreComponent
       ],
       providers: [MessageService, { provide: ProjectService, useValue: mockProjectService },],
       imports: [
@@ -51,7 +53,7 @@ describe('DetailsProjectComponent', () => {
     detailsProject.and.returnValue(of<Project>(mockProjectDetails));
     component.ngOnInit();
     expect(mockProjectService.detailsProject).toHaveBeenCalled();
-    expect(component.searchProject._id).toEqual(1);
+    expect(component.searchProject._id).toEqual("1");
 
   })
 

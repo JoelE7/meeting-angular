@@ -30,7 +30,7 @@ describe('CardProjectComponent', () => {
 
     expect(cardProjectComponent.project._id).toBe(undefined);
 
-    (project._id = 1), (project.name = 'Prueba de proyecto');
+    (project._id = "1"), (project.name = 'Prueba de proyecto');
 
     cardProjectComponent.project = project;
 

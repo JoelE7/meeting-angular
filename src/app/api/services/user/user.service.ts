@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { QuestionPreferenceUser } from 'src/app/modules/project/interfaces/questionPreferenceUser.interface';
 import { User } from 'src/app/shared/models/user/user.class';
 import { enviroment } from 'src/environments/enviroment.prod';
 
@@ -8,11 +9,7 @@ import { enviroment } from 'src/environments/enviroment.prod';
   providedIn: 'root',
 })
 export class UserService {
-
-
   constructor(private http: HttpClient) {}
-
-
 
   getAllUsersByRanking(paginate: number) {
     let headers = new HttpHeaders();
@@ -32,7 +29,7 @@ export class UserService {
       );
   }
 
-  updateUser(user: User,update:any = {}) {
+  updateUser(user: User, update: any = {}) {
     let headers = new HttpHeaders();
     // headers = headers.append(
     //   'Authorization',
@@ -50,7 +47,9 @@ export class UserService {
       );
   }
 
-  getRecommendationQuestionUser(user: User) {
+  getRecommendationQuestionUser(
+    user: User
+  ): Observable<QuestionPreferenceUser> {
     let headers = new HttpHeaders();
     // headers = headers.append(
     //   'Authorization',
@@ -58,9 +57,35 @@ export class UserService {
     // );
 
     return this.http
-      .post(`${enviroment.apiUrl}/recommendations/`, user, {
-        headers: headers,
-      })
+      .post<QuestionPreferenceUser>(
+        `${enviroment.apiUrl}/recommendations/`,
+        user,
+        {
+          headers: headers,
+        }
+      )
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  linkProjectWithGithub(url: string): Observable<QuestionPreferenceUser> {
+    let headers = new HttpHeaders();
+    // headers = headers.append(
+    //   'Authorization',
+    //   'Bearer' + localStorage.getItem('token')
+    // );
+
+    return this.http
+      .post<QuestionPreferenceUser>(
+        `${enviroment.apiUrl}/recommendations/`,
+        url,
+        {
+          headers: headers,
+        }
+      )
       .pipe(
         map((res: any) => {
           return res;

@@ -62,6 +62,7 @@
               ></textarea>
 
               <p-button
+                *ngIf="currentUser"
                 type="submit"
                 [style]="{ width: '100%' }"
                 label="Comentar"
