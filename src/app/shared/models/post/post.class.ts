@@ -10,5 +10,6 @@ export class Post {
   author: any  ;
   messages: Message[];
   technologies: string[];
+  random:any;
 }
 

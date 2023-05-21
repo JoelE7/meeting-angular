@@ -1,29 +1,38 @@
 <p-table [value]="developers">
-    <ng-template pTemplate="header">
-        <tr>
-            <th class="text-center">Foto</th>
-            <th class="text-center">Nombre</th>
-            <th class="text-center">Tecnologías/Lenguajes</th>
-            <th class="text-center">Puntaje</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-developer>
-        <tr>
-            <td>
-                <div class="developer-avatar">
-                    <p-avatar [image]="developer.avatarUrl" size="large" shape="circle"></p-avatar>
-                </div>
-            </td>
-            <td class="text-center">{{ developer.name }}</td>
-            <td class="text-center">
-                <ul class="developer-skills">
-                    <li *ngFor="let skill of developer.skills">
-                        <i class="{{ skill }}"></i>
-                    </li>
-                </ul>
-            </td>
-            <td class="text-center">{{ developer.score }}</td>
-        </tr>
-    </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th class="text-center">Foto</th>
+      <th class="text-center">Nombre</th>
+      <th class="text-center">Tecnologías/Lenguajes</th>
+      <th class="text-center">Puntaje</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-developer>
+    <tr>
+      <td>
+        <div class="developer-avatar">
+          <img
+            src="../../../../../assets/img/no-user.jpg"
+            alt="Foto de usuario"
+            class="mt-2 ms-5"
+          />
+          <!-- <p-avatar [image]="developer.avatarUrl" size="large" ></p-avatar> -->
+        </div>
+      </td>
+      <td class="text-center">{{ developer.name }}</td>
+      <td class="text-center">
+        <ul class="developer-skills">
+          <li *ngFor="let skill of developer.skills">
+            <i class="{{ skill }}"></i>
+          </li>
+        </ul>
+      </td>
+      <td class="text-center">{{ developer.score }}</td>
+    </tr>
+  </ng-template>
 </p-table>
-<p-paginator [totalRecords]="totalRecords" [rows]="size" (onPageChange)="paginateEmit($event)"></p-paginator>
+<p-paginator
+  [totalRecords]="totalRecords"
+  [rows]="size"
+  (onPageChange)="paginateEmit($event)"
+></p-paginator>

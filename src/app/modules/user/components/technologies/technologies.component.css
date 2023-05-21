@@ -3,3 +3,10 @@
   border-radius: 10px;
   padding: 20px 0px;
 }
+.p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
+  background-color: #c42e6c!important;
+}
+.p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
+  background: #EFF6FF;
+  color: #f1bcd173;
+}
