@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { QuestionPreferenceUser } from 'src/app/modules/project/interfaces/questionPreferenceUser.interface';
 import { User } from 'src/app/shared/models/user/user.class';
-import { enviroment } from 'src/environments/enviroment.prod';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,7 @@ export class UserService {
     // );
 
     return this.http
-      .get(`${enviroment.apiUrl}/users/ranking/${paginate}`, {
+      .get(`${environment.apiUrl}/users/ranking/${paginate}`, {
         headers: headers,
       })
       .pipe(
@@ -37,7 +37,7 @@ export class UserService {
     // );
 
     return this.http
-      .put(`${enviroment.apiUrl}/users/${user._id}`, update, {
+      .put(`${environment.apiUrl}/users/${user._id}`, update, {
         headers: headers,
       })
       .pipe(
@@ -58,7 +58,7 @@ export class UserService {
 
     return this.http
       .post<QuestionPreferenceUser>(
-        `${enviroment.apiUrl}/recommendations/`,
+        `${environment.apiUrl}/recommendations/`,
         user,
         {
           headers: headers,
@@ -80,7 +80,7 @@ export class UserService {
 
     return this.http
       .post<QuestionPreferenceUser>(
-        `${enviroment.apiUrl}/recommendations/`,
+        `${environment.apiUrl}/recommendations/`,
         url,
         {
           headers: headers,

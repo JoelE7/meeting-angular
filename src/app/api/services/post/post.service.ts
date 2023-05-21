@@ -4,7 +4,7 @@ import { Observable, map } from 'rxjs';
 import { Method } from 'src/app/shared/filters/enum/method.enum';
 import { FilterService } from 'src/app/shared/filters/services/filter.service';
 import { Post } from 'src/app/shared/models/post/post.class';
-import { enviroment } from 'src/environments/enviroment.prod';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ export class PostService{
   createPost(data: Post) {
     let headers = new HttpHeaders();
   
-    return this.http.post(`${enviroment.apiUrl}/posts/`, data,{ headers: headers })
+    return this.http.post(`${environment.apiUrl}/posts/`, data,{ headers: headers })
     .pipe(
       map((res: any) => {
         return res;
@@ -27,7 +27,7 @@ export class PostService{
     
     let headers = new HttpHeaders();
   
-    return this.http.post(`${enviroment.apiUrl}/messages`, data,{ headers: headers })
+    return this.http.post(`${environment.apiUrl}/messages`, data,{ headers: headers })
     .pipe(
       map((res: any) => {
         return res;
@@ -59,7 +59,7 @@ export class PostService{
     // );
 
     return this.http
-      .post(`${enviroment.apiUrl}/posts/filter`,queryBuild, { headers: headers })
+      .post(`${environment.apiUrl}/posts/filter`,queryBuild, { headers: headers })
       .pipe(
         map((res: any) => {
           return res;
@@ -75,7 +75,7 @@ export class PostService{
     // );
 
     return this.http
-      .get<Post>(`${enviroment.apiUrl}/posts/${id}`, { headers: headers })
+      .get<Post>(`${environment.apiUrl}/posts/${id}`, { headers: headers })
       .pipe(
         map((res: any) => {
           return res;

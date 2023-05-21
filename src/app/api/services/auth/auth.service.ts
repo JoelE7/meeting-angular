@@ -2,7 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { User } from 'src/app/shared/models/user/user.class';
-import { enviroment } from 'src/environments/enviroment.prod';
+import { environment } from 'src/environments/environment';
+;
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,7 @@ export class AuthService {
   }
 
   loginUser(data: User) {
-    return this.http.post(`${enviroment.apiUrl}/users/login`, data).pipe(
+    return this.http.post(`${environment.apiUrl}/users/login`, data).pipe(
       map((res: any) => {
         return res;
       })
@@ -30,7 +31,7 @@ export class AuthService {
   }
 
   registerUser(data: User){
-    return this.http.post(`${enviroment.apiUrl}/users`, data).pipe(
+    return this.http.post(`${environment.apiUrl}/users`, data).pipe(
       map((res: any) => {
         return res;
       })

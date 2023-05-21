@@ -12,13 +12,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "AuthService": () => (/* binding */ AuthService)
 /* harmony export */ });
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ 635);
-/* harmony import */ var src_environments_enviroment_prod__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/enviroment.prod */ 9095);
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment */ 2340);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ 8987);
 
 
 
 
+;
 class AuthService {
   constructor(http) {
     this.http = http;
@@ -31,12 +32,12 @@ class AuthService {
     return this.login;
   }
   loginUser(data) {
-    return this.http.post(`${src_environments_enviroment_prod__WEBPACK_IMPORTED_MODULE_0__.enviroment.apiUrl}/users/login`, data).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_1__.map)(res => {
+    return this.http.post(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiUrl}/users/login`, data).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_1__.map)(res => {
       return res;
     }));
   }
   registerUser(data) {
-    return this.http.post(`${src_environments_enviroment_prod__WEBPACK_IMPORTED_MODULE_0__.enviroment.apiUrl}/users`, data).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_1__.map)(res => {
+    return this.http.post(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiUrl}/users`, data).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_1__.map)(res => {
       return res;
     }));
   }
@@ -65,7 +66,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ 8987);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ 635);
 /* harmony import */ var src_app_shared_filters_enum_method_enum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/app/shared/filters/enum/method.enum */ 8689);
-/* harmony import */ var src_environments_enviroment_prod__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/environments/enviroment.prod */ 9095);
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/environments/environment */ 2340);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var src_app_shared_filters_services_filter_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/shared/filters/services/filter.service */ 7833);
 
@@ -82,7 +83,7 @@ class PostService {
   }
   createPost(data) {
     let headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpHeaders();
-    return this.http.post(`${src_environments_enviroment_prod__WEBPACK_IMPORTED_MODULE_1__.enviroment.apiUrl}/posts/`, data, {
+    return this.http.post(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.apiUrl}/posts/`, data, {
       headers: headers
     }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_4__.map)(res => {
       return res;
@@ -91,7 +92,7 @@ class PostService {
   createMessage(data) {
     console.log(data);
     let headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpHeaders();
-    return this.http.post(`${src_environments_enviroment_prod__WEBPACK_IMPORTED_MODULE_1__.enviroment.apiUrl}/messages`, data, {
+    return this.http.post(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.apiUrl}/messages`, data, {
       headers: headers
     }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_4__.map)(res => {
       return res;
@@ -105,7 +106,7 @@ class PostService {
     //   'Authorization',
     //   'Bearer' + localStorage.getItem('token')
     // );
-    return this.http.post(`${src_environments_enviroment_prod__WEBPACK_IMPORTED_MODULE_1__.enviroment.apiUrl}/posts/filter`, queryBuild, {
+    return this.http.post(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.apiUrl}/posts/filter`, queryBuild, {
       headers: headers
     }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_4__.map)(res => {
       return res;
@@ -117,7 +118,7 @@ class PostService {
     //   'Authorization',
     //   'Bearer' + localStorage.getItem('token')
     // );
-    return this.http.get(`${src_environments_enviroment_prod__WEBPACK_IMPORTED_MODULE_1__.enviroment.apiUrl}/posts/${id}`, {
+    return this.http.get(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.apiUrl}/posts/${id}`, {
       headers: headers
     }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_4__.map)(res => {
       return res;
@@ -147,7 +148,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ 8987);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ 635);
-/* harmony import */ var src_environments_enviroment_prod__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/enviroment.prod */ 9095);
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment */ 2340);
 /* harmony import */ var _shared_filters_enum_method_enum__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../shared/filters/enum/method.enum */ 8689);
 /* harmony import */ var src_app_shared_models_user_user_class__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/shared/models/user/user.class */ 2284);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 2560);
@@ -171,7 +172,7 @@ class ProjectService {
     //   'Authorization',
     //   'Bearer' + localStorage.getItem('token')
     // );
-    return this.http.get(`${src_environments_enviroment_prod__WEBPACK_IMPORTED_MODULE_0__.enviroment.apiUrl}/projects/${id}`, {
+    return this.http.get(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiUrl}/projects/${id}`, {
       headers: headers
     }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_5__.map)(res => {
       return res;
@@ -183,7 +184,7 @@ class ProjectService {
     //   'Authorization',
     //   'Bearer' + localStorage.getItem('token')
     // );
-    return this.http.post(`${src_environments_enviroment_prod__WEBPACK_IMPORTED_MODULE_0__.enviroment.apiUrl}/projects/`, data, {
+    return this.http.post(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiUrl}/projects/`, data, {
       headers: headers
     }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_5__.map)(res => {
       return res;
@@ -196,7 +197,7 @@ class ProjectService {
     //   'Authorization',
     //   'Bearer' + localStorage.getItem('token')
     // );
-    return this.http.put(`${src_environments_enviroment_prod__WEBPACK_IMPORTED_MODULE_0__.enviroment.apiUrl}/projects/${project._id}`, project, {
+    return this.http.put(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiUrl}/projects/${project._id}`, project, {
       headers: headers
     }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_5__.map)(res => {
       return res;
@@ -212,7 +213,7 @@ class ProjectService {
     //   'Authorization',
     //   'Bearer' + localStorage.getItem('token')
     // );
-    return this.http.post(`${src_environments_enviroment_prod__WEBPACK_IMPORTED_MODULE_0__.enviroment.apiUrl}/projects/filter`, queryBuild, {
+    return this.http.post(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiUrl}/projects/filter`, queryBuild, {
       headers: headers
     }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_5__.map)(res => {
       return res;
@@ -224,7 +225,7 @@ class ProjectService {
     //   'Authorization',
     //   'Bearer' + localStorage.getItem('token')
     // );
-    return this.http.post(`${src_environments_enviroment_prod__WEBPACK_IMPORTED_MODULE_0__.enviroment.apiUrl}/projects/suggestions`, user, {
+    return this.http.post(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiUrl}/projects/suggestions`, user, {
       headers: headers
     }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_5__.map)(res => {
       return res;
@@ -237,7 +238,7 @@ class ProjectService {
     //   'Authorization',
     //   'Bearer' + localStorage.getItem('token')
     // );
-    return this.http.post(`${src_environments_enviroment_prod__WEBPACK_IMPORTED_MODULE_0__.enviroment.apiUrl}/projects/finish/${idProject}`, scores, {
+    return this.http.post(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiUrl}/projects/finish/${idProject}`, scores, {
       headers: headers
     }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_5__.map)(res => {
       return res;
@@ -267,7 +268,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ 8987);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ 635);
-/* harmony import */ var src_environments_enviroment_prod__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/enviroment.prod */ 9095);
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/environments/environment */ 2340);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2560);
 
 
@@ -284,7 +285,7 @@ class UserService {
     //   'Authorization',
     //   'Bearer' + localStorage.getItem('token')
     // );
-    return this.http.get(`${src_environments_enviroment_prod__WEBPACK_IMPORTED_MODULE_0__.enviroment.apiUrl}/users/ranking/${paginate}`, {
+    return this.http.get(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiUrl}/users/ranking/${paginate}`, {
       headers: headers
     }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_2__.map)(res => {
       return res;
@@ -296,7 +297,7 @@ class UserService {
     //   'Authorization',
     //   'Bearer' + localStorage.getItem('token')
     // );
-    return this.http.put(`${src_environments_enviroment_prod__WEBPACK_IMPORTED_MODULE_0__.enviroment.apiUrl}/users/${user._id}`, update, {
+    return this.http.put(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiUrl}/users/${user._id}`, update, {
       headers: headers
     }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_2__.map)(res => {
       return res;
@@ -308,7 +309,7 @@ class UserService {
     //   'Authorization',
     //   'Bearer' + localStorage.getItem('token')
     // );
-    return this.http.post(`${src_environments_enviroment_prod__WEBPACK_IMPORTED_MODULE_0__.enviroment.apiUrl}/recommendations/`, user, {
+    return this.http.post(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiUrl}/recommendations/`, user, {
       headers: headers
     }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_2__.map)(res => {
       return res;
@@ -320,7 +321,7 @@ class UserService {
     //   'Authorization',
     //   'Bearer' + localStorage.getItem('token')
     // );
-    return this.http.post(`${src_environments_enviroment_prod__WEBPACK_IMPORTED_MODULE_0__.enviroment.apiUrl}/recommendations/`, url, {
+    return this.http.post(`${src_environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.apiUrl}/recommendations/`, url, {
       headers: headers
     }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_2__.map)(res => {
       return res;
@@ -7341,18 +7342,18 @@ SharedModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵ
 
 /***/ }),
 
-/***/ 9095:
-/*!*********************************************!*\
-  !*** ./src/environments/enviroment.prod.ts ***!
-  \*********************************************/
+/***/ 2340:
+/*!*****************************************!*\
+  !*** ./src/environments/environment.ts ***!
+  \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "enviroment": () => (/* binding */ enviroment)
+/* harmony export */   "environment": () => (/* binding */ environment)
 /* harmony export */ });
-const enviroment = {
-  apiUrl: 'http://localhost:4000/api',
+const environment = {
+  apiUrl: 'http://localhost:3000/api',
   frontUrl: '',
   production: true
 };
