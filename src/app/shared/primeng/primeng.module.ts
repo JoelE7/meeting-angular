@@ -47,6 +47,7 @@ import { AccordionModule } from 'primeng/accordion';
 import { ChipModule } from 'primeng/chip';
 import { EditorModule } from 'primeng/editor';
 import { BadgeModule } from 'primeng/badge';
+import {RatingModule} from 'primeng/rating'
 
 @NgModule({
   providers: [ConfirmationService],
@@ -100,6 +101,7 @@ import { BadgeModule } from 'primeng/badge';
     ChipModule,
     EditorModule,
     BadgeModule,
+    RatingModule
   ],
 })
 export class PrimengModule {}

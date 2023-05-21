@@ -102,7 +102,7 @@ export class FormProjectComponent {
       //   Validators.required,
       // ]),
       endDate: new FormControl(this.project.endDate, [Validators.required]),
-      typeProject: new FormControl(this.project.typeProject, [
+      typeProject: new FormControl(this.project.type, [
         Validators.required,
       ]),
       complexity: new FormControl(this.project.complexity, [
@@ -113,7 +113,7 @@ export class FormProjectComponent {
         Validators.required,
         Validators.min(1),
       ]),
-      lider: new FormControl(this.project.liderId || false, []),
+      lider: new FormControl(this.project.leader || false, []),
       requestSupport: new FormControl(this.project.requestSupport || false, []),
     });
   }
@@ -124,11 +124,11 @@ export class FormProjectComponent {
     this.newproject.startDate = this.form.get('startDate').value;
     this.newproject.endDate = this.form.get('endDate').value;
     this.newproject.complexity = this.form.get('complexity').value;
-    this.newproject.typeProject = this.form.get('typeProject').value;
+    this.newproject.type = this.form.get('typeProject').value;
     this.newproject.amountParticipants =
       this.form.get('amountParticipants').value;
     //this.newproject.status = this.form.get('status').value;
-    this.newproject.liderId = this.form.get('lider').value;
+    this.newproject.leader = this.form.get('lider').value;
     //this.newproject.requestSupport = this.form.get('requestSupport').value;
 
     this.emitProject.emit(this.newproject);

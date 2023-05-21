@@ -13,7 +13,7 @@ import { Project } from 'src/app/shared/models/project/project.class';
 import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CardProjectComponent } from 'src/app/modules/project/components/card-project/card-project.component';
-import { mockGetAllProjects, mockProjectService } from 'src/app/test/__mocks__/services/project/project.service.mock';
+import { mockGetAllProjects, mockGetSuggestedProjects, mockProjectService } from 'src/app/test/__mocks__/services/project/project.service.mock';
 
 describe('ListProjectComponent', () => {
   let component: ListProjectComponent;
@@ -52,6 +52,16 @@ describe('ListProjectComponent', () => {
     getAllProjects.and.returnValue(of<Project[]>(mockGetAllProjects));
     component.ngOnInit();
     expect(mockProjectService.getAllProjects).toHaveBeenCalled();
+    component.spinner = false;
     expect(component.listProject).toHaveSize(2)
+  });
+  it('al iniciar el componente con ngOnInit se active : getSuggestedProjects() ', () => {
+    const getSuggestedProjects = spyOn(mockProjectService, 'getSuggestedProjects');
+    getSuggestedProjects.and.returnValue(of<any[]>(mockGetSuggestedProjects));
+    component.ngOnInit();
+    expect(mockProjectService.getSuggestedProjects).toHaveBeenCalled();
+    console.log(component.suggestionsProject);
+    expect(component.suggestionsProject).toHaveSize(3)
+
   });
 });

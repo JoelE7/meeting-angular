@@ -6,6 +6,7 @@ import { Method } from 'src/app/shared/filters/enum/method.enum';
 import { Filters } from 'src/app/shared/filters/interface/filters.interface';
 import { Post } from 'src/app/shared/models/post/post.class';
 import { FilterService } from '../../../../shared/filters/services/filter.service';
+import { User } from 'src/app/shared/models/user/user.class';
 
 @Component({
   selector: 'app-list-post',
@@ -13,11 +14,15 @@ import { FilterService } from '../../../../shared/filters/services/filter.servic
   styleUrls: ['./list-post.component.css'],
 })
 export class ListPostComponent implements OnInit {
+
+  currentUser: User = JSON.parse(localStorage.getItem('user')) || undefined;
   listPost: Post[] = [];
 
   query: any = [];
 
   title: string = 'General';
+
+  spinner = true;
 
   filters: Filters = {
     autoSend: false,
@@ -116,10 +121,10 @@ export class ListPostComponent implements OnInit {
     } else{
       this.title="General"
     }
-
     this.postService.getAllPost(this.query).subscribe(
       (data) => {
         this.listPost = data;
+        this.spinner = false;
       },
       (err) => {
         this.messageService.add({
@@ -133,9 +138,8 @@ export class ListPostComponent implements OnInit {
 
   getFilters() {
     this.query = this.filtersService.getFilters();
-    console.log(this.query);
-    
     this.query.method = this.filters.method;
+    this.spinner = true;
     this.getAllPosts();
   }
 }

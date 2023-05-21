@@ -1,4 +1,11 @@
-<div class="postBackground">
+<div class="card text-center" *ngIf="spinner">
+  <span>
+    <p-progressSpinner></p-progressSpinner>
+  </span>
+  <br>
+  <span class="text-center">Cargando...</span>
+</div>
+<div class="postBackground" *ngIf="!spinner">
   <div class="container card p-3 mb-2 shadow-sm">
     <div class="row justify-content-around">
 
@@ -8,6 +15,7 @@
         </div>
         <div class="col-sm-9 col-md-9 col-lg-3">
           <p-button
+          *ngIf="currentUser"
           type="button"
           [style]="{ width: '100%' }"
           label="Crear nuevo post"
