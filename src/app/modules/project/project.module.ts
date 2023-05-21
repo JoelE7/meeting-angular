@@ -15,6 +15,8 @@ import { StartModule } from 'src/app/public/start.module';
 import { ModalQuestionComponent } from './shared/question-modal/modal-question.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SearchProjectComponent } from './pages/search-project/search-project.component';
+import { PostModule } from '../post/post.module';
+import { ModalScoreComponent } from './shared/modal-score/modal-score.component';
 
 
 @NgModule({
@@ -29,14 +31,16 @@ import { SearchProjectComponent } from './pages/search-project/search-project.co
     RequestSendModalComponent,
     RequestAcceptModalComponent,
     ModalQuestionComponent,
-    SearchProjectComponent
+    SearchProjectComponent,
+    ModalScoreComponent
   ],
   imports: [
     CommonModule,
     ProjectRoutingModule,
     PrimengModule,
     StartModule,
-    SharedModule
+    SharedModule,
+    PostModule
   ],
   exports:[
     CreateProjectComponent,

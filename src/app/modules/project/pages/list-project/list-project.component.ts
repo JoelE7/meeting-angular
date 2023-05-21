@@ -8,6 +8,7 @@ import { Filters } from 'src/app/shared/filters/interface/filters.interface';
 import { FilterService } from 'src/app/shared/filters/services/filter.service';
 import { Project } from 'src/app/shared/models/project/project.class';
 import { User } from 'src/app/shared/models/user/user.class';
+import { QuestionPreferenceUser } from '../../interfaces/questionPreferenceUser.interface';
 
 @Component({
   selector: 'app-list-project',
@@ -16,9 +17,12 @@ import { User } from 'src/app/shared/models/user/user.class';
   encapsulation: ViewEncapsulation.None,
 })
 export class ListProjectComponent implements OnInit {
+  spinner = true;
+  spinnerSuggestion = true;
   currentUser: User = JSON.parse(localStorage.getItem('user')) || undefined;
 
   listProject: Project[] = [];
+  suggestionsProject: Project[] = [];
 
   typeProyects = [];
   complexitys = [];
@@ -28,6 +32,7 @@ export class ListProjectComponent implements OnInit {
   query;
 
   question: string = '¿Te gustaría participar en un proyecto de react?';
+  responseQuestion: string = '';
 
   filters: Filters = {
     autoSend: false,
@@ -45,19 +50,19 @@ export class ListProjectComponent implements OnInit {
           items: [
             {
               label: 'Trainee',
-              value: 'trainee',
+              value: 'Trainee',
             },
             {
               label: 'Junior',
-              value: 'junior',
+              value: 'Junior',
             },
             {
               label: 'Semisenior',
-              value: 'semisenior',
+              value: 'Semisenior',
             },
             {
               label: 'Senior',
-              value: 'senior',
+              value: 'Senior',
             },
           ],
         },
@@ -74,19 +79,19 @@ export class ListProjectComponent implements OnInit {
           items: [
             {
               label: 'Web',
-              value: 'web',
+              value: 'Web',
             },
             {
               label: 'Movil',
-              value: 'mobile',
+              value: 'Mobile',
             },
             {
               label: 'Videojuegos',
-              value: 'videogames',
+              value: 'Videogames',
             },
             {
               label: 'Escritorio',
-              value: 'desktop',
+              value: 'Desktop',
             },
           ],
         },
@@ -94,7 +99,7 @@ export class ListProjectComponent implements OnInit {
       {
         type: FilterEnum.CHECKBOX,
         col: 'col-12 mt-3 mt-md-2',
-        title: 'Técnologias',
+        title: 'Tecnologías',
         nameFilter: 'technologies',
         valueFilter: '',
         checkboxItems: {
@@ -102,43 +107,43 @@ export class ListProjectComponent implements OnInit {
           items: [
             {
               label: 'Angular',
-              value: 'angular',
+              value: 'Angular',
             },
             {
               label: 'React',
-              value: 'react',
+              value: 'React',
             },
             {
               label: 'Vue',
-              value: 'vue',
+              value: 'Vue',
             },
             {
               label: 'Spring',
-              value: 'spring',
+              value: 'Spring',
             },
             {
               label: 'Node.js',
-              value: 'nodejs',
+              value: 'Nodejs',
             },
             {
               label: 'Javascript',
-              value: 'javascript',
+              value: 'Javascript',
             },
             {
               label: 'Java',
-              value: 'java',
+              value: 'Java',
             },
             {
               label: 'Python',
-              value: 'python',
+              value: 'Python',
             },
             {
               label: 'C',
-              value: 'c',
+              value: 'C',
             },
             {
               label: 'Typescript',
-              value: 'typescript',
+              value: 'Typescript',
             },
           ],
         },
@@ -184,6 +189,7 @@ export class ListProjectComponent implements OnInit {
       this.visiblePopUpQuestion = true;
     }
 
+    this.getSuggestedProjects();
     this.getProjects();
     if (this.currentUser) {
       this.getQuestion();
@@ -194,6 +200,23 @@ export class ListProjectComponent implements OnInit {
     this.projectService.getAllProjects(this.query).subscribe(
       (data) => {
         this.listProject = data;
+        this.spinner = false;
+      },
+      (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+        });
+      }
+    );
+  }
+
+  getSuggestedProjects() {
+    this.projectService.getSuggestedProjects(this.currentUser).subscribe(
+      (data) => {
+        this.suggestionsProject = data.result;
+        this.spinnerSuggestion = false;
       },
       (err) => {
         this.messageService.add({
@@ -206,16 +229,9 @@ export class ListProjectComponent implements OnInit {
   }
 
   answerQuestion(answer: Boolean) {
-    console.log('Llego la respuesta a la pregunta del usuario');
-    let technology = this.question.split(' ');
-    let lastWord: string = technology[technology.length - 1].replace(
-      /[.,;?!]/g,
-      ''
-    );
-
     answer
-      ? this.currentUser.preferences.push(lastWord)
-      : this.currentUser.disinterest.push(lastWord);
+      ? this.currentUser.preferences.push(this.responseQuestion)
+      : this.currentUser.disinterest.push(this.responseQuestion);
 
     this.userService
       .updateUser(this.currentUser, {
@@ -249,14 +265,16 @@ export class ListProjectComponent implements OnInit {
   getFilters() {
     this.query = this.filtersService.getFilters();
     this.query.method = this.filters.method;
+    this.spinner = true;
     this.getProjects();
   }
 
   getQuestion() {
     this.userService.getRecommendationQuestionUser(this.currentUser).subscribe(
-      (question) => {
-        let { result } = question;
-        this.question = result;
+      (data: QuestionPreferenceUser) => {
+        let { question, technologie } = data.result;
+        this.question = question;
+        this.responseQuestion = technologie;
       },
       (err) => {
         this.messageService.add({

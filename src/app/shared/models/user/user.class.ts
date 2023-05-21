@@ -11,7 +11,7 @@ export class User {
   skills: any;
   preferences: string[] = [];
   disinterest: string[] = [];
-  score: string | number;
+  score: number;
   projects: Project[] = [];
   posts: Post[] = [];
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { ProjectService } from 'src/app/api/services/project/project.service';
 import { Project } from 'src/app/shared/models/project/project.class';
@@ -10,6 +10,8 @@ import { Project } from 'src/app/shared/models/project/project.class';
   encapsulation: ViewEncapsulation.None,
 })
 export class SuggestionsProjectComponent implements OnInit {
+
+  @Input()
   suggestions: Project[] = [];
 
   constructor(
@@ -18,20 +20,6 @@ export class SuggestionsProjectComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.projectService.getAllProjects().subscribe(
-      (data) => {
-        this.suggestions = data;
-        
-      },
-      (err) => {
-        this.messageService.add({
-          key: 'msg',
-          severity: 'error',
-          summary: 'Error',
-          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
-        });
-      }
-    );
   }
 
   responsiveOptions = [

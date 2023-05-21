@@ -51,14 +51,14 @@ describe('RegisterComponent', () => {
     let name = component.form.get('name');
     let email = component.form.get('email');
     let pass = component.form.get('pass');
-    let role = component.form.get('role');
+    let role = component.form.get('profile');
 
     expect(form.invalid).toBeTruthy();
 
     name.setValue('Prueba nombre');
     email.setValue('prueba@gmail.com');
     pass.setValue('1234');
-    role.setValue('COMPANY');
+    role.setValue('FullStack');
 
     expect(form.invalid).toBeFalsy();
 

@@ -1,12 +1,14 @@
  <!-- card para listados 2-->
  <div class="card mt-4 cardPost p-3">
-  <p-chip
-    label="Analia Martinez"
-    image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+<p-chip
+    label="{{post.author?.name}}"
+    image="https://bootdey.com/img/Content/avatar/avatar4.png"
   ></p-chip>
-  <small>Posteo 30 abril</small>
+
+  <small> {{ post.date| date }} 
+  </small>
   <h3 class="titulo">
-    Easy Installation Guide for Age and Postgresql with minute changes.
+    {{ post.title }} 
   </h3>
   <!-- botones -->
   <div class="text-end m-3">
@@ -28,9 +30,8 @@
       label="Ver post"
       class="py-2"
       styleClass="p-button"
-      routerLink="/post/details-post/1"
-    ></p-button>
-    <!-- routerLink="/post/details-post/{{post._id}}" -->
+      routerLink="/post/details-post/{{post._id}}"
+      ></p-button>
   </div>
   <!-- botones -->
 </div>

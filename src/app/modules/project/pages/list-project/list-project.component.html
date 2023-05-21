@@ -1,28 +1,36 @@
-<div class="m-auto projects">
-  <div class="container row standingOut shadow-sm" style="margin: 10px 0px;">
+<div class="card text-center" *ngIf="spinner || spinnerSuggestion">
+  <span>
+    <p-progressSpinner></p-progressSpinner>
+  </span>
+  <br>
+  <span class="text-center">Cargando...</span>
+</div>
+
+<div class="m-auto projects" >
+  <div class="container row standingOut shadow-sm" style="margin: 10px 0px;" *ngIf="!spinnerSuggestion">
     <div class="col">
-      <app-suggestions-project></app-suggestions-project>
+      <app-suggestions-project *ngIf="suggestionsProject" [suggestions]="suggestionsProject"></app-suggestions-project>
     </div>
   </div>
 
-  <div class="container d-flex flex-column standingOut shadow-sm p-3 mb-2">
+  <div class="container d-flex flex-column standingOut shadow-sm p-3 mb-2" *ngIf="!spinner">
     <div class="w-100 d-flex">
       <div class="col-9">
         <h3 class="text-center p-0 m-0">Proyectos</h3>
       </div>
       <div class="col-3">
         <p-button type="button" [style]="{ width: '100%' }" label="Crear Proyecto" class="float-end"
-          styleClass=" p-button-help" routerLink="/project/create"></p-button>
+          styleClass=" p-button-help" routerLink="/project/create" *ngIf="currentUser"></p-button>
       </div>
     </div>
-    <!----------------- COMPONENTE FILTRO extraer-------------------->
+    <!----------------- COMPONENTE FILTRO-------------------->
     <div class="container">
       <div class="row">
         <div class="col-4">
           <div class="" id="filtro">
             <h2>Filtros</h2>
             <app-filters [filters]="filters"></app-filters>
-            <p-button type="button" [style]="{ width: '100%' }" label="Filtrar" class="float-start mt-5 d-block"
+            <p-button type="button" [style]="{ width: '100%' }" label="Filtrar" class="float-center mt-3 d-block"
               styleClass="p-button-help" icon="pi pi-search" (click)="getFilters()"></p-button>
           </div>
         </div>

@@ -7,6 +7,7 @@ import { MessageService } from 'primeng/api';
 import { PostService } from 'src/app/api/services/post/post.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { FiltersComponent } from 'src/app/shared/filters/filters.component';
 
 describe('ListPostComponent', () => {
   let component: ListPostComponent;
@@ -14,7 +15,7 @@ describe('ListPostComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ListPostComponent,CardPostComponent ],
+      declarations: [ ListPostComponent,CardPostComponent,FiltersComponent ],
       providers:[PostService,MessageService],
       imports:[ PrimengModule,HttpClientTestingModule,RouterTestingModule],
     })

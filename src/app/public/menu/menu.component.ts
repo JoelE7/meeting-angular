@@ -70,6 +70,7 @@ export class MenuComponent implements OnInit {
         },
         visible: false,
         class: 'nav-link items-nav d-flex flex-column',
+        badge: "2"
       },
     ];
   }

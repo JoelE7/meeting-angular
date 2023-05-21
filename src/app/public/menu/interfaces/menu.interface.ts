@@ -16,4 +16,5 @@ export interface Menu {
   visible?: boolean;
   class?: string;
   style?: string;
+  badge?:string;
 }

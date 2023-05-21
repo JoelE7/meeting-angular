@@ -5,6 +5,7 @@ import { Project } from 'src/app/shared/models/project/project.class';
 import { enviroment } from 'src/environments/enviroment.prod';
 import { Method } from '../../../shared/filters/enum/method.enum';
 import { FilterService } from 'src/app/shared/filters/services/filter.service';
+import { User } from 'src/app/shared/models/user/user.class';
 
 @Injectable({
   providedIn: 'root',
@@ -43,14 +44,16 @@ export class ProjectService {
       );
   }
 
-  updateProject(data: Project) {
+  updateProject(project: Project) {
+    console.log(project);
+    
     let headers = new HttpHeaders();
     // headers = headers.append(
     //   'Authorization',
     //   'Bearer' + localStorage.getItem('token')
     // );
     return this.http
-      .post(`${enviroment.apiUrl}/projects/update`, data, { headers: headers })
+      .put(`${enviroment.apiUrl}/projects/${project._id}`, project, { headers: headers })
       .pipe(
         map((res: any) => {
           return res;
@@ -58,6 +61,7 @@ export class ProjectService {
       );
   }
 
+  //TODO: REVISAR ESTO, LA ENTIDAD CAMBIO
   getAllProjects(query: any = []) {
     let filtersAccept = [
       'name',
@@ -75,19 +79,21 @@ export class ProjectService {
       'requestSupport',
     ];
 
+    console.log(query);
+
     let queryBuild =
       query.method === Method.POST
         ? this.filterService.getFiltersForPost(query, filtersAccept)
         : this.filterService.getFiltersForGet(query, filtersAccept);
 
     let headers = new HttpHeaders();
-    headers = headers.append(
-      'Authorization',
-      'Bearer' + localStorage.getItem('token')
-    );
+    // headers = headers.append(
+    //   'Authorization',
+    //   'Bearer' + localStorage.getItem('token')
+    // );
 
     return this.http
-      .post(`${enviroment.apiUrl}/projects/filter`,queryBuild ,{
+      .post(`${enviroment.apiUrl}/projects/filter`, queryBuild, {
         headers: headers,
       })
       .pipe(
@@ -96,4 +102,42 @@ export class ProjectService {
         })
       );
   }
+  getSuggestedProjects(user: User = new User()) {
+    let headers = new HttpHeaders();
+    // headers = headers.append(
+    //   'Authorization',
+    //   'Bearer' + localStorage.getItem('token')
+    // );
+
+    return this.http
+      .post(`${enviroment.apiUrl}/projects/suggestions`, user, {
+        headers: headers,
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  finalizeProject(idProject: string, scores: any) {
+    console.log(scores);
+    
+    let headers = new HttpHeaders();
+    // headers = headers.append(
+    //   'Authorization',
+    //   'Bearer' + localStorage.getItem('token')
+    // );
+
+    return this.http
+      .post(`${enviroment.apiUrl}/projects/finish/${idProject}`, scores, {
+        headers: headers,
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
 }

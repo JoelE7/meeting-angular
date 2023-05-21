@@ -11,7 +11,6 @@ import { Item } from 'src/app/shared/models/model-forms/item-form.interface';
 import { Post } from 'src/app/shared/models/post/post.class';
 import { User } from 'src/app/shared/models/user/user.class';
 
-
 @Component({
   selector: 'app-form-post',
   templateUrl: './form-post.component.html',
@@ -32,35 +31,15 @@ export class FormPostComponent implements OnInit {
 
   type:Item[] = [
     {
-      label:"informativo", 
+      label:"Informativo", 
       value:"informative"
     },
     {
-      label:"colaborativo", 
+      label:"Colaborativo", 
       value:"collaborative"
     },
    ]
-   languages: Item[] = [
-    {
-      label:"java", 
-      value:"java"
-    },
-    {
-      label:"php", 
-      value:"php"
-    },
-    {
-      label:"javascript", 
-      value:"javascript"
-    },
-    {
-      label:"go", 
-      value:"go"
-    },{
-      label:"kotlin", 
-      value:"kotlin"
-    }
-   ]
+    
    technologies: Item[] = [
     {
       label:"Angular", 
@@ -77,7 +56,26 @@ export class FormPostComponent implements OnInit {
     {
       label:"Svelte", 
       value:"Svelte"
+    },{
+      label:"Java", 
+      value:"Java"
+    },{
+      label:"Php", 
+      value:"Php"
+    },{
+      label:"Javascript", 
+      value:"Javascript"
+    },{
+      label:"Go", 
+      value:"Go"
+    },{
+      label:"Kotlin", 
+      value:"Kotlin"
+    },{
+      label:"Node.js", 
+      value:"Nodejs"
     }
+
   ]
   
 
@@ -93,8 +91,7 @@ export class FormPostComponent implements OnInit {
         Validators.minLength(10),
       ]),
       type: new FormControl(this.post.type, [Validators.required]),
-      languages: new FormControl(this.post.languages,[Validators.required]),
-      technologies: new FormControl(this.post.technologies,[Validators.required]),
+      technologie: new FormControl(this.post.technologies,[Validators.required]),
     });
   }
    submitPost(){
@@ -103,11 +100,12 @@ export class FormPostComponent implements OnInit {
     this.newPost.body = this.form.get('body').value;
     this.newPost.type = this.form.get('type').value;
     this.newPost.date = new Date();
-    this.newPost.author= new User();
-    this.newPost.author._id="6445c859e5c80b2eec56cc77"
-    // this.newPost.languages = this.form.get('languages').value;
-    // this.newPost.technologies = this.form.get('technologies').value;
+    // this.newPost.author= new User();
+    this.newPost.author="64584dfc6e91980ca4954f0c"
+    this.newPost.technologies = this.form.get('technologie').value;
 
     this.emitPost.emit(this.newPost);
+    console.log(this.newPost);
+
   }
 }

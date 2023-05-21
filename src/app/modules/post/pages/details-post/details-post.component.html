@@ -4,13 +4,16 @@
       <div class="col-sm-12 col-md-10 col-lg-6">
         <div class="card p-3">
           <p-chip
-            label="Analia Martinez"
-            image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+            label="{{ searchPost.author?.name }} "
+            image="https://bootdey.com/img/Content/avatar/avatar4.png"
           ></p-chip>
-          <small>Posteo 30 abril</small>
+
+          <!-- <small>Posteo 30 de abril</small> -->
+          <small>Posteo {{ searchPost.date | date }}</small>
           <h3 class="titulo">
-            Easy Installation Guide for Age and Postgresql with minute changes.
+            {{ searchPost.title }}
           </h3>
+          <p class="">{{ searchPost.body }}</p>
           <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
           <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
           <p-skeleton width="100%" height="150px"></p-skeleton>
@@ -23,26 +26,51 @@
 
           <!--  seccion comentarios del post -->
           <hr />
+
           <div class="Comments">
-            <h4>Comentarios(0)</h4>
-            <span class="p-float-label">
+            <h4 class="mt-3" *ngIf="searchPost.messages">
+              Últimos Comentarios({{ searchPost.messages.length }})
+            </h4>
+            <div
+              class="card mt-4 cardCommentPost p-2"
+              *ngFor="let message of searchPost.messages"
+            >
+              <p-chip
+                label="{{ message?.author?.name}} "
+                image="https://bootdey.com/img/Content/avatar/avatar4.png"
+              ></p-chip>
+              <p>{{ message.message }}</p>
+              <div class="text-end mb-2">
+                <p-button
+                  type="button"
+                  icon="pi pi-thumbs-up-fill"
+                  styleClass="p-button-rounded p-button-outlined mx-2 "
+                ></p-button>
+              </div>
+            </div>
+
+            <form [formGroup]="form" (ngSubmit)="createMessage()" class="mt-4">
               <textarea
-                id="float-input"
+                id=""
                 rows="5"
                 cols="60"
                 pInputTextarea
                 class="borderInput"
+                placeholder="Añade un comentario.."
+                [style]="{ width: '100%' }"
+                formControlName="comment"
               ></textarea>
-              <label for="float-input">Añade un comentario..</label>
-            </span>
-            <p-button
-              type="button"
-              [style]="{ width: '100%' }"
-              label="Comentar"
-              class="d-block py-2"
-              styleClass="p-button"
-              routerLink="/post/details-post/1"
-            ></p-button>
+
+              <p-button
+                *ngIf="currentUser"
+                type="submit"
+                [style]="{ width: '100%' }"
+                label="Comentar"
+                class="d-block py-2"
+                styleClass="p-button"
+                [disabled]="form.invalid"
+              ></p-button>
+            </form>
           </div>
           <!--  seccion comentarios del post -->
         </div>
@@ -52,8 +80,8 @@
         <div class="card">
           <div class="card flex align-items-center py-3 flex-wrap">
             <p-chip
-              label="Analia Martinez"
-              image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png"
+              label="{{ searchPost.author?.name }} "
+              image="https://bootdey.com/img/Content/avatar/avatar3.png"
             ></p-chip>
           </div>
           <p class="m-2">
@@ -61,7 +89,7 @@
             Software en la Unlam y soy pasante en Globant. También soy exalumna
             del Programa de Intercambio Global UGRAD Primavera 2023.
           </p>
-          <div class="boton text-end m-3">
+          <!-- <div class="boton text-end m-3">
             <p-button
               type="button"
               [style]="{ width: '100%' }"
@@ -70,7 +98,7 @@
               styleClass="p-button-outlined"
               routerLink="/post/details-post/1"
             ></p-button>
-          </div>
+          </div> -->
         </div>
 
         <!-- mas datos del autor -->

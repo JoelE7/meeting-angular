@@ -1,0 +1,40 @@
+<form [formGroup]="form" (ngSubmit)="submitScore()">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p-table [value]="users" [tableStyle]="{'min-width': '50rem'}">
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th class="text-dark">Integrante</th>
+                            <th class="text-dark">Puntuacion</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowIndex="rowIndex" let-user>
+                        <tr>
+                            <td>Ezequiel Sanson</td>
+                            <td formArrayName="starArray">
+                                <div [formGroupName]="rowIndex">
+                                    <p-rating formControlName="star"></p-rating>
+                                </div>
+                                <span class="danger" *ngIf="starArray.controls[rowIndex].get('star').hasError('required') && starArray.controls[rowIndex].get('star').touched
+                                ">
+                                    <small class="p-error">Debe de darle un <strong>puntaje</strong> a este
+                                        miembro</small>
+                                </span>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-12">
+                <p-button class="ms-2 float-end" type="submit" styleClass="p-button-outlined p-button-help"
+                    label="Finalizar Proyecto" [disabled]="form.invalid"
+                    [style]="{ heigth: '30px !important' }"></p-button>
+                <p-button class="ms-2 float-end" type="button" styleClass="p-button-outlined p-button-help"
+                    label="Cancelar" [style]="{ heigth: '30px !important' }" (click)="hiddenPopUp()"></p-button>
+            </div>
+        </div>
+    </div>
+</form>

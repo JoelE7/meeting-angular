@@ -1,17 +1,21 @@
+import { Post } from '../post/post.class';
+import { User } from '../user/user.class';
+
 export class Project {
-  _id: number;
+  _id: string;
   name: string;
   description: string;
-  typeProject: string;
   type: string;
   complexity: string;
   amountParticipants: number;
-  participantsId: string;
-  liderId: boolean;
+  leader: any;
+  participants: any;
+  supports: any;
+  posts: any= [];
   startDate: Date;
   endDate: Date;
-  languages: string[];
   technologies: string[];
   status: string;
   requestSupport: Boolean;
+  urlRepository:string;
 }
