@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:href": "ng build --base-href ./",
+    "build:href": "ng build --configuration development --base-href ./",
     "build:github" : "npm run delete:docs && npm run build:href && npm run copy:dist",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
