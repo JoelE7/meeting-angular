@@ -5,12 +5,12 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "delete:docs": "del-cli -f docs",
     "build:href": "ng build --configuration development --base-href ./",
+    "copy:dist" : "copyfiles dist/meeting-frontend/* ./docs -f && copyfiles -u 2 dist/meeting-frontend/assets/** ./docs",
     "build:github" : "npm run delete:docs && npm run build:href && npm run copy:dist",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "delete:docs": "del docs",
-    "copy:dist" : "copyfiles dist/meeting-frontend/**/* ./docs -f"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
