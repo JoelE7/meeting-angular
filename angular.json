@@ -33,7 +33,9 @@
               "node_modules/quill/dist/quill.core.css",
               "node_modules/quill/dist/quill.snow.css"
             ],
-            "scripts": ["node_modules/quill/dist/quill.js"]
+            "scripts": [
+              "node_modules/quill/dist/quill.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -49,7 +51,13 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
             },
             "development": {
               "buildOptimizer": false,
