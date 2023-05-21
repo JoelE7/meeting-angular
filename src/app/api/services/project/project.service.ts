@@ -45,8 +45,6 @@ export class ProjectService {
   }
 
   updateProject(project: Project) {
-    console.log(project);
-    
     let headers = new HttpHeaders();
     // headers = headers.append(
     //   'Authorization',
@@ -78,8 +76,6 @@ export class ProjectService {
       'status',
       'requestSupport',
     ];
-
-    console.log(query);
 
     let queryBuild =
       query.method === Method.POST
@@ -121,8 +117,6 @@ export class ProjectService {
   }
 
   finalizeProject(idProject: string, scores: any) {
-    console.log(scores);
-    
     let headers = new HttpHeaders();
     // headers = headers.append(
     //   'Authorization',

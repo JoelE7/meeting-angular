@@ -23,8 +23,6 @@ export class PostService{
     );
   }
   createMessage(data: any) {
-    console.log(data);
-    
     let headers = new HttpHeaders();
   
     return this.http.post(`${environment.apiUrl}/messages`, data,{ headers: headers })
