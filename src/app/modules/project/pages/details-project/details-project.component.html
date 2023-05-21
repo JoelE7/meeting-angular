@@ -51,7 +51,7 @@
           </div>
           <div class="row">
             <div class="col-6">
-              <h6>Tecnologías:</h6>
+              <p><b>Tecnologías:</b>
               <ul>
                 <li *ngFor="let tecnologie of searchProject.technologies">{{tecnologie}}</li>
               </ul>
@@ -64,7 +64,7 @@
           </div>
           <div class="row" *ngIf="searchProject.urlRepository">
             <div class="col-12">
-              <p><b>Url del repositorio: </b> <a target="_blank"
+              <p class="link"><b>Url del repositorio: </b> <a target="_blank"
                   [href]="searchProject.urlRepository">{{searchProject.name}}</a></p>
             </div>
           </div>
@@ -175,7 +175,7 @@
           <hr>
           <div class="row mt-5" *ngFor="let participant of searchProject.participants">
             <div class="col-2 d-flex justify-content-center">
-              <img width="60" height="60" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user"
+              <img width="60" height="60" src="../../../../../assets/img/no-user.jpg" alt="user"
                 class="rounded-circle">
             </div>
             <div class="col-7">
@@ -192,7 +192,7 @@
           <hr>
           <div class="row mt-3" *ngFor="let participant of searchProject.supports">
             <div class="col-2 d-flex justify-content-center">
-              <img width="60" height="60" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="user"
+              <img width="60" height="60" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="user"
                 class="rounded-circle">
             </div>
             <div class="col-7">
@@ -221,7 +221,7 @@
             </div>
           </div> -->
         </p-tabPanel>
-        <p-tabPanel header="Metricas" *ngIf="searchProject.urlRepository">
+        <p-tabPanel header="Métricas" *ngIf="searchProject.urlRepository">
           <div class="row">
             <p-cascadeSelect optionLabel="integrants" optionGroupLabel="integrants" [options]="integrants"
               [style]="{ minWidth: '14rem', marginBottom: '1rem' }" placeholder="Seleccione un integrante" class="p-3">

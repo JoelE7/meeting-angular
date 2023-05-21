@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-technologies',
@@ -6,22 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./technologies.component.css']
 })
 export class TechnologiesComponent {
-  technologies = [{
-    name:"PHP",
-    level:"Medio",
-    icon: "fab fa-php"
-  },
-    {
-      name:"Larevel",
-      level:"Medio",
-      icon: "fab fa-laravel"
-    },{
-      name:"React",
-      level:"Básico",
-      icon: "fab fa-react"
-    },{
-      name:"Angular",
-      level:"Básico",
-      icon: "fab fa-angular"
-    }]
+  @Input()
+  technologies:string[] = []
 }

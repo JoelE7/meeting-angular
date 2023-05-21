@@ -2,25 +2,25 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-sm-12 col-md-10 col-lg-6">
+        <span class="fst-italic text-secondary small"><a href="" class="text-secondary" style="text-decoration: none;"
+          routerLink="/project/list-post">Volver</a></span>
         <div class="card p-3">
           <p-chip
             label="{{ searchPost.author?.name }} "
-            image="https://bootdey.com/img/Content/avatar/avatar4.png"
+            image="https://bootdey.com/img/Content/avatar/avatar2.png"
           ></p-chip>
 
-          <!-- <small>Posteo 30 de abril</small> -->
-          <small>Posteo {{ searchPost.date | date }}</small>
+          <small>Posteo 30 de abril</small>
+          <!-- <small>Posteo {{ searchPost.date | date }}</small> -->
           <h3 class="titulo">
             {{ searchPost.title }}
           </h3>
           <p class="">{{ searchPost.body }}</p>
-          <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
-          <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
-          <p-skeleton width="100%" height="150px"></p-skeleton>
+       
           <p>
             <strong> Reference: </strong>
             <a class="text-dark"
-              >dev.to/mahinash26/easy-installation-guide-for-age-and-postgresql-with-minute-changes-j07</a
+              >https://dev.to/michelc/crud-application-with-express-and-postgressql-in-10-steps-289e</a
             >
           </p>
 
@@ -36,8 +36,8 @@
               *ngFor="let message of searchPost.messages"
             >
               <p-chip
-                label="{{ message?.author?.name}} "
-                image="https://bootdey.com/img/Content/avatar/avatar4.png"
+                label="{{ message?.author?.name}}"
+               image="../../../../../assets/img/no-user.jpg"
               ></p-chip>
               <p>{{ message.message }}</p>
               <div class="text-end mb-2">
@@ -67,7 +67,7 @@
                 [style]="{ width: '100%' }"
                 label="Comentar"
                 class="d-block py-2"
-                styleClass="p-button"
+                styleClass="p-button-help"
                 [disabled]="form.invalid"
               ></p-button>
             </form>
@@ -81,12 +81,12 @@
           <div class="card flex align-items-center py-3 flex-wrap">
             <p-chip
               label="{{ searchPost.author?.name }} "
-              image="https://bootdey.com/img/Content/avatar/avatar3.png"
+              image="https://bootdey.com/img/Content/avatar/avatar2.png"
             ></p-chip>
           </div>
           <p class="m-2">
-            Hola soy Analia Martinez me encuentro en último año de Ingeniería de
-            Software en la Unlam y soy pasante en Globant. También soy exalumna
+            Hola soy Jonathan me encuentro en último año de Ingeniería de
+            Software en la Unlam y trabajo como pasante en Globant. También soy exalumno
             del Programa de Intercambio Global UGRAD Primavera 2023.
           </p>
           <!-- <div class="boton text-end m-3">

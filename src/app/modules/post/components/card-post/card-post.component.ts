@@ -11,12 +11,17 @@ export class CardPostComponent implements OnInit {
   @Input()
   post: Post= new Post();
 
+  random: number=0;
+
   ngOnInit(): void {
+    while(this.random == 0||this.random == 3){
+      this.random =Math.floor(Math.random() * 8);
+
+    }
+    this.post["random"]=this.random;
+
+    console.log(this.post);
   }
   
   
-} {
-  
-
-
-}
+} 

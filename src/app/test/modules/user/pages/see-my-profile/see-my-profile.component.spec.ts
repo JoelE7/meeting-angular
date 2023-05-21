@@ -5,7 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { SeeMyProfileComponent } from 'src/app/modules/user/pages/see-my-profile/see-my-profile.component';
 import { TechnologiesComponent } from 'src/app/modules/user/components/technologies/technologies.component';
 import { CardProjectComponent } from 'src/app/modules/project/components/card-project/card-project.component';
-import { SharedModule } from 'primeng/api';
+import { MessageService, SharedModule } from 'primeng/api';
 import { ChartBarComponent } from 'src/app/shared/components/chart-bar/chart-bar.component';
 import { ChartDoughnutComponent } from 'src/app/shared/components/chart-doughnut/chart-doughnut.component';
 import { ChartLineComponent } from 'src/app/shared/components/chart-line/chart-line.component';
@@ -25,6 +25,7 @@ describe('See my profile', () => {
         ChartDoughnutComponent,
         ChartLineComponent
       ],
+      providers:[MessageService],
       imports: [PrimengModule, RouterTestingModule, SharedModule,HttpClientModule],
     }).compileComponents();
 
