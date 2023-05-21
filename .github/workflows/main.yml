@@ -14,5 +14,3 @@ jobs:
         run: npm ci
       - name: Test
         run: npm test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
-      - name : deploy
-        run : npm run build:github
