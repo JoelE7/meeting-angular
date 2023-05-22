@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Project } from 'src/app/shared/models/project/project.class';
-import { enviroment } from 'src/environments/enviroment.prod';
+import { environment } from 'src/environments/environment';
 import { Method } from '../../../shared/filters/enum/method.enum';
 import { FilterService } from 'src/app/shared/filters/services/filter.service';
 import { User } from 'src/app/shared/models/user/user.class';
@@ -21,7 +21,7 @@ export class ProjectService {
     // );
 
     return this.http
-      .get<Project>(`${enviroment.apiUrl}/projects/${id}`, { headers: headers })
+      .get<Project>(`${environment.apiUrl}/projects/${id}`, { headers: headers })
       .pipe(
         map((res: any) => {
           return res;
@@ -36,7 +36,7 @@ export class ProjectService {
     //   'Bearer' + localStorage.getItem('token')
     // );
     return this.http
-      .post(`${enviroment.apiUrl}/projects/`, data, { headers: headers })
+      .post(`${environment.apiUrl}/projects/`, data, { headers: headers })
       .pipe(
         map((res: any) => {
           return res;
@@ -45,15 +45,13 @@ export class ProjectService {
   }
 
   updateProject(project: Project) {
-    console.log(project);
-    
     let headers = new HttpHeaders();
     // headers = headers.append(
     //   'Authorization',
     //   'Bearer' + localStorage.getItem('token')
     // );
     return this.http
-      .put(`${enviroment.apiUrl}/projects/${project._id}`, project, { headers: headers })
+      .put(`${environment.apiUrl}/projects/${project._id}`, project, { headers: headers })
       .pipe(
         map((res: any) => {
           return res;
@@ -79,8 +77,6 @@ export class ProjectService {
       'requestSupport',
     ];
 
-    console.log(query);
-
     let queryBuild =
       query.method === Method.POST
         ? this.filterService.getFiltersForPost(query, filtersAccept)
@@ -93,7 +89,7 @@ export class ProjectService {
     // );
 
     return this.http
-      .post(`${enviroment.apiUrl}/projects/filter`, queryBuild, {
+      .post(`${environment.apiUrl}/projects/filter`, queryBuild, {
         headers: headers,
       })
       .pipe(
@@ -110,7 +106,7 @@ export class ProjectService {
     // );
 
     return this.http
-      .post(`${enviroment.apiUrl}/projects/suggestions`, user, {
+      .post(`${environment.apiUrl}/projects/suggestions`, user, {
         headers: headers,
       })
       .pipe(
@@ -121,8 +117,6 @@ export class ProjectService {
   }
 
   finalizeProject(idProject: string, scores: any) {
-    console.log(scores);
-    
     let headers = new HttpHeaders();
     // headers = headers.append(
     //   'Authorization',
@@ -130,7 +124,7 @@ export class ProjectService {
     // );
 
     return this.http
-      .post(`${enviroment.apiUrl}/projects/finish/${idProject}`, scores, {
+      .post(`${environment.apiUrl}/projects/finish/${idProject}`, scores, {
         headers: headers,
       })
       .pipe(
