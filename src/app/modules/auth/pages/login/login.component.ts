@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Usuario o contraseña incorretos',
+          detail: 'Usuario o contraseña incorrectos',
         });
       }
     );

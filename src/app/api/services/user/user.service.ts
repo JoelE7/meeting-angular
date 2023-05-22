@@ -93,22 +93,18 @@ export class UserService {
       );
   }
 
-  
-//aqui solo hasta string
-detailsUser(id:string="64677c466da9143a19e6509d"):Observable<User>{
-  let headers = new HttpHeaders();
-   // headers = headers.append(
-  //   'Authorization',
-  //   'Bearer' + localStorage.getItem('token')
-  // );
-  return this.http
-  .get<User>(`${enviroment.apiUrl}/users/${id}`, { headers: headers })
-  .pipe(
-    map((res: any) => {
-      return res;
-    })
-  );
-}
-
-
+  detailsUser(id: string): Observable<User> {
+    let headers = new HttpHeaders();
+    // headers = headers.append(
+    //   'Authorization',
+    //   'Bearer' + localStorage.getItem('token')
+    // );
+    return this.http
+      .get<User>(`${environment.apiUrl}/users/${id}`, { headers: headers })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
 }

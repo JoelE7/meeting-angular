@@ -12,4 +12,3 @@ export class Post {
   technologies: string[];
   random:any;
 }
-

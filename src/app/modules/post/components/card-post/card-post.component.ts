@@ -22,6 +22,4 @@ export class CardPostComponent implements OnInit {
 
     console.log(this.post);
   }
-  
-  
-} 
+}

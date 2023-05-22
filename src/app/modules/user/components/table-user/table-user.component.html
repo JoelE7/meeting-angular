@@ -12,18 +12,17 @@
       <td>
         <div class="developer-avatar">
           <img
-            src="../../../../../assets/img/no-user.jpg"
+            src="assets/img/no-user.jpg"
             alt="Foto de usuario"
             class="mt-2 ms-5"
           />
-          <!-- <p-avatar [image]="developer.avatarUrl" size="large" ></p-avatar> -->
         </div>
       </td>
       <td class="text-center">{{ developer.name }}</td>
       <td class="text-center">
         <ul class="developer-skills">
-          <li *ngFor="let skill of developer.skills">
-            <i class="{{ skill }}"></i>
+          <li *ngFor="let technologies of developer.preferences">
+            {{ technologies }}
           </li>
         </ul>
       </td>
