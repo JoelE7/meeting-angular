@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '',
     children: [
-      { path: 'see-my-profile', component: SeeMyProfileComponent },
+      { path: 'see-my-profile/:id', component: SeeMyProfileComponent },
       { path: 'see-profile/:id', component: SeeMyProfileComponent },
       { path: 'list-users', component: ListUserComponent },
       { path: 'search-users', component: SearchUserComponent },

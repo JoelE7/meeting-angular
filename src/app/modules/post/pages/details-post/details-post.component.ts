@@ -18,6 +18,7 @@ export class DetailsPostComponent {
 
   currentUser: User = JSON.parse(localStorage.getItem('user')) || undefined;
 
+  idParam;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -27,7 +28,8 @@ export class DetailsPostComponent {
 
   ngOnInit(): void {
     let { id } = this.activatedRoute.snapshot.params;
-    this.getDetail(id);
+    this.idParam = id;
+    this.getDetail(this.idParam);
     this.startFrom();
     if(!this.currentUser){
       this.form.get('comment').disable()
@@ -44,7 +46,6 @@ export class DetailsPostComponent {
     this.postService.detailsPost(id).subscribe(
       (post) => {
         this.searchPost = post;
-        console.log(this.searchPost);
       },
       (err) => {
         this.messageService.add({
@@ -72,6 +73,8 @@ export class DetailsPostComponent {
             summary: 'Hecho!',
             detail : "Tu comentario se envio con exito"
           });
+          this.getDetail(this.idParam)
+          this.startFrom();
       },
       (err) => {
         this.messageService.add({

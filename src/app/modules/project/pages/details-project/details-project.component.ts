@@ -157,6 +157,8 @@ export class DetailsProjectComponent implements OnInit {
 
   async getDetailsProject(id: string) {
     this.searchProject = await this.projectService.detailsProjectAsync(id);
+    console.log(this.searchProject);
+    
     this.checkUserIfExistsInProject();
     this.spinner = false;
   }
@@ -238,6 +240,7 @@ export class DetailsProjectComponent implements OnInit {
           summary: 'Hecho',
           detail: 'El proyecto fue vinculado exitosamente',
         });
+        this.getMetricByProject();
       },
       (err) => {
         this.messageService.add({
@@ -296,8 +299,6 @@ export class DetailsProjectComponent implements OnInit {
     this.metricProject = await this.projectService.getMetricByProject(
       this.searchProject._id
     );
-    console.log(this.metricProject);
-
     let developers = [];
     let commits = [];
     let commitsFrequency = [];

@@ -95,7 +95,6 @@ export class FormPostComponent implements OnInit {
     });
   }
    submitPost(){
-    console.log("pasaron todas las validaciones");
     this.newPost.title = this.form.get('title').value;
     this.newPost.body = this.form.get('body').value;
     this.newPost.type = this.form.get('type').value;
@@ -105,7 +104,6 @@ export class FormPostComponent implements OnInit {
     this.newPost.technologies = this.form.get('technologie').value;
 
     this.emitPost.emit(this.newPost);
-    console.log(this.newPost);
 
   }
 }

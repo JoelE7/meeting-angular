@@ -27,7 +27,7 @@ export class ListProjectComponent implements OnInit {
   typeProyects = [];
   complexitys = [];
 
-  visiblePopUpQuestion: Boolean = false;
+  visiblePopUpQuestion: Boolean = true;
 
   query;
 

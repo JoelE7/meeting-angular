@@ -117,7 +117,6 @@ describe('LoginComponent desde el ts', () => {
 
     expect(form.invalid).toBeFalsy();
 
-    console.log(form);
 
     const loginUser = spyOn(mockAuthService, 'loginUser');
     loginUser.and.returnValue(of<any>({}));

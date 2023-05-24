@@ -79,12 +79,14 @@ export class SeeMyProfileComponent {
     });
 
     this.userService.updateUser(this.searchUser).subscribe(
-      (data) => {
+      async (data) => {
         this.messageService.add({
           severity: 'success',
           summary: 'Hecho',
           detail: 'Tu usuario fue vinculado exitosamente',
         });
+        await this.getLanguagesGithub();
+        await this.getCommitsByUserGithub();
       },
       (err) => {
         this.messageService.add({

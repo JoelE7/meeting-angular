@@ -1,5 +1,5 @@
 export const environment = {
-    apiUrl: 'http://localhost:3000/api',
+    apiUrl: 'https://meeting-nodejs-production.up.railway.app/api',
     frontUrl: '',
     production: true,
   };

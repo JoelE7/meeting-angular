@@ -60,7 +60,6 @@ describe('ListProjectComponent', () => {
     getSuggestedProjects.and.returnValue(of<any[]>(mockGetSuggestedProjects));
     component.ngOnInit();
     expect(mockProjectService.getSuggestedProjects).toHaveBeenCalled();
-    console.log(component.suggestionsProject);
     expect(component.suggestionsProject).toHaveSize(3)
 
   });

@@ -26,11 +26,11 @@
                   {{ item.name }}
                 </a>
                 <div class="notificationMenu">
-                  <p-badge
+                  <!-- <p-badge
                     *ngIf="item.badge"
                     [value]="item.badge"
                     severity="danger"
-                  ></p-badge>
+                  ></p-badge> -->
                 </div>
               </li>
             </ul>
@@ -57,13 +57,13 @@
               </span>
           </form> -->
           <div class="d-flex w-30">
-              <p-button class="me-2" *ngIf="!login()" type="submit" label="Ingresar" styleClass="p-button-help"
+              <p-button class="me-2" *ngIf="!currentUser" type="submit" label="Ingresar" styleClass="p-button-help"
                   routerLink="/auth/login" ></p-button>
-              <p-button class="me-2" *ngIf="!login()" type="submit" label="Registrarse" styleClass="p-button-outlined p-button-help"
+              <p-button class="me-2" *ngIf="!currentUser" type="submit" label="Registrarse" styleClass="p-button-outlined p-button-help"
                   routerLink="/auth/register" ></p-button>
-              <p-button class="me-2" *ngIf="login()" type="submit" label="Perfil" styleClass="p-button-outlined p-button-help"
-                  routerLink="/user/see-my-profile"></p-button>
-              <p-button class="me-2" *ngIf="login()"  type="submit" label="Cerrar sesión" styleClass="p-button p-button-help"
+              <p-button class="me-2" *ngIf="currentUser" type="submit" label="Perfil" styleClass="p-button-outlined p-button-help"
+                  routerLink="/user/see-my-profile/{{currentUser._id}}"></p-button>
+              <p-button class="me-2" *ngIf="currentUser"  type="submit" label="Cerrar sesión" styleClass="p-button p-button-help"
                    (click)="signOut()"></p-button>
           </div>
       </div>

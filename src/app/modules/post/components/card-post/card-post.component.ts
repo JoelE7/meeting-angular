@@ -11,6 +11,8 @@ export class CardPostComponent implements OnInit {
   @Input()
   post: Post= new Post();
 
+  currentUser: User = JSON.parse(localStorage.getItem('user')) || undefined;
+
   random: number=0;
 
   ngOnInit(): void {
@@ -20,6 +22,5 @@ export class CardPostComponent implements OnInit {
     }
     this.post["random"]=this.random;
 
-    console.log(this.post);
   }
 }

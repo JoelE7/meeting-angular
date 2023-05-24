@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterContentChecked, Component, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Menu } from './interfaces/menu.interface';
 import { User } from '../../shared/models/user/user.class';
@@ -11,11 +11,11 @@ import { AuthService } from 'src/app/api/services/auth/auth.service';
   styleUrls: ['./menu.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit,OnChanges {
   menu: Menu[] = [];
   url: string = '';
   session: any = localStorage.getItem('token');
-  currentUser: boolean = JSON.parse(localStorage.getItem('user')) ? true : false;
+  currentUser: User = JSON.parse(localStorage.getItem('user')) || undefined;
 
   constructor(
     private router: Router,
@@ -23,6 +23,10 @@ export class MenuComponent implements OnInit {
     private messageService: MessageService,
     private authService:AuthService
   ) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.currentUser =  JSON.parse(localStorage.getItem('user')) || undefined;
+  }
 
   ngOnInit(): void {
     this.menu = [

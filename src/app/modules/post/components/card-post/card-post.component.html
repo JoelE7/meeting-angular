@@ -1,9 +1,7 @@
 <!-- card para listados 2-->
 <div class="card mt-4 cardPost p-3" *ngIf="post">
-  <p-chip
-    label="{{ post.author?.name }}"
-    image="https://bootdey.com/img/Content/avatar/avatar{{post.random}}.png"
-  ></p-chip>
+  <p-chip label="{{ post.author?.name }}"
+    image="https://bootdey.com/img/Content/avatar/avatar{{post.random}}.png"></p-chip>
 
   <small>Posteo 30 de abril</small>
   <h3 class="titulo">
@@ -11,26 +9,13 @@
   </h3>
   <!-- botones -->
   <div class="text-end m-3">
-    <p-button
-      type="button"
-      icon="pi pi-bookmark"
-      styleClass="p-button-rounded p-button-outlined"
-    >
+    <p-button *ngIf="currentUser" type="button" icon="pi pi-bookmark" styleClass="p-button-rounded p-button-outlined">
     </p-button>
 
-    <p-button
-      type="button"
-      icon="pi pi-thumbs-up-fill"
-      styleClass="p-button-rounded p-button-outlined mx-2"
-    ></p-button>
-    <p-button
-      type="button"
-      [style]="{ width: '100%' }"
-      label="Ver post"
-      class="py-2"
-      styleClass="p-button-help"
-      routerLink="/post/details-post/{{ post._id }}"
-    ></p-button>
+    <p-button type="button" icon="pi pi-thumbs-up-fill"
+      styleClass="p-button-rounded p-button-outlined mx-2"></p-button>
+    <p-button type="button" [style]="{ width: '100%' }" label="Ver post" class="py-2" styleClass="p-button-help"
+      routerLink="/post/details-post/{{ post._id }}"></p-button>
   </div>
   <!-- botones -->
 </div>
