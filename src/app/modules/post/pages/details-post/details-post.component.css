@@ -26,3 +26,6 @@ a{
 textarea{
   resize: none !important;
 }
+p-chip  img{
+  border: 1px solid rgb(71, 71, 71);
+}

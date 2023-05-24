@@ -3,7 +3,7 @@
   <p-chip label="{{ post.author?.name }}"
     image="https://bootdey.com/img/Content/avatar/avatar{{post.random}}.png"></p-chip>
 
-  <small>Posteo 30 de abril</small>
+  <small>Posteo {{ post.date | date:'short'}}hs</small>
   <h3 class="titulo">
     {{ post.title }}
   </h3>
