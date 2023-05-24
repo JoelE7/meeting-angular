@@ -145,3 +145,8 @@ list-project.component.css
   background-color: #ced4da !important;
   padding:1rem;
 } 
+
+canvas{
+  min-height: 400px !important;
+  max-height: 500px;
+}

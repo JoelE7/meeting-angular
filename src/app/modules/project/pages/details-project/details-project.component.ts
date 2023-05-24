@@ -5,6 +5,7 @@ import { Project } from 'src/app/shared/models/project/project.class';
 import { Task } from '../../interfaces/tasks.interface';
 import { MessageService } from 'primeng/api';
 import { User } from 'src/app/shared/models/user/user.class';
+import { MetricProject } from '../../interfaces/metricProject.interface';
 
 @Component({
   selector: 'app-details-project',
@@ -135,37 +136,32 @@ export class DetailsProjectComponent implements OnInit {
 
   puntuacion: boolean = false;
 
+  metricProject: MetricProject[];
+
+  spinnerMetric = true;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
     private projectService: ProjectService
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
     let { id } = this.activatedRoute.snapshot.params;
     this.idParam = id;
-    this.getDetailsProject();
+    await this.getDetailsProject(id);
+    if (this.searchProject.urlRepository) {
+      this.getMetricByProject();
+    }
   }
 
-  getDetailsProject() {
-    this.projectService.detailsProject(this.idParam).subscribe(
-      (project) => {
-        this.searchProject = project;
-        this.checkUserIfExistsInProject();
-        this.spinner = false;
-      },
-      (err) => {
-        this.messageService.add({
-          key: 'msg',
-          severity: 'error',
-          summary: 'Error',
-          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
-        });
-      }
-    );
+  async getDetailsProject(id: string) {
+    this.searchProject = await this.projectService.detailsProjectAsync(id);
+    this.checkUserIfExistsInProject();
+    this.spinner = false;
   }
 
-  joinAProject() {
+  joinAProject(support: boolean = false) {
     if (!this.currentUser) {
       this.messageService.add({
         severity: 'warn',
@@ -175,7 +171,35 @@ export class DetailsProjectComponent implements OnInit {
       });
       return;
     }
-    this.projectAccept = true;
+
+    let message = support
+      ? 'Te has unido al proyecto ' +
+        this.searchProject.name +
+        ' exitosamente como soporte'
+      : 'Te has unido al proyecto ' +
+        this.searchProject.name +
+        ' exitosamente como integrante';
+
+    this.projectService
+      .joinProject(this.currentUser._id, this.searchProject._id, support)
+      .subscribe(
+        (data) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Hecho',
+            detail: message,
+          });
+          this.getDetailsProject(this.idParam);
+        },
+        (err) => {
+          this.messageService.add({
+            key: 'msg',
+            severity: 'error',
+            summary: 'Error',
+            detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+          });
+        }
+      );
   }
 
   finishProjectPopUp() {
@@ -249,14 +273,14 @@ export class DetailsProjectComponent implements OnInit {
     this.projectService
       .finalizeProject(this.searchProject._id, scores)
       .subscribe(
-        (data) => {
+        async (data) => {
           this.messageService.add({
             severity: 'success',
             summary: 'Hecho!',
             detail: 'El proyecto fue finalizado con exito',
           });
           this.spinner = true;
-          this.getDetailsProject();
+          await this.getDetailsProject(this.idParam);
         },
         (err) => {
           this.messageService.add({
@@ -266,5 +290,95 @@ export class DetailsProjectComponent implements OnInit {
           });
         }
       );
+  }
+
+  async getMetricByProject() {
+    this.metricProject = await this.projectService.getMetricByProject(
+      this.searchProject._id
+    );
+    console.log(this.metricProject);
+
+    let developers = [];
+    let commits = [];
+    let commitsFrequency = [];
+
+    this.metricProject.forEach((metric) => {
+      developers.push(metric.developerUsername);
+      commits.push(metric.commits.commitCount);
+      commitsFrequency.push(metric.commits.commitFrequencyByDay);
+    });
+
+    this.getMetricGrafic(developers, commits, commitsFrequency);
+    this.spinnerMetric = false;
+  }
+
+  data: any;
+
+  options: any;
+
+  getMetricGrafic(
+    devoloper: string[],
+    commits: string[],
+    commitsFrequency: string[]
+  ) {
+    const documentStyle = getComputedStyle(document.documentElement);
+    const textColor = documentStyle.getPropertyValue('--text-color');
+    const textColorSecondary = documentStyle.getPropertyValue(
+      '--text-color-secondary'
+    );
+    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+
+    this.data = {
+      labels: devoloper,
+      datasets: [
+        {
+          label: 'Cantidad de commits',
+          backgroundColor: documentStyle.getPropertyValue('--purple-300'),
+          borderColor: documentStyle.getPropertyValue('--purple-300'),
+          data: commits,
+        },
+        {
+          label: 'Frecuencia de commits',
+          backgroundColor: documentStyle.getPropertyValue('--purple-900'),
+          borderColor: documentStyle.getPropertyValue('--purple-900'),
+          data: commitsFrequency,
+        },
+      ],
+    };
+
+    this.options = {
+      maintainAspectRatio: false,
+      aspectRatio: 0.8,
+      plugins: {
+        legend: {
+          labels: {
+            color: textColor,
+          },
+        },
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: textColorSecondary,
+            font: {
+              weight: 500,
+            },
+          },
+          grid: {
+            color: surfaceBorder,
+            drawBorder: false,
+          },
+        },
+        y: {
+          ticks: {
+            color: textColorSecondary,
+          },
+          grid: {
+            color: surfaceBorder,
+            drawBorder: false,
+          },
+        },
+      },
+    };
   }
 }

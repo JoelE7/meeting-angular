@@ -1,11 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, lastValueFrom, map } from 'rxjs';
 import { Project } from 'src/app/shared/models/project/project.class';
 import { environment } from 'src/environments/environment';
 import { Method } from '../../../shared/filters/enum/method.enum';
 import { FilterService } from 'src/app/shared/filters/services/filter.service';
 import { User } from 'src/app/shared/models/user/user.class';
+import { MetricProject } from 'src/app/modules/project/interfaces/metricProject.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -21,12 +22,28 @@ export class ProjectService {
     // );
 
     return this.http
-      .get<Project>(`${environment.apiUrl}/projects/${id}`, { headers: headers })
+      .get<Project>(`${environment.apiUrl}/projects/${id}`, {
+        headers: headers,
+      })
       .pipe(
         map((res: any) => {
           return res;
         })
       );
+  }
+
+  detailsProjectAsync(id: string): Promise<Project> {
+    let headers = new HttpHeaders();
+    // headers = headers.append(
+    //   'Authorization',
+    //   'Bearer' + localStorage.getItem('token')
+    // );
+
+    return lastValueFrom<Project>(
+      this.http.get<Project>(`${environment.apiUrl}/projects/${id}`, {
+        headers: headers,
+      })
+    );
   }
 
   createProject(data: Project) {
@@ -51,7 +68,9 @@ export class ProjectService {
     //   'Bearer' + localStorage.getItem('token')
     // );
     return this.http
-      .put(`${environment.apiUrl}/projects/${project._id}`, project, { headers: headers })
+      .put(`${environment.apiUrl}/projects/${project._id}`, project, {
+        headers: headers,
+      })
       .pipe(
         map((res: any) => {
           return res;
@@ -134,4 +153,45 @@ export class ProjectService {
       );
   }
 
+  getMetricByProject(idProject: string): Promise<MetricProject[]> {
+    let headers = new HttpHeaders();
+    // headers = headers.append(
+    //   'Authorization',
+    //   'Bearer' + localStorage.getItem('token')
+    // );
+
+    return lastValueFrom<MetricProject[]>(
+      this.http.get<MetricProject[]>(
+        `${environment.apiUrl}/projects/getMetrics/${idProject}`,
+        {
+          headers: headers,
+        }
+      )
+    );
+  }
+
+  joinProject(userId:string,projectId:string,supportRequired:boolean = false){
+
+    let data = {
+      userId,
+      projectId,
+      support : supportRequired
+    }
+
+    let headers = new HttpHeaders();
+    // headers = headers.append(
+    //   'Authorization',
+    //   'Bearer' + localStorage.getItem('token')
+    // );
+
+    return this.http
+      .post(`${environment.apiUrl}/projects/join/`, data, {
+        headers: headers,
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
 }

@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chart-line.component.css']
 })
 export class ChartLineComponent implements OnInit{
+
+
+    
   data: any;
 
 

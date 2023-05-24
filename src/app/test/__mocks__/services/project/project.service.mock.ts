@@ -28,8 +28,10 @@ export const mockProjectService: {
   createProject: () => Observable<any>;
   getAllProjects: () => Observable<Project[]>;
   getSuggestedProjects: () => Observable<any[]>;
+  detailsProjectAsync: () => Promise<Project>;
 } = {
   detailsProject: () => of(mockProjectDetails),
+  detailsProjectAsync: () => new Promise((resolve,reject)=>{resolve(mockProjectDetails)}),
   createProject: () => of({}),
   getAllProjects: () => of(mockGetAllProjects),
   getSuggestedProjects: () => of(mockGetSuggestedProjects),

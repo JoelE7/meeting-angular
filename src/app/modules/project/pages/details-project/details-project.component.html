@@ -1,13 +1,6 @@
-<p-dialog
-  [header]="'Finalizar proyecto'"
-  [(visible)]="visiblePopUpScore"
-  *ngIf="searchProject.participants"
->
-  <app-modal-score
-    [users]="searchProject.participants"
-    (eventEmitterHiddenPopUpScore)="hiddenPopUpScore($event)"
-    (eventEmitterScoreUsers)="finishProject($event)"
-  ></app-modal-score>
+<p-dialog [header]="'Finalizar proyecto'" [(visible)]="visiblePopUpScore" *ngIf="searchProject.participants">
+  <app-modal-score [users]="searchProject.participants" (eventEmitterHiddenPopUpScore)="hiddenPopUpScore($event)"
+    (eventEmitterScoreUsers)="finishProject($event)"></app-modal-score>
 </p-dialog>
 
 <div class="card text-center" *ngIf="spinner">
@@ -20,28 +13,14 @@
 
 <div class="profile" *ngIf="!spinner && searchProject">
   <div class="container rounded">
-    <span class="fst-italic text-secondary small"
-      ><a
-        href=""
-        class="text-secondary"
-        style="text-decoration: none"
-        routerLink="/project/list-project"
-        >Volver</a
-      >
+    <span class="fst-italic text-secondary small"><a href="" class="text-secondary" style="text-decoration: none"
+        routerLink="/project/list-project">Volver</a>
       |
-      <a
-        routerLink="/project/details-project/1"
-        class="text-secondary"
-        style="text-decoration: none"
-        >{{ searchProject.name }}</a
-      ></span
-    >
+      <a routerLink="/project/details-project/1" class="text-secondary" style="text-decoration: none">{{
+        searchProject.name }}</a></span>
     <div class="card shadow-sm" style="width: 100%; min-height: 700px">
-      <app-banner
-        [title]="searchProject.name"
-        [subtitle]="'Aplicacion ' + searchProject.type"
-        [short]="true"
-      ></app-banner>
+      <app-banner [title]="searchProject.name" [subtitle]="'Aplicacion ' + searchProject.type"
+        [short]="true"></app-banner>
       <p-tabView class="p-3">
         <p-tabPanel [cache]="false" header="Datos del proyecto">
           <div class="row">
@@ -98,17 +77,14 @@
                 <b>Url del repositorio: </b>
                 <a target="_blank" [href]="searchProject.urlRepository">{{
                   searchProject.name
-                }}</a>
+                  }}</a>
               </p>
             </div>
           </div>
-          <div
-            class=""
-            *ngIf="
+          <div class="" *ngIf="
               !searchProject.urlRepository &&
               searchProject.leader?._id == currentUser?._id
-            "
-          >
+            ">
             <div class="row" *ngIf="!visibleInputGithub">
               <div class="col-12">
                 <p>
@@ -117,35 +93,17 @@
                   laudantium in ratione consequuntur, provident tempora minima
                   porro nihil dolor similique, ducimus fugiat quos.
                 </p>
-                <p-button
-                  type="button"
-                  iconPos="right"
-                  icon="bi bi-github"
-                  [style]="{ width: '100%' }"
-                  label="Vincular con github"
-                  class="github"
-                  styleClass="p-button-secondary"
-                  (click)="linkInputProjectWithGithub()"
-                ></p-button>
+                <p-button type="button" iconPos="right" icon="bi bi-github" [style]="{ width: '100%' }"
+                  label="Vincular con github" class="github" styleClass="p-button-secondary"
+                  (click)="linkInputProjectWithGithub()"></p-button>
               </div>
             </div>
             <div class="row mt-3" *ngIf="visibleInputGithub">
               <div class="col-6">
                 <label for="github">Ingresa el link del repositorio</label>
-                <input
-                  type="url"
-                  [(ngModel)]="linkGithubProject"
-                  class="form-control"
-                  id="github-link"
-                />
-                <p-button
-                  (click)="linkProjectWithGithub()"
-                  type="button"
-                  [style]="{ width: '100%' }"
-                  label="Vincular repositorio"
-                  class="mt-3"
-                  styleClass="p-button-help"
-                ></p-button>
+                <input type="url" [(ngModel)]="linkGithubProject" class="form-control" id="github-link" />
+                <p-button (click)="linkProjectWithGithub()" type="button" [style]="{ width: '100%' }"
+                  label="Vincular repositorio" class="mt-3" styleClass="p-button-help"></p-button>
               </div>
             </div>
           </div>
@@ -221,14 +179,9 @@
                 resolver este problema.
               </li>
             </ul>
-            <p-button
-              type="button"
-              [style]="{ width: '100%' }"
-              label="Colaborar con proyecto"
-              class=""
-              styleClass=" p-button-help"
-              ><i class="m-1 fas fa-hands-helping"></i
-            ></p-button>
+            <p-button (click)="joinAProject(true)" type="button" [style]="{ width: '100%' }"
+              label="Colaborar con proyecto" class="" styleClass=" p-button-help"><i
+                class="m-1 fas fa-hands-helping"></i></p-button>
           </div>
         </p-tabPanel>
         <p-tabPanel header="Integrantes">
@@ -236,107 +189,56 @@
           <hr />
           <div class="row mt-3">
             <div class="col-2 d-flex justify-content-center">
-              <img
-                width="60"
-                height="60"
-                src="https://bootdey.com/img/Content/avatar/avatar6.png"
-                alt="user"
-                class="rounded-circle"
-              />
+              <img width="60" height="60" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="user"
+                class="rounded-circle" />
             </div>
             <div class="col-7">
               <h4>{{ searchProject.leader?.name }}</h4>
               <h6>{{ searchProject.leader?.role }} Developer</h6>
             </div>
             <div class="col-3 text-center">
-              <p-button
-                type="button"
-                [style]="{ width: '100%' }"
-                label="Ver perfil"
-                class=""
+              <p-button type="button" [style]="{ width: '100%' }" label="Ver perfil" class=""
                 styleClass="p-button-outlined p-button-help"
-                routerLink="/user/see-profile/{{ searchProject.leader?._id }}"
-              ></p-button>
+                routerLink="/user/see-profile/{{ searchProject.leader?._id }}"></p-button>
             </div>
           </div>
-          <h4 class="mt-4">Integrantes</h4>
+          <h4 class="mt-4" *ngIf=" searchProject.participants && searchProject.participants.length > 0">Integrantes</h4>
           <hr />
-          <div
-            class="row mt-5"
-            *ngFor="let participant of searchProject.participants"
-          >
+          <div class="row mt-5" *ngFor="let participant of searchProject.participants">
             <div class="col-2 d-flex justify-content-center">
-              <img
-                width="60"
-                height="60"
-                src="../../../../../assets/img/no-user.jpg"
-                alt="user"
-                class="rounded-circle"
-              />
+              <img width="60" height="60" src="assets/img/no-user.jpg" alt="user"
+                class="rounded-circle" />
             </div>
             <div class="col-7">
               <h4>{{ participant.name }}</h4>
               <h6>{{ participant.role }} Developer</h6>
             </div>
             <div class="col-3 text-center">
-              <p-button
-                type="button"
-                [style]="{ width: '100%' }"
-                label="Ver perfil"
-                class=""
+              <p-button type="button" [style]="{ width: '100%' }" label="Ver perfil" class=""
                 styleClass="p-button-outlined p-button-help"
-                routerLink="/user/see-profile/{{ participant._id }}"
-              ></p-button>
+                routerLink="/user/see-profile/{{ participant._id }}"></p-button>
             </div>
           </div>
-          <h4 class="mt-4">Soportes</h4>
+          <h4 class="mt-4" *ngIf="searchProject.supports.length > 0">Soportes</h4>
           <hr />
-          <div
-            class="row mt-3"
-            *ngFor="let participant of searchProject.supports"
-          >
+          <div class="row mt-3" *ngFor="let participant of searchProject.supports">
             <div class="col-2 d-flex justify-content-center">
-              <img
-                width="60"
-                height="60"
-                src="https://bootdey.com/img/Content/avatar/avatar2.png"
-                alt="user"
-                class="rounded-circle"
-              />
+              <img width="60" height="60" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="user"
+                class="rounded-circle" />
             </div>
             <div class="col-7">
               <h4>{{ participant?.name }}</h4>
               <h6>{{ participant?.role }} Developer</h6>
             </div>
             <div class="col-3 text-center">
-              <p-button
-                type="button"
-                [style]="{ width: '100%' }"
-                label="Ver perfil"
-                class=""
+              <p-button type="button" [style]="{ width: '100%' }" label="Ver perfil" class=""
                 styleClass="p-button-outlined p-button-help"
-                routerLink="/user/see-profile/{{ participant._id }}"
-              ></p-button>
+                routerLink="/user/see-profile/{{ participant._id }}"></p-button>
             </div>
           </div>
-
-          <!-- <div class="row mt-3">
-            <div class="col-2 d-flex justify-content-center">
-              <img width="60" height="60" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="user"
-                class="rounded-circle">
-            </div>
-            <div class="col-7">
-              <h4>Ezequiel Sanson</h4>
-              <h6>Back-end developer</h6>
-            </div>
-            <div class="col-3 text-center">
-              <p-button type="button" [style]="{ width: '100%' }" label="Ver perfil" class=""
-                styleClass="p-button-outlined" routerLink="/user/see-my-profile"></p-button>
-            </div>
-          </div> -->
         </p-tabPanel>
         <p-tabPanel header="Métricas" *ngIf="searchProject.urlRepository">
-          <div class="row">
+          <!-- <div class="row">
             <p-cascadeSelect
               optionLabel="integrants"
               optionGroupLabel="integrants"
@@ -359,22 +261,28 @@
                 <app-chart-line></app-chart-line>
               </div>
             </div>
+          </div> -->
+          <div class="card text-center" *ngIf="spinnerMetric">
+            <span>
+              <p-progressSpinner></p-progressSpinner>
+            </span>
+            <br>
+            <span class="text-center">Cargando...</span>
+          </div>
+          <div class="row" *ngIf="!spinnerMetric">
+            <div class="col-12">
+              <h5>Commits del proyecto:</h5>
+              <p-chart type="bar" [data]="data" [options]="options" height="100%"></p-chart>
+            </div>
           </div>
         </p-tabPanel>
-        <p-tabPanel
-          header="Avances de integrantes"
-          *ngIf="searchProject.urlRepository"
-        >
+        <p-tabPanel header="Avances de integrantes" *ngIf="searchProject.urlRepository">
           <p-accordion [multiple]="true">
             <p-accordionTab *ngFor="let user of users" [header]="user.name">
               <ng-template #accordionHeaderTemplate>
                 <div class="user-info">
                   <div class="user-avatar">
-                    <p-avatar
-                      [image]="user.avatarUrl"
-                      size="small"
-                      shape="circle"
-                    ></p-avatar>
+                    <p-avatar [image]="user.avatarUrl" size="small" shape="circle"></p-avatar>
                   </div>
                   <div class="user-name">{{ user.name }}</div>
                 </div>
@@ -384,7 +292,7 @@
                   <li *ngFor="let commit of user.commits">
                     <a [href]="commit.url" target="_blank">{{
                       commit.message
-                    }}</a>
+                      }}</a>
                   </li>
                 </ul>
               </div>
@@ -392,35 +300,18 @@
           </p-accordion>
         </p-tabPanel>
         <p-tabPanel header="Post">
-          <app-card-post
-            [post]="post"
-            *ngFor="let post of searchProject.posts"
-          ></app-card-post>
+          <app-card-post [post]="post" *ngFor="let post of searchProject.posts"></app-card-post>
         </p-tabPanel>
         <div class="row text-end mt-5">
           <div class="col-12">
-            <p-button
-              (click)="joinAProject()"
-              *ngIf="!userExistProject"
-              type="button"
-              [style]="{ width: '100%' }"
-              label="Unirse al Proyecto"
-              class=""
-              styleClass="p-button-help"
-            ></p-button>
-            <p-button
-              class="ms-2"
-              type="button"
-              styleClass="p-button-outlined p-button-help"
-              label="Finalizar Proyecto"
+            <p-button (click)="joinAProject()" *ngIf="!userExistProject" type="button" [style]="{ width: '100%' }"
+              label="Unirse al Proyecto" class="" styleClass="p-button-help"></p-button>
+            <p-button class="ms-2" type="button" styleClass="p-button-outlined p-button-help" label="Finalizar Proyecto"
               *ngIf="
                 currentUser &&
                 searchProject?.leader?._id === currentUser._id &&
                 searchProject.status != 'Done'
-              "
-              [style]="{ heigth: '30px !important' }"
-              (click)="finishProjectPopUp()"
-            ></p-button>
+              " [style]="{ heigth: '30px !important' }" (click)="finishProjectPopUp()"></p-button>
           </div>
         </div>
       </p-tabView>

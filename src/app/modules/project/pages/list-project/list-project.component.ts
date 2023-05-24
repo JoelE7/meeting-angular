@@ -234,7 +234,7 @@ export class ListProjectComponent implements OnInit {
       : this.currentUser.disinterest.push(this.responseQuestion);
 
     this.userService
-      .updateUser(this.currentUser, {
+      .updatePreferences(this.currentUser, {
         $push: {
           preferences: this.currentUser.preferences,
           disinterest: this.currentUser.disinterest,

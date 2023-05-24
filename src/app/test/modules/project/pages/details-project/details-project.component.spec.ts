@@ -49,10 +49,10 @@ describe('DetailsProjectComponent', () => {
   });
 
   it('que al iniciar el componente se llame a : detailsProject',()=>{
-    const detailsProject = spyOn(mockProjectService, 'detailsProject');
-    detailsProject.and.returnValue(of<Project>(mockProjectDetails));
+    const detailsProjectAsync = spyOn(mockProjectService, 'detailsProjectAsync');
+    detailsProjectAsync.and.returnValue(new Promise((resolve,reject)=>{resolve(mockProjectDetails)}));
     component.ngOnInit();
-    expect(mockProjectService.detailsProject).toHaveBeenCalled();
+    expect(mockProjectService.detailsProjectAsync).toHaveBeenCalled();
     expect(component.searchProject._id).toEqual("1");
 
   })

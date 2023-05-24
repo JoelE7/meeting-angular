@@ -14,4 +14,5 @@ export class User {
   score: number;
   projects: Project[] = [];
   posts: Post[] = [];
+  githubUsername:string;
 }
