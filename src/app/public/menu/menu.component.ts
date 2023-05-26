@@ -1,4 +1,4 @@
-import { AfterContentChecked, Component, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { AfterContentChecked, Component, DoCheck, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Menu } from './interfaces/menu.interface';
 import { User } from '../../shared/models/user/user.class';
@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/api/services/auth/auth.service';
   styleUrls: ['./menu.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class MenuComponent implements OnInit,OnChanges {
+export class MenuComponent implements OnInit,DoCheck {
   menu: Menu[] = [];
   url: string = '';
   session: any = localStorage.getItem('token');
@@ -23,8 +23,7 @@ export class MenuComponent implements OnInit,OnChanges {
     private messageService: MessageService,
     private authService:AuthService
   ) {}
-
-  ngOnChanges(changes: SimpleChanges): void {
+  ngDoCheck(): void {
     this.currentUser =  JSON.parse(localStorage.getItem('user')) || undefined;
   }
 

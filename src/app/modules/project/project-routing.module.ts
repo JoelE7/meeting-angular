@@ -5,12 +5,13 @@ import { ListProjectComponent } from 'src/app/modules/project/pages/list-project
 import { DetailsProjectComponent } from './pages/details-project/details-project.component';
 import { UpdateProjectComponent } from './pages/update-project/update-project.component';
 import { SearchProjectComponent } from './pages/search-project/search-project.component';
+import { canActivateAuth } from '../auth/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     children: [
-      { path: 'create', component: CreateProjectComponent },
+    { path: 'create', component: CreateProjectComponent, canActivate: [canActivateAuth] },
       { path: 'update/:id', component: UpdateProjectComponent },
       { path: 'list-project', component: ListProjectComponent },
       { path: 'list-project-support', component: ListProjectComponent },
