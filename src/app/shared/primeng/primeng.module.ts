@@ -48,7 +48,7 @@ import { ChipModule } from 'primeng/chip';
 import { EditorModule } from 'primeng/editor';
 import { BadgeModule } from 'primeng/badge';
 import {RatingModule} from 'primeng/rating'
-
+import { SplitterModule } from 'primeng/splitter';
 @NgModule({
   providers: [ConfirmationService],
   declarations: [],
@@ -101,7 +101,8 @@ import {RatingModule} from 'primeng/rating'
     ChipModule,
     EditorModule,
     BadgeModule,
-    RatingModule
+    RatingModule,
+    SplitterModule
   ],
 })
 export class PrimengModule {}

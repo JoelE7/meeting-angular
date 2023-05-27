@@ -74,12 +74,12 @@
           <div *ngIf="!spinnerMetric">
             <div class="row">
               <div class="col-12">
-                <app-chart-doughnut *ngIf="languagesMetric" [metrics]="languagesMetric"></app-chart-doughnut>
+                <app-chart-doughnut *ngIf="languagesUser" [data]="languagesUser"></app-chart-doughnut>
               </div>
             </div>
             <div class="row mt-3">
               <div class="col-12">
-                <app-chart-bar *ngIf="commitsByUser" [metricCommit]="commitsByUser"></app-chart-bar>
+                <app-chart-bar *ngIf="repositorysCommits" [data]="repositorysCommits"></app-chart-bar>
               </div>
             </div>
           </div>

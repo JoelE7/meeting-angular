@@ -17,6 +17,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { SearchProjectComponent } from './pages/search-project/search-project.component';
 import { PostModule } from '../post/post.module';
 import { ModalScoreComponent } from './shared/modal-score/modal-score.component';
+import { SupportCollaborateComponent } from './components/support-collaborate/support-collaborate.component';
+import { ProjectMemberComponent } from './components/project-member/project-member.component';
+import { AdvancementMembersComponent } from './components/advancement-members/advancement-members.component';
+import { ProjectProfilesComponent } from './components/project-profiles/project-profiles.component';
 
 
 @NgModule({
@@ -32,7 +36,11 @@ import { ModalScoreComponent } from './shared/modal-score/modal-score.component'
     RequestAcceptModalComponent,
     ModalQuestionComponent,
     SearchProjectComponent,
-    ModalScoreComponent
+    ModalScoreComponent,
+    SupportCollaborateComponent,
+    ProjectMemberComponent,
+    AdvancementMembersComponent,
+    ProjectProfilesComponent,
   ],
   imports: [
     CommonModule,
@@ -52,7 +60,11 @@ import { ModalScoreComponent } from './shared/modal-score/modal-score.component'
     RequestSendModalComponent,
     RequestAcceptModalComponent,
     ModalQuestionComponent,
-    SearchProjectComponent
+    SearchProjectComponent,
+    SupportCollaborateComponent,
+    ProjectMemberComponent,
+    AdvancementMembersComponent,
+    ProjectProfilesComponent,
   ]
 })
 export class ProjectModule { }
