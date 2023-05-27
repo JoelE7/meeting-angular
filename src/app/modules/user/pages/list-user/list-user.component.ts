@@ -11,6 +11,8 @@ import { User } from 'src/app/shared/models/user/user.class';
 export class ListUserComponent implements OnInit {
   developers: User[] = [];
 
+  spinner = true;
+
   paginate: any = 1;
 
   totalRecords = 0;
@@ -28,6 +30,7 @@ export class ListUserComponent implements OnInit {
       (data) => {
         this.developers = data.users;
         this.totalRecords = data.count;
+        this.spinner = false;
       },
       (err) => {
         console.log(err);

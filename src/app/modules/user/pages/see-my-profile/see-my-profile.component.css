@@ -40,3 +40,10 @@ canvas{
   min-height: 400px !important;
   max-height: 500px !important;
 }
+
+.profile .container span a{
+  text-decoration: none;
+ }
+ .profile .container span a:hover{
+   font-weight:700;
+  }

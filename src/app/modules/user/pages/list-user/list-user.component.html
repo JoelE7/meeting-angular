@@ -1,18 +1,28 @@
-<div class="rankingBackground">
-  <div class="container m-auto">
-    <div class="row py-4">
-      <div class="col-8">
-        <h2 class="text-dark">Usuarios por ranking</h2>
+<div class="card text-center" *ngIf="spinner">
+  <span>
+    <p-progressSpinner></p-progressSpinner>
+  </span>
+  <br>
+  <span class="text-center">Cargando...</span>
+</div>
+
+<div class="rankingBackground"  *ngIf="!spinner">
+  <div class="container ">
+    <div class="card p-3">
+      <div class="row py-3">
+        <div class="col-8">
+          <h2 class="text-dark">Usuarios por ranking</h2>
+        </div>
+
+        <div class="col-4 d-flex align-items-center justify-content-end">
+          <p style="margin: 0">Ordenar por:</p>
+          <p-button class="d-block ms-2" type="submit" [style]="{ width: '' }" label="Puntaje ^"
+            styleClass="p-button-help"></p-button>
+        </div>
       </div>
 
-      <div class="col-4 d-flex align-items-center justify-content-end">
-        <p style="margin: 0">Ordenar por:</p>
-        <p-button class="d-block ms-2" type="submit" [style]="{ width: '' }" label="Puntaje ^"
-          styleClass="p-button-help"></p-button>
-      </div>
+      <app-table-user [totalRecords]="totalRecords" [size]="size" [paginate]="paginate" [developers]="developers"
+        (eventEmitterPaginate)="paginateFunction($event)"></app-table-user>
     </div>
-
-    <app-table-user [totalRecords]="totalRecords" [size]="size" [paginate]="paginate" [developers]="developers"
-      (eventEmitterPaginate)="paginateFunction($event)"></app-table-user>
   </div>
 </div>
