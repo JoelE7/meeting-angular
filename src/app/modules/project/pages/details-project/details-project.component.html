@@ -21,8 +21,8 @@
     <div class="card shadow-sm" style="width: 100%; min-height: 700px">
       <app-banner [title]="searchProject.name" [subtitle]="'Aplicacion ' + searchProject.type"
         [short]="true"></app-banner>
-      <p-tabView class="p-3">
-        <p-tabPanel [cache]="false" header="Datos del proyecto">
+      <p-tabView class="p-3"  [(activeIndex)]="activeIndex">
+        <p-tabPanel [cache]="false" header="Datos del proyecto" >
           <div class="row">
             <div class="col-12">
               <h5>Descripción</h5>
@@ -156,110 +156,21 @@
           </div>
         </p-tabPanel> -->
         <p-tabPanel header="Colaborar">
-          <div class="problem-section">
-            <h2>Problema del proyecto</h2>
-            <p>
-              Este proyecto tiene un problema que necesita ser resuelto para
-              poder avanzar. El problema es el siguiente:
-            </p>
-            <ul>
-              <li>
-                <strong>Descripción:</strong> El sistema de autenticación no
-                está funcionando correctamente y los usuarios no pueden iniciar
-                sesión.
-              </li>
-              <li>
-                <strong>Causa probable:</strong> Un error en la configuración
-                del servidor de autenticación.
-              </li>
-              <li>
-                <strong>Impacto:</strong> Los usuarios no pueden acceder a las
-                funcionalidades del sistema y el proyecto no puede avanzar sin
-                resolver este problema.
-              </li>
-            </ul>
-            <p-button (click)="joinAProject(true)" type="button" [style]="{ width: '100%' }"
-              label="Colaborar con proyecto" class="" styleClass=" p-button-help"><i
-                class="m-1 fas fa-hands-helping"></i></p-button>
-          </div>
+          <app-support-collaborate (eventEmitterSupportJoinProject)="joinAProject($event)"></app-support-collaborate>
         </p-tabPanel>
         <p-tabPanel header="Integrantes">
           <h4>Lider</h4>
           <hr />
-          <div class="row mt-3">
-            <div class="col-2 d-flex justify-content-center">
-              <img width="60" height="60" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="user"
-                class="rounded-circle" />
-            </div>
-            <div class="col-7">
-              <h4>{{ searchProject.leader?.name }}</h4>
-              <h6>{{ searchProject.leader?.role }} Developer</h6>
-            </div>
-            <div class="col-3 text-center">
-              <p-button type="button" [style]="{ width: '100%' }" label="Ver perfil" class=""
-                styleClass="p-button-outlined p-button-help"
-                routerLink="/user/see-profile/{{ searchProject.leader?._id }}"></p-button>
-            </div>
-          </div>
+          <app-project-member (eventEmitterUserProgress)="seeProgressMember($event)" [user]="searchProject.leader"></app-project-member>
           <h4 class="mt-4" *ngIf=" searchProject.participants && searchProject.participants.length > 0">Integrantes</h4>
           <hr />
-          <div class="row mt-5" *ngFor="let participant of searchProject.participants">
-            <div class="col-2 d-flex justify-content-center">
-              <img width="60" height="60" src="assets/img/no-user.jpg" alt="user" class="rounded-circle" />
-            </div>
-            <div class="col-7">
-              <h4>{{ participant.name }}</h4>
-              <h6>{{ participant.role }} Developer</h6>
-            </div>
-            <div class="col-3 text-center">
-              <p-button type="button" [style]="{ width: '100%' }" label="Ver perfil" class=""
-                styleClass="p-button-outlined p-button-help"
-                routerLink="/user/see-profile/{{ participant._id }}"></p-button>
-            </div>
-          </div>
+          <app-project-member (eventEmitterUserProgress)="seeProgressMember($event)" *ngFor="let member of searchProject.participants" [user]="member"></app-project-member>
           <h4 class="mt-4" *ngIf="searchProject.supports.length > 0">Soportes</h4>
           <hr />
-          <div class="row mt-3" *ngFor="let participant of searchProject.supports">
-            <div class="col-2 d-flex justify-content-center">
-              <img width="60" height="60" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="user"
-                class="rounded-circle" />
-            </div>
-            <div class="col-7">
-              <h4>{{ participant?.name }}</h4>
-              <h6>{{ participant?.role }} Developer</h6>
-            </div>
-            <div class="col-3 text-center">
-              <p-button type="button" [style]="{ width: '100%' }" label="Ver perfil" class=""
-                styleClass="p-button-outlined p-button-help"
-                routerLink="/user/see-profile/{{ participant._id }}"></p-button>
-            </div>
-          </div>
+          <app-project-member (eventEmitterUserProgress)="seeProgressMember($event)" *ngFor="let memberSupport of searchProject.supports"
+            [user]="memberSupport"></app-project-member>
         </p-tabPanel>
         <p-tabPanel header="Métricas" *ngIf="searchProject.urlRepository && currentUser">
-          <!-- <div class="row">
-            <p-cascadeSelect
-              optionLabel="integrants"
-              optionGroupLabel="integrants"
-              [options]="integrants"
-              [style]="{ minWidth: '14rem', marginBottom: '1rem' }"
-              placeholder="Seleccione un integrante"
-              class="p-3"
-            >
-            </p-cascadeSelect>
-            <div class="row p-2">
-              <div class="d-flex justify-content-center">
-                <div class="w-75">
-                  <app-chart-bar></app-chart-bar>
-                </div>
-              </div>
-              <div class="col-6">
-                <app-chart-doughnut></app-chart-doughnut>
-              </div>
-              <div class="col-6">
-                <app-chart-line></app-chart-line>
-              </div>
-            </div>
-          </div> -->
           <div class="card text-center" *ngIf="spinnerMetric">
             <span>
               <p-progressSpinner></p-progressSpinner>
@@ -270,32 +181,21 @@
           <div class="row" *ngIf="!spinnerMetric">
             <div class="col-12">
               <h5>Commits del proyecto:</h5>
-              <p-chart type="bar" [data]="data" [options]="options" height="100%"></p-chart>
+              <app-chart-bar *ngIf="data" [data]="data"></app-chart-bar>
             </div>
           </div>
         </p-tabPanel>
         <p-tabPanel header="Avances de integrantes" *ngIf="searchProject.urlRepository && currentUser">
-          <p-accordion [multiple]="true">
-            <p-accordionTab *ngFor="let user of users" [header]="user.name">
-              <ng-template #accordionHeaderTemplate>
-                <div class="user-info">
-                  <div class="user-avatar">
-                    <p-avatar [image]="user.avatarUrl" size="small" shape="circle"></p-avatar>
-                  </div>
-                  <div class="user-name">{{ user.name }}</div>
-                </div>
-              </ng-template>
-              <div class="commits-info">
-                <ul>
-                  <li *ngFor="let commit of user.commits">
-                    <a [href]="commit.url" target="_blank">{{
-                      commit.message
-                      }}</a>
-                  </li>
-                </ul>
-              </div>
-            </p-accordionTab>
-          </p-accordion>
+          <div class="row">
+            <div class="col-6">
+              <h4>Integrantes</h4>
+              <app-advancement-members [members]="users"></app-advancement-members>
+            </div>
+            <div class="col-6">
+              <h4>Soportes</h4>
+              <app-advancement-members [members]="users"></app-advancement-members>
+            </div>
+          </div>
         </p-tabPanel>
         <p-tabPanel header="Post">
           <app-card-post [post]="post" *ngFor="let post of searchProject.posts"></app-card-post>

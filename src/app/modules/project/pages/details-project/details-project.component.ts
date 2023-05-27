@@ -14,6 +14,8 @@ import { MetricProject } from '../../interfaces/metricProject.interface';
   encapsulation: ViewEncapsulation.None,
 })
 export class DetailsProjectComponent implements OnInit {
+
+  activeIndex = 0;
   idParam: any;
 
   profile: [];
@@ -209,8 +211,6 @@ export class DetailsProjectComponent implements OnInit {
     this.visiblePopUpScore = true;
   }
 
-  scoreUsers(score: any) {}
-
   hiddenPopUpScore(hiddenPopUp: any) {
     this.visiblePopUpScore = !hiddenPopUp;
   }
@@ -315,19 +315,12 @@ export class DetailsProjectComponent implements OnInit {
 
   data: any;
 
-  options: any;
-
   getMetricGrafic(
     devoloper: string[],
     commits: string[],
     commitsFrequency: string[]
   ) {
     const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
-    const textColorSecondary = documentStyle.getPropertyValue(
-      '--text-color-secondary'
-    );
-    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
     this.data = {
       labels: devoloper,
@@ -346,40 +339,12 @@ export class DetailsProjectComponent implements OnInit {
         },
       ],
     };
+  }
 
-    this.options = {
-      maintainAspectRatio: false,
-      aspectRatio: 0.8,
-      plugins: {
-        legend: {
-          labels: {
-            color: textColor,
-          },
-        },
-      },
-      scales: {
-        x: {
-          ticks: {
-            color: textColorSecondary,
-            font: {
-              weight: 500,
-            },
-          },
-          grid: {
-            color: surfaceBorder,
-            drawBorder: false,
-          },
-        },
-        y: {
-          ticks: {
-            color: textColorSecondary,
-          },
-          grid: {
-            color: surfaceBorder,
-            drawBorder: false,
-          },
-        },
-      },
-    };
+  userSeeProgressId:string = "";
+
+  seeProgressMember(userId:string){
+    this.userSeeProgressId = userId;
+    this.activeIndex = 4;
   }
 }

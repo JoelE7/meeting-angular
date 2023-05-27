@@ -5,6 +5,8 @@ import { UserService } from 'src/app/api/services/user/user.service';
 import { User } from 'src/app/shared/models/user/user.class';
 import { MetricLanguage } from '../../interfaces/metricLanguage.interface';
 import { MetricCommit } from '../../interfaces/metricCommit.interface';
+import { ChartBarData } from 'src/app/shared/models/model-metric/CharBarMetric.interface';
+import { ChartDoughnutData } from 'src/app/shared/models/model-metric/DoughnutMetric.interface';
 
 @Component({
   selector: 'app-see-my-profile',
@@ -99,16 +101,65 @@ export class SeeMyProfileComponent {
     );
   }
 
+  languagesUser: ChartDoughnutData;
+
   async getLanguagesGithub() {
     this.languagesMetric = await this.userService.getLanguagesGithub(
       this.searchUser.githubUsername
     );
+
+    let languages = [];
+    let quantityRepositoryByLanguage = [];
+
+    this.languagesMetric.forEach((lang: MetricLanguage) => {
+      languages.push(lang.technology);
+      quantityRepositoryByLanguage.push(lang.quantity);
+    });
+
+    this.languagesUser = {
+      labels: languages,
+      datasets: [
+        {
+          data: quantityRepositoryByLanguage,
+        },
+      ],
+    };
+    console.log(this.languagesUser);
   }
 
   async getCommitsByUserGithub() {
     this.commitsByUser = await this.userService.getCommitsByUserGithub(
       this.searchUser.githubUsername
     );
+
+    let nameRepositorys = [];
+    let commits = [];
+
+    this.commitsByUser.forEach((metric) => {
+      metric.commits.forEach((commit) => {
+        nameRepositorys.push(commit.nameRepository);
+        commits.push(commit.quantityCommits);
+      });
+    });
+    this.getMetricGrafic(nameRepositorys, commits);
     this.spinnerMetric = false;
+  }
+
+  repositorysCommits: ChartBarData;
+
+  getMetricGrafic(nameRepositorys: string[], commitsByRepository: string[]) {
+    const documentStyle = getComputedStyle(document.documentElement);
+
+    this.repositorysCommits = {
+      labels: nameRepositorys,
+      datasets: [
+        {
+          label: 'Cantidad de commits',
+          backgroundColor: documentStyle.getPropertyValue('--purple-300'),
+          borderColor: documentStyle.getPropertyValue('--purple-300'),
+          data: commitsByRepository,
+        },
+      ],
+    };
   }
 }

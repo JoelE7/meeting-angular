@@ -8,7 +8,7 @@ export class Project {
   type: string;
   complexity: string;
   amountParticipants: number;
-  leader: any;
+  leader: any | User;
   participants: any;
   supports: any;
   posts: any= [];
