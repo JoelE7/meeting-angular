@@ -5,27 +5,20 @@
   <br>
   <span class="text-center">Cargando...</span>
 </div>
-<div class="postBackground" *ngIf="!spinner">
-  <div class="container card p-3 mb-2 shadow-sm">
-    <div class="row justify-content-around">
+<div class=" postBackground d-flex flex-column standingOut shadow-sm p-3 mb-2" *ngIf="!spinner">
 
-      <div class="w-100 d-flex">
-        <div class="col-sm-9 col-md-9 col-lg-9">
-          <h3 class=" titlePosts p-0">{{ title }}</h3>
-        </div>
-        <div class="col-sm-9 col-md-9 col-lg-3">
-          <p-button
-          *ngIf="currentUser"
-          type="button"
-          [style]="{ width: '100%' }"
-          label="Crear nuevo post"
-          class="float-end"
-          styleClass=" p-button-help"
-          routerLink="/post/create"
-        ></p-button>
-        </div>
-      </div>
-     
+  <div class="container card p-3 mb-2 shadow-sm">
+    <!-- seccion titulo mas boton -->
+     <div class="row d-flex mt-3">
+        <div class="col-sm-12 col-md-9 col-lg-9">
+         <h3 class="text-center p-0 m-0 p-0">Posteos</h3>
+       </div>
+       <div class="col-sm-12 col-md-3 col-lg-3  mb-md-0 mb-4">
+         <p-button *ngIf="currentUser" type="button"  [style]="{ width: '100%' }" label="Crear nuevo post" class="float-end"
+           styleClass=" p-button-help" routerLink="/post/create" ></p-button>
+       </div>
+     </div>     
+  
       <!----------------- COMPONENTE FILTRO-------------------->
       <div class="container">
         <div class="row">
@@ -56,4 +49,4 @@
       </div>
     </div>
   </div>
-</div>
+<!-- </div> -->

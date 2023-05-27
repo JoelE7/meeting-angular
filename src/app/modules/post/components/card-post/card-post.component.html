@@ -1,22 +1,25 @@
 <!-- card para listados 2-->
 <div class="card mt-4 cardPost p-3" *ngIf="post">
-  <p-chip label="{{ post.author?.name }}"
+  <p-chip label="{{ post.author?.name }} {{ post.author?.nivel}}(Senior)"
     image="https://bootdey.com/img/Content/avatar/avatar{{post.random}}.png"></p-chip>
 
+
   <small>Posteo {{ post.date | date:'short'}}hs</small>
-  <h3 class="titulo">
+  <h4 class="titulo">
     {{ post.title }}
-  </h3>
+  </h4>
+  <footer _ngcontent-bug-c114="" class="blockquote-footer mt-3"><b _ngcontent-bug-c114="">Tecnologías:</b>
+     <cite *ngFor="let technologie of post.technologies; let l = last" title="Source Title"> {{technologie}} -</cite>
+  </footer>
   <!-- botones -->
   <div class="text-end m-3">
     <p-button *ngIf="currentUser" type="button" icon="pi pi-bookmark" styleClass="p-button-rounded p-button-outlined">
     </p-button>
-
     <p-button type="button" icon="pi pi-thumbs-up-fill"
       styleClass="p-button-rounded p-button-outlined mx-2"></p-button>
     <p-button type="button" [style]="{ width: '100%' }" label="Ver post" class="py-2" styleClass="p-button-help"
       routerLink="/post/details-post/{{ post._id }}"></p-button>
-  </div>
+ </div>
   <!-- botones -->
 </div>
 <!-- card para listados 2 -->

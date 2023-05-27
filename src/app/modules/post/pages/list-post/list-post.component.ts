@@ -18,86 +18,66 @@ export class ListPostComponent implements OnInit {
   currentUser: User = JSON.parse(localStorage.getItem('user')) || undefined;
   listPost: Post[] = [];
 
-  query: any = [];
+  
 
-  title: string = 'General';
-
+  
   spinner = true;
 
+  query: any = [];
   filters: Filters = {
     autoSend: false,
     method: Method.POST,
     filtersCustom: [
-      {
-        type: FilterEnum.DROPDOWN,
-        col: 'col-12 m-0 p-0',
-        title: 'Tipo de post',
-        nameFilter: 'type',
-        valueFilter: '',
-        items: {
-          label: 'label',
-          value: 'value',
-          items: [
-            {
-              label: 'Informativo',
-              value: 'informative',
-            },
-            {
-              label: 'Colaborativo',
-              value: 'collaborative',
-            },
-          ],
-        },
-      },
+     
       {
         type: FilterEnum.CHECKBOX,
         col: 'col-12 mt-3 mt-md-2',
-        title: 'Tecnologías',
+        title: 'COMO ADAPTAR AQUI EL MULTISELECT',
         nameFilter: 'technologies',
         valueFilter: '',
         checkboxItems: {
           column: false,
           items: [
-            {
-              label: 'Angular',
-              value: 'Angular',
-            },
-            {
-              label: 'React',
-              value: 'React',
-            },
-            {
-              label: 'Vue',
-              value: 'Vue',
-            },
-            {
-              label: 'Spring',
-              value: 'Spring',
-            },
-            {
-              label: 'Node.js',
-              value: 'Nodejs',
-            },
-            {
-              label: 'Javascript',
-              value: 'Javascript',
-            },
-            {
-              label: 'Java',
-              value: 'Java',
-            },
-            {
-              label: 'Python',
-              value: 'python',
-            },
-            {
-              label: 'C',
-              value: 'c',
-            },
-            {
-              label: 'Typescript',
-              value: 'typescript',
-            },
+            // {
+            //   label: 'Angular',
+            //   value: 'Angular',
+            // },
+            // {
+            //   label: 'React',
+            //   value: 'React',
+            // },
+            // {
+            //   label: 'Vue',
+            //   value: 'Vue',
+            // },
+            // {
+            //   label: 'Spring',
+            //   value: 'Spring',
+            // },
+            // {
+            //   label: 'Node.js',
+            //   value: 'Nodejs',
+            // },
+            // {
+            //   label: 'Javascript',
+            //   value: 'Javascript',
+            // },
+            // {
+            //   label: 'Java',
+            //   value: 'Java',
+            // },
+            // {
+            //   label: 'Python',
+            //   value: 'python',
+            // },
+            // {
+            //   label: 'C',
+            //   value: 'c',
+            // },
+            // {
+            //   label: 'Typescript',
+            //   value: 'typescript',
+            // },
           ],
         },
       },
@@ -115,13 +95,7 @@ export class ListPostComponent implements OnInit {
   }
 
   getAllPosts() {
-    let { value } = this.query[0] || [];
-    if( value ){
-      this.title = value == "informative" ? "Informativo" : "Colaborativo";
-    } else{
-      this.title="General"
-    }
-    this.postService.getAllPost(this.query).subscribe(
+       this.postService.getAllPost(this.query).subscribe(
       (data) => {
         this.listPost = data;
         this.spinner = false;
