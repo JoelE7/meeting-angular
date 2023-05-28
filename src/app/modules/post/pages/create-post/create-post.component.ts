@@ -31,7 +31,7 @@ createPost(post: Post) {
         summary: 'Creado',
         detail: '¡El post fue creado con exito!',
       });
-      this.router.navigate(['post/list-post']);
+      this.router.navigate(['/list-post']);
     },
     (err) => {
       this.messageService.add({
