@@ -1,8 +1,20 @@
 <div class="postBackground">
-  <div class="container card p-3 mb-2 shadow-sm">
-    <div class="text-center">
-      <h2 class="text-dark">Crear Post</h2>
+  <div class="container">
+    <!-- Boton de regresar -->
+    <span class="fst-italic text-secondary small">
+      <i class="m-1 pi pi-arrow-circle-left"></i>
+      <a href="" class="text-secondary" routerLink="/project/list-project"
+        >Volver</a
+      >
+      |
+      <a class="fst-italic text-secondary">Crear post</a></span
+    >
+    <!--fin  Boton de regresar -->
+    <div class="container card p-3 shadow-sm">
+      <div class="text-center">
+        <h2 class="text-dark">Crear Post</h2>
+      </div>
+      <app-form-post (emitPost)="createPost($event)"></app-form-post>
     </div>
-     <app-form-post (emitPost)="createPost($event)"></app-form-post>  
   </div>
 </div>

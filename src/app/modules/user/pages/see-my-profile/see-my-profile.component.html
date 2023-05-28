@@ -1,7 +1,11 @@
 <div class="profile">
   <div class="container rounded">
-    <span class="fst-italic text-secondary small"><a href="" class="text-secondary" style="text-decoration: none"
-        routerLink="/project/list-project">Volver</a></span>
+    <span class="fst-italic text-secondary small">
+      <i class="m-1 pi pi-arrow-circle-left"></i>
+      <a href="" class="text-secondary" routerLink="/project/list-project"
+        >Volver</a
+      ></span
+    >
     <div class="card shadow-sm" style="width: 100%; min-height: 700px">
       <div class="d-flex banner-profile">
         <img src="assets/img/no-user.jpg" alt="Foto de usuario" id="profile" class="mt-2 ms-5" />
@@ -38,10 +42,8 @@
             <div class="row mt-3" *ngIf="!visibleInputGithub">
               <div class="col-12">
                 <p>
-                  Al vincular Lorem ipsum dolor sit amet consectetur adipisicing
-                  elit. Iure quae vel pariatur sint doloremque vero explicabo
-                  laudantium in ratione consequuntur, provident tempora minima
-                  porro nihil dolor similique, ducimus fugiat quos.
+                  Al vincular el proyecto a github tendrás acceso a métricas y a las actividades de los
+                    integrantes.
                 </p>
                 <p-button type="button" iconPos="right" icon="bi bi-github" [style]="{ width: '100%' }"
                   label="Vincular con github" class="github" styleClass="p-button-secondary"
@@ -100,6 +102,23 @@
               <p-button class="mt-2 me-2" icon="pi pi-discord" type="submit" [style]="{ minWidth: '40px' }" label=""
                 styleClass="p-button-help"></p-button>
             </div>
+             <!-- boton para contactar a la persona routerLink="/post/details-post/{{  }}" -->
+          <div class="boton text-end m-2">
+            <span>
+            <p-button
+              type="submit"
+              [style]="{ width: '100%' }"
+              iconPos="right"
+              icon="bi bi-envelope"
+              label="Contactar"
+              class=""
+              styleClass="p-button-help"
+            >
+          </p-button>
+          </span>
+          </div>
+          <!-- boton para contactar a la persona -->
+
           </div>
         </p-tabPanel>
         <p-tabPanel header="Reseñas">

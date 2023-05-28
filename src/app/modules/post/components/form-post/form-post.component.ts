@@ -31,14 +31,31 @@ export class FormPostComponent implements OnInit {
 
   type:Item[] = [
     {
-      label:"Informativo", 
-      value:"informative"
+      label:"No aplica a ningún proyecto",
+      value:"NA"
     },
     {
-      label:"Colaborativo", 
-      value:"collaborative"
+      label:"Project Zomboid",
+      value:"Project Zomboid"
+    },
+    {
+      label:"Project ERT",
+      value:"Project ERT"
+    },
+    {
+      label:"Turisteando",
+      value:"Turisteando"
+    },
+    {
+      label:"Netflix Rey",
+      value:"Netflix Rey"
+    },
+    {
+      label:"App TPI",
+      value:"App TPI"
     },
    ]
+
     
    technologies: Item[] = [
     {

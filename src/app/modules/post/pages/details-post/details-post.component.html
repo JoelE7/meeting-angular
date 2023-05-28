@@ -1,27 +1,38 @@
 <div class="postBackground">
   <div class="container">
+    <span class="fst-italic text-secondary small">
+      <i class="m-1 pi pi-arrow-circle-left"></i>
+      <a href="" class="text-secondary" routerLink="/project/list-project"
+        >Volver</a
+      ></span
+    >
     <div class="row justify-content-center">
       <div class="col-sm-12 col-md-10 col-lg-6">
-        <span class="fst-italic text-secondary small"><a href="" class="text-secondary" style="text-decoration: none;"
-          routerLink="/project/list-post">Volver</a></span>
         <div class="card p-3">
           <p-chip
-            label="{{ searchPost.author?.name }} "
+            label="{{ searchPost.author?.name }} {{
+              searchPost.author?.nivel
+            }}(Senior)"
             image="https://bootdey.com/img/Content/avatar/avatar2.png"
           ></p-chip>
 
-          <small>Posteo {{ searchPost.date | date:'short'}}hs</small>
+          <small class="text-secondary"
+            >Posteo {{ searchPost.date | date : "short" }}hs</small
+          >
           <h3 class="titulo">
             {{ searchPost.title }}
           </h3>
           <p class="">{{ searchPost.body }}</p>
-       
-          <p>
-            <strong> Reference: </strong>
-            <a class="text-dark"
-              >https://dev.to/michelc/crud-application-with-express-and-postgressql-in-10-steps-289e</a
+
+          <footer _ngcontent-bug-c114="" class="blockquote-footer mt-3">
+            <b _ngcontent-bug-c114="">Tecnologías utilizadas:</b>
+            <cite
+              *ngFor="let technologie of searchPost.technologies; let l = last"
+              title="Source Title"
             >
-          </p>
+              {{ technologie }} -</cite
+            >
+          </footer>
 
           <!--  seccion comentarios del post -->
           <hr />
@@ -35,8 +46,8 @@
               *ngFor="let message of searchPost.messages"
             >
               <p-chip
-                label="{{ message?.author?.name}}"
-               image="assets/img/no-user.jpg"
+                label="{{ message?.author?.name }}"
+                image="assets/img/no-user.jpg"
               ></p-chip>
               <p>{{ message.message }}</p>
               <div class="text-end mb-2">
@@ -75,7 +86,7 @@
         </div>
       </div>
       <!-- segunda columna -->
-      <div class="col-sm-12 col-md-10 col-lg-4"> 
+      <div class="col-sm-12 col-md-10 col-lg-4">
         <div class="card">
           <div class="card flex align-items-center py-3 flex-wrap">
             <p-chip
@@ -84,25 +95,32 @@
             ></p-chip>
           </div>
           <p class="m-2">
-            Hola soy Jonathan me encuentro en último año de Ingeniería de
-            Software en la Unlam y trabajo como pasante en Globant. También soy exalumno
-            del Programa de Intercambio Global UGRAD Primavera 2023.
+            Hola soy {{ searchPost.author?.name }} me encuentro en último año de
+            Ingeniería de Software en la Unlam y trabajo como pasante en
+            Globant. También soy exalumno del Programa de Intercambio Global
+            UGRAD Primavera 2023.
           </p>
-          <!-- <div class="boton text-end m-3">
-            <p-button
-              type="button"
-              [style]="{ width: '100%' }"
-              label="Conectar"
-              class="d-block py-2"
-              styleClass="p-button-outlined"
-              routerLink="/post/details-post/1"
-            ></p-button>
-          </div> -->
+          <!-- boton para contactar a la persona routerLink="/post/details-post/{{  }}" -->
+          <div class="boton text-center m-2">
+            <span>
+              <p-button
+                type="submit"
+                [style]="{ width: '100%' }"
+                iconPos="right"
+                icon="bi bi-envelope"
+                label="Contactar"
+                class=""
+                styleClass="p-button-help"
+              >
+              </p-button>
+            </span>
+          </div>
+          <!-- boton para contactar a la persona -->
         </div>
 
         <!-- mas datos del autor -->
         <div class="card mt-4 cardPost p-3">
-          <h6>Otros post de {{ searchPost.author?.name}}</h6>
+          <h6>Otros post de {{ searchPost.author?.name }}</h6>
           <p class="text-dark my-2">Sobre POSTGRESQL</p>
           <small>#apacheage #postgres #database</small>
           <p class="text-dark my-2">Que es Apache Age?</p>

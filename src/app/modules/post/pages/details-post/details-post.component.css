@@ -8,6 +8,13 @@
 color: #495057;
 }
 
+.postBackground .container span a{
+  text-decoration: none;
+    /* margin-left: 95px;  */
+ }
+ .postBackground span a:hover{
+   font-weight:700;
+  } 
 .borderInput:hover{
   border: 1px solid #ad2c73 !important;
 }
