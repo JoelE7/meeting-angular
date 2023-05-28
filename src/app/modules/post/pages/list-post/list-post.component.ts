@@ -23,6 +23,12 @@ export class ListPostComponent implements OnInit {
   
   spinner = true;
 
+  paginate: any = 1;
+
+  totalRecords = 0;
+
+  size = 10;
+
   query: any = [];
   filters: Filters = {
     autoSend: false,
@@ -95,9 +101,10 @@ export class ListPostComponent implements OnInit {
   }
 
   getAllPosts() {
-       this.postService.getAllPost(this.query).subscribe(
+       this.postService.getAllPost(this.query,this.paginate).subscribe(
       (data) => {
-        this.listPost = data;
+        this.listPost = data.posts;
+        this.totalRecords = data.count
         this.spinner = false;
       },
       (err) => {
@@ -114,6 +121,12 @@ export class ListPostComponent implements OnInit {
     this.query = this.filtersService.getFilters();
     this.query.method = this.filters.method;
     this.spinner = true;
+    this.getAllPosts();
+  }
+
+  paginatePosts(event){
+    this.paginate = event.page + 1;
+    this.size = event.rows;
     this.getAllPosts();
   }
 }

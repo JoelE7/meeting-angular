@@ -33,7 +33,7 @@ export class PostService{
     );
   }
 
-  getAllPost(query: any = []) {
+  getAllPost(query: any = [],pagination:number) {
     let filtersAccept = [
       'title',
       'body',
@@ -57,7 +57,7 @@ export class PostService{
     // );
 
     return this.http
-      .post(`${environment.apiUrl}/posts/filter`,queryBuild, { headers: headers })
+      .post(`${environment.apiUrl}/posts/filter/${pagination}`,queryBuild, { headers: headers })
       .pipe(
         map((res: any) => {
           return res;

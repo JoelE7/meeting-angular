@@ -9,44 +9,35 @@
 
   <div class="container card p-3 mb-2 shadow-sm">
     <!-- seccion titulo mas boton -->
-     <div class="row d-flex mt-3">
-        <div class="col-sm-12 col-md-9 col-lg-9">
-         <h3 class="text-center p-0 m-0 p-0">Posteos</h3>
-       </div>
-       <div class="col-sm-12 col-md-3 col-lg-3  mb-md-0 mb-4">
-         <p-button *ngIf="currentUser" type="button"  [style]="{ width: '100%' }" label="Crear nuevo post" class="float-end"
-           styleClass=" p-button-help" routerLink="/post/create" ></p-button>
-       </div>
-     </div>     
-  
-      <!----------------- COMPONENTE FILTRO-------------------->
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12 col-md-4 col-lg-4 ">
-            <div class="" id="filtro">
-              <h2>Filtros</h2>
-              <app-filters [filters]="filters" ></app-filters>
-              <p-button
-                type="button"
-                [style]="{ width: '100%' }"
-                label="Filtrar"
-                class="float-center mt-3 d-block"
-                styleClass="p-button-help"
-                icon="pi pi-search"
-                (click)="getFilters()"
-              ></p-button>
-            </div>
+    <div class="row d-flex mt-3">
+      <div class="col-sm-12 col-md-9 col-lg-9">
+        <h3 class="text-center p-0 m-0 p-0">Posteos</h3>
+      </div>
+      <div class="col-sm-12 col-md-3 col-lg-3  mb-md-0 mb-4">
+        <p-button *ngIf="currentUser" type="button" [style]="{ width: '100%' }" label="Crear nuevo post"
+          class="float-end" styleClass=" p-button-help" routerLink="/post/create"></p-button>
+      </div>
+    </div>
+
+    <!----------------- COMPONENTE FILTRO-------------------->
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-4 col-lg-4 ">
+          <div class="" id="filtro">
+            <h2>Filtros</h2>
+            <app-filters [filters]="filters"></app-filters>
+            <p-button type="button" [style]="{ width: '100%' }" label="Filtrar" class="float-center mt-3 d-block"
+              styleClass="p-button-help" icon="pi pi-search" (click)="getFilters()"></p-button>
           </div>
-          <div class="col-sm-12 col-md-8 col-lg-8">
-            <!-- componente de card -->
-            <app-card-post
-              *ngFor="let post of listPost"
-              [post]="post"
-            ></app-card-post>
-            <!--componente de card  -->
-          </div>
+        </div>
+        <div class="col-sm-12 col-md-8 col-lg-8">
+          <!-- componente de card -->
+          <app-card-post *ngFor="let post of listPost" [post]="post"></app-card-post>
+          <!--componente de card  -->
+          <p-paginator [totalRecords]="totalRecords" [rows]="size" (onPageChange)="paginatePosts($event)"></p-paginator>
         </div>
       </div>
     </div>
   </div>
+</div>
 <!-- </div> -->
