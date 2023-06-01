@@ -25,16 +25,14 @@ export class CreateProjectComponent {
     this.projectService.createProject(this.newProject).subscribe(
       (resp) => {
         this.messageService.add({
-          key: 'msg',
           severity: 'success',
           summary: 'Creado',
           detail: '¡El Proyecto fue creado con exito!',
         });
-        this.router.navigate(['/list-project']);
+        this.router.navigate(['/project/list-project']);
       },
       (err) => {
         this.messageService.add({
-          key: 'msg',
           severity: 'error',
           summary: 'Error',
           detail: err.error ? err.error.message : 'Ups! ocurrio un error',

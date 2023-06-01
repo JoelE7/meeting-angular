@@ -1,25 +1,22 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { lastValueFrom, map } from 'rxjs';
 import { User } from 'src/app/shared/models/user/user.class';
 import { environment } from 'src/environments/environment';
-;
-
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-
-  login:boolean = false;
+  login: boolean = false;
 
   constructor(private http: HttpClient) {}
 
-  setLogin(login:boolean){
+  setLogin(login: boolean) {
     this.login = login;
   }
 
-  get getLogin():boolean{
-    return this.login
+  get getLogin(): boolean {
+    return this.login;
   }
 
   loginUser(data: User) {
@@ -30,7 +27,7 @@ export class AuthService {
     );
   }
 
-  registerUser(data: User){
+  registerUser(data: User) {
     return this.http.post(`${environment.apiUrl}/users`, data).pipe(
       map((res: any) => {
         return res;
@@ -38,5 +35,12 @@ export class AuthService {
     );
   }
 
-
+  verifiedCurrentUser(user: User, token: string) {
+    return lastValueFrom(
+      this.http.post(`${environment.apiUrl}/users/verify`, {
+        userId: user._id,
+        token,
+      })
+    );
+  }
 }

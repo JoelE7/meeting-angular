@@ -14,16 +14,8 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getAllUsersByRanking(paginate: number) {
-    let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
-
     return this.http
-      .get(`${environment.apiUrl}/users/ranking/${paginate}`, {
-        headers: headers,
-      })
+      .get(`${environment.apiUrl}/users/ranking/${paginate}`, {})
       .pipe(
         map((res: any) => {
           return res;
@@ -33,10 +25,10 @@ export class UserService {
 
   updateUser(user: User) {
     let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
 
     return this.http
       .put(`${environment.apiUrl}/users/${user._id}`, user, {
@@ -51,10 +43,10 @@ export class UserService {
 
   updatePreferences(user: User, update: any = {}) {
     let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
 
     return this.http
       .put(`${environment.apiUrl}/users/${user._id}`, update, {
@@ -68,35 +60,19 @@ export class UserService {
   }
 
   getLanguagesGithub(username: string): Promise<MetricLanguage[]> {
-    let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
-
     return lastValueFrom<MetricLanguage[]>(
       this.http.get<MetricLanguage[]>(
         `${environment.apiUrl}/users/languages/${username}`,
-        {
-          headers: headers,
-        }
+        {}
       )
     );
   }
 
   getCommitsByUserGithub(username: string): Promise<MetricCommit[]> {
-    let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
-
     return lastValueFrom<MetricCommit[]>(
       this.http.get<MetricCommit[]>(
         `${environment.apiUrl}/users/metrics/${username}`,
-        {
-          headers: headers,
-        }
+        {}
       )
     );
   }
@@ -105,10 +81,10 @@ export class UserService {
     user: User
   ): Observable<QuestionPreferenceUser> {
     let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
 
     return this.http
       .post<QuestionPreferenceUser>(
@@ -125,53 +101,39 @@ export class UserService {
       );
   }
 
-  linkUserWithGithub(username: string): Observable<any> {
-    let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
+  // linkUserWithGithub(username: string): Observable<any> {
+  //   let headers = new HttpHeaders();
+  //   // headers = headers.append(
+  //   //   'Authorization',
+  //   //   'Bearer' + localStorage.getItem('token')
+  //   // );
 
-    return this.http
-      .post<QuestionPreferenceUser>(
-        `${environment.apiUrl}/recommendations/`,
-        username,
-        {
-          headers: headers,
-        }
-      )
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
+  //   return this.http
+  //     .post<QuestionPreferenceUser>(
+  //       `${environment.apiUrl}/recommendations/`,
+  //       username,
+  //       {
+  //         headers: headers,
+  //       }
+  //     )
+  //     .pipe(
+  //       map((res: any) => {
+  //         return res;
+  //       })
+  //     );
+  // }
 
   detailsUser(id: string): Observable<User> {
-    let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
-    return this.http
-      .get<User>(`${environment.apiUrl}/users/${id}`, { headers: headers })
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
+    return this.http.get<User>(`${environment.apiUrl}/users/${id}`).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
   }
 
   detailsUserAsync(id: string): Promise<User> {
-    let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
     return lastValueFrom<User>(
-      this.http.get<User>(`${environment.apiUrl}/users/${id}`, {
-        headers: headers,
-      })
+      this.http.get<User>(`${environment.apiUrl}/users/${id}`, {})
     );
   }
 }

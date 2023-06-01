@@ -14,6 +14,10 @@ export class PostService{
 
   createPost(data: Post) {
     let headers = new HttpHeaders();
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
   
     return this.http.post(`${environment.apiUrl}/posts/`, data,{ headers: headers })
     .pipe(
@@ -24,6 +28,10 @@ export class PostService{
   }
   createMessage(data: any) {
     let headers = new HttpHeaders();
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
   
     return this.http.post(`${environment.apiUrl}/messages`, data,{ headers: headers })
     .pipe(
@@ -66,14 +74,8 @@ export class PostService{
   }
   
   detailsPost(id: number): Observable<Post> {
-    let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
-
     return this.http
-      .get<Post>(`${environment.apiUrl}/posts/${id}`, { headers: headers })
+      .get<Post>(`${environment.apiUrl}/posts/${id}`)
       .pipe(
         map((res: any) => {
           return res;

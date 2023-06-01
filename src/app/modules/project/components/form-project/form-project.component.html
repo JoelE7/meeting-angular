@@ -22,10 +22,10 @@
         <label for="amountParticipants" class="pl-5"
         >Cantidad de participantes
       </label>
-      <div class="d-flex align-items-center h-75">
+      <!-- <div class="d-flex align-items-center h-75">
         <i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i>
-      </div>
-      <!--<input
+      </div> -->
+      <input
         pInputText
         type="number"
         formControlName="amountParticipants"
@@ -51,7 +51,7 @@
         <small class="p-error"
           >Debe tener al menos <strong>1 </strong>participante</small
         >
-      </span> -->
+      </span>
     </div>
   </div>
   <div class="row mt-5">
@@ -135,6 +135,7 @@
         [options]="typeProject"
         placeholder="Seleccione una opción..."
         optionLabel="type"
+        optionValue="value"
       >
         <ng-template let-option pTemplate="item">
           <span [class]="'type-' + option.value">
@@ -219,14 +220,14 @@
 <label for="complexity" class="pl-5">¿Querés aplicar como lider? </label>
 <p-dropdown
   [style]="{ width: '100%' }"
-  formControlName="requestSupport"
+  formControlName="lider"
   optionLabel="label"
   optionValue="value"
   [options]="confirm"
   placeholder="Seleccione una opción..."
 >
   <ng-template let-option pTemplate="item">
-    <span [class]="'requestSupport-' + option.value">
+    <span [class]="'lider-' + option.value">
       {{ option.label }}
     </span>
   </ng-template>
@@ -247,12 +248,12 @@
 
   <div class="text-center p-4">
     <p-button
-      type="button"
+      type="submit"
       [style]="{ width: '100%' }"
       label="Crear proyecto"
       class="text-center"
       styleClass="p-button-help"
-      routerLink="/project/list-project"
+      [disabled]="form.invalid"
     ></p-button>
   </div>
 </form>

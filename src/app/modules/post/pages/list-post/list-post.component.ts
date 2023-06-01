@@ -103,8 +103,6 @@ export class ListPostComponent implements OnInit {
   getAllPosts() {
        this.postService.getAllPost(this.query,this.paginate).subscribe(
       (data) => {
-        console.log(data);
-        
         this.listPost = data.posts;
         this.totalRecords = data.count
         this.spinner = false;

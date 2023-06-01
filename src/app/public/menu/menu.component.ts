@@ -20,7 +20,7 @@ export class MenuComponent implements OnInit,DoCheck {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private messageService: MessageService,
+    private messageService: MessageService, 
     private authService:AuthService
   ) {}
   ngDoCheck(): void {
