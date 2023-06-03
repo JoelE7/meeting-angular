@@ -23,7 +23,7 @@ export class MenuComponent implements OnInit,DoCheck {
     private authService:AuthService
   ) {}
   ngDoCheck(): void {
-    this.currentUser =  JSON.parse(localStorage.getItem('user')) || undefined;
+    this.currentUser = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;
   }
 
   ngOnInit(): void {
