@@ -15,8 +15,7 @@ export class MenuComponent implements OnInit,DoCheck {
   menu: Menu[] = [];
   url: string = '';
   session: any = localStorage.getItem('token');
-  currentUser: User = JSON.parse(localStorage.getItem('user')) || undefined;
-
+  currentUser: User = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -24,7 +23,7 @@ export class MenuComponent implements OnInit,DoCheck {
     private authService:AuthService
   ) {}
   ngDoCheck(): void {
-    this.currentUser =  JSON.parse(localStorage.getItem('user')) || undefined;
+    this.currentUser = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;
   }
 
   ngOnInit(): void {

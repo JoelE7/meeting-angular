@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from 'src/app/public/home/home.component';
 import { LoginComponent } from 'src/app/modules/auth/pages/login/login.component';
 import { mockAuthService } from 'src/app/test/__mocks__/services/auth/auth.service.mock';
+import { userMock } from 'src/app/test/__mocks__/models/users/users.mock.model';
 
 describe('LoginComponent desde el html', () => {
   let component: LoginComponent;
@@ -119,8 +120,8 @@ describe('LoginComponent desde el ts', () => {
 
 
     const loginUser = spyOn(mockAuthService, 'loginUser');
-    loginUser.and.returnValue(of<any>({}));
-    component.login();
+
+    loginUser.and.returnValue(of<any>({token : "algo", user: userMock}));    component.login();
     expect(mockAuthService.loginUser).toHaveBeenCalled();
   });
 });

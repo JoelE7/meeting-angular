@@ -9,6 +9,7 @@ import { CreateProjectComponent } from 'src/app/modules/project/pages/create-pro
 import { ListProjectComponent } from 'src/app/modules/project/pages/list-project/list-project.component';
 import { Project } from 'src/app/shared/models/project/project.class';
 import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
+import { userMock } from 'src/app/test/__mocks__/models/users/users.mock.model';
 import { mockProjectService } from 'src/app/test/__mocks__/services/project/project.service.mock';
 
 describe('CreateProjectComponent', () => {
@@ -34,8 +35,15 @@ describe('CreateProjectComponent', () => {
     fixture = TestBed.createComponent(CreateProjectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    localStorage.setItem('user',JSON.stringify(userMock))
+
   });
 
+  afterEach(() => {
+    localStorage.removeItem("user");
+  })
+  
   it('should create', () => {
     expect(component).toBeTruthy();
   });
