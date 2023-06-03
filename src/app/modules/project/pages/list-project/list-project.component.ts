@@ -19,7 +19,8 @@ import { QuestionPreferenceUser } from '../../interfaces/questionPreferenceUser.
 export class ListProjectComponent implements OnInit {
   spinner = true;
   spinnerSuggestion = true;
-  currentUser: User = JSON.parse(localStorage.getItem('user')) || undefined;
+  currentUser: User = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;  
+  userExistProject: boolean = false;
 
   listProject: Project[] = [];
   suggestionsProject: Project[] = [];
@@ -27,12 +28,18 @@ export class ListProjectComponent implements OnInit {
   typeProyects = [];
   complexitys = [];
 
-  visiblePopUpQuestion: Boolean = true;
+  visiblePopUpQuestion: Boolean = false;
 
   query;
 
-  question: string = '¿Te gustaría participar en un proyecto de react?';
+  question: string = '';
   responseQuestion: string = '';
+
+  paginate: any = 1;
+
+  totalRecords = 0;
+
+  size = 10;
 
   filters: Filters = {
     autoSend: false,
@@ -197,9 +204,12 @@ export class ListProjectComponent implements OnInit {
   }
 
   getProjects() {
-    this.projectService.getAllProjects(this.query).subscribe(
-      (data) => {
-        this.listProject = data;
+    this.projectService.getAllProjects(this.query,this.paginate).subscribe(
+      (data) => {       
+        console.log(data);
+        
+        this.listProject = data.results;
+        this.totalRecords=data.count
         this.spinner = false;
       },
       (err) => {
@@ -284,5 +294,11 @@ export class ListProjectComponent implements OnInit {
         });
       }
     );
+  }
+
+  paginatePosts(event){
+    this.paginate = event.page + 1;
+    this.size = event.rows;
+    this.getProjects();
   }
 }

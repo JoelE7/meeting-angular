@@ -79,7 +79,7 @@ export class ProjectService {
   }
 
   //TODO: REVISAR ESTO, LA ENTIDAD CAMBIO
-  getAllProjects(query: any = []) {
+  getAllProjects(query: any = [],paginate: any) {
     let filtersAccept = [
       'name',
       'description',
@@ -108,7 +108,7 @@ export class ProjectService {
     // );
 
     return this.http
-      .post(`${environment.apiUrl}/projects/filter`, queryBuild, {
+      .post(`${environment.apiUrl}/projects/filter/${paginate}`, queryBuild, {
         headers: headers,
       })
       .pipe(

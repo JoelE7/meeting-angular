@@ -15,8 +15,7 @@ import { ChartDoughnutData } from 'src/app/shared/models/model-metric/DoughnutMe
   encapsulation: ViewEncapsulation.None,
 })
 export class SeeMyProfileComponent {
-  currentUser: User = JSON.parse(localStorage.getItem('user')) || undefined;
-
+  currentUser: User = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;
   visiblePopUpScore = false;
   visibleInputGithub: boolean = false;
   userNameGithub = '';

@@ -16,8 +16,7 @@ export class DetailsPostComponent {
   searchPost: Post = new Post();
   form: FormGroup;
 
-  currentUser: User = JSON.parse(localStorage.getItem('user')) || undefined;
-
+  currentUser: User = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;
   idParam;
 
   constructor(

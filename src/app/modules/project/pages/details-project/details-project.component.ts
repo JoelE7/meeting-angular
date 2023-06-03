@@ -24,8 +24,7 @@ export class DetailsProjectComponent implements OnInit {
 
   searchProject: Project = new Project();
 
-  currentUser: User = JSON.parse(localStorage.getItem('user')) || undefined;
-  userExistProject: boolean = false;
+  currentUser: User = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;  userExistProject: boolean = false;
 
   visiblePopUpScore = false;
   visibleInputGithub: boolean = false;

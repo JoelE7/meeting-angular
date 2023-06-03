@@ -11,8 +11,64 @@ import { of } from 'rxjs';
 import { Post } from 'src/app/shared/models/post/post.class';
 import { mockPostDetails } from '../../../../__mocks__/services/post/post.service.mock';
 import { User } from 'src/app/shared/models/user/user.class';
+import { userMock } from 'src/app/test/__mocks__/models/users/users.mock.model';
 
-describe('DetailsPostComponent', () => {
+describe('DetailsPostComponentConLogin', () => {
+  let component: DetailsPostComponent;
+  let fixture: ComponentFixture<DetailsPostComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ DetailsPostComponent ],
+      providers: [
+        { provide: PostService, useValue: mockPostService },
+        MessageService,
+      ],
+      imports:[ PrimengModule,RouterTestingModule,HttpClientModule],
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(DetailsPostComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+
+    localStorage.setItem('user',JSON.stringify(userMock))
+
+  });
+  
+  afterEach(() => {
+    localStorage.removeItem("user");
+  })
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it("Al iniciar el ngOnInit que se busque el proyecto por id : detailsPost()",()=>{
+    const detailsPost = spyOn(mockPostService, 'detailsPost');
+    detailsPost.and.returnValue(of<Post>(mockPostDetails));
+    component.ngOnInit();
+    expect(mockPostService.detailsPost).toHaveBeenCalled();
+  })
+
+  it("debería permitir comentar el post si el usuario está logueado : createMessage()", () => {
+    const commentText = 'test de comentario post';
+    spyOn(mockPostService, 'createMessage').and.returnValue(of<any>({}));
+    component.currentUser = new User();
+    
+    component.ngOnInit();
+    component.form.get('comment').setValue(commentText);
+    const isFormValidBeforeSubmit = component.form.valid;
+    component.createMessage();
+  
+    expect(component.form.get('comment').disabled).toBeFalsy();
+    expect(isFormValidBeforeSubmit).toBeTruthy();
+    expect(mockPostService.createMessage).toHaveBeenCalled();
+  });
+
+});
+
+describe('DetailsPostComponentSinLogin', () => {
   let component: DetailsPostComponent;
   let fixture: ComponentFixture<DetailsPostComponent>;
 
@@ -48,20 +104,4 @@ describe('DetailsPostComponent', () => {
     component.ngOnInit();
     expect(component.form.get('comment').disabled).toBeTruthy();
   });
-
-  it("debería permitir comentar el post si el usuario está logueado : createMessage()", () => {
-    const commentText = 'test de comentario post';
-    spyOn(mockPostService, 'createMessage').and.returnValue(of<any>({}));
-    component.currentUser = new User();
-    
-    component.ngOnInit();
-    component.form.get('comment').setValue(commentText);
-    const isFormValidBeforeSubmit = component.form.valid;
-    component.createMessage();
-  
-    expect(component.form.get('comment').disabled).toBeFalsy();
-    expect(isFormValidBeforeSubmit).toBeTruthy();
-    expect(mockPostService.createMessage).toHaveBeenCalled();
-  });
-
 });

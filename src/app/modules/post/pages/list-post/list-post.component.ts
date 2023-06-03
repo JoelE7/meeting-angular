@@ -15,8 +15,7 @@ import { User } from 'src/app/shared/models/user/user.class';
 })
 export class ListPostComponent implements OnInit {
 
-  currentUser: User = JSON.parse(localStorage.getItem('user')) || undefined;
-  listPost: Post[] = [];
+  currentUser: User = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;  listPost: Post[] = [];
 
   
 
@@ -105,7 +104,7 @@ export class ListPostComponent implements OnInit {
       (data) => {
         console.log(data);
         
-        this.listPost = data.posts;
+        this.listPost = data.results;
         this.totalRecords = data.count
         this.spinner = false;
       },

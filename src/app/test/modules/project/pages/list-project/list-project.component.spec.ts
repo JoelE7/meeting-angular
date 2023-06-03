@@ -14,8 +14,49 @@ import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CardProjectComponent } from 'src/app/modules/project/components/card-project/card-project.component';
 import { mockGetAllProjects, mockGetSuggestedProjects, mockProjectService } from 'src/app/test/__mocks__/services/project/project.service.mock';
+import { userMock } from 'src/app/test/__mocks__/models/users/users.mock.model';
 
-describe('ListProjectComponent', () => {
+describe('ListProjectComponentConLogin', () => {
+  let component: ListProjectComponent;
+  let fixture: ComponentFixture<ListProjectComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [
+        ListProjectComponent,
+        SuggestionsProjectComponent,
+        ModalQuestionComponent,
+        FiltersComponent,
+        CardProjectComponent
+      ],
+      providers: [MessageService,FilterService, { provide: ProjectService, useValue: mockProjectService },],
+      imports: [
+        SharedModule,
+        PrimengModule,
+        HttpClientTestingModule,
+        RouterTestingModule,
+        BrowserAnimationsModule,
+      ],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(ListProjectComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+
+    localStorage.setItem('user',JSON.stringify(userMock))
+
+  });
+
+  afterEach(() => {
+    localStorage.removeItem("user");
+  })
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+
+describe('ListProjectComponentSinLogin', () => {
   let component: ListProjectComponent;
   let fixture: ComponentFixture<ListProjectComponent>;
 

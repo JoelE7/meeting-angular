@@ -12,10 +12,14 @@ import { ChartDoughnutComponent } from 'src/app/shared/components/chart-doughnut
 import { ChartLineComponent } from 'src/app/shared/components/chart-line/chart-line.component';
 import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 import { Project } from 'src/app/shared/models/project/project.class';
-import { mockProjectDetails, mockProjectService } from 'src/app/test/__mocks__/services/project/project.service.mock';
+import {
+  mockProjectDetails,
+  mockProjectService,
+} from 'src/app/test/__mocks__/services/project/project.service.mock';
 import { ModalScoreComponent } from 'src/app/modules/project/shared/modal-score/modal-score.component';
+import { userMock } from 'src/app/test/__mocks__/models/users/users.mock.model';
 
-describe('DetailsProjectComponent', () => {
+describe('DetailsProjectComponentConLogin', () => {
   let component: DetailsProjectComponent;
   let fixture: ComponentFixture<DetailsProjectComponent>;
 
@@ -27,9 +31,55 @@ describe('DetailsProjectComponent', () => {
         ChartBarComponent,
         ChartLineComponent,
         ChartDoughnutComponent,
-        ModalScoreComponent
+        ModalScoreComponent,
       ],
-      providers: [MessageService, { provide: ProjectService, useValue: mockProjectService },],
+      providers: [
+        MessageService,
+        { provide: ProjectService, useValue: mockProjectService },
+      ],
+      imports: [
+        BrowserAnimationsModule,
+        PrimengModule,
+        RouterTestingModule,
+        HttpClientTestingModule,
+        SharedModule,
+      ],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(DetailsProjectComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+
+    localStorage.setItem('user', JSON.stringify(userMock));
+  });
+
+  afterEach(() => {
+    localStorage.removeItem('user');
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+
+describe('DetailsProjectComponentSinLogin', () => {
+  let component: DetailsProjectComponent;
+  let fixture: ComponentFixture<DetailsProjectComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [
+        DetailsProjectComponent,
+        BannerComponent,
+        ChartBarComponent,
+        ChartLineComponent,
+        ChartDoughnutComponent,
+        ModalScoreComponent,
+      ],
+      providers: [
+        MessageService,
+        { provide: ProjectService, useValue: mockProjectService },
+      ],
       imports: [
         BrowserAnimationsModule,
         PrimengModule,
@@ -48,14 +98,18 @@ describe('DetailsProjectComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('que al iniciar el componente se llame a : detailsProject',()=>{
-    const detailsProjectAsync = spyOn(mockProjectService, 'detailsProjectAsync');
-    detailsProjectAsync.and.returnValue(new Promise((resolve,reject)=>{resolve(mockProjectDetails)}));
+  it('que al iniciar el componente se llame a : detailsProject', () => {
+    const detailsProjectAsync = spyOn(
+      mockProjectService,
+      'detailsProjectAsync'
+    );
+    detailsProjectAsync.and.returnValue(
+      new Promise((resolve, reject) => {
+        resolve(mockProjectDetails);
+      })
+    );
     component.ngOnInit();
     expect(mockProjectService.detailsProjectAsync).toHaveBeenCalled();
-    expect(component.searchProject._id).toEqual("1");
-
-  })
-
-
+    expect(component.searchProject._id).toEqual('1');
+  });
 });

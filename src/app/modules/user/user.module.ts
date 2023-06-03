@@ -9,6 +9,7 @@ import { ProjectModule } from '../project/project.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TableUserComponent } from './components/table-user/table-user.component';
 import { SearchUserComponent } from './pages/search-user/search-user.component';
+import { ModalContactComponent } from './shared/modal-contact/modal-contact.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SearchUserComponent } from './pages/search-user/search-user.component';
     TechnologiesComponent,
     ListUserComponent,
     TableUserComponent,
-    SearchUserComponent
+    SearchUserComponent,
+    ModalContactComponent
   ],
   imports: [
     CommonModule,
@@ -25,6 +27,6 @@ import { SearchUserComponent } from './pages/search-user/search-user.component';
     PrimengModule,
     ProjectModule,
   ],
-  exports: [SeeMyProfileComponent,TableUserComponent,SearchUserComponent],
+  exports: [SeeMyProfileComponent,TableUserComponent,SearchUserComponent,ModalContactComponent],
 })
 export class UserModule {}
