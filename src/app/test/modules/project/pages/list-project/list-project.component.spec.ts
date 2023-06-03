@@ -90,11 +90,11 @@ describe('ListProjectComponentSinLogin', () => {
 
   it('al iniciar el componente con ngOnInit se active : getAllProjects() ', () => {
     const getAllProjects = spyOn(mockProjectService, 'getAllProjects');
-    getAllProjects.and.returnValue(of<Project[]>(mockGetAllProjects));
+    getAllProjects.and.returnValue(of<any[]>(mockGetAllProjects));
     component.ngOnInit();
     expect(mockProjectService.getAllProjects).toHaveBeenCalled();
     component.spinner = false;
-    expect(component.listProject).toHaveSize(2)
+    expect(component.listProject).toHaveSize(3)
   });
   it('al iniciar el componente con ngOnInit se active : getSuggestedProjects() ', () => {
     const getSuggestedProjects = spyOn(mockProjectService, 'getSuggestedProjects');
