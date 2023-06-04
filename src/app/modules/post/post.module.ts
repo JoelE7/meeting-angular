@@ -10,7 +10,7 @@ import { SuggestionsPostComponent } from './components/suggestions-post/suggesti
 import { CardPostComponent } from './components/card-post/card-post.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-SharedModule
+
 @NgModule({
   declarations: [
     CreatePostComponent,

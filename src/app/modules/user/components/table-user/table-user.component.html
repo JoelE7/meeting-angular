@@ -1,5 +1,5 @@
-<p-dialog header="Header" *ngIf="currentUser" [(visible)]="visibleModalContact" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
-  <app-modal-contact [userEmisor]="userEmisor" [userReceptor]="currentUser"></app-modal-contact>
+<p-dialog header="Redactar mensaje" *ngIf="currentUser" [(visible)]="visibleModalContact" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+  <app-modal-contact [userEmisor]="userEmisor" [userReceptor]="currentUser" (emitContact)="sendMail($event)"></app-modal-contact>
 </p-dialog>
 <p-table [value]="developers" dataKey="developers._id">
   <ng-template pTemplate="header">

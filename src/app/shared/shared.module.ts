@@ -12,6 +12,7 @@ import { FiltersComponent } from './filters/filters.component';
     ChartDoughnutComponent,
     ChartLineComponent,
     FiltersComponent,
+   
   ],
   imports: [CommonModule, PrimengModule],
   exports: [

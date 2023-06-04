@@ -5,7 +5,11 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
+import { Mail } from 'src/app/shared/models/model-mail/model-mail.interface';
 import { User } from 'src/app/shared/models/user/user.class';
+import { UserService } from 'src/app/api/services/user/user.service';
+import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -40,11 +44,13 @@ export class TableUserComponent {
   currentUser: User = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;
 
   userEmisor: User = new User();
-
+  
+  newContact:Mail;
 
   @Output()
   eventEmitterPaginate: EventEmitter<any> = new EventEmitter();
 
+  constructor(private userService:UserService,private messageService:MessageService,private router:Router){}
 
   paginateEmit(event: any) {
     this.eventEmitterPaginate.emit(event);
@@ -52,5 +58,28 @@ export class TableUserComponent {
   showModalContact(userEmisor:User){
     this.userEmisor=userEmisor;
     this.visibleModalContact=true;
+  }
+
+  sendMail(mail: Mail){
+     this.newContact=mail;
+    console.log(this.newContact);
+
+    this.userService.sendMail(this.newContact).subscribe(
+      (resp)=>{
+        this.messageService.add({
+          severity:'success',
+          summary:'Creado',
+          detail:'¡Su mensaje ha sido enviado con éxito!'
+        });
+        this.router.navigate(['user/list-users']);
+      },
+      (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+        });
+      }
+    );
   }
 }
