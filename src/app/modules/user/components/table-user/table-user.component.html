@@ -1,5 +1,5 @@
-<p-dialog header="Redactar mensaje" *ngIf="currentUser" [(visible)]="visibleModalContact" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
-  <app-modal-contact [userEmisor]="userEmisor" [userReceptor]="currentUser" (emitContact)="sendMail($event)"></app-modal-contact>
+<p-dialog header="Redactar mensaje" *ngIf="currentUser && userReceptor._id" [(visible)]="visibleModalContact" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+  <app-modal-contact [userEmisor]="currentUser" [userReceptor]="userReceptor" (emitContact)="sendMailContact($event)"></app-modal-contact>
 </p-dialog>
 <p-table [value]="developers" dataKey="developers._id">
   <ng-template pTemplate="header">
@@ -22,7 +22,7 @@
           />
         </div>
       </td>
-      <td class="text-center">{{ developer.name }}</td>
+      <td class="text-center">{{ developer.name }} ({{ developer.level }})</td>
       <td class="text-center">
         <ul class="developer-skills">
           <li *ngFor="let technologies of developer.preferences">

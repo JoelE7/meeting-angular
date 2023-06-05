@@ -194,4 +194,23 @@ export class ProjectService {
         })
       );
   }
+
+
+  // sendMail(data:MailProject){
+  //   let headers = new HttpHeaders();
+  //   headers = headers.append(
+  //     'Authorization',
+  //     'Bearer ' + localStorage.getItem('token')
+  //   );
+
+  // // api/projects/invite
+
+  //   return this.http
+  //     .post<User>(`${environment.apiUrl}/projects/invite`, data, { headers: headers })
+  //     .pipe(
+  //       map((res: any) => {
+  //         return res;
+  //       })
+  //     );
+  // }
 }

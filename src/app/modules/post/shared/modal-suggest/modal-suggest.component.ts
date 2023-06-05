@@ -1,23 +1,16 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  EventEmitter,
-  Output,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from 'src/app/shared/models/user/user.class';
 import { MessageService } from 'primeng/api';
-import { Mail } from 'src/app/shared/models/model-mail-contact/model-mail.interface';
+import { MailSuggest } from 'src/app/shared/models/model-mail-suggest/model-mail.interface';
+import { Post } from 'src/app/shared/models/post/post.class';
+import { User } from 'src/app/shared/models/user/user.class';
 
 @Component({
-  selector: 'app-modal-contact',
-  templateUrl: './modal-contact.component.html',
-  styleUrls: ['./modal-contact.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  selector: 'app-modal-suggest',
+  templateUrl: './modal-suggest.component.html',
+  styleUrls: ['./modal-suggest.component.css']
 })
-export class ModalContactComponent implements OnInit {
+export class ModalSuggestComponent {
   formContact: FormGroup;
 
   @Input()
@@ -25,11 +18,14 @@ export class ModalContactComponent implements OnInit {
 
   @Input()
   userReceptor: User = new User();
+  
+  @Input()
+  post: Post = new Post();;
 
-  mail: Mail;
+  mail: MailSuggest;
 
   @Output()
-  emitContact: EventEmitter<Mail> = new EventEmitter();
+  emitContact: EventEmitter<MailSuggest> = new EventEmitter();
 
   constructor(private messageService: MessageService) {}
 
@@ -39,22 +35,27 @@ export class ModalContactComponent implements OnInit {
     this.formContact.get('for').disable();
     this.formContact.get('to').setValue(this.userEmisor.email);
     this.formContact.get('for').setValue(this.userReceptor.email);
+    this.formContact.get('post').setValue(this.post.title)
   }
   startForm() {
     this.formContact = new FormGroup({
       to: new FormControl(),
       for: new FormControl(),
       message: new FormControl("",[Validators.required,Validators.minLength(3)]),
+      post:new FormControl(),
+     
     });
   }
 
   submitContact() {
-     this.mail = {
+    this.mail = {
       user: this.userEmisor,
       email: this.userReceptor.email,
       message: this.formContact.get('message').value,
+      post: this.post,
     };
 
     this.emitContact.emit(this.mail);
   }
+
 }

@@ -5,7 +5,7 @@ import { FilterEnum } from 'src/app/shared/filters/enum/filters.enum';
 import { Method } from 'src/app/shared/filters/enum/method.enum';
 import { Filters } from 'src/app/shared/filters/interface/filters.interface';
 import { Post } from 'src/app/shared/models/post/post.class';
-import { FilterService } from '../../../../shared/filters/services/filter.service';
+import { FilterService } from 'src/app/shared/filters/services/filter.service';
 import { User } from 'src/app/shared/models/user/user.class';
 
 @Component({
@@ -16,10 +16,7 @@ import { User } from 'src/app/shared/models/user/user.class';
 export class ListPostComponent implements OnInit {
 
   currentUser: User = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;  listPost: Post[] = [];
-
-  
-
-  
+ 
   spinner = true;
 
   paginate: any = 1;
@@ -37,7 +34,7 @@ export class ListPostComponent implements OnInit {
       {
         type: FilterEnum.CHECKBOX,
         col: 'col-12 mt-3 mt-md-2',
-        title: 'COMO ADAPTAR AQUI EL MULTISELECT',
+        title: 'Tecnologías',
         nameFilter: 'technologies',
         valueFilter: '',
         checkboxItems: {

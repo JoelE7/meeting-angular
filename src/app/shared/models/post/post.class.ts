@@ -11,4 +11,5 @@ export class Post {
   messages: Message[];
   technologies: string[];
   random:any;
+ 
 }

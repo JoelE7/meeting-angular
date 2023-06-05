@@ -5,12 +5,11 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { Mail } from 'src/app/shared/models/model-mail/model-mail.interface';
+import { Mail } from 'src/app/shared/models/model-mail-contact/model-mail.interface';
 import { User } from 'src/app/shared/models/user/user.class';
 import { UserService } from 'src/app/api/services/user/user.service';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-table-user',
@@ -22,54 +21,55 @@ export class TableUserComponent {
   @Input()
   developers: User[] = [];
 
-
   @Input()
   paginate: any = 1;
-
 
   @Input()
   totalRecords = 0;
 
-
   @Input()
   size = 10;
 
-
   paginateBoolean: boolean = true;
 
+  visibleModalContact: boolean = false;
 
-  visibleModalContact: boolean= false;
+  currentUser: User =
+    localStorage.getItem('user') != 'undefined'
+      ? JSON.parse(localStorage.getItem('user'))
+      : undefined;
 
+  userReceptor: User = new User();
 
-  currentUser: User = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;
-
-  userEmisor: User = new User();
-  
-  newContact:Mail;
+  newContact: Mail;
 
   @Output()
   eventEmitterPaginate: EventEmitter<any> = new EventEmitter();
 
-  constructor(private userService:UserService,private messageService:MessageService,private router:Router){}
+  constructor(
+    private userService: UserService,
+    private messageService: MessageService,
+    private router: Router
+  ) {}
 
   paginateEmit(event: any) {
     this.eventEmitterPaginate.emit(event);
   }
-  showModalContact(userEmisor:User){
-    this.userEmisor=userEmisor;
-    this.visibleModalContact=true;
+  showModalContact(userReceptor: User) {
+    this.userReceptor = userReceptor;
+    this.visibleModalContact = true;
   }
 
-  sendMail(mail: Mail){
-     this.newContact=mail;
+  sendMailContact(mail: Mail) {
+    this.newContact = mail;
     console.log(this.newContact);
 
-    this.userService.sendMail(this.newContact).subscribe(
-      (resp)=>{
+    this.userService.sendMailContact(this.newContact).subscribe(
+      (resp) => {
         this.messageService.add({
-          severity:'success',
-          summary:'Creado',
-          detail:'¡Su mensaje ha sido enviado con éxito!'
+          severity: 'success',
+          summary: 'Creado',
+          detail: '¡Su mensaje ha sido enviado con éxito!',
         });
         this.router.navigate(['user/list-users']);
       },

@@ -1,12 +1,12 @@
 <form [formGroup]="formContact" (ngSubmit)="submitContact()" class="">
-  <div class="row p-0">
+   <div class="row p-0">
     <div class="col-sm-12 col-md-12 ">
       <label for="to">De:</label>
       <input
         type="text"
         pInputText
         formControlName="to"
-        class="form-control borderInput"
+        class="form-control"
         placeholder="De:"
       />
     </div>
@@ -19,21 +19,21 @@
         type="text"
         pInputText
         formControlName="for"
-        class="form-control borderInput"
+        class="form-control "
         placeholder="Para:"
       />
     </div>
-  </div>
+  </div> 
 
   <div class="row mt-3 p-0">
     <div class="col-sm-12 col-md-12">
       <label for="message">Mensaje:</label>
+      <!-- rows="5"
+      cols="30" -->
       <textarea
-        [style]="{ width: '100%' }"
+        [style]="{ height:'200px !important' ,width: '100%' }"
+        placeholder="Ingrese su mensaje:"
         formControlName="message"
-        placeholder="Mensaje:"
-        rows="5"
-        cols="30"
         pInputTextarea
         [autoResize]="true"
       ></textarea>

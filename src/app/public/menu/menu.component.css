@@ -57,6 +57,16 @@ p-menubarsub {
    margin-top: 40px;
 }  
 
+@media (min-width: 575px) {
+  .btnLogin{
+    text-align: center;
+
+  /* align-content: end; */
+  }
+  #butt {
+    display: none !important;
+  }
+}
 @media (max-width: 991px) {
   #searcher{
     display: none !important;
@@ -64,6 +74,7 @@ p-menubarsub {
   #butt {
     display: none !important;
   }
+  
 }
 
 /* Menu - FIN */

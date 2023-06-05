@@ -3,9 +3,6 @@
   background-color: rgb(241, 241, 241); 
   padding: 80px 0px;
 }
-.titlePosts{
-  margin-left: 375px !important;
-}
 
 #filtro{
   background-color: #f1bcd173;
@@ -17,8 +14,22 @@
   padding: 20px;
 }
 
+#titlePosts{
+  align-items: center;
+  text-align: center; 
+}
+
 @media screen and (max-width: 480px) {
   p {
     font-size: 12px;
   }
 }
+
+/* cuando sea menor a 767px */
+@media(max-width: 767px){
+
+  #titlePosts{
+    align-items: center;
+    text-align: start; 
+ }
+} 

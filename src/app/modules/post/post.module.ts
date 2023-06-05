@@ -9,6 +9,7 @@ import { FormPostComponent } from './components/form-post/form-post.component';
 import { SuggestionsPostComponent } from './components/suggestions-post/suggestions-post.component';
 import { CardPostComponent } from './components/card-post/card-post.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ModalSuggestComponent } from './shared/modal-suggest/modal-suggest.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ListPostComponent,
     FormPostComponent,
     SuggestionsPostComponent,
-    CardPostComponent,  
+    CardPostComponent,
+    ModalSuggestComponent,  
   ],
   imports: [
     CommonModule,
