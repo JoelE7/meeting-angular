@@ -56,10 +56,18 @@ p-menubarsub {
    margin-left: -25px;
    margin-top: 40px;
 }  
+@media (max-width: 575px) {
+  .btnLogin{
+    /* margin: auto; */
+  }
+}
 
+/* hasta 767 sea mayor a 767px */
 @media (min-width: 575px) {
   .btnLogin{
     text-align: center;
+
+
 
   /* align-content: end; */
   }

@@ -27,6 +27,8 @@ export class ModalSuggestComponent {
   @Output()
   emitContact: EventEmitter<MailSuggest> = new EventEmitter();
 
+
+
   constructor(private messageService: MessageService) {}
 
   ngOnInit(): void {

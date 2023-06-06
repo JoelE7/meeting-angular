@@ -3,9 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { PostService } from 'src/app/api/services/post/post.service';
+import { Mail } from 'src/app/shared/models/model-mail-contact/model-mail.interface';
 import { MailSuggest } from 'src/app/shared/models/model-mail-suggest/model-mail.interface';
 import { Post } from 'src/app/shared/models/post/post.class';
 import { User } from 'src/app/shared/models/user/user.class';
+import { UserService } from 'src/app/api/services/user/user.service';
 
 @Component({
   selector: 'app-details-post',
@@ -21,6 +23,8 @@ export class DetailsPostComponent {
 
   visibleModalContact: boolean = false;
 
+  visibleModalSuggest:boolean = false;
+
   currentUser: User =
     localStorage.getItem('user') != 'undefined'
       ? JSON.parse(localStorage.getItem('user'))
@@ -30,12 +34,15 @@ export class DetailsPostComponent {
 
   newSuggest: MailSuggest;
 
+  newContact: Mail;
+
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
     private postService: PostService,
+    private userService: UserService,
     private router: Router
-
   ) {}
 
   ngOnInit(): void {
@@ -100,10 +107,37 @@ export class DetailsPostComponent {
     );
   }
 
-  showModalContact() {
-    this.userReceptor = this.userReceptor;
+  showModalSuggest(){
+    this.visibleModalSuggest = true;
+  }
+  showModalContact(author:User) {
+    this.userReceptor = author;
     this.visibleModalContact = true;
   }
+
+  sendMailContact(mail:Mail){
+  this.newContact = mail;
+    console.log(this.newContact);
+
+    this.userService.sendMailContact(this.newContact).subscribe(
+      (resp) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Creado',
+          detail: '¡Su mensaje ha sido enviado con éxito!',
+        });
+        this.router.navigate(['post/list-post']);
+      },
+      (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+        });
+      }
+    );
+  }
+
   sendMailSuggestPost(mail: MailSuggest) {
     this.newSuggest = mail;
     console.log(this.newSuggest);
@@ -113,7 +147,7 @@ export class DetailsPostComponent {
         this.messageService.add({
           severity: 'success',
           summary: 'Creado',
-          detail: '¡Su mensaje ha sido enviado con éxito!',
+          detail: '¡Su sugerencia ha sido enviado con éxito!',
         });
         this.router.navigate(['post/list-post']);
       },

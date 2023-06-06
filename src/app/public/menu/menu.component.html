@@ -35,10 +35,10 @@
               </li>
             </ul>
         
-          <div class="d-flex w-30">
-              <p-button  class="btnLogin me-2" *ngIf="!currentUser" type="submit" label="Ingresar" styleClass="p-button-help"
+          <div class="w-30">
+              <p-button  class="btnLogin d-inline-lg d-block-sm me-2" *ngIf="!currentUser" type="submit" label="Ingresar" styleClass="p-button-help"
                   routerLink="/auth/login" ></p-button>
-              <p-button class="btnLogin me-2" *ngIf="!currentUser" type="submit" label="Registrarse" styleClass="p-button-outlined p-button-help"
+              <p-button class="btnLogin d-inline-lg d-block-sm  me-2" *ngIf="!currentUser" type="submit" label="Registrarse" styleClass="p-button-outlined p-button-help"
                   routerLink="/auth/register" ></p-button>
               <p-button class="btnLogin me-2" *ngIf="currentUser" type="submit" label="Perfil" styleClass="p-button-outlined p-button-help"
                   routerLink="/user/see-my-profile/{{currentUser._id}}"></p-button>
