@@ -15,7 +15,7 @@ import { MetricProject } from '../../interfaces/metricProject.interface';
 })
 export class DetailsProjectComponent implements OnInit {
 
-  activeIndex = 0;
+  activeIndex: number = 0;
   idParam: any;
 
   profile: [];
@@ -152,7 +152,7 @@ export class DetailsProjectComponent implements OnInit {
     this.idParam = id;
     await this.getDetailsProject(id);
     if (this.searchProject.urlRepository) {
-      this.getMetricByProject();
+      // this.getMetricByProject();
     }
   }
 

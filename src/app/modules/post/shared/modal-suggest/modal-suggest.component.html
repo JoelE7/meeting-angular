@@ -1,0 +1,75 @@
+<form [formGroup]="formContact" (ngSubmit)="submitContact()" class="">
+  <div class="row p-0">
+   <div class="col-sm-12 col-md-12 ">
+     <label class="color" for="to">De:</label>
+     <input
+       type="text"
+       pInputText
+       formControlName="to"
+       class="form-control"
+       placeholder="De:"
+     />
+   </div>
+ </div>
+
+ <div class="row mt-3 p-0">
+   <div class="col-sm-12 col-md-12">
+     <label class="color" for="for">Para:</label>
+     <input
+       type="text"
+       pInputText
+       formControlName="for"
+       class="form-control "
+       placeholder="Para:"
+     />
+   </div>
+ </div> 
+
+ <div class="row mt-3 p-0">
+   <div class="col-sm-12 col-md-12">
+     <label for="message" class="color">Mensaje:</label>
+     <!-- rows="5"
+     cols="30" -->
+     <textarea
+       [style]="{ height:'200px !important' ,width: '100%' }"
+       placeholder="Ingrese su mensaje:"
+       formControlName="message"
+       pInputTextarea
+       [autoResize]="true"
+     ></textarea>
+     <span
+       class="danger"
+       *ngIf="
+         formContact.get('message').hasError('required') &&
+         formContact.get('message').touched
+       "
+     >
+       <small class="p-error">Este campo es <strong>requerido</strong></small>
+     </span>
+   </div>
+ </div>
+
+ <div class="row mt-3 p-0">
+  <div class="col-sm-12 col-md-12">
+    <label class="color" for="post">Post:</label>
+    <input
+      type="text"
+      pInputText
+      formControlName="post"
+      class="form-control "
+      placeholder="Seleccione el post:"
+    />
+  </div>
+</div> 
+
+ <div class="text-center p-4">
+   <p-button
+     type="submit"
+     [disabled]="formContact.invalid"
+     [style]="{ width: '100%' }"
+     label="Enviar"
+     class="text-center"
+     styleClass="p-button-help d-block"
+   ></p-button>
+ </div>
+</form>

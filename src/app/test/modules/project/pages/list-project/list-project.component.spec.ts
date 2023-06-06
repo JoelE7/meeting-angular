@@ -14,7 +14,7 @@ import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CardProjectComponent } from 'src/app/modules/project/components/card-project/card-project.component';
 import { mockGetAllProjects, mockGetSuggestedProjects, mockProjectService } from 'src/app/test/__mocks__/services/project/project.service.mock';
-import { userMock } from 'src/app/test/__mocks__/models/users/users.mock.model';
+import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
 
 describe('ListProjectComponentConLogin', () => {
   let component: ListProjectComponent;

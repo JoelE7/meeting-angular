@@ -1,5 +1,5 @@
 import { Observable, of } from 'rxjs';
-import { userMock } from '../../models/users/users.mock.model';
+import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
 
 export const mockAuthService: {
   loginUser: () => Observable<any>;

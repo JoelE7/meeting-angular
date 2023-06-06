@@ -34,3 +34,21 @@
    background: #f1bcd173 !important;
 }
 
+/*.p-dialog .p-dialog-header {
+   border: 1px solid #f1bcd173; 
+  background-color: #f1bcd173 !important;
+}*/
+
+/* desde 767 sea menor a 767px */
+@media (max-width: 767px) {
+  /* p-table tr th {
+   background-color: aqua;
+  margin-left:  94px;
+  } */
+}
+
+@media (min-width: 960px) {
+  #btnBack {
+    margin: auto;  
+  }
+}

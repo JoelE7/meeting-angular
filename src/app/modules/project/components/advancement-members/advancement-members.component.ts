@@ -8,7 +8,6 @@ import { User } from 'src/app/shared/models/user/user.class';
 })
 export class AdvancementMembersComponent implements DoCheck{
 
-
   @Input()
   members:any[]= []
 

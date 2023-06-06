@@ -1,38 +1,51 @@
-.postBackground{
+.postBackground {
   min-height: 500px;
-  background-color: rgb(241, 241, 241); 
+  background-color: rgb(241, 241, 241);
   padding: 80px 0px;
 }
 
-.postBackground .card small{
-color: #495057;
+.postBackground .card small {
+  color: #495057;
 }
 
-.postBackground .container span a{
+.postBackground .container span a {
   text-decoration: none;
-    /* margin-left: 95px;  */
- }
- .postBackground span a:hover{
-   font-weight:700;
-  } 
-.borderInput:hover{
+  /* margin-left: 95px;  */
+}
+.postBackground span a:hover {
+  font-weight: 700;
+}
+.borderInput:hover {
   border: 1px solid #ad2c73 !important;
 }
-a{
-  cursor: pointer
+a {
+  cursor: pointer;
 }
 
-.cardPost p,small{
-  cursor: pointer
+.cardPost p,
+small {
+  cursor: pointer;
 }
-.cardCommentPost{
+.cardCommentPost {
   border: 1px solid #ad2c73 !important;
-
 }
 
-textarea{
+textarea {
   resize: none !important;
 }
-p-chip  img{
+p-chip img {
   border: 1px solid rgb(71, 71, 71);
+}
+/* hasta 767 sea mayor a 767px */
+@media (min-width: 767px) {
+  #btnBack {
+    margin: auto;  
+  /* margin-left:  94px; */
+  }
+}
+
+@media (min-width: 960px) {
+  #btnBack {
+    margin: auto;  
+  }
 }

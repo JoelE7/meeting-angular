@@ -15,4 +15,5 @@ export class User {
   projects: Project[] = [];
   posts: Post[] = [];
   githubUsername:string;
+  level:string;
 }
