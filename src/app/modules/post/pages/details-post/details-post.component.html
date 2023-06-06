@@ -1,6 +1,12 @@
-<p-dialog header="Redactar mensaje" *ngIf="currentUser && searchPost._id" [(visible)]="visibleModalContact" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+<p-dialog header="Redactar mensaje" *ngIf="currentUser && searchPost._id" [(visible)]="visibleModalSuggest" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
    <app-modal-suggest [post]="searchPost" [userEmisor]="currentUser" [userReceptor]="searchPost.author" (emitContact)="sendMailSuggestPost($event)"></app-modal-suggest> 
 </p-dialog> 
+<!-- modal de enviar sugerencia a un comocido sobre ese post -->
+<p-dialog header="Redactar mensaje" *ngIf="currentUser && userReceptor._id" [(visible)]="visibleModalContact" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+  <app-modal-contact [userEmisor]="currentUser" [userReceptor]="userReceptor" (emitContact)="sendMailContact($event)"></app-modal-contact>
+</p-dialog>
+<!-- modal de contactar a ese usuario -->
+
 <div class="postBackground">
   <div class="container">
     <span id="btnBack" class="fst-italic text-secondary small">
@@ -101,17 +107,16 @@
             Globant. También soy exalumno del Programa de Intercambio Global
             UGRAD Primavera 2023.
           </p>
-          <!-- boton para contactar a la persona routerLink="/post/details-post/{{  }}" -->
+          <!-- boton para contactar a la persona -->
           <div class="boton text-center m-2">
             <span>
               <p-button
-              (click)="showModalContact()"
+              (click)="showModalContact(searchPost.author)"
                 type="submit"
                 [style]="{ width: '100%' }"
                 iconPos="right"
                 icon="bi bi-envelope"
-                label="Enviar sugerencias de post"
-                class=""
+                label="Contactar"
                 styleClass="p-button-help"
               >
               </p-button>
@@ -129,7 +134,27 @@
           <small>#blog #apacheage #postgres #database</small>
         </div>
         <!-- mas datos del autor -->
+
+        <!-- boton para sugerir post" -->
+        <div class="boton text-center mt-4">
+          <span>
+            <p-button
+            (click)="showModalSuggest()"
+              type="submit"
+              [style]="{ width: '100%' }"
+              iconPos="right"
+              icon="bi bi-envelope"
+              label="Enviar sugerencias de post"
+              class=""
+              styleClass="p-button-help"
+            >
+            </p-button>
+          </span>
+        </div>
+        <!-- boton para contactar a la persona -->
       </div>
+
+      
     </div>
   </div>
 </div>
