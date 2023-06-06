@@ -32,9 +32,7 @@ export class ModalSuggestComponent {
   ngOnInit(): void {
     this.startForm();
     this.formContact.get('to').disable();
-    this.formContact.get('for').disable();
     this.formContact.get('to').setValue(this.userEmisor.email);
-    this.formContact.get('for').setValue(this.userReceptor.email);
     this.formContact.get('post').setValue(this.post.title)
   }
   startForm() {
@@ -50,7 +48,7 @@ export class ModalSuggestComponent {
   submitContact() {
     this.mail = {
       user: this.userEmisor,
-      email: this.userReceptor.email,
+      email: this.formContact.get('for').value,
       message: this.formContact.get('message').value,
       post: this.post,
     };

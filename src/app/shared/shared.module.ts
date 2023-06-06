@@ -5,6 +5,7 @@ import { ChartDoughnutComponent } from './components/chart-doughnut/chart-doughn
 import { ChartLineComponent } from './components/chart-line/chart-line.component';
 import { PrimengModule } from './primeng/primeng.module';
 import { FiltersComponent } from './filters/filters.component';
+import { ModalContactComponent } from './components/modal-contact/modal-contact.component';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { FiltersComponent } from './filters/filters.component';
     ChartDoughnutComponent,
     ChartLineComponent,
     FiltersComponent,
+    ModalContactComponent,
    
   ],
   imports: [CommonModule, PrimengModule],
@@ -20,6 +22,7 @@ import { FiltersComponent } from './filters/filters.component';
     ChartDoughnutComponent,
     ChartLineComponent,
     FiltersComponent,
+    ModalContactComponent,
   ],
 })
 export class SharedModule {}

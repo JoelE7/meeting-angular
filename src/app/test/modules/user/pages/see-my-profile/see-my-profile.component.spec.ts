@@ -10,7 +10,7 @@ import { ChartBarComponent } from 'src/app/shared/components/chart-bar/chart-bar
 import { ChartDoughnutComponent } from 'src/app/shared/components/chart-doughnut/chart-doughnut.component';
 import { ChartLineComponent } from 'src/app/shared/components/chart-line/chart-line.component';
 import { HttpClientModule } from '@angular/common/http';
-import { userMock } from 'src/app/test/__mocks__/models/users/users.mock.model';
+import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
 
 describe('See my profileConLogin', () => {
   let component: SeeMyProfileComponent;

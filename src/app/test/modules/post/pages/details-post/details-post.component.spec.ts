@@ -11,7 +11,8 @@ import { of } from 'rxjs';
 import { Post } from 'src/app/shared/models/post/post.class';
 import { mockPostDetails } from '../../../../__mocks__/services/post/post.service.mock';
 import { User } from 'src/app/shared/models/user/user.class';
-import { userMock } from 'src/app/test/__mocks__/models/users/users.mock.model';
+import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
+import { ModalSuggestComponent } from 'src/app/modules/post/shared/modal-suggest/modal-suggest.component';
 
 describe('DetailsPostComponentConLogin', () => {
   let component: DetailsPostComponent;
@@ -19,7 +20,7 @@ describe('DetailsPostComponentConLogin', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DetailsPostComponent ],
+      declarations: [ DetailsPostComponent ,ModalSuggestComponent ],
       providers: [
         { provide: PostService, useValue: mockPostService },
         MessageService,

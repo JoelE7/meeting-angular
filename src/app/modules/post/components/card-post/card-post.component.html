@@ -1,6 +1,6 @@
 <!-- card para listados 2-->
 <div class="card mt-4 mt-sm-4 cardPost p-3" *ngIf="post">
-  <p-chip label="{{ post.author?.name }} ({{ post.author?.level }})"
+  <p-chip label="{{ post.author?.name? post.author?.name :'Jonatan' }} ({{ post.author?.level? post.author?.level :'Junior' }})"
     image="https://bootdey.com/img/Content/avatar/avatar{{post.random}}.png"></p-chip>
 
 

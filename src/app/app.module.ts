@@ -16,10 +16,11 @@ import { PostModule } from './modules/post/post.module';
 import localeEs from "@angular/common/locales/es";
 import { registerLocaleData } from "@angular/common";
 import { SharedModule } from './shared/shared.module';
+import { ModalInvitationComponent } from './module/project/shared/modal-invitation/modal-invitation.component';
 registerLocaleData(localeEs, "es");
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ModalInvitationComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

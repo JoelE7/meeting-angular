@@ -1,4 +1,4 @@
-<p-accordion [multiple]="true"[activeIndex]="activeIndex">
+<p-accordion [activeIndex]="activeIndex">
     <p-accordionTab *ngFor="let user of members" [header]="user.name">
         <ng-template #accordionHeaderTemplate>
             <div class="user-info">

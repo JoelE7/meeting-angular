@@ -8,7 +8,7 @@ import { MenuComponent } from 'src/app/public/menu/menu.component';
 import { MainComponent } from 'src/app/public/main/main.component';
 import { FooterComponent } from 'src/app/public/footer/footer.component';
 import { MessageService } from 'primeng/api';
-import { userMock } from '../../__mocks__/models/users/users.mock.model';
+import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
 
 describe('MenuComponentConLogin', () => {
   let component: MenuComponent;
