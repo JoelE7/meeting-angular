@@ -13,6 +13,7 @@ import { mockPostDetails } from '../../../../__mocks__/services/post/post.servic
 import { User } from 'src/app/shared/models/user/user.class';
 import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
 import { ModalSuggestComponent } from 'src/app/modules/post/shared/modal-suggest/modal-suggest.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('DetailsPostComponentConLogin', () => {
   let component: DetailsPostComponent;
@@ -25,7 +26,7 @@ describe('DetailsPostComponentConLogin', () => {
         { provide: PostService, useValue: mockPostService },
         MessageService,
       ],
-      imports:[ PrimengModule,RouterTestingModule,HttpClientModule],
+      imports:[ PrimengModule,RouterTestingModule,HttpClientTestingModule],
     })
     .compileComponents();
 
