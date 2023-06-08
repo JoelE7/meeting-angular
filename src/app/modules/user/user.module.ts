@@ -9,7 +9,7 @@ import { ProjectModule } from '../project/project.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TableUserComponent } from './components/table-user/table-user.component';
 import { SearchUserComponent } from './pages/search-user/search-user.component';
-import { ModalContactComponent } from './shared/modal-contact/modal-contact.component';
+import { ModalInvitationComponent } from './shared/modal-invitation/modal-invitation.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { ModalContactComponent } from './shared/modal-contact/modal-contact.comp
     ListUserComponent,
     TableUserComponent,
     SearchUserComponent,
-    ModalContactComponent
+    ModalInvitationComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +27,10 @@ import { ModalContactComponent } from './shared/modal-contact/modal-contact.comp
     PrimengModule,
     ProjectModule,
   ],
-  exports: [SeeMyProfileComponent,TableUserComponent,SearchUserComponent,ModalContactComponent],
+  exports: [
+    SeeMyProfileComponent,
+    TableUserComponent,
+    SearchUserComponent,
+  ],
 })
 export class UserModule {}

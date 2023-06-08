@@ -28,6 +28,7 @@ export interface Items {
   label: string;
   value: any;
   items: Item[];
+  search?:boolean;
 }
 
 export interface CheckboxItems {

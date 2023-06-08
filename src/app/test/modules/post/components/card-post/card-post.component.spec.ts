@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CardPostComponent } from '../../../../../modules/post/components/card-post/card-post.component';
 import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 import { RouterTestingModule } from '@angular/router/testing';
-import { userMock } from 'src/app/test/__mocks__/models/users/users.mock.model';
+import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
 
 describe('CardPostComponentConLogin', () => {
   let component: CardPostComponent;

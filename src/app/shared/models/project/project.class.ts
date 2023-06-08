@@ -18,4 +18,5 @@ export class Project {
   status: string;
   requestSupport: Boolean;
   urlRepository:string;
+  validateSystem:boolean;
 }

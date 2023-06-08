@@ -9,7 +9,7 @@ import { CreateProjectComponent } from 'src/app/modules/project/pages/create-pro
 import { ListProjectComponent } from 'src/app/modules/project/pages/list-project/list-project.component';
 import { Project } from 'src/app/shared/models/project/project.class';
 import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
-import { userMock } from 'src/app/test/__mocks__/models/users/users.mock.model';
+import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
 import { mockProjectService } from 'src/app/test/__mocks__/services/project/project.service.mock';
 
 describe('CreateProjectComponent', () => {
@@ -26,7 +26,7 @@ describe('CreateProjectComponent', () => {
       imports: [
         PrimengModule,
         RouterTestingModule.withRoutes([
-          { path: 'list-project', component: ListProjectComponent },
+          { path: 'project/list-project', component: ListProjectComponent },
         ]),
         HttpClientTestingModule,
       ],

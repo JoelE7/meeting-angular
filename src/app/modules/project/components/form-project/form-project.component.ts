@@ -12,6 +12,7 @@ import { TypeProject } from '../../interfaces/typeProject.interface';
 import { ComplexityProject } from '../../interfaces/complexityProject.interface';
 import { StatusProject } from '../../interfaces/statusProject.interface';
 import { Confirm } from '../../interfaces/confirm.interface';
+import { User } from 'src/app/shared/models/user/user.class';
 
 Component;
 
@@ -22,6 +23,12 @@ Component;
   encapsulation:ViewEncapsulation.None
 })
 export class FormProjectComponent {
+
+  currentUser: User =
+  localStorage.getItem('user') != 'undefined'
+    ? JSON.parse(localStorage.getItem('user'))
+    : undefined;
+
   title: string = 'Crear proyecto';
 
   @Input()
@@ -53,29 +60,33 @@ export class FormProjectComponent {
     this.typeProject.push(
       {
         type: 'Web',
-        value: '1',
+        value: 'Web',
       },
       {
-        type: 'Mobile',
-        value: '2',
+        type: 'Movil',
+        value: 'Mobile',
       },
       {
-        type: 'VideoGames',
-        value: '3',
-      }
+        type: 'Videojuegos',
+        value: 'Videogames',
+      },
+      {
+        type: 'Escritorio',
+        value: 'Desktop',
+      },
     );
     this.complexityProject.push(
       {
         level: 'Trainee',
-        value: '1',
+        value: 'Trainee',
       },
       {
         level: 'Junior',
-        value: '2',
+        value: 'Junior',
       },
       {
         level: 'Senior',
-        value: '3',
+        value: 'Senior',
       }
     );
   }
@@ -108,13 +119,14 @@ export class FormProjectComponent {
       complexity: new FormControl(this.project.complexity, [
         Validators.required,
       ]),
-      status: new FormControl(this.project.status, [Validators.required]),
       amountParticipants: new FormControl(this.project.amountParticipants, [
         Validators.required,
         Validators.min(1),
+        Validators.max(10)
       ]),
       lider: new FormControl(this.project.leader || false, []),
       requestSupport: new FormControl(this.project.requestSupport || false, []),
+      validateSystem : new FormControl(this.project.validateSystem || false,[])
     });
   }
 
@@ -128,9 +140,12 @@ export class FormProjectComponent {
     this.newproject.amountParticipants =
       this.form.get('amountParticipants').value;
     //this.newproject.status = this.form.get('status').value;
-    this.newproject.leader = this.form.get('lider').value;
+    this.newproject.leader = this.form.get('lider').value ? this.currentUser._id : "";
+    this.newproject.validateSystem = this.form.get('validateSystem').value;
     //this.newproject.requestSupport = this.form.get('requestSupport').value;
 
+    console.log(this.newproject);
+    
     this.emitProject.emit(this.newproject);
   }
 }

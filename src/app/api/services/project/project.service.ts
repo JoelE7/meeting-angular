@@ -7,6 +7,7 @@ import { Method } from '../../../shared/filters/enum/method.enum';
 import { FilterService } from 'src/app/shared/filters/services/filter.service';
 import { User } from 'src/app/shared/models/user/user.class';
 import { MetricProject } from 'src/app/modules/project/interfaces/metricProject.interface';
+import { MailInvitation } from 'src/app/shared/models/model-mail-invitation/model-mail-invitation.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -48,10 +49,10 @@ export class ProjectService {
 
   createProject(data: Project) {
     let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
     return this.http
       .post(`${environment.apiUrl}/projects/`, data, { headers: headers })
       .pipe(
@@ -137,10 +138,10 @@ export class ProjectService {
 
   finalizeProject(idProject: string, scores: any) {
     let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
+    headers = headers.append(
+      'Authorization',
+      'Bearer' + localStorage.getItem('token')
+    );
 
     return this.http
       .post(`${environment.apiUrl}/projects/finish/${idProject}`, scores, {
@@ -179,15 +180,34 @@ export class ProjectService {
     }
 
     let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
+    headers = headers.append(
+      'Authorization',
+      'Bearer' + localStorage.getItem('token')
+    );
 
     return this.http
       .post(`${environment.apiUrl}/projects/join/`, data, {
         headers: headers,
       })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+
+  sendMailInvitation(data:MailInvitation){
+    let headers = new HttpHeaders();
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+
+  // api/projects/invite
+
+    return this.http
+      .post<Project>(`${environment.apiUrl}/projects/invite`, data, { headers: headers })
       .pipe(
         map((res: any) => {
           return res;

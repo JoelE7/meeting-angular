@@ -1,10 +1,9 @@
-/* *{
-    background-color: rgb(69, 69, 69) !important;
-} */
-.login{
+.loginBackground{
   min-height: 500px;
   background-color: rgb(241, 241, 241);
   padding: 80px 0px;
+  display: flex;
+  justify-content: center;
 }
 
 .p-card	{
@@ -15,6 +14,7 @@
     flex-direction: column;
     justify-content: center;
     min-height: 100%;
+    min-width: 500px;
     width: 50%;
     margin: 0 auto;
   }
@@ -29,4 +29,17 @@
 }
 .link a{
   color: #c42e6c !important;
+}
+
+
+@media (max-width: 767.98px) {
+  .contenido {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100%;
+    min-width: 365px; 
+    width:300px;
+    margin: 0px 25px;  
+  }
 }

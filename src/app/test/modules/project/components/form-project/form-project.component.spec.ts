@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormProjectComponent } from 'src/app/modules/project/components/form-project/form-project.component';
 import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
-import { userMock } from 'src/app/test/__mocks__/models/users/users.mock.model';
+import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
 
 
 describe('FormProjectComponentConLogin', () => {

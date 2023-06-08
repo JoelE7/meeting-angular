@@ -17,7 +17,7 @@ import {
   mockProjectService,
 } from 'src/app/test/__mocks__/services/project/project.service.mock';
 import { ModalScoreComponent } from 'src/app/modules/project/shared/modal-score/modal-score.component';
-import { userMock } from 'src/app/test/__mocks__/models/users/users.mock.model';
+import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
 
 describe('DetailsProjectComponentConLogin', () => {
   let component: DetailsProjectComponent;

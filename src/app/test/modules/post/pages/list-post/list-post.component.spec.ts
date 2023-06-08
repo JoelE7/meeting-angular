@@ -10,7 +10,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { FiltersComponent } from 'src/app/shared/filters/filters.component';
 import { mockGetAllPost, mockPostService } from 'src/app/test/__mocks__/services/post/post.service.mock';
 import { of } from 'rxjs';
-import { userMock } from 'src/app/test/__mocks__/models/users/users.mock.model';
+import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
 
 describe('ListPostComponentConLogin', () => {
   let component: ListPostComponent;

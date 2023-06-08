@@ -7,6 +7,9 @@ import { MetricLanguage } from '../../interfaces/metricLanguage.interface';
 import { MetricCommit } from '../../interfaces/metricCommit.interface';
 import { ChartBarData } from 'src/app/shared/models/model-metric/CharBarMetric.interface';
 import { ChartDoughnutData } from 'src/app/shared/models/model-metric/DoughnutMetric.interface';
+import { MailInvitation } from 'src/app/shared/models/model-mail-invitation/model-mail-invitation.interface';
+import { Project } from 'src/app/shared/models/project/project.class';
+import { ProjectService } from 'src/app/api/services/project/project.service';
 
 @Component({
   selector: 'app-see-my-profile',
@@ -27,18 +30,27 @@ export class SeeMyProfileComponent {
 
   spinnerMetric: boolean = true;
 
+  searchProject:Project= new Project();
+  visibleModalInvitation:boolean = false;
+  userReceptor: User = new User();
+  newInvitation: MailInvitation;
+
+  id:string;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
-    private userService: UserService
+    private userService: UserService,
+    private  projectService:ProjectService,
   ) {}
 
   async ngOnInit() {
     let { id } = this.activatedRoute.snapshot.params;
+    this.id = id;
     this.searchUser = await this.userService.detailsUserAsync(id);
 
     if (this.searchUser.githubUsername) {
-      this.getLanguagesGithub();
+       this.getLanguagesGithub();
       this.getCommitsByUserGithub();
     }
   }
@@ -86,7 +98,7 @@ export class SeeMyProfileComponent {
           summary: 'Hecho',
           detail: 'Tu usuario fue vinculado exitosamente',
         });
-        await this.getLanguagesGithub();
+         await this.getLanguagesGithub();
         await this.getCommitsByUserGithub();
       },
       (err) => {
@@ -160,5 +172,30 @@ export class SeeMyProfileComponent {
         },
       ],
     };
+  }
+
+  showModalInvitation(){
+    this.visibleModalInvitation = true;
+  }
+  sendMailInvitation(mail: MailInvitation) {
+    this.newInvitation = mail;
+    console.log(this.newInvitation);
+
+    this.projectService.sendMailInvitation(this.newInvitation).subscribe(
+      (resp) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Creado',
+          detail: '¡Su invitación ha sido enviado con éxito!',
+        });
+      },
+      (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+        });
+      }
+    );
   }
 }
