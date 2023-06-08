@@ -15,7 +15,6 @@
   margin: 0;
   padding: 0;
 }
-
 .developer-skills li {
   display: inline-block;
   margin-right: 10px;
@@ -31,24 +30,33 @@
 
 .p-datatable .p-datatable-thead tr th {
    border: 1px solid #f1bcd173;
-   background: #f1bcd173 !important;
+   background-color: #f1bcd173 !important;
+}
+.p-datatable .p-datatable-tbody{
+  border-left:solid 1px #ccc;
+  border-right:solid 1px #ccc;
+}
+.p-dialog .p-dialog-header {
+  background-color: #ced4da !important;
+  padding:1rem;
 }
 
-/*.p-dialog .p-dialog-header {
-   border: 1px solid #f1bcd173; 
-  background-color: #f1bcd173 !important;
-}*/
+/* desde 991.98px sea menor a 991.98px */
+@media (max-width: 991.98px) {
+ .p-datatable .sticky{
+  position: sticky;
+  left:0 ;
+ }
+ p-table tbody tr .sticky{
+  background-color: #fff;
+ }
+ 
+ /* .p-datatable .p-datatable-thead tr th .sticky {
+  background-color: #fff;
+ } */
 
-/* desde 767 sea menor a 767px */
-@media (max-width: 767px) {
-  /* p-table tr th {
-   background-color: aqua;
-  margin-left:  94px;
-  } */
+  p-table thead th .sticky{
+  background-color:#333;
+ } 
 }
 
-@media (min-width: 960px) {
-  #btnBack {
-    margin: auto;  
-  }
-}

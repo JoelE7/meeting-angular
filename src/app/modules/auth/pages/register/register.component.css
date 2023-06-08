@@ -1,9 +1,8 @@
-.register{
+.registerBackground{
   min-height: 500px;
   display: flex;
   justify-content: center;
   background-color: rgb(241, 241, 241);
-  width: 100%;
 }
 
 .contenido{
@@ -29,3 +28,20 @@
 .link a{
   color: #c42e6c !important;
 }
+
+/* .p-inputtext:enabled:hover {
+  border-color: #c42e6c!important;
+} */
+
+/* hasta 767px sea menor a 767px */
+ @media (max-width: 767px) {
+  .contenido {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100%;
+    min-width: 365px; 
+    width: 300px;
+    margin: 0px 25px;   
+  }
+} 

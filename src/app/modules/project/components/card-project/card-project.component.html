@@ -1,24 +1,26 @@
 <div class="card my-4">
   <h5 class="card-header">{{project.name}}</h5>
   <div class="card-body">
+        <!-- seccion datos del proyecto -->
     <blockquote class="blockquote mb-0">
       <p>
         {{project.description}}
       </p>
     </blockquote>
-    <div class="d-flex justify-content-between p-2 mt-4">
+     <div id ="infoProject" class=" p-md-2 mt-md-4 p-lg-2 mt-lg-4">
       <footer class="blockquote-footer">
         <b>Tipo de proyecto: </b><cite title="Source Title">{{project.type}}</cite>
       </footer>
       <footer class="blockquote-footer">
         <b>Tecnologías: </b>
-        <!-- TODO: Aca habria que cambiar la variable cuando lo adapten -->
         <cite *ngFor="let technologie of project.technologies; let l = last" title="Source Title"> {{technologie}} -</cite>
       </footer>
       <footer class="blockquote-footer">
         <b>Complejidad: </b><cite title="Source Title">{{project.complexity}}</cite>
       </footer>
-    </div>
+    </div> 
+
+    <!-- seccion datos del proyecto -->
     <div class="row text-end">
       <div class="col-12">
         <p-button type="button" [style]="{'width' : '100%'}" label="Brindar apoyo" *ngIf="project.requestSupport"

@@ -10,3 +10,13 @@
   background: #EFF6FF;
   color: #f1bcd173;
 }
+
+/* hasta 375 sea menor a 767px */
+@media (max-width: 375px) {
+  .item-technologie {
+    text-align: center;
+    align-items: center;
+    border: 1px solid #c42e6c !important;
+    height: 15px;
+  }
+}

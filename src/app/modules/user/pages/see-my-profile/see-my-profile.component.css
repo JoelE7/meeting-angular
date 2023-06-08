@@ -1,25 +1,30 @@
-.profile{
+.profile {
   min-height: 500px;
   background-color: rgb(241, 241, 241);
   padding: 40px 0px;
 }
 
-.banner-profile{
-  background: rgb(0,0,0);
-  background: linear-gradient(153deg, rgba(0,0,0,1) 0%, rgb(147, 25, 90) 46%, rgb(249, 237, 248) 100%);
+.banner-profile {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    153deg,
+    rgb(134, 51, 86) 0%,
+    rgb(147, 25, 90) 46%,
+    rgb(249, 237, 248) 100%
+  );
   width: 100%;
   height: 200px;
   border-radius: 5px 5px 0px 0px;
 }
 
-#profile{
+#profile {
   width: 13%;
   height: 180px;
   border-radius: 50%;
   border: 2px solid rgb(71, 71, 71);
 }
 
-.reviews{
+.reviews {
   border: 1px solid #c42e6c;
   border-radius: 10px;
 }
@@ -36,14 +41,92 @@
   box-shadow: inset 0 0 0 0.2rem #f1bcd173;
 }
 
-canvas{
+canvas {
   min-height: 400px !important;
   max-height: 500px !important;
 }
 
-.profile .container span a{
+.profile .container span a {
   text-decoration: none;
- }
- .profile .container span a:hover{
-   font-weight:700;
+}
+.profile .container span a:hover {
+  font-weight: 700;
+}
+
+.link a {
+  color: #c42e6c !important;
+}
+.p-inputtext:enabled:hover {
+  border-color: #c42e6c;
+}
+
+/* hasta 375 sea menor a 767px */
+@media (max-width: 375px) {
+  #profile {
+    margin-top: 10px;
+    margin-left: 20px;
+    width: 35%;
+    height: 180px;
+    border-radius: 50%;
+    border: 2px solid rgb(71, 71, 71);
   }
+  .infoName {
+    padding: 40px 40px;
+  }
+}
+
+@media (min-width: 376px) {
+  #profile {
+    margin-top: 10px;
+    margin-left: 20px;
+    width: 32%;
+    height: 180px;
+  }
+  .infoName {
+    padding: 40px 40px;
+  }
+}
+
+/* // Small devices (landscape phones, sea mayor 576px) */
+@media (min-width: 576px) {
+  #profile {
+    margin-top: 10px;
+    margin-left: 40px;
+    width: 30%;
+    height: 180px;
+  }
+  .infoName {
+    padding: 40px 40px;
+  }
+}
+
+@media (min-width: 767.98px) {
+  #profile {
+    margin-top: 10px;
+    margin-left: 40px;
+    width: 25%;
+    height: 180px;
+  }
+  .infoName {
+    padding: 40px 40px;
+  }
+}
+@media (min-width: 991.98px) {
+  #profile {
+    margin-top: 10px;
+    margin-left: 40px;
+    width: 15%;
+    height: 180px;
+  }
+  .infoName {
+    padding: 40px 40px;
+  }
+  .p-tabview .p-tabview-nav-btn.p-link {
+    display: none;
+  }
+}
+@media (max-width: 991.98px) {
+  .p-tabview .p-tabview-nav-btn.p-link {
+    color: #ccc !important;
+  }
+}

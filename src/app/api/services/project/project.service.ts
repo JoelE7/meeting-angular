@@ -7,6 +7,7 @@ import { Method } from '../../../shared/filters/enum/method.enum';
 import { FilterService } from 'src/app/shared/filters/services/filter.service';
 import { User } from 'src/app/shared/models/user/user.class';
 import { MetricProject } from 'src/app/modules/project/interfaces/metricProject.interface';
+import { MailInvitation } from 'src/app/shared/models/model-mail-invitation/model-mail-invitation.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -196,21 +197,21 @@ export class ProjectService {
   }
 
 
-  // sendMail(data:MailProject){
-  //   let headers = new HttpHeaders();
-  //   headers = headers.append(
-  //     'Authorization',
-  //     'Bearer ' + localStorage.getItem('token')
-  //   );
+  sendMailInvitation(data:MailInvitation){
+    let headers = new HttpHeaders();
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
 
-  // // api/projects/invite
+  // api/projects/invite
 
-  //   return this.http
-  //     .post<User>(`${environment.apiUrl}/projects/invite`, data, { headers: headers })
-  //     .pipe(
-  //       map((res: any) => {
-  //         return res;
-  //       })
-  //     );
-  // }
+    return this.http
+      .post<Project>(`${environment.apiUrl}/projects/invite`, data, { headers: headers })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
 }
