@@ -15,18 +15,18 @@
 
   <div class="container d-flex flex-column standingOut shadow-sm p-3 mb-2" *ngIf="!spinner">
     <div class="row w-100 d-flex">
-      <div class="col-9">
+      <div class="offset-0 col-sm-12 offset-md-1">
         <h3 class="text-center p-0 m-0">Proyectos</h3>
       </div>
-      <div class="col-3">
+      <div class="offset-0 col-9">
         <p-button type="button" [style]="{ width: '100%' }" label="Crear Proyecto" class="float-end"
           styleClass=" p-button-help" routerLink="/project/create" *ngIf="currentUser"></p-button>
       </div>
     </div>
     <!----------------- COMPONENTE FILTRO-------------------->
     <div class="container">
-      <div class="row">
-        <div class="col-4">
+      <div class="row mt-5 p-0">
+        <div class="offset-0 col-sm-12 col-md-5 offset-md-1">
           <div class="" id="filtro">
             <h2>Filtros</h2>
             <app-filters [filters]="filters"></app-filters>
@@ -34,7 +34,7 @@
               styleClass="p-button-help" icon="pi pi-search" (click)="getFilters()"></p-button>
           </div>
         </div>
-        <div class="col-8">
+        <div class="offset-0 col-sm-12 col-md-5">
           <app-card-project *ngFor="let project of listProject" [project]="project"></app-card-project>
           <p-paginator [totalRecords]="totalRecords" [rows]="size" (onPageChange)="paginatePosts($event)"></p-paginator>
         </div>
