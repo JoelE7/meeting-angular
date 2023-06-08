@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { Project } from 'src/app/shared/models/project/project.class';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/shared/models/user/user.class';
@@ -8,7 +8,8 @@ import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-modal-invitation',
   templateUrl: './modal-invitation.component.html',
-  styleUrls: ['./modal-invitation.component.css']
+  styleUrls: ['./modal-invitation.component.css'],
+  encapsulation : ViewEncapsulation.None
 })
 export class ModalInvitationComponent {
 

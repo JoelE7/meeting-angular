@@ -35,6 +35,8 @@ export class SeeMyProfileComponent {
   userReceptor: User = new User();
   newInvitation: MailInvitation;
 
+  id:string;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
@@ -44,6 +46,7 @@ export class SeeMyProfileComponent {
 
   async ngOnInit() {
     let { id } = this.activatedRoute.snapshot.params;
+    this.id = id;
     this.searchUser = await this.userService.detailsUserAsync(id);
 
     if (this.searchUser.githubUsername) {

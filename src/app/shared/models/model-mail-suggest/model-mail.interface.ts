@@ -5,5 +5,5 @@ export interface MailSuggest{
   user:User,
   email:string,
   message: string,
-  post:Post,
+  post?:Post,
 }

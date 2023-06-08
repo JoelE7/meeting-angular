@@ -106,10 +106,10 @@ export class UserService {
     user: User
   ): Observable<QuestionPreferenceUser> {
     let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
 
     return this.http
       .post<QuestionPreferenceUser>(

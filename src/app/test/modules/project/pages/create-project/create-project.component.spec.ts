@@ -26,7 +26,7 @@ describe('CreateProjectComponent', () => {
       imports: [
         PrimengModule,
         RouterTestingModule.withRoutes([
-          { path: 'list-project', component: ListProjectComponent },
+          { path: 'project/list-project', component: ListProjectComponent },
         ]),
         HttpClientTestingModule,
       ],

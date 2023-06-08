@@ -10,7 +10,7 @@ export class DataService {
 
   constructor(private http:HttpClient) { }
 
-  getTechnologies(id: number) {
+  getTechnologies() {
     let headers = new HttpHeaders();
     // headers = headers.append(
     //   'Authorization',
@@ -18,7 +18,7 @@ export class DataService {
     // );
 
     return this.http
-      .get(`${environment.apiUrl}/data/technologies`, { headers: headers })
+      .get(`${environment.apiUrl}/common/technologies`, { headers: headers })
       .pipe(
         map((res: any) => {
           return res;

@@ -1,4 +1,4 @@
-<p-dialog header="Redactar mensaje" *ngIf="currentUser && searchProject._id" [(visible)]="visibleModalInvitation" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+<p-dialog header="Redactar mensaje" *ngIf="currentUser" [(visible)]="visibleModalInvitation" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
   <app-modal-invitation [project]="searchProject" [userEmisor]="currentUser" [userReceptor]="userReceptor" (emitContact)="sendMailInvitation($event)"></app-modal-invitation> 
 </p-dialog> 
 <div class="profile">
@@ -109,13 +109,14 @@
             <span>
             <p-button
             (click)="showModalInvitation()"
-              type="submit"
+              type="button"
               [style]="{ width: '100%' }"
               iconPos="right"
               icon="bi bi-envelope"
               label="Enviar invitación"
               class=""
               styleClass="p-button-help"
+              *ngIf="currentUser && currentUser._id != id"
             >
           </p-button>
           </span>

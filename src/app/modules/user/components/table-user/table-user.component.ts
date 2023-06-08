@@ -60,6 +60,10 @@ export class TableUserComponent {
     this.visibleModalContact = true;
   }
 
+  hiddenPopUpModalContact(){
+    this.userReceptor = new User();
+  }
+
   sendMailContact(mail: Mail) {
     this.newContact = mail;
     console.log(this.newContact);
@@ -82,4 +86,6 @@ export class TableUserComponent {
       }
     );
   }
+
+
 }

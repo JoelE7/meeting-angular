@@ -14,7 +14,6 @@ import { MetricProject } from '../../interfaces/metricProject.interface';
   encapsulation: ViewEncapsulation.None,
 })
 export class DetailsProjectComponent implements OnInit {
-
   activeIndex: number = 0;
   idParam: any;
 
@@ -24,7 +23,11 @@ export class DetailsProjectComponent implements OnInit {
 
   searchProject: Project = new Project();
 
-  currentUser: User = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;  userExistProject: boolean = false;
+  currentUser: User =
+    localStorage.getItem('user') != 'undefined'
+      ? JSON.parse(localStorage.getItem('user'))
+      : undefined;
+  userExistProject: boolean = false;
 
   visiblePopUpScore = false;
   visibleInputGithub: boolean = false;
@@ -135,6 +138,109 @@ export class DetailsProjectComponent implements OnInit {
     },
   ];
 
+  supports = [
+    {
+      name: 'Alejandro',
+      avatarUrl: 'https://via.placeholder.com/150x150',
+      commits: [
+        {
+          id: 1,
+          message: 'Home Page',
+          url: 'https://github.com/JoelE7/meeting-frontend/commit/4d14c44f0afe0872f0ba4a2563e4388212ffe444',
+        },
+        {
+          id: 2,
+          message: 'Agrego Estilos',
+          url: 'https://github.com/JoelE7/meeting-frontend/commit/4d14c44f0afe0872f0ba4a2563e4388212ffe444',
+        },
+        {
+          id: 3,
+          message: 'Agrego Tests',
+          url: 'https://github.com/JoelE7/meeting-frontend/commit/4d14c44f0afe0872f0ba4a2563e4388212ffe444',
+        },
+      ],
+    },
+    {
+      name: 'Marcelo',
+      avatarUrl: 'https://via.placeholder.com/150x150',
+      commits: [
+        {
+          id: 1,
+          message: 'Agrego funcionalidad crear usuario',
+          url: 'https://github.com/JoelE7/meeting-frontend/commit/4d14c44f0afe0872f0ba4a2563e4388212ffe444',
+        },
+        {
+          id: 2,
+          message: 'Modifico diseño',
+          url: 'https://github.com/JoelE7/meeting-frontend/commit/4d14c44f0afe0872f0ba4a2563e4388212ffe444',
+        },
+        {
+          id: 3,
+          message: 'Agrego test',
+          url: 'https://github.com/JoelE7/meeting-frontend/commit/4d14c44f0afe0872f0ba4a2563e4388212ffe444',
+        },
+      ],
+    },
+    {
+      name: 'Juan',
+      avatarUrl: 'https://via.placeholder.com/150x150',
+      commits: [
+        {
+          id: 4,
+          message: 'Crear MVP',
+          url: 'https://github.com/JoelE7/meeting-frontend/commit/4d14c44f0afe0872f0ba4a2563e4388212ffe444',
+        },
+        {
+          id: 5,
+          message: 'Agrego Test',
+          url: 'https://github.com/JoelE7/meeting-frontend/commit/4d14c44f0afe0872f0ba4a2563e4388212ffe444',
+        },
+      ],
+    },
+    {
+      name: 'Sebastian',
+      avatarUrl: 'https://via.placeholder.com/150x150',
+      commits: [
+        {
+          id: 6,
+          message: 'Crear Proyecto',
+          url: 'https://github.com/JoelE7/meeting-frontend/commit/4d14c44f0afe0872f0ba4a2563e4388212ffe444',
+        },
+        {
+          id: 7,
+          message: 'Agrego Graficos',
+          url: 'https://github.com/JoelE7/meeting-frontend/commit/4d14c44f0afe0872f0ba4a2563e4388212ffe444',
+        },
+        {
+          id: 8,
+          message: 'Ajustes y estilos',
+          url: 'https://github.com/JoelE7/meeting-frontend/commit/4d14c44f0afe0872f0ba4a2563e4388212ffe444',
+        },
+        {
+          id: 9,
+          message: 'Tests',
+          url: 'https://github.com/JoelE7/meeting-frontend/commit/4d14c44f0afe0872f0ba4a2563e4388212ffe444',
+        },
+      ],
+    },
+    {
+      name: 'Matias ',
+      avatarUrl: 'https://via.placeholder.com/150x150',
+      commits: [
+        {
+          id: 6,
+          message: 'Modal',
+          url: 'https://github.com/JoelE7/meeting-frontend/commit/4d14c44f0afe0872f0ba4a2563e4388212ffe444',
+        },
+        {
+          id: 7,
+          message: 'Tests',
+          url: 'https://github.com/JoelE7/meeting-frontend/commit/4d14c44f0afe0872f0ba4a2563e4388212ffe444',
+        },
+      ],
+    },
+  ];
+
   puntuacion: boolean = false;
 
   metricProject: MetricProject[];
@@ -159,7 +265,7 @@ export class DetailsProjectComponent implements OnInit {
   async getDetailsProject(id: string) {
     this.searchProject = await this.projectService.detailsProjectAsync(id);
     console.log(this.searchProject);
-    
+
     this.checkUserIfExistsInProject();
     this.spinner = false;
   }
@@ -340,10 +446,15 @@ export class DetailsProjectComponent implements OnInit {
     };
   }
 
-  userSeeProgressId:string = "";
+  userSeeProgressId: string = '';
+  advancement: boolean = false;
 
-  seeProgressMember(userId:string){
+  seeProgressMember(userId: string) {
+    this.advancement = true;
     this.userSeeProgressId = userId;
-    this.activeIndex = 4;
+  }
+
+  backMembersProject() {
+    this.advancement = false;
   }
 }

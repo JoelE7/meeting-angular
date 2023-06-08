@@ -24,8 +24,8 @@
     <div class="card shadow-sm" style="width: 100%; min-height: 700px">
       <app-banner [title]="searchProject.name" [subtitle]="'Aplicacion ' + searchProject.type"
         [short]="true"></app-banner>
-      <p-tabView  class="p-3"  [(activeIndex)]="activeIndex">
-        <p-tabPanel [cache]="false" header="Datos del proyecto" >
+      <p-tabView class="p-3" [(activeIndex)]="activeIndex">
+        <p-tabPanel [cache]="false" header="Datos del proyecto">
           <div class="row">
             <div class="col-12">
               <h5>Descripción</h5>
@@ -162,16 +162,40 @@
           <app-support-collaborate (eventEmitterSupportJoinProject)="joinAProject($event)"></app-support-collaborate>
         </p-tabPanel>
         <p-tabPanel header="Integrantes">
-          <h4>Lider</h4>
-          <hr />
-          <app-project-member (eventEmitterUserProgress)="seeProgressMember($event)" [user]="searchProject.leader"></app-project-member>
-          <h4 class="mt-4" *ngIf=" searchProject.participants && searchProject.participants.length > 0">Integrantes</h4>
-          <hr />
-          <app-project-member (eventEmitterUserProgress)="seeProgressMember($event)" *ngFor="let member of searchProject.participants" [user]="member"></app-project-member>
-          <h4 class="mt-4" *ngIf="searchProject.supports.length > 0">Soportes</h4>
-          <hr />
-          <app-project-member (eventEmitterUserProgress)="seeProgressMember($event)" *ngFor="let memberSupport of searchProject.supports"
-            [user]="memberSupport"></app-project-member>
+          <div *ngIf="!advancement">
+            <h4>Lider</h4>
+            <hr />
+            <app-project-member (eventEmitterUserProgress)="seeProgressMember($event)"
+              [user]="searchProject.leader"></app-project-member>
+            <h4 class="mt-4" *ngIf=" searchProject.participants && searchProject.participants.length > 0">Integrantes
+            </h4>
+            <hr />
+            <app-project-member (eventEmitterUserProgress)="seeProgressMember($event)"
+              *ngFor="let member of searchProject.participants" [user]="member"></app-project-member>
+            <h4 class="mt-4" *ngIf="searchProject.supports.length > 0">Soportes</h4>
+            <hr />
+            <app-project-member (eventEmitterUserProgress)="seeProgressMember($event)"
+              *ngFor="let memberSupport of searchProject.supports" [user]="memberSupport"></app-project-member>
+          </div>
+
+
+          <div class="row" *ngIf="advancement">
+            <div class="col-6">
+              <h4>Integrantes</h4>
+              <app-advancement-members [members]="users"></app-advancement-members>
+            </div>
+            <div class="col-6">
+              <h4>Soportes</h4>
+              <app-advancement-members [members]="supports"></app-advancement-members>
+            </div>
+            <div class="row text-end mt-3">
+              <div class="col-12">
+                <p-button (click)="backMembersProject()" type="button" [style]="{ width: '100%' }"
+                  label="Volver" class="text-end" styleClass="p-button-help"></p-button>
+              </div>
+            </div>
+          </div>
+
         </p-tabPanel>
         <p-tabPanel header="Métricas" *ngIf="searchProject.urlRepository && currentUser">
           <div class="card text-center" *ngIf="spinnerMetric">
@@ -185,18 +209,6 @@
             <div class="col-12">
               <h5>Commits del proyecto:</h5>
               <app-chart-bar *ngIf="data" [data]="data"></app-chart-bar>
-            </div>
-          </div>
-        </p-tabPanel>
-        <p-tabPanel header="Avances de integrantes" *ngIf="searchProject.urlRepository && currentUser">
-          <div class="row">
-            <div class="col-6">
-              <h4>Integrantes</h4>
-              <app-advancement-members [members]="users"></app-advancement-members>
-            </div>
-            <div class="col-6">
-              <h4>Soportes</h4>
-              <app-advancement-members [members]="users"></app-advancement-members>
             </div>
           </div>
         </p-tabPanel>

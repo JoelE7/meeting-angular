@@ -49,10 +49,10 @@ export class ProjectService {
 
   createProject(data: Project) {
     let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
     return this.http
       .post(`${environment.apiUrl}/projects/`, data, { headers: headers })
       .pipe(
@@ -138,10 +138,10 @@ export class ProjectService {
 
   finalizeProject(idProject: string, scores: any) {
     let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
+    headers = headers.append(
+      'Authorization',
+      'Bearer' + localStorage.getItem('token')
+    );
 
     return this.http
       .post(`${environment.apiUrl}/projects/finish/${idProject}`, scores, {
@@ -180,10 +180,10 @@ export class ProjectService {
     }
 
     let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
+    headers = headers.append(
+      'Authorization',
+      'Bearer' + localStorage.getItem('token')
+    );
 
     return this.http
       .post(`${environment.apiUrl}/projects/join/`, data, {

@@ -11,6 +11,8 @@ import { ChartDoughnutComponent } from 'src/app/shared/components/chart-doughnut
 import { ChartLineComponent } from 'src/app/shared/components/chart-line/chart-line.component';
 import { HttpClientModule } from '@angular/common/http';
 import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
+import { ModalInvitationComponent } from 'src/app/modules/user/shared/modal-invitation/modal-invitation.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('See my profileConLogin', () => {
   let component: SeeMyProfileComponent;
@@ -24,10 +26,11 @@ describe('See my profileConLogin', () => {
         CardProjectComponent,
         ChartBarComponent,
         ChartDoughnutComponent,
-        ChartLineComponent
+        ChartLineComponent,
+        ModalInvitationComponent
       ],
       providers:[MessageService],
-      imports: [PrimengModule, RouterTestingModule, SharedModule,HttpClientModule],
+      imports: [PrimengModule, RouterTestingModule, SharedModule,HttpClientTestingModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SeeMyProfileComponent);

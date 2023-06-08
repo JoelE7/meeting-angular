@@ -30,20 +30,6 @@
 
             <app-filters [filters]="filters"></app-filters>
            
-            <!-- cambiar en filtros por ahora: formControlName="technologie"-->
-        <p-multiSelect
-        [style]="{ width: '100%' }"
-        placeholder="Seleccione una opción..."
-       
-        optionValue="value"
-        optionLabel="label"
-      >
-        <ng-template let-option pTemplate="item">
-          <span [class]="'type-' + option.value">
-            {{ option.label }}
-          </span>
-        </ng-template>          
-      </p-multiSelect>
             <p-button type="button" [style]="{ width: '100%' }" label="Filtrar" class="float-center mt-3 d-block"
               styleClass="p-button-help" icon="pi pi-search" (click)="getFilters()"></p-button>
           </div>
