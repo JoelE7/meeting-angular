@@ -4,6 +4,7 @@ import { MessageService } from 'primeng/api';
 import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 import { HttpClientTestingModule  } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 describe('ModalSuggestComponent', () => {
@@ -14,7 +15,7 @@ describe('ModalSuggestComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ModalSuggestComponent ],
       providers: [MessageService],
-      imports: [PrimengModule,HttpClientTestingModule,ReactiveFormsModule]
+      imports: [PrimengModule,HttpClientTestingModule,ReactiveFormsModule,BrowserAnimationsModule]
     })
     .compileComponents();
 

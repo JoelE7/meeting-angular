@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MessageService } from 'primeng/api';
 import { ModalInvitationComponent } from 'src/app/modules/user/shared/modal-invitation/modal-invitation.component';
@@ -15,7 +16,7 @@ describe('ModalInvitationComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ModalInvitationComponent ],
       providers : [MessageService],
-      imports : [PrimengModule,HttpClientTestingModule,ReactiveFormsModule,RouterTestingModule]
+      imports : [PrimengModule,HttpClientTestingModule,ReactiveFormsModule,RouterTestingModule,BrowserAnimationsModule]
     })
     .compileComponents();
 

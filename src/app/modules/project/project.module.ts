@@ -24,6 +24,7 @@ import { RecommendationsPostModalComponent } from './shared/recommendations-post
 import { RecommendationsProjectModalComponent } from './shared/recommendations-project-modal/recommendations-project-modal.component';
 import { RecommendationsTechnologiesModalComponent } from './shared/recommendations-technologies-modal/recommendations-technologies-modal.component';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -54,7 +55,7 @@ import { FormsModule } from '@angular/forms';
     PrimengModule,
     StartModule,
     SharedModule,
-    PostModule
+    PostModule,
   ],
   exports:[
     CreateProjectComponent,
