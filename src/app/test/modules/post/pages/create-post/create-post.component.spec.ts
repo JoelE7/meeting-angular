@@ -26,7 +26,7 @@ describe('CreatePostComponent', () => {
       imports: [
         PrimengModule,
         RouterTestingModule.withRoutes([
-          { path: 'list-post', component: ListPostComponent },
+          { path: 'post/list-post', component: ListPostComponent },
         ]),
         HttpClientTestingModule,
       ],
