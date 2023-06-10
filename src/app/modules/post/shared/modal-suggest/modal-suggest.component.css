@@ -5,3 +5,7 @@ form .color{
 textarea{
   height: 100px !important;
 }
+
+.p-autoComplete{
+  width: 100% !important;
+}

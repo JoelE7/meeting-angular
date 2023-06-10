@@ -258,13 +258,12 @@ export class DetailsProjectComponent implements OnInit {
     this.idParam = id;
     await this.getDetailsProject(id);
     if (this.searchProject.urlRepository) {
-      // this.getMetricByProject();
+      this.getMetricByProject();
     }
   }
 
   async getDetailsProject(id: string) {
     this.searchProject = await this.projectService.detailsProjectAsync(id);
-    console.log(this.searchProject);
 
     this.checkUserIfExistsInProject();
     this.spinner = false;
@@ -293,12 +292,21 @@ export class DetailsProjectComponent implements OnInit {
       .joinProject(this.currentUser._id, this.searchProject._id, support)
       .subscribe(
         (data) => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Hecho',
-            detail: message,
-          });
-          this.getDetailsProject(this.idParam);
+          if (data.status === 200) {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Hecho',
+              detail: message,
+            });
+            this.getDetailsProject(this.idParam);
+          }else{
+            this.messageService.add({
+              severity: 'warn',
+              summary: 'No te pudiste unir al proyecto',
+              detail: data.body.message,
+            });
+          }
+          console.log(data);
         },
         (err) => {
           this.messageService.add({

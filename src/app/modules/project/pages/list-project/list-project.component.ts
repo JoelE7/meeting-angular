@@ -33,12 +33,9 @@ export class ListProjectComponent implements OnInit {
   typeProyects = [];
   complexitys = [];
 
-  visiblePopUpQuestion: Boolean = false;
+  visiblePopUpQuestion: Boolean = true;
 
   query;
-
-  question: string = '';
-  responseQuestion: string = '';
 
   paginate: any = 1;
 
@@ -225,8 +222,8 @@ export class ListProjectComponent implements OnInit {
 
   answerQuestion(answer: Boolean) {
     answer
-      ? this.currentUser.preferences.push(this.responseQuestion)
-      : this.currentUser.disinterest.push(this.responseQuestion);
+      ? this.currentUser.preferences.push(this.recommendationsQuestionUser.result.technologie)
+      : this.currentUser.disinterest.push(this.recommendationsQuestionUser.result.technologie);
 
     this.userService
       .updatePreferences(this.currentUser, {
@@ -264,12 +261,14 @@ export class ListProjectComponent implements OnInit {
     this.getProjects();
   }
 
+  recommendationsQuestionUser:QuestionPreferenceUser;
+
   getQuestion() {
     this.userService.getRecommendationQuestionUser(this.currentUser).subscribe(
       (data: QuestionPreferenceUser) => {
-        let { question, technologie } = data.result;
-        this.question = question;
-        this.responseQuestion = technologie;
+        console.log(data);
+        
+        this.recommendationsQuestionUser = data;        
       },
       (err) => {
         this.messageService.add({
