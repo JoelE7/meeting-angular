@@ -4,6 +4,7 @@ import { Observable, lastValueFrom, map } from 'rxjs';
 import { QuestionPreferenceUser } from 'src/app/modules/project/interfaces/questionPreferenceUser.interface';
 import { MetricCommit } from 'src/app/modules/user/interfaces/metricCommit.interface';
 import { MetricLanguage } from 'src/app/modules/user/interfaces/metricLanguage.interface';
+import { Mail } from 'src/app/shared/models/model-mail-contact/model-mail.interface';
 import { User } from 'src/app/shared/models/user/user.class';
 import { environment } from 'src/environments/environment';
 
@@ -22,6 +23,24 @@ export class UserService {
 
     return this.http
       .get(`${environment.apiUrl}/users/ranking/${paginate}`, {
+        headers: headers,
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  getAllUser() {
+    let headers = new HttpHeaders();
+    // headers = headers.append(
+    //   'Authorization',
+    //   'Bearer' + localStorage.getItem('token')
+    // );
+
+    return this.http
+      .post(`${environment.apiUrl}/users/find`,{} ,{
         headers: headers,
       })
       .pipe(
@@ -105,10 +124,10 @@ export class UserService {
     user: User
   ): Observable<QuestionPreferenceUser> {
     let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
 
     return this.http
       .post<QuestionPreferenceUser>(
@@ -173,5 +192,24 @@ export class UserService {
         headers: headers,
       })
     );
+  }
+
+  sendMailContact(data: Mail) {
+    let headers = new HttpHeaders();
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+
+    // /api/users/contact
+    return this.http
+      .post<User>(`${environment.apiUrl}/users/contact`, data, {
+        headers: headers,
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
   }
 }

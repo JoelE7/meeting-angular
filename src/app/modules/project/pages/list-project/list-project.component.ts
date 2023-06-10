@@ -9,6 +9,8 @@ import { FilterService } from 'src/app/shared/filters/services/filter.service';
 import { Project } from 'src/app/shared/models/project/project.class';
 import { User } from 'src/app/shared/models/user/user.class';
 import { QuestionPreferenceUser } from '../../interfaces/questionPreferenceUser.interface';
+import { DataService } from 'src/app/api/services/data/data.service';
+import { Item } from 'src/app/shared/models/model-forms/item-form.interface';
 
 @Component({
   selector: 'app-list-project',
@@ -19,7 +21,11 @@ import { QuestionPreferenceUser } from '../../interfaces/questionPreferenceUser.
 export class ListProjectComponent implements OnInit {
   spinner = true;
   spinnerSuggestion = true;
-  currentUser: User = JSON.parse(localStorage.getItem('user')) || undefined;
+  currentUser: User =
+    localStorage.getItem('user') != 'undefined'
+      ? JSON.parse(localStorage.getItem('user'))
+      : undefined;
+  userExistProject: boolean = false;
 
   listProject: Project[] = [];
   suggestionsProject: Project[] = [];
@@ -31,16 +37,34 @@ export class ListProjectComponent implements OnInit {
 
   query;
 
-  question: string = '¿Te gustaría participar en un proyecto de react?';
-  responseQuestion: string = '';
+  paginate: any = 1;
+
+  totalRecords = 0;
+
+  size = 10;
+
+  technologies: Item[] = [];
 
   filters: Filters = {
     autoSend: false,
     method: Method.POST,
     filtersCustom: [
       {
+        type: FilterEnum.MULTISELECT,
+        col: 'col-12 m-0 p-0 mb-3',
+        title: 'Tecnologías',
+        nameFilter: 'technologies',
+        valueFilter: '',
+        items: {
+          label: 'label',
+          value: 'value',
+          search : true,
+          items: this.technologies
+        },
+      },
+      {
         type: FilterEnum.DROPDOWN,
-        col: 'col-12 m-0 p-0',
+        col: 'col-12 m-0 p-0 mb-3',
         title: 'Complejidad',
         nameFilter: 'complexity',
         valueFilter: '',
@@ -69,7 +93,7 @@ export class ListProjectComponent implements OnInit {
       },
       {
         type: FilterEnum.DROPDOWN,
-        col: 'col-12 m-0 p-0',
+        col: 'col-12 m-0 p-0 mb-3',
         title: 'Tipo de aplicación',
         nameFilter: 'type',
         valueFilter: '',
@@ -92,58 +116,6 @@ export class ListProjectComponent implements OnInit {
             {
               label: 'Escritorio',
               value: 'Desktop',
-            },
-          ],
-        },
-      },
-      {
-        type: FilterEnum.CHECKBOX,
-        col: 'col-12 mt-3 mt-md-2',
-        title: 'Tecnologías',
-        nameFilter: 'technologies',
-        valueFilter: '',
-        checkboxItems: {
-          column: false,
-          items: [
-            {
-              label: 'Angular',
-              value: 'Angular',
-            },
-            {
-              label: 'React',
-              value: 'React',
-            },
-            {
-              label: 'Vue',
-              value: 'Vue',
-            },
-            {
-              label: 'Spring',
-              value: 'Spring',
-            },
-            {
-              label: 'Node.js',
-              value: 'Nodejs',
-            },
-            {
-              label: 'Javascript',
-              value: 'Javascript',
-            },
-            {
-              label: 'Java',
-              value: 'Java',
-            },
-            {
-              label: 'Python',
-              value: 'Python',
-            },
-            {
-              label: 'C',
-              value: 'C',
-            },
-            {
-              label: 'Typescript',
-              value: 'Typescript',
             },
           ],
         },
@@ -180,7 +152,8 @@ export class ListProjectComponent implements OnInit {
     private messageService: MessageService,
     private projectService: ProjectService,
     private userService: UserService,
-    private filtersService: FilterService
+    private filtersService: FilterService,
+    private dataService: DataService
   ) {}
 
   ngOnInit(): void {
@@ -191,15 +164,34 @@ export class ListProjectComponent implements OnInit {
 
     this.getSuggestedProjects();
     this.getProjects();
+    this.getTechnologies()
     if (this.currentUser) {
       this.getQuestion();
     }
   }
 
-  getProjects() {
-    this.projectService.getAllProjects(this.query).subscribe(
+  getTechnologies() {
+    this.dataService.getTechnologies().subscribe(
       (data) => {
-        this.listProject = data;
+        for(let i = 0; i < data.technologies.length; i++){
+          this.technologies.push({"label" : data.technologies[i],value : data.technologies[i]})
+        }
+      },
+      (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+        });
+      }
+    );
+  }
+
+  getProjects() {
+    this.projectService.getAllProjects(this.query, this.paginate).subscribe(
+      (data) => {
+        this.listProject = data.results;
+        this.totalRecords = data.count;
         this.spinner = false;
       },
       (err) => {
@@ -230,8 +222,8 @@ export class ListProjectComponent implements OnInit {
 
   answerQuestion(answer: Boolean) {
     answer
-      ? this.currentUser.preferences.push(this.responseQuestion)
-      : this.currentUser.disinterest.push(this.responseQuestion);
+      ? this.currentUser.preferences.push(this.recommendationsQuestionUser.result.technologie)
+      : this.currentUser.disinterest.push(this.recommendationsQuestionUser.result.technologie);
 
     this.userService
       .updatePreferences(this.currentUser, {
@@ -269,12 +261,14 @@ export class ListProjectComponent implements OnInit {
     this.getProjects();
   }
 
+  recommendationsQuestionUser:QuestionPreferenceUser;
+
   getQuestion() {
     this.userService.getRecommendationQuestionUser(this.currentUser).subscribe(
       (data: QuestionPreferenceUser) => {
-        let { question, technologie } = data.result;
-        this.question = question;
-        this.responseQuestion = technologie;
+        console.log(data);
+        
+        this.recommendationsQuestionUser = data;        
       },
       (err) => {
         this.messageService.add({
@@ -284,5 +278,11 @@ export class ListProjectComponent implements OnInit {
         });
       }
     );
+  }
+
+  paginatePosts(event) {
+    this.paginate = event.page + 1;
+    this.size = event.rows;
+    this.getProjects();
   }
 }

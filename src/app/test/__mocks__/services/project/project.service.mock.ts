@@ -18,15 +18,16 @@ export const mockProjectDetails: Project = {
   posts : [],
   supports : [],
   urlRepository : "",
+  validateSystem : false
 };
 
-export const mockGetAllProjects: Project[] = [new Project(), new Project()];
+export const mockGetAllProjects: any =  {"results" : [new Project(), new Project(), new Project()],"count" : 3};
 export const mockGetSuggestedProjects: any = {"result" : [new Project(), new Project(), new Project()]};
 
 export const mockProjectService: {
   detailsProject: () => Observable<Project>;
   createProject: () => Observable<any>;
-  getAllProjects: () => Observable<Project[]>;
+  getAllProjects: () => Observable<any[]>;
   getSuggestedProjects: () => Observable<any[]>;
   detailsProjectAsync: () => Promise<Project>;
 } = {

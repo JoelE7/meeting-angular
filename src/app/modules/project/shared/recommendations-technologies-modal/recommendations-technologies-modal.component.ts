@@ -4,14 +4,14 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-
 @Component({
-  selector: 'app-modal-question',
-  templateUrl: './modal-question.component.html',
-  styleUrls: ['./modal-question.component.css'],
-  encapsulation: ViewEncapsulation.None,
+  selector: 'app-recommendations-technologies-modal',
+  templateUrl: './recommendations-technologies-modal.component.html',
+  styleUrls: ['./recommendations-technologies-modal.component.css'],
+  encapsulation : ViewEncapsulation.None
 })
-export class ModalQuestionComponent {
+export class RecommendationsTechnologiesModalComponent {
+
 
   answer: Boolean = false;
 
@@ -28,4 +28,5 @@ export class ModalQuestionComponent {
     this.eventEmitterHiddenPopUpQuestion.emit(this.hiddenPopUpQuestion);
     this.eventEmitterAnswer.emit(this.answer);
   }
+
 }

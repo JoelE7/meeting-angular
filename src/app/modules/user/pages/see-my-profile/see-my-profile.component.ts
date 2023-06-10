@@ -7,6 +7,9 @@ import { MetricLanguage } from '../../interfaces/metricLanguage.interface';
 import { MetricCommit } from '../../interfaces/metricCommit.interface';
 import { ChartBarData } from 'src/app/shared/models/model-metric/CharBarMetric.interface';
 import { ChartDoughnutData } from 'src/app/shared/models/model-metric/DoughnutMetric.interface';
+import { MailInvitation } from 'src/app/shared/models/model-mail-invitation/model-mail-invitation.interface';
+import { Project } from 'src/app/shared/models/project/project.class';
+import { ProjectService } from 'src/app/api/services/project/project.service';
 
 @Component({
   selector: 'app-see-my-profile',
@@ -15,8 +18,7 @@ import { ChartDoughnutData } from 'src/app/shared/models/model-metric/DoughnutMe
   encapsulation: ViewEncapsulation.None,
 })
 export class SeeMyProfileComponent {
-  currentUser: User = JSON.parse(localStorage.getItem('user')) || undefined;
-
+  currentUser: User = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;
   visiblePopUpScore = false;
   visibleInputGithub: boolean = false;
   userNameGithub = '';
@@ -28,18 +30,31 @@ export class SeeMyProfileComponent {
 
   spinnerMetric: boolean = true;
 
+  visibleModalInvitation:boolean = false;
+  userReceptor: User = new User();
+  newInvitation: MailInvitation;
+
+  id:string;
+  idCurrentUser = "";
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
-    private userService: UserService
+    private userService: UserService,
+    private  projectService:ProjectService,
   ) {}
 
   async ngOnInit() {
     let { id } = this.activatedRoute.snapshot.params;
+    this.id = id;
     this.searchUser = await this.userService.detailsUserAsync(id);
-
+    this.userReceptor = this.searchUser
+    this.currentUser = await this.userService.detailsUserAsync(this.currentUser._id);
+    this.idCurrentUser = this.currentUser._id;
+    // this.listProjectsUserEmisor = this.currentUser.projects;
+    
     if (this.searchUser.githubUsername) {
-      this.getLanguagesGithub();
+       this.getLanguagesGithub();
       this.getCommitsByUserGithub();
     }
   }
@@ -87,7 +102,7 @@ export class SeeMyProfileComponent {
           summary: 'Hecho',
           detail: 'Tu usuario fue vinculado exitosamente',
         });
-        await this.getLanguagesGithub();
+         await this.getLanguagesGithub();
         await this.getCommitsByUserGithub();
       },
       (err) => {
@@ -124,7 +139,6 @@ export class SeeMyProfileComponent {
         },
       ],
     };
-    console.log(this.languagesUser);
   }
 
   async getCommitsByUserGithub() {
@@ -161,5 +175,40 @@ export class SeeMyProfileComponent {
         },
       ],
     };
+  }
+
+  async showModalInvitation(){
+    this.visibleModalInvitation = true;
+    this.currentUser = await this.userService.detailsUserAsync(this.currentUser._id);
+    this.idCurrentUser = this.currentUser._id
+
+  }
+
+  hiddenPopUpInvitation(){
+    this.visibleModalInvitation = false;
+    this.idCurrentUser = "";
+  }
+
+  sendMailInvitation(mail: MailInvitation) {
+    this.newInvitation = mail;
+    console.log(this.newInvitation);
+
+    this.projectService.sendMailInvitation(this.newInvitation).subscribe(
+      (resp) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Creado',
+          detail: '¡Su invitación ha sido enviado con éxito!',
+        });
+        this.visibleModalInvitation = false;
+      },
+      (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+        });
+      }
+    );
   }
 }

@@ -6,7 +6,7 @@
   <span class="text-center">Cargando...</span>
 </div>
 
-<div class="m-auto projects" >
+<div class="m-auto projects">
   <div class="container row standingOut shadow-sm" style="margin: 10px 0px;" *ngIf="!spinnerSuggestion">
     <div class="col">
       <app-suggestions-project *ngIf="suggestionsProject" [suggestions]="suggestionsProject"></app-suggestions-project>
@@ -15,18 +15,18 @@
 
   <div class="container d-flex flex-column standingOut shadow-sm p-3 mb-2" *ngIf="!spinner">
     <div class="row w-100 d-flex">
-      <div class="col-9">
+      <div class="offset-0 col-sm-12 offset-md-1">
         <h3 class="text-center p-0 m-0">Proyectos</h3>
       </div>
-      <div class="col-3">
+      <div class="offset-0 col-9">
         <p-button type="button" [style]="{ width: '100%' }" label="Crear Proyecto" class="float-end"
           styleClass=" p-button-help" routerLink="/project/create" *ngIf="currentUser"></p-button>
       </div>
     </div>
     <!----------------- COMPONENTE FILTRO-------------------->
     <div class="container">
-      <div class="row">
-        <div class="col-4">
+      <div class="row mt-5 p-0">
+        <div class="offset-0 col-sm-12 col-md-5 offset-md-1">
           <div class="" id="filtro">
             <h2>Filtros</h2>
             <app-filters [filters]="filters"></app-filters>
@@ -34,18 +34,24 @@
               styleClass="p-button-help" icon="pi pi-search" (click)="getFilters()"></p-button>
           </div>
         </div>
-        <div class="col-8">
+        <div class="offset-0 col-sm-12 col-md-5">
           <app-card-project *ngFor="let project of listProject" [project]="project"></app-card-project>
+          <p-paginator [totalRecords]="totalRecords" [rows]="size" (onPageChange)="paginatePosts($event)"></p-paginator>
         </div>
       </div>
 
 
     </div>
     <!----------------- COMPONENTE modal-------------------->
-    <p-dialog [header]="question" [(visible)]="visiblePopUpQuestion" [position]="'right'"
-      [transitionOptions]="'1000ms'">
-      <app-modal-question (eventEmitterHiddenPopUpQuestion)="hiddenPopUpQuestion($event)"
-        (eventEmitterAnswer)="answerQuestion($event)"></app-modal-question>
+    <p-dialog *ngIf="recommendationsQuestionUser" [header]="recommendationsQuestionUser?.result?.question"
+      [(visible)]="visiblePopUpQuestion" [position]="'right'" [transitionOptions]="'1000ms'">
+      <app-recommendations-technologies-modal *ngIf="recommendationsQuestionUser.type === 'recommendation'"
+        (eventEmitterHiddenPopUpQuestion)="hiddenPopUpQuestion($event)"
+        (eventEmitterAnswer)="answerQuestion($event)"></app-recommendations-technologies-modal>
+      <app-recommendations-post-modal [posts]="recommendationsQuestionUser.result.results"
+        *ngIf="recommendationsQuestionUser.type === 'post'"></app-recommendations-post-modal>
+      <app-recommendations-project-modal *ngIf="recommendationsQuestionUser.type === 'project'"
+        [projects]="recommendationsQuestionUser.result.results"></app-recommendations-project-modal>
     </p-dialog>
     <!----------------- COMPONENTE modal-------------------->
   </div>

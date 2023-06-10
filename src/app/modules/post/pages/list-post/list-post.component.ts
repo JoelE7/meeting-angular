@@ -5,8 +5,10 @@ import { FilterEnum } from 'src/app/shared/filters/enum/filters.enum';
 import { Method } from 'src/app/shared/filters/enum/method.enum';
 import { Filters } from 'src/app/shared/filters/interface/filters.interface';
 import { Post } from 'src/app/shared/models/post/post.class';
-import { FilterService } from '../../../../shared/filters/services/filter.service';
+import { FilterService } from 'src/app/shared/filters/services/filter.service';
 import { User } from 'src/app/shared/models/user/user.class';
+import { Item } from 'src/app/shared/models/model-forms/item-form.interface';
+import { DataService } from 'src/app/api/services/data/data.service';
 
 @Component({
   selector: 'app-list-post',
@@ -15,12 +17,8 @@ import { User } from 'src/app/shared/models/user/user.class';
 })
 export class ListPostComponent implements OnInit {
 
-  currentUser: User = JSON.parse(localStorage.getItem('user')) || undefined;
-  listPost: Post[] = [];
-
-  
-
-  
+  currentUser: User = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;  listPost: Post[] = [];
+ 
   spinner = true;
 
   paginate: any = 1;
@@ -29,6 +27,8 @@ export class ListPostComponent implements OnInit {
 
   size = 10;
 
+  technologies: Item[] = [];
+
   query: any = [];
   filters: Filters = {
     autoSend: false,
@@ -36,55 +36,16 @@ export class ListPostComponent implements OnInit {
     filtersCustom: [
      
       {
-        type: FilterEnum.CHECKBOX,
-        col: 'col-12 mt-3 mt-md-2',
-        title: 'COMO ADAPTAR AQUI EL MULTISELECT',
+        type: FilterEnum.MULTISELECT,
+        col: 'col-12 m-0 p-0',
+        title: 'Tecnologías',
         nameFilter: 'technologies',
         valueFilter: '',
-        checkboxItems: {
-          column: false,
-          items: [
-            // {
-            //   label: 'Angular',
-            //   value: 'Angular',
-            // },
-            // {
-            //   label: 'React',
-            //   value: 'React',
-            // },
-            // {
-            //   label: 'Vue',
-            //   value: 'Vue',
-            // },
-            // {
-            //   label: 'Spring',
-            //   value: 'Spring',
-            // },
-            // {
-            //   label: 'Node.js',
-            //   value: 'Nodejs',
-            // },
-            // {
-            //   label: 'Javascript',
-            //   value: 'Javascript',
-            // },
-            // {
-            //   label: 'Java',
-            //   value: 'Java',
-            // },
-            // {
-            //   label: 'Python',
-            //   value: 'python',
-            // },
-            // {
-            //   label: 'C',
-            //   value: 'c',
-            // },
-            // {
-            //   label: 'Typescript',
-            //   value: 'typescript',
-            // },
-          ],
+        items: {
+          label: 'label',
+          value: 'value',
+          search : true,
+          items: this.technologies
         },
       },
     ],
@@ -93,11 +54,31 @@ export class ListPostComponent implements OnInit {
   constructor(
     private messageService: MessageService,
     private postService: PostService,
-    private filtersService: FilterService
+    private filtersService: FilterService,
+    private dataService: DataService
+
   ) {}
 
   ngOnInit(): void {
+    this.getTechnologies();
     this.getAllPosts();
+  }
+
+  getTechnologies() {
+    this.dataService.getTechnologies().subscribe(
+      (data) => {
+        for(let i = 0; i < data.technologies.length; i++){
+          this.technologies.push({"label" : data.technologies[i],value : data.technologies[i]})
+        }
+      },
+      (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+        });
+      }
+    );
   }
 
   getAllPosts() {
@@ -105,7 +86,7 @@ export class ListPostComponent implements OnInit {
       (data) => {
         console.log(data);
         
-        this.listPost = data.posts;
+        this.listPost = data.results;
         this.totalRecords = data.count
         this.spinner = false;
       },

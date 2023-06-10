@@ -1,46 +1,54 @@
-<p-table [value]="developers">
-  <ng-template pTemplate="header">
-    <tr>
-      <th class="text-center">Foto</th>
-      <th class="text-center">Nombre</th>
-      <th class="text-center">Tecnologías/Lenguajes</th>
-      <th class="text-center">Puntaje</th>
-      <th class="text-center">Contacto</th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-developer>
-    <tr>
-      <td>
-        <div class="developer-avatar">
-          <img
-            src="assets/img/no-user.jpg"
-            alt="Foto de usuario"
-            class="mt-2"
-          />
-        </div>
-      </td>
-      <td class="text-center">{{ developer.name }}</td>
-      <td class="text-center">
-        <ul class="developer-skills">
-          <li *ngFor="let technologies of developer.preferences">
-            {{ technologies }}
-          </li>
-        </ul>
-      </td>
-      <td class="text-center">{{ developer.score }}</td>
-      <td class="text-center"> 
-        <p-button
-          type="button"
-          icon="pi pi-envelope"
-          styleClass="p-button-rounded p-button-help p-button-outlined"
-        ></p-button>
-      </td>
+<p-dialog (onHide)="hiddenPopUpModalContact()" header="Redactar mensaje" *ngIf="currentUser && userReceptor._id"
+  [(visible)]="visibleModalContact" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+  <app-modal-contact [userEmisor]="currentUser" [userReceptor]="userReceptor"
+    (emitContact)="sendMailContact($event)"></app-modal-contact>
+</p-dialog>
+<div class="table-scroll">
+  <p-table [value]="developers" dataKey="developers._id" [tableStyle]="{'min-width': '50rem'}">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th class="text-center">Foto</th>
+        <th class="sticky text-center ">Nombre</th>
+        <th class="text-center">Tecnologías/Lenguajes</th>
+        <th class="text-center">Puntaje</th>
+        <th *ngIf="currentUser" class="text-center">Contacto</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-developer>
+      <tr>
+        <td>
+          <div class="developer-avatar" *ngIf="developer.level === 'Trainee'">
+            <img src="assets/img/C-3po.png" alt="Trainee">
+          </div>
+          <div class="developer-avatar" *ngIf="developer.level === 'Junior'">
+            <img src="assets/img/Stormtrooper.png" alt="Junior">
+          </div>
+          <div class="developer-avatar" *ngIf="developer.level === 'Semi Senior'">
+            <img src="assets/img/Darth-Vader.png" alt="Semi Senior">
+          </div>
+          <div class="developer-avatar" *ngIf="developer.level === 'Senior'">
+            <img src="assets/img/Yoda.png" alt="Senior">
+          </div>
+        </td>
+        <td class="text-center sticky">{{ developer.name }} ({{ developer.level }})</td>
+        <td class="text-center">
+          <ul class="developer-skills d-inline" *ngFor="let technologies of developer.preferences; let i = index">
+            <li class="text-center" >
+              <div *ngIf="i < 4">
+                {{technologies}}
+              </div>
+            </li>
+          </ul>
+        </td>
+        <td class="text-center">{{ developer.score }}</td>
+        <td *ngIf="currentUser" class="text-center">
+          <p-button (click)="showModalContact(developer)" type="button" pTooltip="Contactar" icon="pi pi-envelope"
+            styleClass="p-button-rounded p-button-help p-button-outlined"></p-button>
+          <p-button type="button" pTooltip="Ver perfil" icon="pi pi-eye"
+            styleClass="p-button-rounded p-button-help p-button-outlined" [routerLink]="'/user/see-profile/' + developer._id"></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 
-    </tr>
-  </ng-template>
-</p-table>
-<p-paginator
-  [totalRecords]="totalRecords"
-  [rows]="size"
-  (onPageChange)="paginateEmit($event)"
-></p-paginator>
+  <p-paginator [totalRecords]="totalRecords" [rows]="size" (onPageChange)="paginateEmit($event)"></p-paginator>

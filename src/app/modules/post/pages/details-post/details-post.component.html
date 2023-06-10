@@ -1,18 +1,26 @@
+<!-- modal de enviar sugerencia a un comocido sobre ese post -->
+
+<p-dialog header="Redactar mensaje" *ngIf="currentUser && searchPost._id" [(visible)]="visibleModalSuggest" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+   <app-modal-suggest [post]="searchPost" [userEmisor]="currentUser" [userReceptor]="searchPost.author" (emitContact)="sendMailSuggestPost($event)"></app-modal-suggest> 
+</p-dialog> 
+
+<!-- modal de contactar a ese usuario -->
+<p-dialog header="Redactar mensaje" *ngIf="currentUser && userReceptor._id" [(visible)]="visibleModalContact" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+  <app-modal-contact [userEmisor]="currentUser" [userReceptor]="userReceptor" (emitContact)="sendMailContact($event)"></app-modal-contact>
+</p-dialog>
+
 <div class="postBackground">
   <div class="container">
-    <span class="fst-italic text-secondary small">
+    <span id="btnBack" class="fst-italic text-secondary small">
       <i class="m-1 pi pi-arrow-circle-left"></i>
-      <a href="" class="text-secondary" routerLink="/post/list-post"
-        >Volver</a
-      ></span
+      <a class="text-secondary" routerLink="/post/list-post">Volver</a></span
     >
     <div class="row justify-content-center">
       <div class="col-sm-12 col-md-10 col-lg-6">
         <div class="card p-3">
           <p-chip
-            label="{{ searchPost.author?.name }} {{
-              searchPost.author?.nivel
-            }}(Senior)"
+            label="{{ searchPost.author?.name }} (
+              {{ searchPost.author?.level }})"
             image="https://bootdey.com/img/Content/avatar/avatar2.png"
           ></p-chip>
 
@@ -86,11 +94,12 @@
         </div>
       </div>
       <!-- segunda columna -->
-      <div class="col-sm-12 col-md-10 col-lg-4">
+      <div class="col-sm-12 col-md-10 col-lg-4 mt-4 mt-sm-4 mt-lg-0">
         <div class="card">
           <div class="card flex align-items-center py-3 flex-wrap">
             <p-chip
-              label="{{ searchPost.author?.name }} "
+              label="{{ searchPost.author?.name }} (
+                {{ searchPost.author?.level }}) "
               image="https://bootdey.com/img/Content/avatar/avatar2.png"
             ></p-chip>
           </div>
@@ -100,16 +109,16 @@
             Globant. También soy exalumno del Programa de Intercambio Global
             UGRAD Primavera 2023.
           </p>
-          <!-- boton para contactar a la persona routerLink="/post/details-post/{{  }}" -->
+          <!-- boton para contactar a la persona -->
           <div class="boton text-center m-2">
             <span>
               <p-button
+              (click)="showModalContact(searchPost.author)"
                 type="submit"
                 [style]="{ width: '100%' }"
                 iconPos="right"
                 icon="bi bi-envelope"
                 label="Contactar"
-                class=""
                 styleClass="p-button-help"
               >
               </p-button>
@@ -127,7 +136,27 @@
           <small>#blog #apacheage #postgres #database</small>
         </div>
         <!-- mas datos del autor -->
+
+        <!-- boton para sugerir post" -->
+        <div class="boton text-center mt-4">
+          <span>
+            <p-button
+            (click)="showModalSuggest()"
+              type="submit"
+              [style]="{ width: '100%' }"
+              iconPos="right"
+              icon="bi bi-share"
+              label="Compartir"
+              class=""
+              styleClass="p-button-help"
+            >
+            </p-button>
+          </span>
+        </div>
+        <!-- boton para contactar a la persona -->
       </div>
+
+      
     </div>
   </div>
 </div>

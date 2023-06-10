@@ -6,3 +6,14 @@
 .card{
   border: 1px solid #f1bcd173 !important;
 }
+#infoProject {
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 991.98px) {
+  #infoProject {
+    margin-top: 20px;
+    display: block;
+   
+  }
+}

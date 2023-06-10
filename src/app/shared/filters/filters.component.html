@@ -37,7 +37,7 @@
             <div *ngIf="filter.type === types.MULTISELECT">
                 <label [class]="filter.titleClass"><span>{{filter.title}}</span></label>
                 <p-multiSelect (onChange)="filterCustom(filter.nameFilter,filter.valueFilter,true)"
-                    [(ngModel)]="filter.valueFilter" [style]="{width: '100%'}" [filter]="false" [options]="filter.items.items"
+                    [(ngModel)]="filter.valueFilter" [style]="{width: '100%'}" [filter]="filter.items.search" [options]="filter.items.items"
                     [optionLabel]="filter.items.label" [optionValue]="filter.items.value" placeholder="Seleccione una opcion"></p-multiSelect>
             </div>
             <div *ngIf="filter.type === types.SWITCH">
