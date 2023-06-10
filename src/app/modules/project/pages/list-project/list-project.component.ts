@@ -25,6 +25,9 @@ export class ListProjectComponent implements OnInit {
     localStorage.getItem('user') != 'undefined'
       ? JSON.parse(localStorage.getItem('user'))
       : undefined;
+
+  searchProjectCurrentUser: boolean = localStorage.getItem('user')  ? true : false;
+
   userExistProject: boolean = false;
 
   listProject: Project[] = [];
@@ -58,8 +61,8 @@ export class ListProjectComponent implements OnInit {
         items: {
           label: 'label',
           value: 'value',
-          search : true,
-          items: this.technologies
+          search: true,
+          items: this.technologies,
         },
       },
       {
@@ -164,7 +167,7 @@ export class ListProjectComponent implements OnInit {
 
     this.getSuggestedProjects();
     this.getProjects();
-    this.getTechnologies()
+    this.getTechnologies();
     if (this.currentUser) {
       this.getQuestion();
     }
@@ -173,8 +176,11 @@ export class ListProjectComponent implements OnInit {
   getTechnologies() {
     this.dataService.getTechnologies().subscribe(
       (data) => {
-        for(let i = 0; i < data.technologies.length; i++){
-          this.technologies.push({"label" : data.technologies[i],value : data.technologies[i]})
+        for (let i = 0; i < data.technologies.length; i++) {
+          this.technologies.push({
+            label: data.technologies[i],
+            value: data.technologies[i],
+          });
         }
       },
       (err) => {
@@ -188,7 +194,7 @@ export class ListProjectComponent implements OnInit {
   }
 
   getProjects() {
-    this.projectService.getAllProjects(this.query, this.paginate).subscribe(
+    this.projectService.getAllProjects(this.query, this.paginate,this.searchProjectCurrentUser).subscribe(
       (data) => {
         this.listProject = data.results;
         this.totalRecords = data.count;
@@ -222,8 +228,12 @@ export class ListProjectComponent implements OnInit {
 
   answerQuestion(answer: Boolean) {
     answer
-      ? this.currentUser.preferences.push(this.recommendationsQuestionUser.result.technologie)
-      : this.currentUser.disinterest.push(this.recommendationsQuestionUser.result.technologie);
+      ? this.currentUser.preferences.push(
+          this.recommendationsQuestionUser.result.technologie
+        )
+      : this.currentUser.disinterest.push(
+          this.recommendationsQuestionUser.result.technologie
+        );
 
     this.userService
       .updatePreferences(this.currentUser, {
@@ -261,14 +271,14 @@ export class ListProjectComponent implements OnInit {
     this.getProjects();
   }
 
-  recommendationsQuestionUser:QuestionPreferenceUser;
+  recommendationsQuestionUser: QuestionPreferenceUser;
 
   getQuestion() {
     this.userService.getRecommendationQuestionUser(this.currentUser).subscribe(
       (data: QuestionPreferenceUser) => {
         console.log(data);
-        
-        this.recommendationsQuestionUser = data;        
+
+        this.recommendationsQuestionUser = data;
       },
       (err) => {
         this.messageService.add({

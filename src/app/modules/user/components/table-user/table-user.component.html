@@ -15,25 +15,45 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-developer>
-      <tr>
-        <td>
+      <tr [ngClass]="{'row-accessories': currentUser?._id === developer._id}">
+        <td >
           <div class="developer-avatar" *ngIf="developer.level === 'Trainee'">
-            <img src="assets/img/C-3po.png" alt="Trainee">
+            <p-avatar *ngIf="currentUser?._id === developer._id;else trainee" image="assets/img/C-3po.png" pBadge
+               severity="danger">
+            </p-avatar>
+            <ng-template #trainee>
+              <p-avatar image="assets/img/C-3po.png" severity="danger"></p-avatar>
+            </ng-template>
           </div>
           <div class="developer-avatar" *ngIf="developer.level === 'Junior'">
-            <img src="assets/img/Stormtrooper.png" alt="Junior">
+            <p-avatar class="p-avatar-icon" *ngIf="currentUser?._id === developer._id; else junior"
+              image="assets/img/Stormtrooper.png" pBadge severity="danger">
+              </p-avatar>
+            <ng-template #junior>
+              <p-avatar image="assets/img/Stormtrooper.png" severity="danger"></p-avatar>
+            </ng-template>
           </div>
           <div class="developer-avatar" *ngIf="developer.level === 'Semi Senior'">
-            <img src="assets/img/Darth-Vader.png" alt="Semi Senior">
+            <p-avatar *ngIf="currentUser?._id === developer._id;else semisenior" image="assets/img/Darth-Vader.png"
+              pBadge class="pi pi-check" severity="danger"></p-avatar>
+            <ng-template #semisenior>
+              <p-avatar image="assets/img/Darth-Vader.png" severity="danger"></p-avatar>
+
+            </ng-template>
           </div>
           <div class="developer-avatar" *ngIf="developer.level === 'Senior'">
-            <img src="assets/img/Yoda.png" alt="Senior">
+            <p-avatar *ngIf="currentUser?._id === developer._id;else senior" image="assets/img/Yoda.png" pBadge
+              class="pi pi-check" severity="danger"></p-avatar>
+            <ng-template #senior>
+              <p-avatar image="assets/img/Yoda.png" severity="danger"></p-avatar>
+            </ng-template>
           </div>
+
         </td>
-        <td class="text-center sticky">{{ developer.name }} ({{ developer.level }})</td>
+        <td class="text-center sticky">{{ developer.name }}</td>
         <td class="text-start">
           <ul class="developer-skills d-inline" *ngFor="let technologies of developer.preferences; let i = index">
-            <li class="text-center" >
+            <li class="text-center">
               <div *ngIf="i < 4">
                 {{technologies}}
               </div>
@@ -42,10 +62,11 @@
         </td>
         <td class="text-center">{{ developer.score }}</td>
         <td *ngIf="currentUser" class="btnes">
-          <p-button (click)="showModalContact(developer)" type="button" pTooltip="Contactar" icon="pi pi-envelope"
+          <p-button *ngIf="currentUser._id != developer._id !" [disabled]="developer.mailEnabled" (click)="showModalContact(developer)" type="button" pTooltip="Contactar" icon="pi pi-envelope"
             styleClass="p-button-rounded p-button-help p-button-outlined" class="mx-2"></p-button>
-          <p-button type="button" pTooltip="Ver perfil" icon="pi pi-eye"
-            styleClass="p-button-rounded p-button-help p-button-outlined" [routerLink]="'/user/see-profile/' + developer._id"></p-button>
+          <p-button (click)="seeProfile(developer._id)" type="button" pTooltip="Ver perfil" icon="pi pi-eye"
+            styleClass="p-button-rounded p-button-help p-button-outlined"
+            [routerLink]="'/user/see-profile/' + developer._id"></p-button>
         </td>
       </tr>
     </ng-template>

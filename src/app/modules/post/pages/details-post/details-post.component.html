@@ -120,6 +120,7 @@
                 icon="bi bi-envelope"
                 label="Contactar"
                 styleClass="p-button-help"
+                *ngIf="searchPost.author?.mailEnabled"
               >
               </p-button>
             </span>

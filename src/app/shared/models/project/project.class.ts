@@ -19,4 +19,5 @@ export class Project {
   requestSupport: Boolean;
   urlRepository:string;
   validateSystem:boolean;
+  roleUser?:string;
 }

@@ -56,11 +56,13 @@ export class TableUserComponent {
     this.eventEmitterPaginate.emit(event);
   }
   showModalContact(userReceptor: User) {
-    this.userReceptor = userReceptor;
-    this.visibleModalContact = true;
+    if(userReceptor.mailEnabled){
+      this.userReceptor = userReceptor;
+      this.visibleModalContact = true;
+    }
   }
 
-  hiddenPopUpModalContact(){
+  hiddenPopUpModalContact() {
     this.userReceptor = new User();
   }
 
@@ -75,7 +77,7 @@ export class TableUserComponent {
           summary: 'Creado',
           detail: '¡Su mensaje ha sido enviado con éxito!',
         });
-        this.router.navigate(['user/list-users']);
+        this.visibleModalContact = false;
       },
       (err) => {
         this.messageService.add({
@@ -87,5 +89,11 @@ export class TableUserComponent {
     );
   }
 
-
+  seeProfile(id: string) {
+    this.router.navigate(['/user/see-profile/' + id], {
+      state: {
+        seeProjects: true,
+      },
+    });
+  }
 }

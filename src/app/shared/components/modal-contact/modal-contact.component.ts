@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/shared/models/user/user.class';
-import { MessageService } from 'primeng/api';
+import { Message, MessageService } from 'primeng/api';
 import { Mail } from 'src/app/shared/models/model-mail-contact/model-mail.interface';
 
 @Component({
@@ -31,18 +31,20 @@ export class ModalContactComponent implements OnInit {
   @Output()
   emitContact: EventEmitter<Mail> = new EventEmitter();
 
+  messages: Message[] = [];
+
   constructor(private messageService: MessageService) {}
 
   ngOnInit(): void {
     this.startForm();
-    this.formContact.get('to').disable();
     this.formContact.get('for').disable();
-    this.formContact.get('to').setValue(this.userEmisor.email);
     this.formContact.get('for').setValue(this.userReceptor.email);
+    this.messages = [
+      { severity: 'info', detail: 'Si querés contactar a este usuario, podes enviarle un email' }
+    ];
   }
   startForm() {
     this.formContact = new FormGroup({
-      to: new FormControl(),
       for: new FormControl(),
       message: new FormControl("",[Validators.required,Validators.minLength(3)]),
     });

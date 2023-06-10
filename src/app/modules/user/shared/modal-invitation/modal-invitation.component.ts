@@ -12,7 +12,7 @@ import { Project } from 'src/app/shared/models/project/project.class';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/shared/models/user/user.class';
 import { MailInvitation } from 'src/app/shared/models/model-mail-invitation/model-mail-invitation.interface';
-import { MessageService } from 'primeng/api';
+import { Message, MessageService } from 'primeng/api';
 import { UserService } from 'src/app/api/services/user/user.service';
 
 @Component({
@@ -38,16 +38,19 @@ export class ModalInvitationComponent implements OnInit {
   @Output()
   emitContact: EventEmitter<MailInvitation> = new EventEmitter();
 
+  messages: Message[] = [];
+
   constructor(private messageService: MessageService,private userService:UserService) {}
 
   ngOnInit(): void {
     this.startForm();
-    this.formContact.get('to').disable();
     this.formContact.get('for').disable();
+    this.messages = [
+      { severity: 'info', detail: 'Podes contactar a esta persona para invitarla a tu proyecto' }
+    ];
   }
   startForm() {
     this.formContact = new FormGroup({
-      to: new FormControl(this.userEmisor?.email),
       for: new FormControl(this.userReceptor?.email),
       message: new FormControl('', [
       ]),
@@ -63,8 +66,6 @@ export class ModalInvitationComponent implements OnInit {
       project: this.formContact.get('project').value,
     };
 
-    console.log(this.mail);
-    
 
     this.emitContact.emit(this.mail);
   }

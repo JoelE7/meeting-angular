@@ -23,6 +23,7 @@ import { ProjectProfilesComponent } from './components/project-profiles/project-
 import { RecommendationsPostModalComponent } from './shared/recommendations-post-modal/recommendations-post-modal.component';
 import { RecommendationsProjectModalComponent } from './shared/recommendations-project-modal/recommendations-project-modal.component';
 import { RecommendationsTechnologiesModalComponent } from './shared/recommendations-technologies-modal/recommendations-technologies-modal.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { RecommendationsTechnologiesModalComponent } from './shared/recommendati
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ProjectRoutingModule,
     PrimengModule,
     StartModule,

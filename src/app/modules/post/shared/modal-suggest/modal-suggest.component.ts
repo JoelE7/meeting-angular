@@ -8,6 +8,7 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { UserService } from 'src/app/api/services/user/user.service';
+import { Message } from 'primeng/api';
 import { MailSuggest } from 'src/app/shared/models/model-mail-suggest/model-mail.interface';
 import { Post } from 'src/app/shared/models/post/post.class';
 import { User } from 'src/app/shared/models/user/user.class';
@@ -19,8 +20,6 @@ import { User } from 'src/app/shared/models/user/user.class';
   encapsulation: ViewEncapsulation.None,
 })
 export class ModalSuggestComponent {
-  az = 'jajaja';
-
   formContact: FormGroup;
 
   @Input()
@@ -40,6 +39,8 @@ export class ModalSuggestComponent {
   usersReceptor: User[] = [];
   filteredCountries: User[] = [];
 
+  messages: Message[] = [];
+
   constructor(
     private messageService: MessageService,
     private userService: UserService
@@ -47,14 +48,14 @@ export class ModalSuggestComponent {
 
   ngOnInit(): void {
     this.startForm();
-    this.formContact.get('to').disable();
-    this.formContact.get('to').setValue(this.userEmisor.email);
+    this.messages = [
+      { severity: 'info', detail: 'Podes enviarle este post a un conocido por email' }
+    ];
     // this.formContact.get('post').setValue(this.post.title)
     this.getUsers();
   }
   startForm() {
     this.formContact = new FormGroup({
-      to: new FormControl(),
       for: new FormControl('', [Validators.required]),
       message: new FormControl('', []),
       // post:new FormControl(),
@@ -65,7 +66,9 @@ export class ModalSuggestComponent {
     this.userService.getAllUser().subscribe(
       (data) => {
         this.usersReceptor = data;
-        this.removeCurrentUserFilters()
+        console.log(this.userReceptor);
+        
+        this.removeCurrentUserFilters();
       },
       (err) => {
         this.messageService.add({
@@ -85,7 +88,6 @@ export class ModalSuggestComponent {
     };
 
     this.emitContact.emit(this.mail);
-
   }
 
   filterUsers(event) {
@@ -94,7 +96,7 @@ export class ModalSuggestComponent {
 
     for (let i = 0; i < this.usersReceptor.length; i++) {
       let user: User = this.usersReceptor[i];
-      if (user.email.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+      if (user.email.toLowerCase().indexOf(query.toLowerCase()) == 0 && user.mailEnabled) {
         filtered.push(user);
       }
     }
@@ -102,11 +104,12 @@ export class ModalSuggestComponent {
     this.filteredCountries = filtered;
   }
 
-  removeCurrentUserFilters(){
-    let index = this.usersReceptor.findIndex((user:User) => user._id === this.userEmisor._id);
+  removeCurrentUserFilters() {
+    let index = this.usersReceptor.findIndex(
+      (user: User) => user._id === this.userEmisor._id
+    );
     if (index != -1) {
       this.usersReceptor.splice(index, 1);
     }
-    
   }
 }

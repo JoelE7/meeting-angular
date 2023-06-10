@@ -16,4 +16,5 @@ export class User {
   posts: Post[] = [];
   githubUsername:string;
   level:string;
+  mailEnabled?:boolean;
 }

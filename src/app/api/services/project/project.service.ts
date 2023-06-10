@@ -79,8 +79,7 @@ export class ProjectService {
       );
   }
 
-  //TODO: REVISAR ESTO, LA ENTIDAD CAMBIO
-  getAllProjects(query: any = [],paginate: any) {
+  getAllProjects(query: any = [],paginate: any,currentUser:boolean) {
     let filtersAccept = [
       'name',
       'description',
@@ -103,10 +102,13 @@ export class ProjectService {
         : this.filterService.getFiltersForGet(query, filtersAccept);
 
     let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
+    if(currentUser){
+      headers = headers.append(
+        'Authorization',
+        'Bearer ' + localStorage.getItem('token')
+      );
+    }
+
 
     return this.http
       .post(`${environment.apiUrl}/projects/filter/${paginate}`, queryBuild, {

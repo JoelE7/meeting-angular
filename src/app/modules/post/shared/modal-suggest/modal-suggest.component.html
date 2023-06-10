@@ -1,17 +1,9 @@
 <form [formGroup]="formContact" (ngSubmit)="submitContact()" class="">
-  <div class="row p-0">
-    <div class="col-sm-12 col-md-12 ">
-      <label class="color" for="to">De:</label>
-      <input type="text" pInputText formControlName="to" class="form-control" placeholder="De:" />
-      <span class="danger" *ngIf="
-      formContact.get('to').hasError('required') &&
-      formContact.get('to').touched
-    ">
-     <small class="p-error">Este campo es <strong>requerido</strong></small>
-   </span>
+  <div class="row">
+    <div class="col">
+      <p-messages [(value)]="messages" [enableService]="false" [closable]="true"></p-messages>
     </div>
   </div>
-
   <div class="row mt-3 p-0">
     <div class="col-sm-12 col-md-12">
       <label class="color" for="for">Para:</label>

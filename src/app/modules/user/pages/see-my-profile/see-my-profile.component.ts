@@ -37,6 +37,8 @@ export class SeeMyProfileComponent {
   id:string;
   idCurrentUser = "";
 
+  activeIndex = 0;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
@@ -45,6 +47,12 @@ export class SeeMyProfileComponent {
   ) {}
 
   async ngOnInit() {
+    let seeProjects = history.state.seeProjects;
+    if(seeProjects){
+      this.activeIndex = 1;
+    }
+
+
     let { id } = this.activatedRoute.snapshot.params;
     this.id = id;
     this.searchUser = await this.userService.detailsUserAsync(id);

@@ -38,7 +38,8 @@ export class RegisterComponent {
       name: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       pass: new FormControl('', Validators.required),
-      profile: new FormControl('', Validators.required)
+      profile: new FormControl('', Validators.required),
+      mailEnabled: new FormControl(true)
     });
   }
 
@@ -47,6 +48,7 @@ export class RegisterComponent {
     this.userRegister.email = this.form.get('email').value;
     this.userRegister.password = this.form.get('pass').value;
     this.userRegister.role = this.form.get('profile').value;
+    this.userRegister.mailEnabled = this.form.get('mailEnabled').value;
 
     this.authService.registerUser(this.userRegister).subscribe(
       async (data) => {

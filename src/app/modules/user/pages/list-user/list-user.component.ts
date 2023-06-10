@@ -9,6 +9,9 @@ import { User } from 'src/app/shared/models/user/user.class';
   encapsulation: ViewEncapsulation.None,
 })
 export class ListUserComponent implements OnInit {
+
+  currentUser: User = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;
+
   developers: User[] = [];
 
   spinner = true;

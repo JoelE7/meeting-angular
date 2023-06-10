@@ -39,7 +39,14 @@
       <div class="row p-0">
         <div class="col-12 col-sm-12 col-md-4 col-lg-4">
           <div class="" id="filtro">
-            <h2>Filtros</h2>
+            <div class="row">
+              <div class="col-6">
+                <h2>Filtros</h2>
+              </div>
+              <div class="col-6">
+                <p-checkbox *ngIf="currentUser" label="Mis proyectos" [(ngModel)]="searchProjectCurrentUser" [binary]="true" inputId="binary"></p-checkbox>
+              </div>
+            </div>
             <app-filters [filters]="filters"></app-filters>
             <p-button type="button" [style]="{ width: '100%' }" label="Filtrar" class="float-center pt-3 mt-sm-3 mt-md-3 d-block"
               styleClass="p-button-help" icon="pi pi-search" (click)="getFilters()"></p-button>
