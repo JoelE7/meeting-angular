@@ -110,13 +110,14 @@
       <!-- TECNOLOGIAS -->
 
     
-  <div class="text-center mt-3">
+  <div class="text-center p-4">
     <p-button
+      [disabled]="form.invalid"
       type="submit"
-      [style]="{ width: '80%' }"
+      [style]="{ width: '100%' }"
       label="Crear"
-      class="text-center d-block"
-      styleClass="p-button-help mx-2"
+      class="text-center"
+      styleClass="p-button-help"
     ></p-button>
   </div>
 </form>

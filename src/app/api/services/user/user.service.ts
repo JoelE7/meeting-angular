@@ -52,10 +52,10 @@ export class UserService {
 
   updateUser(user: User) {
     let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
 
     return this.http
       .put(`${environment.apiUrl}/users/${user._id}`, user, {
@@ -70,10 +70,10 @@ export class UserService {
 
   updatePreferences(user: User, update: any = {}) {
     let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
 
     return this.http
       .put(`${environment.apiUrl}/users/${user._id}`, update, {

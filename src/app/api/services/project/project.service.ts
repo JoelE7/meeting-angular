@@ -64,10 +64,10 @@ export class ProjectService {
 
   updateProject(project: Project) {
     let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
     return this.http
       .put(`${environment.apiUrl}/projects/${project._id}`, project, {
         headers: headers,

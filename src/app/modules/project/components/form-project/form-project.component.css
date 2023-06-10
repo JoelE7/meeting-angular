@@ -4,4 +4,10 @@ p-calendar .p-button{
   border: 1px solid #c42e6c !important;
 }
 
-
+@media (max-width: 767.98px) {
+  .switch {
+    margin-top: 20px;
+    margin-left: 10px;
+  }
+   
+}

@@ -60,3 +60,17 @@
  } 
 }
 
+/* hasta 767 sea mayor a 767px */
+/* @media (min-width: 767px) {
+  .btnPost {
+    text-align: end;
+  }
+} */
+
+@media (max-width: 1200px) {
+  .btnes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

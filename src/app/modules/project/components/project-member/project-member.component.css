@@ -1,3 +1,8 @@
 .cursor-pointer{
     cursor: pointer;
 }
+@media (max-width: 575px) {
+    .btnSeeProfile {
+      text-align: end;
+    }
+  }
