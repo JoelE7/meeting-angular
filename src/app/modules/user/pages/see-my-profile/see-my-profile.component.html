@@ -1,6 +1,6 @@
 <p-dialog header="Redactar mensaje" (onHide)="hiddenPopUpInvitation()" *ngIf="currentUser && userReceptor._id" [(visible)]="visibleModalInvitation" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
-  <app-modal-invitation  [userEmisor]="currentUser" [userReceptor]="userReceptor" (emitContact)="sendMailInvitation($event)"></app-modal-invitation> 
-</p-dialog> 
+  <app-modal-invitation  [userEmisor]="currentUser" [userReceptor]="userReceptor" (emitContact)="sendMailInvitation($event)"></app-modal-invitation>
+</p-dialog>
 <div class="profile">
   <div class="container rounded">
     <span class="fst-italic text-secondary small">
@@ -13,7 +13,7 @@
       <div class="d-flex banner-profile">
         <img src="assets/img/no-user.jpg" alt="Foto de usuario" id="profile" class="img-fluid" />
         <div class="infoName">
-          <h3 class="text-light">{{ searchUser.name }}</h3>
+          <h3 class="text-light" style="text-shadow: 1px 1px 1px #000;">{{ searchUser.name }}</h3>
           <h6 class="fst-italic text-dark">
             {{ searchUser.role }} Developer
           </h6>          <span class="fst-italic text-dark small"> {{ searchUser.score }} pts - {{ searchUser.level }}</span>
@@ -142,7 +142,7 @@
               styleClass="p-button-help"></p-button>
           </form>
         </p-tabPanel>
-      </p-tabView>  
+      </p-tabView>
     </div>
   </div>
 </div>

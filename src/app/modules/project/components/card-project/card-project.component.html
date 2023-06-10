@@ -5,11 +5,13 @@
     </div>
     <div class="col-6 text-end">
       <span class="text-end" *ngIf="project?.roleUser ==='leader'">
-        <i class="fa-solid fa-crown h4"></i> </span>
+        <i class="fa-solid fa-crown h4" pTooltip="Eres lider de este proyecto"></i>
+      </span>
       <span class="text-end" *ngIf="project?.roleUser ==='participant'">
-         <i class="fa-solid fa-user h4"></i></span>
+        <i class="fa-solid fa-user h4" pTooltip="Eres miembro de este proyecto"></i>
+      </span>
       <span class="text-end" *ngIf="project?.roleUser ==='support'">
-        <i class="fa-solid fa-screwdriver-wrench h4"></i>
+        <i class="fa-solid fa-screwdriver-wrench h4" pTooltip="Brindas soporte a este proyecto"></i>
       </span>
     </div>
   </div>
