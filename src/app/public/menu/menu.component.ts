@@ -30,6 +30,21 @@ export class MenuComponent implements OnInit,DoCheck {
   ngOnInit(): void {
     this.menu = [
       {
+        name: 'Home',
+        icon: 'bi bi-houses text-center ',
+        url: '/home',
+        urlActiveClass: 'active',
+        tooltip: 'Home',
+        tooltipOptions: {
+          showDelay: 1000,
+          autoHide: false,
+          tooltipEvent: 'hover',
+          tooltipPosition: 'bottom',
+        },
+        visible: false,
+        class: 'nav-link items-nav d-flex flex-column',
+      },
+      {
         name: 'Proyectos',
         icon: 'bi bi-clipboard-minus text-center ',
         url: '/project/list-project',
