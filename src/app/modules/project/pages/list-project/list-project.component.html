@@ -8,12 +8,23 @@
 
 <div class="m-auto projects">
   <div class="container row standingOut shadow-sm" style="margin: 10px 0px;" *ngIf="!spinnerSuggestion">
-    <div class="col">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
       <app-suggestions-project *ngIf="suggestionsProject" [suggestions]="suggestionsProject"></app-suggestions-project>
     </div>
   </div>
-
-  <div class="container d-flex flex-column standingOut shadow-sm p-3 mb-2" *ngIf="!spinner">
+  <div class="container p-3 mb-2 d-flex flex-column standingOut shadow-sm " *ngIf="!spinner">
+    <div class="card mb-2 shadow-sm">
+    <!-- seccion titulo mas boton -->
+    <div class="row d-flex mt-3">
+      <div class="col-sm-6 col-md-9 col-lg-9">
+        <h3 class="title mt-sm-4 m-0">Proyectos</h3>
+      </div>
+      <div class="col-sm-6 col-md-3 col-lg-3  mb-md-0 mb-4">
+        <p-button type="button" [style]="{ width: '100%' }" label="Crear Proyecto" class=" pt-3 float-end"
+          styleClass=" p-button-help" routerLink="/project/create" *ngIf="currentUser"></p-button>
+      </div>
+    </div>
+  <!-- <div class="container d-flex flex-column standingOut shadow-sm p-3 mb-2" *ngIf="!spinner">
     <div class="row w-100 d-flex">
       <div class="offset-0 col-sm-12 offset-md-1">
         <h3 class="text-center p-0 m-0">Proyectos</h3>
@@ -22,19 +33,19 @@
         <p-button type="button" [style]="{ width: '100%' }" label="Crear Proyecto" class="float-end"
           styleClass=" p-button-help" routerLink="/project/create" *ngIf="currentUser"></p-button>
       </div>
-    </div>
+    </div> -->
     <!----------------- COMPONENTE FILTRO-------------------->
     <div class="container">
-      <div class="row mt-5 p-0">
-        <div class="offset-0 col-sm-12 col-md-5 offset-md-1">
+      <div class="row p-0">
+        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
           <div class="" id="filtro">
             <h2>Filtros</h2>
             <app-filters [filters]="filters"></app-filters>
-            <p-button type="button" [style]="{ width: '100%' }" label="Filtrar" class="float-center mt-3 d-block"
+            <p-button type="button" [style]="{ width: '100%' }" label="Filtrar" class="float-center pt-3 mt-sm-3 mt-md-3 d-block"
               styleClass="p-button-help" icon="pi pi-search" (click)="getFilters()"></p-button>
           </div>
         </div>
-        <div class="offset-0 col-sm-12 col-md-5">
+        <div class="col-12 col-sm-12 col-md-8 col-lg-8">
           <app-card-project *ngFor="let project of listProject" [project]="project"></app-card-project>
           <p-paginator [totalRecords]="totalRecords" [rows]="size" (onPageChange)="paginatePosts($event)"></p-paginator>
         </div>

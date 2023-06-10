@@ -6,3 +6,25 @@
 .cardPost {
   border: 1px solid #ad2c73 !important;
 }
+
+@media (max-width: 395px) {
+  .btnPost {
+    text-align: center !important;
+  }
+
+  .btnPostRounded{
+    text-align: start !important;
+  }
+}
+/* hasta 767 sea mayor a 767px */
+@media (min-width: 767px) {
+  .btnPost {
+    text-align: end;
+  }
+}
+
+@media (max-width: 767px) {
+  .btnPost {
+    text-align: center;
+  }
+}

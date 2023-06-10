@@ -1,6 +1,3 @@
-<!-- <p-dialog header="Redactar mensaje" *ngIf="currentUser && userReceptor._id" [(visible)]="visibleModalContact" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
-  <app-modal-contact [userEmisor]="currentUser" [userReceptor]="userReceptor" (emitContact)="sendMailContact($event)"></app-modal-contact>
-</p-dialog> -->
 <p-dialog [header]="'Finalizar proyecto'" [(visible)]="visiblePopUpScore" *ngIf="searchProject.participants">
   <app-modal-score [users]="searchProject.participants" (eventEmitterHiddenPopUpScore)="hiddenPopUpScore($event)"
     (eventEmitterScoreUsers)="finishProject($event)"></app-modal-score>
@@ -16,7 +13,8 @@
 
 <div class="profile" *ngIf="!spinner && searchProject">
   <div class="container rounded">
-    <span class="fst-italic text-secondary small"><a href="" class="text-secondary" style="text-decoration: none"
+    <span class="fst-italic text-secondary small"><i class="m-1 pi pi-arrow-circle-left"></i>
+      <a href="" class="text-secondary" style="text-decoration: none"
         routerLink="/project/list-project">Volver</a>
       |
       <a routerLink="/project/details-project/1" class="text-secondary" style="text-decoration: none">{{
@@ -24,7 +22,7 @@
     <div class="card shadow-sm" style="width: 100%; min-height: 700px">
       <app-banner [title]="searchProject.name" [subtitle]="'Aplicacion ' + searchProject.type"
         [short]="true"></app-banner>
-      <p-tabView class="p-3" [(activeIndex)]="activeIndex">
+      <p-tabView class="p-3" [scrollable]="true"  [(activeIndex)]="activeIndex">
         <p-tabPanel [cache]="false" header="Datos del proyecto">
           <div class="row">
             <div class="col-12">
@@ -33,25 +31,19 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-6">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
               <p>
                 <b>Fecha inicio: </b>
                 <span>{{ searchProject.startDate | date : "dd/MM/YYYY" }}</span>
               </p>
             </div>
-            <!-- <div class="col-6">
-              <p>
-                <b>Fecha Fin: </b>
-                <span>{{ searchProject.start | date : "dd/MM/YYYY" }}</span>
-              </p>
-            </div> -->
-            <div class="col-6">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
               <p>
                 <b>Cantidad de participantes: </b>
                 <span>{{ searchProject.amountParticipants }}</span>
               </p>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
               <p>
                 <b>Complejidad: </b>
                 <span>{{ searchProject.complexity }}</span>
@@ -59,7 +51,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-6">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
               <p><b>Tecnologías:</b></p>
               <ul>
                 <li *ngFor="let tecnologie of searchProject.technologies">
@@ -67,7 +59,7 @@
                 </li>
               </ul>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
               <p>
                 <b>Estado del proyecto: </b>
                 <span>{{ searchProject.status }}</span>
@@ -75,7 +67,7 @@
             </div>
           </div>
           <div class="row" *ngIf="searchProject.urlRepository">
-            <div class="col-12">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
               <p class="link">
                 <b>Url del repositorio: </b>
                 <a target="_blank" [href]="searchProject.urlRepository">{{
@@ -189,7 +181,7 @@
               <app-advancement-members [members]="supports"></app-advancement-members>
             </div>
             <div class="row text-end mt-3">
-              <div class="col-12">
+              <div class="col-12 col-sm-12">
                 <p-button (click)="backMembersProject()" type="button" [style]="{ width: '100%' }"
                   label="Volver" class="text-end" styleClass="p-button-help"></p-button>
               </div>
@@ -207,7 +199,7 @@
           </div>
           <div class="row" *ngIf="!spinnerMetric">
             <div class="col-12">
-              <h5>Commits del proyecto:</h5>
+              <h5 class="mx-3">Commits del proyecto:</h5>
               <app-chart-bar *ngIf="data" [data]="data"></app-chart-bar>
             </div>
           </div>

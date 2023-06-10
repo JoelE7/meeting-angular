@@ -31,7 +31,7 @@
           </div>
         </td>
         <td class="text-center sticky">{{ developer.name }} ({{ developer.level }})</td>
-        <td class="text-center">
+        <td class="text-start">
           <ul class="developer-skills d-inline" *ngFor="let technologies of developer.preferences; let i = index">
             <li class="text-center" >
               <div *ngIf="i < 4">
@@ -41,9 +41,9 @@
           </ul>
         </td>
         <td class="text-center">{{ developer.score }}</td>
-        <td *ngIf="currentUser" class="text-center">
+        <td *ngIf="currentUser" class="btnes">
           <p-button (click)="showModalContact(developer)" type="button" pTooltip="Contactar" icon="pi pi-envelope"
-            styleClass="p-button-rounded p-button-help p-button-outlined"></p-button>
+            styleClass="p-button-rounded p-button-help p-button-outlined" class="mx-2"></p-button>
           <p-button type="button" pTooltip="Ver perfil" icon="pi pi-eye"
             styleClass="p-button-rounded p-button-help p-button-outlined" [routerLink]="'/user/see-profile/' + developer._id"></p-button>
         </td>

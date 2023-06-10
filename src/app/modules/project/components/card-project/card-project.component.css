@@ -9,11 +9,11 @@
 #infoProject {
   display: flex;
   justify-content: space-between;
+ 
 }
 @media (max-width: 991.98px) {
   #infoProject {
-    margin-top: 20px;
+    margin-top: 30px;
     display: block;
-   
   }
 }

@@ -1,7 +1,7 @@
 .banner{
   min-height: 550px;
   width: 100%;
-  background-image: url('../../../assets/img/img_6.png');
+  background-image: url('src/assets/img/img_6.png');
   background-size: cover;
 }
 
@@ -13,9 +13,10 @@
   min-height: 500px;
 }
 
-.step{
+
+/* .step{
   width: 30%;
-}
+} */
 
 .image{
   height: 60%;
