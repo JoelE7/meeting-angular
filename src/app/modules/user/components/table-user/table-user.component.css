@@ -1,5 +1,5 @@
 .row-accessories {
-  background-color: rgba(0, 0, 0, 0.15) !important;
+  background-color: #c42e6d15 !important;
 }
 
 .developer-avatar {
@@ -54,14 +54,14 @@
  p-table tbody tr .sticky{
   background-color: #fff;
  }
- 
+
  /* .p-datatable .p-datatable-thead tr th .sticky {
   background-color: #fff;
  } */
 
   p-table thead th .sticky{
   background-color:#333;
- } 
+ }
 }
 
 /* hasta 767 sea mayor a 767px */
