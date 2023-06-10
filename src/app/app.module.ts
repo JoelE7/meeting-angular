@@ -22,10 +22,10 @@ registerLocaleData(localeEs, "es");
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
     PrimengModule,
     SharedModule,
     UserModule,
@@ -37,5 +37,6 @@ registerLocaleData(localeEs, "es");
   ],
   providers: [MessageService,{provide:LOCALE_ID,useValue:'es'}],
   bootstrap: [AppComponent],
+  exports : [BrowserModule,BrowserAnimationsModule]
 })
 export class AppModule {}

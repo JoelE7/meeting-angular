@@ -6,7 +6,6 @@ import { ChartLineComponent } from './components/chart-line/chart-line.component
 import { PrimengModule } from './primeng/primeng.module';
 import { FiltersComponent } from './filters/filters.component';
 import { ModalContactComponent } from './components/modal-contact/modal-contact.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,7 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ModalContactComponent,
    
   ],
-    imports: [CommonModule, PrimengModule,BrowserAnimationsModule],
+    imports: [CommonModule, PrimengModule],
   exports: [
     ChartBarComponent,
     ChartDoughnutComponent,
