@@ -32,6 +32,24 @@ export class UserService {
       );
   }
 
+  getAllUser() {
+    let headers = new HttpHeaders();
+    // headers = headers.append(
+    //   'Authorization',
+    //   'Bearer' + localStorage.getItem('token')
+    // );
+
+    return this.http
+      .post(`${environment.apiUrl}/users/find`,{} ,{
+        headers: headers,
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
   updateUser(user: User) {
     let headers = new HttpHeaders();
     // headers = headers.append(

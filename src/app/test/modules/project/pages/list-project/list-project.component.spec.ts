@@ -7,7 +7,6 @@ import { of } from 'rxjs';
 import { ProjectService } from 'src/app/api/services/project/project.service';
 import { SuggestionsProjectComponent } from 'src/app/modules/project/components/suggestions-project/suggestions-project.component';
 import { ListProjectComponent } from 'src/app/modules/project/pages/list-project/list-project.component';
-import { ModalQuestionComponent } from 'src/app/modules/project/shared/question-modal/modal-question.component';
 import { FiltersComponent } from 'src/app/shared/filters/filters.component';
 import { Project } from 'src/app/shared/models/project/project.class';
 import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
@@ -15,6 +14,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CardProjectComponent } from 'src/app/modules/project/components/card-project/card-project.component';
 import { mockGetAllProjects, mockGetSuggestedProjects, mockProjectService } from 'src/app/test/__mocks__/services/project/project.service.mock';
 import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
+import { RecommendationsPostModalComponent } from 'src/app/modules/project/shared/recommendations-post-modal/recommendations-post-modal.component';
+import { RecommendationsProjectModalComponent } from 'src/app/modules/project/shared/recommendations-project-modal/recommendations-project-modal.component';
+import { RecommendationsTechnologiesModalComponent } from 'src/app/modules/project/shared/recommendations-technologies-modal/recommendations-technologies-modal.component';
 
 describe('ListProjectComponentConLogin', () => {
   let component: ListProjectComponent;
@@ -25,9 +27,11 @@ describe('ListProjectComponentConLogin', () => {
       declarations: [
         ListProjectComponent,
         SuggestionsProjectComponent,
-        ModalQuestionComponent,
         FiltersComponent,
-        CardProjectComponent
+        CardProjectComponent,
+        RecommendationsPostModalComponent,
+        RecommendationsProjectModalComponent,
+        RecommendationsTechnologiesModalComponent
       ],
       providers: [MessageService,FilterService, { provide: ProjectService, useValue: mockProjectService },],
       imports: [
@@ -65,9 +69,11 @@ describe('ListProjectComponentSinLogin', () => {
       declarations: [
         ListProjectComponent,
         SuggestionsProjectComponent,
-        ModalQuestionComponent,
         FiltersComponent,
-        CardProjectComponent
+        CardProjectComponent,
+        RecommendationsPostModalComponent,
+        RecommendationsProjectModalComponent,
+        RecommendationsTechnologiesModalComponent
       ],
       providers: [MessageService,FilterService, { provide: ProjectService, useValue: mockProjectService },],
       imports: [

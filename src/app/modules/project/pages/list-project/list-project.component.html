@@ -6,7 +6,7 @@
   <span class="text-center">Cargando...</span>
 </div>
 
-<div class="m-auto projects" >
+<div class="m-auto projects">
   <div class="container row standingOut shadow-sm" style="margin: 10px 0px;" *ngIf="!spinnerSuggestion">
     <div class="col">
       <app-suggestions-project *ngIf="suggestionsProject" [suggestions]="suggestionsProject"></app-suggestions-project>
@@ -43,10 +43,15 @@
 
     </div>
     <!----------------- COMPONENTE modal-------------------->
-    <p-dialog [header]="question" [(visible)]="visiblePopUpQuestion" [position]="'right'"
-      [transitionOptions]="'1000ms'">
-      <app-modal-question (eventEmitterHiddenPopUpQuestion)="hiddenPopUpQuestion($event)"
-        (eventEmitterAnswer)="answerQuestion($event)"></app-modal-question>
+    <p-dialog *ngIf="recommendationsQuestionUser" [header]="recommendationsQuestionUser?.result?.question"
+      [(visible)]="visiblePopUpQuestion" [position]="'right'" [transitionOptions]="'1000ms'">
+      <app-recommendations-technologies-modal *ngIf="recommendationsQuestionUser.type === 'recommendation'"
+        (eventEmitterHiddenPopUpQuestion)="hiddenPopUpQuestion($event)"
+        (eventEmitterAnswer)="answerQuestion($event)"></app-recommendations-technologies-modal>
+      <app-recommendations-post-modal [posts]="recommendationsQuestionUser.result.results"
+        *ngIf="recommendationsQuestionUser.type === 'post'"></app-recommendations-post-modal>
+      <app-recommendations-project-modal *ngIf="recommendationsQuestionUser.type === 'project'"
+        [projects]="recommendationsQuestionUser.result.results"></app-recommendations-project-modal>
     </p-dialog>
     <!----------------- COMPONENTE modal-------------------->
   </div>

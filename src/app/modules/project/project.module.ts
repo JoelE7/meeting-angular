@@ -12,7 +12,6 @@ import { UpdateProjectComponent } from './pages/update-project/update-project.co
 import { RequestSendModalComponent } from './shared/request-send-modal/request-send-modal.component';
 import { RequestAcceptModalComponent } from './shared/request-accept-modal/request-accept-modal.component';
 import { StartModule } from 'src/app/public/start.module';
-import { ModalQuestionComponent } from './shared/question-modal/modal-question.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SearchProjectComponent } from './pages/search-project/search-project.component';
 import { PostModule } from '../post/post.module';
@@ -21,6 +20,9 @@ import { SupportCollaborateComponent } from './components/support-collaborate/su
 import { ProjectMemberComponent } from './components/project-member/project-member.component';
 import { AdvancementMembersComponent } from './components/advancement-members/advancement-members.component';
 import { ProjectProfilesComponent } from './components/project-profiles/project-profiles.component';
+import { RecommendationsPostModalComponent } from './shared/recommendations-post-modal/recommendations-post-modal.component';
+import { RecommendationsProjectModalComponent } from './shared/recommendations-project-modal/recommendations-project-modal.component';
+import { RecommendationsTechnologiesModalComponent } from './shared/recommendations-technologies-modal/recommendations-technologies-modal.component';
 
 
 @NgModule({
@@ -34,13 +36,15 @@ import { ProjectProfilesComponent } from './components/project-profiles/project-
     DetailsProjectComponent,
     RequestSendModalComponent,
     RequestAcceptModalComponent,
-    ModalQuestionComponent,
     SearchProjectComponent,
     ModalScoreComponent,
     SupportCollaborateComponent,
     ProjectMemberComponent,
     AdvancementMembersComponent,
     ProjectProfilesComponent,
+    RecommendationsPostModalComponent,
+    RecommendationsProjectModalComponent,
+    RecommendationsTechnologiesModalComponent,
   ],
   imports: [
     CommonModule,
@@ -59,12 +63,14 @@ import { ProjectProfilesComponent } from './components/project-profiles/project-
     DetailsProjectComponent,
     RequestSendModalComponent,
     RequestAcceptModalComponent,
-    ModalQuestionComponent,
     SearchProjectComponent,
     SupportCollaborateComponent,
     ProjectMemberComponent,
     AdvancementMembersComponent,
     ProjectProfilesComponent,
+    RecommendationsPostModalComponent,
+    RecommendationsProjectModalComponent,
+    RecommendationsTechnologiesModalComponent,
   ]
 })
 export class ProjectModule { }

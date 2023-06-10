@@ -34,6 +34,8 @@ export class LoginComponent implements OnInit {
 
     this.authService.loginUser(this.userLogin).subscribe(
       (data: any) => {
+        console.log(data.user);
+        
         this.messageService.add({
           severity: 'success',
           summary: '¡Hecho!',

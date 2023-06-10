@@ -65,8 +65,6 @@ export class DetailsPostComponent {
     this.postService.detailsPost(id).subscribe(
       (post) => {
         this.searchPost = post;
-        console.log(post);
-
       },
       (err) => {
         this.messageService.add({
@@ -117,7 +115,6 @@ export class DetailsPostComponent {
 
   sendMailContact(mail:Mail){
   this.newContact = mail;
-    console.log(this.newContact);
 
     this.userService.sendMailContact(this.newContact).subscribe(
       (resp) => {
@@ -126,7 +123,7 @@ export class DetailsPostComponent {
           summary: 'Creado',
           detail: '¡Su mensaje ha sido enviado con éxito!',
         });
-        this.router.navigate(['post/list-post']);
+        this.visibleModalContact = false;
       },
       (err) => {
         this.messageService.add({
@@ -140,7 +137,6 @@ export class DetailsPostComponent {
 
   sendMailSuggestPost(mail: MailSuggest) {
     this.newSuggest = mail;
-    console.log(this.newSuggest);
 
     this.postService.sendMailSuggestPost(this.newSuggest).subscribe(
       (resp) => {
@@ -149,7 +145,7 @@ export class DetailsPostComponent {
           summary: 'Creado',
           detail: '¡Su sugerencia ha sido enviado con éxito!',
         });
-        this.router.navigate(['post/list-post']);
+        this.visibleModalSuggest = false;
       },
       (err) => {
         this.messageService.add({

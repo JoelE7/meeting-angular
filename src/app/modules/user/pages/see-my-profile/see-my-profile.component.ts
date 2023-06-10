@@ -30,12 +30,12 @@ export class SeeMyProfileComponent {
 
   spinnerMetric: boolean = true;
 
-  searchProject:Project= new Project();
   visibleModalInvitation:boolean = false;
   userReceptor: User = new User();
   newInvitation: MailInvitation;
 
   id:string;
+  idCurrentUser = "";
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -48,7 +48,11 @@ export class SeeMyProfileComponent {
     let { id } = this.activatedRoute.snapshot.params;
     this.id = id;
     this.searchUser = await this.userService.detailsUserAsync(id);
-
+    this.userReceptor = this.searchUser
+    this.currentUser = await this.userService.detailsUserAsync(this.currentUser._id);
+    this.idCurrentUser = this.currentUser._id;
+    // this.listProjectsUserEmisor = this.currentUser.projects;
+    
     if (this.searchUser.githubUsername) {
        this.getLanguagesGithub();
       this.getCommitsByUserGithub();
@@ -135,7 +139,6 @@ export class SeeMyProfileComponent {
         },
       ],
     };
-    console.log(this.languagesUser);
   }
 
   async getCommitsByUserGithub() {
@@ -174,9 +177,18 @@ export class SeeMyProfileComponent {
     };
   }
 
-  showModalInvitation(){
+  async showModalInvitation(){
     this.visibleModalInvitation = true;
+    this.currentUser = await this.userService.detailsUserAsync(this.currentUser._id);
+    this.idCurrentUser = this.currentUser._id
+
   }
+
+  hiddenPopUpInvitation(){
+    this.visibleModalInvitation = false;
+    this.idCurrentUser = "";
+  }
+
   sendMailInvitation(mail: MailInvitation) {
     this.newInvitation = mail;
     console.log(this.newInvitation);
@@ -188,6 +200,7 @@ export class SeeMyProfileComponent {
           summary: 'Creado',
           detail: '¡Su invitación ha sido enviado con éxito!',
         });
+        this.visibleModalInvitation = false;
       },
       (err) => {
         this.messageService.add({
