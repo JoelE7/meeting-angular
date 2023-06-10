@@ -4,16 +4,23 @@
 
 .item-suggestion{
   border-radius: 5px;
-  padding: 20px 0px;
   transition: all 1s ease-in-out;
   border: 2px solid #f1bcd173 !important;
 }
 
 .item-suggestion:hover{
-  transform: scale(1.1);
+  border-color: #c42e6c !important;
 }
 
 .title-suggestion{
-
+  height: 70px;
+  border-radius: 3px 3px 0 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  background: url("../../../../../assets/img/Banner5.png");
+  background-position: 50% 90% !important;
+  background-size: cover;
+  color: rgb(255, 255, 255);
+  text-shadow: 1px 1px 1px #000;
 }
 
