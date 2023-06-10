@@ -17,8 +17,17 @@
     <ng-template pTemplate="body" let-developer>
       <tr>
         <td>
-          <div class="developer-avatar">
-            <img src="assets/img/no-user.jpg" alt="Foto de usuario" class="mt-2" />
+          <div class="developer-avatar" *ngIf="developer.level === 'Trainee'">
+            <img src="assets/img/C-3po.png" alt="Trainee">
+          </div>
+          <div class="developer-avatar" *ngIf="developer.level === 'Junior'">
+            <img src="assets/img/Stormtrooper.png" alt="Junior">
+          </div>
+          <div class="developer-avatar" *ngIf="developer.level === 'Semi Senior'">
+            <img src="assets/img/Darth-Vader.png" alt="Semi Senior">
+          </div>
+          <div class="developer-avatar" *ngIf="developer.level === 'Senior'">
+            <img src="assets/img/Yoda.png" alt="Senior">
           </div>
         </td>
         <td class="text-center sticky">{{ developer.name }} ({{ developer.level }})</td>
