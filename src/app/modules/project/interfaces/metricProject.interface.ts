@@ -1,17 +1,17 @@
 export interface MetricProject {
-    developerUsername?:              string;
-    commits?:                        CommitsByUserCommits;
-    contributionDistributionByType?: ContributionDistributionByType;
+    commitByUser:                   CommitByUser[];
 }
 
-export interface CommitsByUserCommits {
+export interface CommitByUser {
+    developerUsername: string;
+    commits:           CommitByUserCommits;
+}
+
+export interface CommitByUserCommits {
     commitCount:          number;
     commitFrequencyByDay: number;
 }
 
-export interface ContributionDistributionByType {
-    commits:      any;
-    issues:       any;
-    pullRequests: any;
-}
+
+
 

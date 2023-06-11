@@ -1,14 +1,14 @@
-<p-dialog header="Redactar mensaje" (onHide)="hiddenPopUpInvitation()" *ngIf="currentUser && userReceptor._id" [(visible)]="visibleModalInvitation" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
-  <app-modal-invitation  [userEmisor]="currentUser" [userReceptor]="userReceptor" (emitContact)="sendMailInvitation($event)"></app-modal-invitation>
+<p-dialog header="Redactar mensaje" (onHide)="hiddenPopUpInvitation()" *ngIf="currentUser && userReceptor._id"
+  [(visible)]="visibleModalInvitation" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false"
+  [resizable]="false">
+  <app-modal-invitation [userEmisor]="currentUser" [userReceptor]="userReceptor"
+    (emitContact)="sendMailInvitation($event)"></app-modal-invitation>
 </p-dialog>
 <div class="profile">
   <div class="container rounded">
     <span class="fst-italic text-secondary small">
       <i class="m-1 pi pi-arrow-circle-left"></i>
-      <a href="" class="text-secondary" routerLink="/project/list-project"
-        >Volver</a
-      ></span
-    >
+      <a href="" class="text-secondary" routerLink="/project/list-project">Volver</a></span>
     <div class="card shadow-sm" style="width: 100%; min-height: 800px">
       <div class="d-flex banner-profile">
         <img src="assets/img/no-user.jpg" alt="Foto de usuario" id="profile" class="img-fluid" />
@@ -16,11 +16,11 @@
           <h3 class="text-light" style="text-shadow: 1px 1px 1px #000;">{{ searchUser.name }}</h3>
           <h6 class="fst-italic text-dark">
             {{ searchUser.role }} Developer
-          </h6>          <span class="fst-italic text-dark small"> {{ searchUser.score }} pts - {{ searchUser.level }}</span>
+          </h6> <span class="fst-italic text-dark small"> {{ searchUser.score }} pts - {{ searchUser.level }}</span>
         </div>
       </div>
-      <p-tabView  id="tableProfile" [scrollable]="true" class="p-3" [(activeIndex)]="activeIndex">
-        <p-tabPanel header="Mi Perfil"id="tableHeader" >
+      <p-tabView id="tableProfile" [scrollable]="true" class="p-3" [(activeIndex)]="activeIndex">
+        <p-tabPanel header="Mi Perfil" id="tableHeader">
           <h5>Preferencias:</h5>
           <app-technologies [technologies]="searchUser.preferences"></app-technologies>
           <h5>Experiencia Laboral:</h5>
@@ -45,7 +45,7 @@
               <div class="col-12">
                 <p>
                   Al vincular el proyecto a github tendrás acceso a métricas y a las actividades de los
-                    integrantes.
+                  integrantes.
                 </p>
                 <p-button type="button" iconPos="right" icon="bi bi-github" [style]="{ width: '100%' }"
                   label="Vincular con github" class="github" styleClass="p-button-secondary"
@@ -76,14 +76,22 @@
             <span class="text-center">Cargando...</span>
           </div>
           <div *ngIf="!spinnerMetric">
-            <div class="row">
-              <div class="col-12">
-                <app-chart-doughnut *ngIf="languagesUser" [data]="languagesUser"></app-chart-doughnut>
+            <div class="row mt-3">
+              <div class="border-right col-6" style="border-right: 1px solid #000 !important;">
+                <h3 class="text-center">Github</h3>
+                <app-chart-doughnut *ngIf="languagesUserGithub" [data]="languagesUserGithub"></app-chart-doughnut>
+              </div>
+              <div class="col-6">
+                <h3 class="text-center">Gitlab</h3>
+                <app-chart-doughnut *ngIf="languagesUserGitlab" [data]="languagesUserGitlab"></app-chart-doughnut>
               </div>
             </div>
             <div class="row mt-3">
-              <div class="col-12">
-                <app-chart-bar *ngIf="repositorysCommits" [data]="repositorysCommits"></app-chart-bar>
+              <div class="col-6" style="border-right: 1px solid #000 !important;">
+                <app-chart-bar *ngIf="repositorysCommitsGithub" [data]="repositorysCommitsGithub"></app-chart-bar>
+              </div>
+              <div class="col-6">
+                <app-chart-bar *ngIf="repositorysCommitsGitlab" [data]="repositorysCommitsGitlab"></app-chart-bar>
               </div>
             </div>
           </div>
@@ -104,24 +112,16 @@
               <p-button class="mt-2 me-2" icon="pi pi-discord" type="submit" [style]="{ minWidth: '40px' }" label=""
                 styleClass="p-button-help"></p-button>
             </div>
-             <!-- boton para contactar a la persona routerLink="/post/details-post/{{  }}" -->
+            <!-- boton para contactar a la persona routerLink="/post/details-post/{{  }}" -->
             <div class="boton text-end m-2">
-            <span>
-            <p-button
-            (click)="showModalInvitation()"
-              type="button"
-              [style]="{ width: '100%' }"
-              iconPos="right"
-              icon="bi bi-envelope"
-              label="Enviar invitación"
-              class=""
-              styleClass="p-button-help"
-              *ngIf="currentUser && currentUser._id != id"
-            >
-          </p-button>
-          </span>
-          </div>
-          <!-- boton para contactar a la persona -->
+              <span>
+                <p-button (click)="showModalInvitation()" type="button" [style]="{ width: '100%' }" iconPos="right"
+                  icon="bi bi-envelope" label="Enviar invitación" class="" styleClass="p-button-help"
+                  *ngIf="currentUser && currentUser._id != id">
+                </p-button>
+              </span>
+            </div>
+            <!-- boton para contactar a la persona -->
 
           </div>
         </p-tabPanel>
@@ -138,7 +138,7 @@
             <input type="text" pInputText class="" placeholder="Título" />
             <textarea name="" id="" cols="30" rows="10" pInputTextarea class="mt-2"
               placeholder="Ingresa un comentario..."></textarea>
-            <p-button class="text-end mt-2"  type="submit" [style]="{ minWidth: '14rem' }" label="Comentar"
+            <p-button class="text-end mt-2" type="submit" [style]="{ minWidth: '14rem' }" label="Comentar"
               styleClass="p-button-help"></p-button>
           </form>
         </p-tabPanel>

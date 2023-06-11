@@ -5,7 +5,7 @@ import { Project } from 'src/app/shared/models/project/project.class';
 import { Task } from '../../interfaces/tasks.interface';
 import { MessageService } from 'primeng/api';
 import { User } from 'src/app/shared/models/user/user.class';
-import { MetricProject } from '../../interfaces/metricProject.interface';
+import { MetricProject, CommitByUser } from '../../interfaces/metricProject.interface';
 
 @Component({
   selector: 'app-details-project',
@@ -243,7 +243,7 @@ export class DetailsProjectComponent implements OnInit {
 
   puntuacion: boolean = false;
 
-  metricProject: MetricProject[];
+  metricProject: any;
 
   spinnerMetric = true;
 
@@ -332,6 +332,14 @@ export class DetailsProjectComponent implements OnInit {
     this.visibleInputGithub = true;
   }
 
+  linkInputProjectWithGitlab() {
+    this.visibleInputGithub = true;
+  }
+
+  backLinkWithRepository(){
+    this.visibleInputGithub = false;
+  }
+
   async linkProjectWithGithub() {
     if (this.linkGithubProject == '') {
       this.messageService.add({
@@ -408,29 +416,86 @@ export class DetailsProjectComponent implements OnInit {
       );
   }
 
+
+  commitActivity:any = ""
   async getMetricByProject() {
     this.metricProject = await this.projectService.getMetricByProject(
       this.searchProject._id
     );
+
     let developers = [];
     let commits = [];
     let commitsFrequency = [];
 
-    this.metricProject.forEach((metric) => {
-      developers.push(metric.developerUsername);
-      commits.push(metric.commits.commitCount);
-      commitsFrequency.push(metric.commits.commitFrequencyByDay);
+
+    let types = [];
+    let releases = [];
+    let pullRequest = [];
+    let issues = [];
+
+    this.commitActivity = this.metricProject?.commitActivity
+    this.metricProject.commitByUser.forEach((data:any) => {
+      developers.push(data.developerUsername);
+      commits.push(data.commits.commitCount)
+      commitsFrequency.push(data.commits.commitFrequencyByDay);
+    });
+
+    this.metricProject.contributionDistributionByType.forEach((data:any) => {
+      types.push(data.type);
+
+      if(data.type == "commits"){
+
+      }
+      if(data.type == "pullRequests"){
+        data.data.forEach((pullRequestUser:any) => {
+          pullRequest.push(pullRequestUser.quantity)
+        });
+      }
+      if(data.type == "issues"){
+        data.data.forEach((issuesUser:any) => {
+          issues.push(issuesUser.quantity)
+        });
+      }
+
+      // commits.push(data.commits.commitCount)
+      // commitsFrequency.push(data.commits.commitFrequencyByDay);
     });
 
     this.getMetricGrafic(developers, commits, commitsFrequency);
+    this.getMetricRadar(developers,types,commits,pullRequest,issues)
     this.spinnerMetric = false;
   }
 
   data: any;
+  dataRadar: any;
+
+  getMetricRadar(developers:any,types:any,releases:any,pullRequest:any,issues:any){
+    const documentStyle = getComputedStyle(document.documentElement);
+    this.dataRadar = {
+      labels: developers,
+      datasets: [
+        {
+          label: 'Cantidad de releases',
+          borderColor: documentStyle.getPropertyValue('--purple-300'),
+          data: releases,
+        },
+        {
+          label: 'Cantidad de pull request',
+          borderColor: documentStyle.getPropertyValue('--bluegray-400'),
+          data: pullRequest,
+        },
+        {
+          label: 'Cantidad de issues abiertos',
+          borderColor: documentStyle.getPropertyValue('--purple-600'),
+          data: issues,
+        },
+      ],
+    };
+  }
 
   getMetricGrafic(
     devoloper: string[],
-    commits: string[],
+    commits: any[],
     commitsFrequency: string[]
   ) {
     const documentStyle = getComputedStyle(document.documentElement);

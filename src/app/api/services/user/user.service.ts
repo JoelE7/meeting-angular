@@ -86,15 +86,15 @@ export class UserService {
       );
   }
 
-  getLanguagesGithub(username: string): Promise<MetricLanguage[]> {
+  getLanguagesGithub(username: string): Promise<any> {
     let headers = new HttpHeaders();
     // headers = headers.append(
     //   'Authorization',
     //   'Bearer' + localStorage.getItem('token')
     // );
 
-    return lastValueFrom<MetricLanguage[]>(
-      this.http.get<MetricLanguage[]>(
+    return lastValueFrom<any>(
+      this.http.get<any>(
         `${environment.apiUrl}/users/languages/${username}`,
         {
           headers: headers,

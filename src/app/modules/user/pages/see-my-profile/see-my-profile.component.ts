@@ -18,24 +18,27 @@ import { ProjectService } from 'src/app/api/services/project/project.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class SeeMyProfileComponent {
-  currentUser: User = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;
+  currentUser: User =
+    localStorage.getItem('user') != 'undefined'
+      ? JSON.parse(localStorage.getItem('user'))
+      : undefined;
   visiblePopUpScore = false;
   visibleInputGithub: boolean = false;
   userNameGithub = '';
 
-  languagesMetric: MetricLanguage[];
-  commitsByUser: MetricCommit[];
+  languagesMetric: any;
+  commitsByUser: any;
 
   searchUser: User = new User();
 
   spinnerMetric: boolean = true;
 
-  visibleModalInvitation:boolean = false;
+  visibleModalInvitation: boolean = false;
   userReceptor: User = new User();
   newInvitation: MailInvitation;
 
-  id:string;
-  idCurrentUser = "";
+  id: string;
+  idCurrentUser = '';
 
   activeIndex = 0;
 
@@ -43,26 +46,27 @@ export class SeeMyProfileComponent {
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
     private userService: UserService,
-    private  projectService:ProjectService,
+    private projectService: ProjectService
   ) {}
 
   async ngOnInit() {
     let seeProjects = history.state.seeProjects;
-    if(seeProjects){
+    if (seeProjects) {
       this.activeIndex = 1;
     }
-
 
     let { id } = this.activatedRoute.snapshot.params;
     this.id = id;
     this.searchUser = await this.userService.detailsUserAsync(id);
-    this.userReceptor = this.searchUser
-    this.currentUser = await this.userService.detailsUserAsync(this.currentUser._id);
+    this.userReceptor = this.searchUser;
+    this.currentUser = await this.userService.detailsUserAsync(
+      this.currentUser._id
+    );
     this.idCurrentUser = this.currentUser._id;
     // this.listProjectsUserEmisor = this.currentUser.projects;
-    
+
     if (this.searchUser.githubUsername) {
-       this.getLanguagesGithub();
+      this.getLanguagesGithub();
       this.getCommitsByUserGithub();
     }
   }
@@ -110,7 +114,7 @@ export class SeeMyProfileComponent {
           summary: 'Hecho',
           detail: 'Tu usuario fue vinculado exitosamente',
         });
-         await this.getLanguagesGithub();
+        await this.getLanguagesGithub();
         await this.getCommitsByUserGithub();
       },
       (err) => {
@@ -124,26 +128,45 @@ export class SeeMyProfileComponent {
     );
   }
 
-  languagesUser: ChartDoughnutData;
+  languagesUserGithub: any;
+  languagesUserGitlab: any;
 
   async getLanguagesGithub() {
     this.languagesMetric = await this.userService.getLanguagesGithub(
-      this.searchUser.githubUsername
+      this.searchUser._id
     );
 
-    let languages = [];
-    let quantityRepositoryByLanguage = [];
+    let languagesGithub = [];
+    let languagesGitlab = [];
+    let quantityRepositoryByLanguageGithub = [];
+    let quantityRepositoryByLanguageGitlab = [];
 
-    this.languagesMetric.forEach((lang: MetricLanguage) => {
-      languages.push(lang.technology);
-      quantityRepositoryByLanguage.push(lang.quantity);
+    this.languagesMetric.githubLanguages.forEach((lang: any) => {
+      languagesGithub.push(lang.technology);
+      quantityRepositoryByLanguageGithub.push(lang.quantity);
     });
 
-    this.languagesUser = {
-      labels: languages,
+    this.languagesMetric.gitlabLanguages.forEach((lang: any) => {
+      languagesGitlab.push(lang.technology);
+      quantityRepositoryByLanguageGitlab.push(lang.quantity);
+    });
+
+    this.languagesMetric.githubLanguages;
+
+    this.languagesUserGithub = {
+      labels: languagesGithub,
       datasets: [
         {
-          data: quantityRepositoryByLanguage,
+          data: quantityRepositoryByLanguageGithub,
+        },
+      ],
+    };
+
+    this.languagesUserGitlab = {
+      labels: languagesGitlab,
+      datasets: [
+        {
+          data: quantityRepositoryByLanguageGitlab,
         },
       ],
     };
@@ -151,50 +174,92 @@ export class SeeMyProfileComponent {
 
   async getCommitsByUserGithub() {
     this.commitsByUser = await this.userService.getCommitsByUserGithub(
-      this.searchUser.githubUsername
+      this.searchUser._id
     );
 
-    let nameRepositorys = [];
-    let commits = [];
+    let nameRepositorysGithub = [];
+    let commitsGithub = [];
 
-    this.commitsByUser.forEach((metric) => {
-      metric.commits.forEach((commit) => {
-        nameRepositorys.push(commit.nameRepository);
-        commits.push(commit.quantityCommits);
-      });
+    let nameRepositorysGitlab = [];
+    let commitsGitlab = [];
+
+    this.commitsByUser.githubMetrics.commitCounts.forEach((project) => {
+      nameRepositorysGithub.push(project.nameRepository);
+      commitsGithub.push(project.quantityCommits);
     });
-    this.getMetricGrafic(nameRepositorys, commits);
+
+    this.commitsByUser.gitlabMetrics.commitCounts.forEach((project) => {
+      nameRepositorysGitlab.push(project.nameRepository);
+      commitsGitlab.push(project.quantityCommits);
+    });
+
+    this.getMetricGrafic(
+      nameRepositorysGithub,
+      commitsGithub,
+      nameRepositorysGitlab,
+      commitsGitlab
+    );
+    this.getMetricGrafic(nameRepositorysGitlab, commitsGitlab);
     this.spinnerMetric = false;
   }
 
-  repositorysCommits: ChartBarData;
+  repositorysCommitsGithub: ChartBarData;
+  repositorysCommitsGitlab: ChartBarData;
 
-  getMetricGrafic(nameRepositorys: string[], commitsByRepository: string[]) {
+  getMetricGrafic(
+    nameRepositorysGithub: string[] = [],
+    commitsByRepositorysGithub: string[] = [],
+    nameRepositorysGitlab: string[] = [],
+    commitsRepositorysGitlab: string[] = []
+  ) {
     const documentStyle = getComputedStyle(document.documentElement);
 
-    this.repositorysCommits = {
-      labels: nameRepositorys,
-      datasets: [
-        {
-          label: 'Cantidad de commits',
-          backgroundColor: documentStyle.getPropertyValue('--purple-300'),
-          borderColor: documentStyle.getPropertyValue('--purple-300'),
-          data: commitsByRepository,
-        },
-      ],
-    };
+    if (
+      nameRepositorysGithub.length > 0 &&
+      commitsByRepositorysGithub.length > 0
+    ) {
+      this.repositorysCommitsGithub = {
+        labels: nameRepositorysGithub,
+        datasets: [
+          {
+            label: 'Cantidad de commits',
+            backgroundColor: documentStyle.getPropertyValue('--purple-300'),
+            borderColor: documentStyle.getPropertyValue('--purple-300'),
+            data: commitsByRepositorysGithub,
+          },
+        ],
+      };
+    }
+
+    if (
+      commitsRepositorysGitlab.length > 0 &&
+      nameRepositorysGitlab.length > 0
+    ) {
+      this.repositorysCommitsGitlab = {
+        labels: nameRepositorysGitlab,
+        datasets: [
+          {
+            label: 'Cantidad de commits',
+            backgroundColor: documentStyle.getPropertyValue('--purple-300'),
+            borderColor: documentStyle.getPropertyValue('--purple-300'),
+            data: commitsRepositorysGitlab,
+          },
+        ],
+      };
+    }
   }
 
-  async showModalInvitation(){
+  async showModalInvitation() {
     this.visibleModalInvitation = true;
-    this.currentUser = await this.userService.detailsUserAsync(this.currentUser._id);
-    this.idCurrentUser = this.currentUser._id
-
+    this.currentUser = await this.userService.detailsUserAsync(
+      this.currentUser._id
+    );
+    this.idCurrentUser = this.currentUser._id;
   }
 
-  hiddenPopUpInvitation(){
+  hiddenPopUpInvitation() {
     this.visibleModalInvitation = false;
-    this.idCurrentUser = "";
+    this.idCurrentUser = '';
   }
 
   sendMailInvitation(mail: MailInvitation) {

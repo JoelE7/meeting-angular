@@ -1,19 +1,24 @@
 <p-accordion [activeIndex]="activeIndex">
-    <p-accordionTab *ngFor="let user of members" [header]="user.name">
+    <p-accordionTab *ngFor="let user of members" [header]="user.developerUsername">
         <ng-template #accordionHeaderTemplate>
             <div class="user-info">
                 <div class="user-avatar">
                     <p-avatar [image]="user.avatarUrl" size="small" shape="circle"></p-avatar>
                 </div>
-                <div class="user-name">{{ user.name }}</div>
+                <div class="user-name">{{ user.developerUsername }}</div>
             </div>
         </ng-template>
         <div class="commits-info">
             <ul>
-                <li *ngFor="let commit of user.commits">
-                    <a [href]="commit.url" target="_blank">{{
-                        commit.message
-                        }}</a>
+                <li *ngFor="let commit of user.data">
+                    <div class="row">
+                        <div class="col-6 text-start">                    <a [href]="commit.html_url" target="_blank">{{
+                            commit.message
+                            }}</a></div>
+                        <div class="col-6 text-end">
+                            {{commit.date | date}}
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>

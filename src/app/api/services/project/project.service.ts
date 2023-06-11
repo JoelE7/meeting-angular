@@ -156,15 +156,15 @@ export class ProjectService {
       );
   }
 
-  getMetricByProject(idProject: string): Promise<MetricProject[]> {
+  getMetricByProject(idProject: string): Promise<any> {
     let headers = new HttpHeaders();
     // headers = headers.append(
     //   'Authorization',
     //   'Bearer' + localStorage.getItem('token')
     // );
 
-    return lastValueFrom<MetricProject[]>(
-      this.http.get<MetricProject[]>(
+    return lastValueFrom<any>(
+      this.http.get<any>(
         `${environment.apiUrl}/projects/getMetrics/${idProject}`,
         {
           headers: headers,

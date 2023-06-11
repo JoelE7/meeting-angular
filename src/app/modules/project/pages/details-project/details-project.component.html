@@ -14,15 +14,14 @@
 <div class="profile" *ngIf="!spinner && searchProject">
   <div class="container rounded">
     <span class="fst-italic text-secondary small"><i class="m-1 pi pi-arrow-circle-left"></i>
-      <a href="" class="text-secondary" style="text-decoration: none"
-        routerLink="/project/list-project">Volver</a>
+      <a href="" class="text-secondary" style="text-decoration: none" routerLink="/project/list-project">Volver</a>
       |
       <a routerLink="/project/details-project/1" class="text-secondary" style="text-decoration: none">{{
         searchProject.name }}</a></span>
     <div class="card shadow-sm" style="width: 100%; min-height: 700px">
       <app-banner [title]="searchProject.name" [subtitle]="'Aplicacion ' + searchProject.type"
         [short]="true"></app-banner>
-      <p-tabView class="p-3" [scrollable]="true"  [(activeIndex)]="activeIndex">
+      <p-tabView class="p-3" [scrollable]="true" [(activeIndex)]="activeIndex">
         <p-tabPanel [cache]="false" header="Datos del proyecto">
           <div class="row">
             <div class="col-12">
@@ -86,8 +85,11 @@
                 <p-button type="button" iconPos="right" icon="bi bi-github" [style]="{ width: '100%' }"
                   label="Vincular con github" class="github" styleClass="p-button-secondary"
                   (click)="linkInputProjectWithGithub()"></p-button>
-                <p>
-                  <strong>Al vincular el proyecto a github tendrás acceso a métricas y a las actividades de los
+                <p-button type="button" iconPos="right" icon='fa-brands fa-square-gitlab' [style]="{ width: '100%' }"
+                  label="Vincular con gitlab" class="gitlab mx-2" styleClass="p-button-secondary"
+                  (click)="linkInputProjectWithGitlab()"></p-button>
+                <p class="mt-3">
+                  <strong>Al vincular el proyecto a github/gitlab tendrás acceso a métricas y a las actividades de los
                     integrantes</strong>
                 </p>
               </div>
@@ -98,6 +100,8 @@
                 <input type="url" [(ngModel)]="linkGithubProject" class="form-control" id="github-link" />
                 <p-button (click)="linkProjectWithGithub()" type="button" [style]="{ width: '100%' }"
                   label="Vincular repositorio" class="mt-3" styleClass="p-button-help"></p-button>
+                <p-button (click)="backLinkWithRepository()" type="button" [style]="{ width: '100%' }"
+                  label="Volver" class="mt-3 mx-2" styleClass="p-button-help"></p-button>
               </div>
             </div>
           </div>
@@ -172,18 +176,14 @@
 
 
           <div class="row" *ngIf="advancement">
-            <div class="col-6">
+            <div class="col-12">
               <h4>Integrantes</h4>
-              <app-advancement-members [members]="users"></app-advancement-members>
-            </div>
-            <div class="col-6">
-              <h4>Soportes</h4>
-              <app-advancement-members [members]="supports"></app-advancement-members>
+              <app-advancement-members *ngIf="commitActivity" [members]="commitActivity"></app-advancement-members>
             </div>
             <div class="row text-end mt-3">
               <div class="col-12 col-sm-12">
-                <p-button (click)="backMembersProject()" type="button" [style]="{ width: '100%' }"
-                  label="Volver" class="text-end" styleClass="p-button-help"></p-button>
+                <p-button (click)="backMembersProject()" type="button" [style]="{ width: '100%' }" label="Volver"
+                  class="text-end" styleClass="p-button-help"></p-button>
               </div>
             </div>
           </div>
@@ -201,6 +201,11 @@
             <div class="col-12">
               <h5 class="mx-3">Commits del proyecto:</h5>
               <app-chart-bar *ngIf="data" [data]="data"></app-chart-bar>
+            </div>
+          </div>
+          <div class="row" *ngIf="!spinnerMetric">
+            <div class="col-12">
+              <app-char-radar *ngIf="dataRadar" [data]="dataRadar"></app-char-radar>
             </div>
           </div>
         </p-tabPanel>

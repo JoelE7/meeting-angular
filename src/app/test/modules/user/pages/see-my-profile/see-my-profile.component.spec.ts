@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
 import { ModalInvitationComponent } from 'src/app/modules/user/shared/modal-invitation/modal-invitation.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { CharRadarComponent } from 'src/app/shared/components/char-radar/char-radar.component';
 
 describe('See my profileConLogin', () => {
   let component: SeeMyProfileComponent;
@@ -27,6 +28,7 @@ describe('See my profileConLogin', () => {
         ChartBarComponent,
         ChartDoughnutComponent,
         ChartLineComponent,
+        CharRadarComponent,
         ModalInvitationComponent
       ],
       providers:[MessageService],
