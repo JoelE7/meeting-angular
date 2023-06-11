@@ -34,7 +34,8 @@ import { ModalSuggestComponent } from './shared/modal-suggest/modal-suggest.comp
     ListPostComponent,
     FormPostComponent,
     SuggestionsPostComponent,
-    CardPostComponent
+    CardPostComponent,
+    ModalSuggestComponent
   ],
 })
 

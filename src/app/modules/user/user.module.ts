@@ -31,6 +31,7 @@ import { ModalInvitationComponent } from './shared/modal-invitation/modal-invita
     SeeMyProfileComponent,
     TableUserComponent,
     SearchUserComponent,
+    ModalInvitationComponent
   ],
 })
 export class UserModule {}
