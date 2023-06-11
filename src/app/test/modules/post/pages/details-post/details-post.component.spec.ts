@@ -15,6 +15,7 @@ import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
 import { ModalSuggestComponent } from 'src/app/modules/post/shared/modal-suggest/modal-suggest.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('DetailsPostComponentConLogin', () => {
   let component: DetailsPostComponent;
@@ -27,7 +28,7 @@ describe('DetailsPostComponentConLogin', () => {
         { provide: PostService, useValue: mockPostService },
         MessageService,
       ],
-      imports:[ PrimengModule,RouterTestingModule,HttpClientTestingModule],
+      imports:[ PrimengModule,RouterTestingModule,HttpClientTestingModule,BrowserAnimationsModule],
       schemas : [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
