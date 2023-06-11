@@ -41,15 +41,6 @@ export class PostService {
   }
 
   getAllPost(query: any = [], pagination: number) {
-    // let filtersAccept = [
-    //   'title',
-    //   'body',
-    //   'type',
-    //   'date',
-    //   'author',
-    //   'messages',
-    //   'technologies'
-    // ];
     let filtersAccept = [
       'title',
       'body',

@@ -19,7 +19,7 @@ export class DetailsPostComponent {
   searchPost: Post = new Post();
   form: FormGroup;
 
-  idParam;
+  idParam:any;
 
   visibleModalContact: boolean = false;
 
@@ -106,9 +106,23 @@ export class DetailsPostComponent {
   }
 
   showModalSuggest(){
+    if(!this.currentUser){
+      this.messageService.add({
+        severity: 'warn',
+        detail: 'Para poder compartir el post a alguien, registrate o inicia sesión',
+      });
+      return;
+    }
     this.visibleModalSuggest = true;
   }
   showModalContact(author:User) {
+    if(!this.currentUser){
+      this.messageService.add({
+        severity: 'warn',
+        detail: 'Para poder contactar a alguien, registrate o inicia sesión',
+      });
+      return;
+    }
     this.userReceptor = author;
     this.visibleModalContact = true;
   }

@@ -18,6 +18,7 @@ import {
 } from 'src/app/test/__mocks__/services/project/project.service.mock';
 import { ModalScoreComponent } from 'src/app/modules/project/shared/modal-score/modal-score.component';
 import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
+import { ModalInvitationProjectComponent } from 'src/app/modules/project/shared/modal-invitation-project/modal-invitation-project.component';
 
 describe('DetailsProjectComponentConLogin', () => {
   let component: DetailsProjectComponent;
@@ -32,6 +33,7 @@ describe('DetailsProjectComponentConLogin', () => {
         ChartLineComponent,
         ChartDoughnutComponent,
         ModalScoreComponent,
+        ModalInvitationProjectComponent
       ],
       providers: [
         MessageService,

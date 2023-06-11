@@ -25,6 +25,7 @@ import { RecommendationsProjectModalComponent } from './shared/recommendations-p
 import { RecommendationsTechnologiesModalComponent } from './shared/recommendations-technologies-modal/recommendations-technologies-modal.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalInvitationProjectComponent } from './shared/modal-invitation-project/modal-invitation-project.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RecommendationsPostModalComponent,
     RecommendationsProjectModalComponent,
     RecommendationsTechnologiesModalComponent,
+    ModalInvitationProjectComponent,
   ],
   imports: [
     CommonModule,

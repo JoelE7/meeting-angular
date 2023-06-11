@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { Message, MessageService } from 'primeng/api';
 import { ProjectService } from 'src/app/api/services/project/project.service';
 import { UserService } from 'src/app/api/services/user/user.service';
 import { FilterEnum } from 'src/app/shared/filters/enum/filters.enum';
@@ -47,6 +47,8 @@ export class ListProjectComponent implements OnInit {
   size = 10;
 
   technologies: Item[] = [];
+
+  messages: Message[] = [];
 
   filters: Filters = {
     autoSend: false,
@@ -171,6 +173,10 @@ export class ListProjectComponent implements OnInit {
     if (this.currentUser) {
       this.getQuestion();
     }
+
+    this.messages = [
+      { severity: 'info', detail: 'No se encontraron proyectos con la busqueda realizada' }
+    ];
   }
 
   getTechnologies() {
