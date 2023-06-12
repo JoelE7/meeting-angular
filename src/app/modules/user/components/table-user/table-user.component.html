@@ -17,7 +17,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-developer let-rowIndex="rowIndex">
       <tr [ngClass]="{'row-accessories': currentUser?._id === developer._id}">
-        <td class="text-center fw-bold">{{rowIndex + 1}}</td>
+        <td class="text-center fw-bold">{{rowIndex + 1 + (paginate * 10 - 10)}}</td>
         <td >
           <div class="developer-avatar d-flex flex-column w-100 h-100 justify-content-center align-items-center" *ngIf="developer.level === 'Trainee'">
             <p-avatar *ngIf="currentUser?._id === developer._id;else trainee" image="assets/img/C-3po.png" pBadge
