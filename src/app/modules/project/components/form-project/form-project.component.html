@@ -172,8 +172,36 @@
         placeholder="Ingrese URL del repositorio" />
     </div>
   </div>
+
   <div class="row mt-5 p-0">
-    <div class="offset-0 col-sm-12 offset-md-1">
+    <div class="offset-0 col-sm-12 col-md-5 offset-md-1">
+      <label for="complexity" class="pl-5">¿Querés aplicar como lider? </label>
+      <p-multiSelect
+        [style]="{ width: '100%' }"
+        formControlName="technologies"
+        placeholder="Seleccione una opción..."
+        [options]="technologies"
+        optionValue="value"
+        optionLabel="label"
+      >
+        <ng-template let-option pTemplate="item">
+          <span [class]="'technologie-' + option.value">
+            {{ option.label }}
+          </span>
+        </ng-template>          
+      </p-multiSelect>
+      <span
+        class="danger"
+        *ngIf="
+          form.get('technologies').hasError('required') && form.get('technologies').touched
+        "
+      >
+        <small class="p-error">Este campo es <strong>requerido</strong></small>
+      </span> 
+
+    </div>
+
+    <div class="offset-0 col-sm-12 col-md-5 mt-md-0">
       <p class="d-inline mx-3 mt-2">¿Querés que nuestro sistema valide quien se une a tu proyecto?</p>
       <p-inputSwitch class="" formControlName="validateSystem"></p-inputSwitch>
     </div>

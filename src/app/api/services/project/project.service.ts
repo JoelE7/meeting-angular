@@ -79,7 +79,7 @@ export class ProjectService {
       );
   }
 
-  getAllProjects(query: any = [],paginate: any,currentUser:boolean) {
+  getAllProjects(query: any = [],paginate: any,currenUser:any,currentUserProjects:boolean) {
     let filtersAccept = [
       'name',
       'description',
@@ -94,7 +94,10 @@ export class ProjectService {
       'technologies',
       'status',
       'requestSupport',
+      'ownProject'
     ];
+  
+    query.push({col : "ownProject", value : currentUserProjects})
 
     let queryBuild =
       query.method === Method.POST
@@ -102,7 +105,7 @@ export class ProjectService {
         : this.filterService.getFiltersForGet(query, filtersAccept);
 
     let headers = new HttpHeaders();
-    if(currentUser){
+    if(currenUser){
       headers = headers.append(
         'Authorization',
         'Bearer ' + localStorage.getItem('token')

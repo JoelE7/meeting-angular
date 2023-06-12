@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from 'src/app/api/services/project/project.service';
 import { Project } from 'src/app/shared/models/project/project.class';
 import { Task } from '../../interfaces/tasks.interface';
-import { MessageService } from 'primeng/api';
+import { Message, MessageService } from 'primeng/api';
 import { User } from 'src/app/shared/models/user/user.class';
 import { MetricProject, CommitByUser } from '../../interfaces/metricProject.interface';
 import { MailInvitation } from 'src/app/shared/models/model-mail-invitation/model-mail-invitation.interface';
@@ -44,6 +44,8 @@ export class DetailsProjectComponent implements OnInit {
 
   spinnerMetric = true;
 
+  messages: Message[] = [];
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
@@ -57,13 +59,20 @@ export class DetailsProjectComponent implements OnInit {
     if (this.searchProject.urlRepository) {
       this.getMetricByProject();
     }
+
+    this.messages = [
+      { severity: 'info', detail: 'No se encontraron post' }
+    ];
+
   }
 
   async getDetailsProject(id: string) {
     this.searchProject = await this.projectService.detailsProjectAsync(id);
-    this.searchProject.roleUser = this.searchProject.leader._id == this.currentUser._id ?
-    'leader' : this.searchProject.participants.some(user => user._id === this.currentUser._id) ?
-    'participant' : this.searchProject.supports.some(supp => supp._id === this.currentUser._id) ?
+    console.log(this.searchProject);
+    
+    this.searchProject.roleUser = this.searchProject.leader?._id == this.currentUser._id ?
+    'leader' : this.searchProject.participants.some(user => user?._id === this.currentUser?._id) ?
+    'participant' : this.searchProject.supports.some(supp => supp?._id === this.currentUser?._id) ?
     'support' : '';
     this.checkUserIfExistsInProject();
     this.spinner = false;
@@ -98,7 +107,7 @@ export class DetailsProjectComponent implements OnInit {
               summary: 'Hecho',
               detail: message,
             });
-            this.getDetailsProject(this.idParam);
+            this.ngOnInit();
           }else{
             this.messageService.add({
               severity: 'warn',
@@ -106,7 +115,6 @@ export class DetailsProjectComponent implements OnInit {
               detail: data.body.message,
             });
           }
-          console.log(data);
         },
         (err) => {
           this.messageService.add({

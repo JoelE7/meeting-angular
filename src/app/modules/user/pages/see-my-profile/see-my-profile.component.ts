@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { Message, MessageService } from 'primeng/api';
 import { UserService } from 'src/app/api/services/user/user.service';
 import { User } from 'src/app/shared/models/user/user.class';
 import { MetricLanguage } from '../../interfaces/metricLanguage.interface';
@@ -24,7 +24,9 @@ export class SeeMyProfileComponent {
       : undefined;
   visiblePopUpScore = false;
   visibleInputGithub: boolean = false;
+  visibleInputGitlab: boolean = false;
   userNameGithub = '';
+  userNameGitlab = '';
 
   languagesMetric: any;
   commitsByUser: any;
@@ -41,6 +43,8 @@ export class SeeMyProfileComponent {
   idCurrentUser = '';
 
   activeIndex = 0;
+
+  messages:Message[] = []
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -69,6 +73,14 @@ export class SeeMyProfileComponent {
       this.getLanguagesGithub();
       this.getCommitsByUserGithub();
     }
+    if (this.searchUser.githubUsername) {
+      this.getLanguagesGithub();
+      this.getCommitsByUserGithub();
+    }
+
+    this.messages = [
+      { severity: 'info', detail: 'No se encontraron proyectos' }
+    ];
   }
 
   async getDetailsUser(id: any) {
@@ -93,6 +105,17 @@ export class SeeMyProfileComponent {
     this.visibleInputGithub = true;
   }
 
+  linkInputUserWithGitlab() {
+    this.visibleInputGitlab = true;
+  }
+  backLinkWithGitlab() {
+    this.visibleInputGitlab = false;
+  }
+
+  backLinkWithGithub() {
+    this.visibleInputGithub = false;
+  }
+
   async linkUsertWithGithub() {
     if (this.userNameGithub == '') {
       this.messageService.add({
@@ -114,8 +137,44 @@ export class SeeMyProfileComponent {
           summary: 'Hecho',
           detail: 'Tu usuario fue vinculado exitosamente',
         });
-        await this.getLanguagesGithub();
-        await this.getCommitsByUserGithub();
+        this.ngOnInit();
+        this.backLinkWithGithub();
+
+      },
+      (err) => {
+        this.messageService.add({
+          key: 'msg',
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+        });
+      }
+    );
+  }
+
+  async linkUsertWithGitlab() {
+    if (this.userNameGitlab == '') {
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Coloca tu nombre de usuario de gitlab',
+      });
+      return;
+    }
+
+    await new Promise((resolve, reject) => {
+      this.searchUser.gitlabUsername = this.userNameGitlab;
+      resolve('');
+    });
+
+    this.userService.updateUser(this.searchUser).subscribe(
+      async (data) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Hecho',
+          detail: 'Tu usuario fue vinculado exitosamente',
+        });
+        this.ngOnInit();
+        this.backLinkWithGitlab();
       },
       (err) => {
         this.messageService.add({
@@ -136,40 +195,43 @@ export class SeeMyProfileComponent {
       this.searchUser._id
     );
 
-    let languagesGithub = [];
-    let languagesGitlab = [];
-    let quantityRepositoryByLanguageGithub = [];
-    let quantityRepositoryByLanguageGitlab = [];
+    if (this.searchUser) {
+      let languagesGithub = [];
+      let quantityRepositoryByLanguageGithub = [];
 
-    this.languagesMetric.githubLanguages.forEach((lang: any) => {
-      languagesGithub.push(lang.technology);
-      quantityRepositoryByLanguageGithub.push(lang.quantity);
-    });
+      this.languagesMetric.githubLanguages.forEach((lang: any) => {
+        languagesGithub.push(lang.technology);
+        quantityRepositoryByLanguageGithub.push(lang.quantity);
+      });
 
-    this.languagesMetric.gitlabLanguages.forEach((lang: any) => {
-      languagesGitlab.push(lang.technology);
-      quantityRepositoryByLanguageGitlab.push(lang.quantity);
-    });
+      this.languagesUserGithub = {
+        labels: languagesGithub,
+        datasets: [
+          {
+            data: quantityRepositoryByLanguageGithub,
+          },
+        ],
+      };
+    }
 
-    this.languagesMetric.githubLanguages;
+    if (this.currentUser.gitlabUsername) {
+      let languagesGitlab = [];
+      let quantityRepositoryByLanguageGitlab = [];
 
-    this.languagesUserGithub = {
-      labels: languagesGithub,
-      datasets: [
-        {
-          data: quantityRepositoryByLanguageGithub,
-        },
-      ],
-    };
+      this.languagesMetric.gitlabLanguages.forEach((lang: any) => {
+        languagesGitlab.push(lang.technology);
+        quantityRepositoryByLanguageGitlab.push(lang.quantity);
+      });
 
-    this.languagesUserGitlab = {
-      labels: languagesGitlab,
-      datasets: [
-        {
-          data: quantityRepositoryByLanguageGitlab,
-        },
-      ],
-    };
+      this.languagesUserGitlab = {
+        labels: languagesGitlab,
+        datasets: [
+          {
+            data: quantityRepositoryByLanguageGitlab,
+          },
+        ],
+      };
+    }
   }
 
   async getCommitsByUserGithub() {
@@ -180,18 +242,22 @@ export class SeeMyProfileComponent {
     let nameRepositorysGithub = [];
     let commitsGithub = [];
 
+    if(this.searchUser.githubUsername){
+      this.commitsByUser.githubMetrics.commitCounts.forEach((project) => {
+        nameRepositorysGithub.push(project.nameRepository);
+        commitsGithub.push(project.quantityCommits);
+      });
+    }
+
     let nameRepositorysGitlab = [];
     let commitsGitlab = [];
 
-    this.commitsByUser.githubMetrics.commitCounts.forEach((project) => {
-      nameRepositorysGithub.push(project.nameRepository);
-      commitsGithub.push(project.quantityCommits);
-    });
-
-    this.commitsByUser.gitlabMetrics.commitCounts.forEach((project) => {
-      nameRepositorysGitlab.push(project.nameRepository);
-      commitsGitlab.push(project.quantityCommits);
-    });
+    if(this.searchUser.gitlabUsername){
+      this.commitsByUser.gitlabMetrics.commitCounts.forEach((project) => {
+        nameRepositorysGitlab.push(project.nameRepository);
+        commitsGitlab.push(project.quantityCommits);
+      });
+    }
 
     this.getMetricGrafic(
       nameRepositorysGithub,
@@ -199,7 +265,6 @@ export class SeeMyProfileComponent {
       nameRepositorysGitlab,
       commitsGitlab
     );
-    this.getMetricGrafic(nameRepositorysGitlab, commitsGitlab);
     this.spinnerMetric = false;
   }
 

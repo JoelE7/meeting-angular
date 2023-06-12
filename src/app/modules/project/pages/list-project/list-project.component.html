@@ -7,7 +7,7 @@
 </div>
 
 <div class="m-auto projects">
-  <div class="container row standingOut shadow-sm" style="margin: 10px 0px;" *ngIf="!spinnerSuggestion">
+  <div class="container row standingOut shadow-sm" style="margin: 10px 0px;" *ngIf="!spinnerSuggestion && suggestionsProject.length > 0">
     <div class="col-12 col-sm-12 col-md-12 col-lg-12">
       <app-suggestions-project *ngIf="suggestionsProject" [suggestions]="suggestionsProject"></app-suggestions-project>
     </div>

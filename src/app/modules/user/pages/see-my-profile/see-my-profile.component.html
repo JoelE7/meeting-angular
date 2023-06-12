@@ -36,38 +36,80 @@
               </p>
             </div>
           </div>
+          <div class="row" *ngIf="searchUser.gitlabUsername">
+            <div class="col-12">
+              <p class="link">
+                <b>Usuario de gitlab: </b>
+                <a target="_blank" [href]="'https://gitlab.com/' + searchUser.gitlabUsername">{{
+                  searchUser.gitlabUsername
+                  }}</a>
+              </p>
+            </div>
+          </div>
           <p-button class="" icon="pi pi-file-edit" type="submit" [style]="{ width: '100%' }" label="Editar"
             styleClass="p-button-help"></p-button>
           <div class="" *ngIf="!searchUser.githubUsername &&
+          searchUser._id == currentUser?._id || !searchUser.gitlabUsername &&
           searchUser._id == currentUser?._id
           ">
-            <div class="row mt-3" *ngIf="!visibleInputGithub">
-              <div class="col-12">
-                <p>
-                  Al vincular el proyecto a github tendrás acceso a métricas y a las actividades de los
-                  integrantes.
-                </p>
-                <p-button type="button" iconPos="right" icon="bi bi-github" [style]="{ width: '100%' }"
-                  label="Vincular con github" class="github" styleClass="p-button-secondary"
-                  (click)="linkInputUserWithGithub()"></p-button>
+            <div>
+              <div class="row mt-3">
+                <div class="col-12">
+                  <p>
+                    Al vincular el proyecto a github/gitlab tendrás acceso a métricas y a las actividades de los
+                    integrantes.
+                  </p>
+                </div>
+                <div class="col-3" *ngIf="!visibleInputGithub && !searchUser.githubUsername &&
+                searchUser._id == currentUser?._id">
+                  <p-button type="button" iconPos="right" icon="bi bi-github" [style]="{ width: '100%' }"
+                    label="Vincular con github" class="github" styleClass="p-button-secondary"
+                    (click)="linkInputUserWithGithub()"></p-button>
+                </div>
+                <div class="col-3" *ngIf="!visibleInputGitlab">
+                  <p-button type="button" iconPos="right" icon="fa-brands fa-square-gitlab" [style]="{ width: '100%' }"
+                    label="Vincular con gitlab" class="github" styleClass="p-button-secondary"
+                    (click)="linkInputUserWithGitlab()"></p-button>
+                </div>
               </div>
-            </div>
-            <div class="row mt-3" *ngIf="visibleInputGithub">
-              <div class="col-6">
-                <label for="github">Ingresa tu nombre de usuario en github</label>
-                <input type="url" [(ngModel)]="userNameGithub" class="form-control" id="github-link" />
-                <p-button (click)="linkUsertWithGithub()" type="button" [style]="{ width: '100%' }"
-                  label="Vincular usuario" class="mt-3" styleClass="p-button-help"></p-button>
+              <div class="row mt-3" *ngIf="visibleInputGithub">
+                <div class="col-6">
+                  <label for="github">Ingresa tu nombre de usuario en github</label>
+                  <input type="url" [(ngModel)]="userNameGithub" class="form-control" id="github-link" />
+                  <p-button (click)="linkUsertWithGithub()" type="button" [style]="{ width: '100%' }"
+                    label="Vincular usuario" class="mt-3" styleClass="p-button-help"></p-button>
+                  <p-button (click)="backLinkWithGithub()" type="button" [style]="{ width: '100%' }" label="Volver"
+                    class="mt-3 mx-2" styleClass="p-button-help"></p-button>
+                </div>
+              </div>
+
+              <div class="row mt-3" *ngIf="visibleInputGitlab && !searchUser.gitlabUsername &&
+              searchUser._id == currentUser?._id">
+                <div class="col-6">
+                  <label for="gitlab">Ingresa tu nombre de usuario en gitlab</label>
+                  <input type="url" [(ngModel)]="userNameGitlab" class="form-control" id="github-link" />
+                  <p-button (click)="linkUsertWithGitlab()" type="button" [style]="{ width: '100%' }"
+                    label="Vincular usuario" class="mt-3" styleClass="p-button-help"></p-button>
+                  <p-button (click)="backLinkWithGitlab()" type="button" [style]="{ width: '100%' }" label="Volver"
+                    class="mt-3 mx-2" styleClass="p-button-help"></p-button>
+                </div>
               </div>
             </div>
           </div>
         </p-tabPanel>
         <p-tabPanel header="Proyectos">
-          <div class="row">
+          <div class="row" *ngIf="searchUser.projects.length > 0;else notFound">
             <app-card-project *ngFor="let project of searchUser.projects" [project]="project"></app-card-project>
           </div>
+          <div class="row">
+            <ng-template #notFound class="col-12">
+              <div class="col-12">
+                <p-messages [style]="{ width: '100%' }" [(value)]="messages" [enableService]="false" [closable]="true"></p-messages>
+              </div>
+            </ng-template>
+          </div>
         </p-tabPanel>
-        <p-tabPanel header="Estadísticas" *ngIf="searchUser.githubUsername">
+        <p-tabPanel header="Estadísticas" *ngIf="searchUser.githubUsername || searchUser.gitlabUsername">
           <div class="card text-center" *ngIf="spinnerMetric">
             <span>
               <p-progressSpinner></p-progressSpinner>
@@ -77,20 +119,21 @@
           </div>
           <div *ngIf="!spinnerMetric">
             <div class="row mt-3">
-              <div class="border-right col-6" style="border-right: 1px solid #000 !important;">
+              <div class="border-right col-6" *ngIf="searchUser.githubUsername"
+                style="border-right: 1px solid #000 !important;">
                 <h3 class="text-center">Github</h3>
                 <app-chart-doughnut *ngIf="languagesUserGithub" [data]="languagesUserGithub"></app-chart-doughnut>
               </div>
-              <div class="col-6">
+              <div class="col-6" *ngIf="searchUser.gitlabUsername">
                 <h3 class="text-center">Gitlab</h3>
                 <app-chart-doughnut *ngIf="languagesUserGitlab" [data]="languagesUserGitlab"></app-chart-doughnut>
               </div>
             </div>
             <div class="row mt-3">
-              <div class="col-6" style="border-right: 1px solid #000 !important;">
+              <div class="col-6" *ngIf="searchUser.githubUsername" style="border-right: 1px solid #000 !important;">
                 <app-chart-bar *ngIf="repositorysCommitsGithub" [data]="repositorysCommitsGithub"></app-chart-bar>
               </div>
-              <div class="col-6">
+              <div class="col-6" *ngIf="searchUser.gitlabUsername">
                 <app-chart-bar *ngIf="repositorysCommitsGitlab" [data]="repositorysCommitsGitlab"></app-chart-bar>
               </div>
             </div>
