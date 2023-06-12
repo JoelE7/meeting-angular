@@ -233,19 +233,12 @@ export class ListProjectComponent implements OnInit {
   }
 
   answerQuestion(answer: Boolean) {
-    answer
-      ? this.currentUser.preferences.push(
-          this.recommendationsQuestionUser.result.technologie
-        )
-      : this.currentUser.disinterest.push(
-          this.recommendationsQuestionUser.result.technologie
-        );
 
     this.userService
       .updatePreferences(this.currentUser, {
         $push: {
-          preferences: this.currentUser.preferences,
-          disinterest: this.currentUser.disinterest,
+          preferences: answer ? [this.recommendationsQuestionUser.result.technologie] : [],
+          disinterest: answer ? [] : [this.recommendationsQuestionUser.result.technologie],
         },
       })
       .subscribe(
