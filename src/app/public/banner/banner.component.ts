@@ -17,4 +17,7 @@ export class BannerComponent {
   @Input()
   short: boolean = false;
 
+  @Input()
+  roleUser: string = "";
+
 }

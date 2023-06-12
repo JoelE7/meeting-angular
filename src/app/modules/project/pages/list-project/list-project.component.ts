@@ -137,15 +137,15 @@ export class ListProjectComponent implements OnInit {
           items: [
             {
               label: 'Por hacer',
-              value: 'to do',
+              value: 'To Do',
             },
             {
               label: 'En progreso',
-              value: 'in progress',
+              value: 'In Progress',
             },
             {
               label: 'Hecho',
-              value: 'dome',
+              value: 'Done',
             },
           ],
         },

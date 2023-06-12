@@ -4,8 +4,8 @@
 </p-dialog>
 
 <p-dialog header="Redactar mensaje" *ngIf="currentUser && searchProject._id" [(visible)]="visiblePopUpInvitationProject" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
-  <app-modal-invitation-project [project]="searchProject" [userEmisor]="currentUser" (emitContact)="sendMailSuggestProject($event)"></app-modal-invitation-project > 
-</p-dialog> 
+  <app-modal-invitation-project [project]="searchProject" [userEmisor]="currentUser" (emitContact)="sendMailSuggestProject($event)"></app-modal-invitation-project >
+</p-dialog>
 
 <div class="card text-center" *ngIf="spinner">
   <span>
@@ -24,7 +24,7 @@
         searchProject.name }}</a></span>
     <div class="card shadow-sm" style="width: 100%; min-height: 700px">
       <app-banner [title]="searchProject.name" [subtitle]="'Aplicacion ' + searchProject.type"
-        [short]="true"></app-banner>
+        [short]="true" [roleUser]="searchProject.roleUser"></app-banner>
       <p-tabView class="p-3" [scrollable]="true" [(activeIndex)]="activeIndex">
         <p-tabPanel [cache]="false" header="Datos del proyecto">
           <div class="row">
@@ -228,7 +228,7 @@
                 searchProject?.leader?._id === currentUser._id &&
                 searchProject.status != 'Done'
               " [style]="{ heigth: '30px !important' }" (click)="finishProjectPopUp()"></p-button>
-          </div> 
+          </div>
         </div>
       </p-tabView>
     </div>

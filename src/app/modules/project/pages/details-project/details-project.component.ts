@@ -61,7 +61,10 @@ export class DetailsProjectComponent implements OnInit {
 
   async getDetailsProject(id: string) {
     this.searchProject = await this.projectService.detailsProjectAsync(id);
-
+    this.searchProject.roleUser = this.searchProject.leader._id == this.currentUser._id ?
+    'leader' : this.searchProject.participants.some(user => user._id === this.currentUser._id) ?
+    'participant' : this.searchProject.supports.some(supp => supp._id === this.currentUser._id) ?
+    'support' : '';
     this.checkUserIfExistsInProject();
     this.spinner = false;
   }

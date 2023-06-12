@@ -39,7 +39,7 @@
           </div>
           <div class="developer-avatar d-flex flex-column w-100 h-100 justify-content-center align-items-center" *ngIf="developer.level === 'Semi Senior'">
             <p-avatar *ngIf="currentUser?._id === developer._id;else semisenior" image="assets/img/Darth-Vader.png"
-              pBadge class="pi pi-check" severity="danger"></p-avatar>
+              pBadge severity="danger"></p-avatar>
             <p class="m-0 text-center">Semi Senior</p>
             <ng-template #semisenior>
               <p-avatar image="assets/img/Darth-Vader.png" severity="danger"></p-avatar>
@@ -47,7 +47,7 @@
           </div>
           <div class="developer-avatar d-flex flex-column w-100 h-100 justify-content-center align-items-center" *ngIf="developer.level === 'Senior'">
             <p-avatar *ngIf="currentUser?._id === developer._id;else senior" image="assets/img/Yoda.png" pBadge
-              class="pi pi-check" severity="danger"></p-avatar>
+              severity="danger"></p-avatar>
             <p class="m-0 text-center">Senior</p>
             <ng-template #senior>
               <p-avatar image="assets/img/Yoda.png" severity="danger"></p-avatar>

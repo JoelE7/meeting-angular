@@ -1,6 +1,17 @@
-      <div class="d-flex banner-profile" [ngClass]="{'short':short}">
+      <div class="d-flex banner-profile justify-content-between" [ngClass]="{'short':short}">
         <div [ngClass]="{'short-p':short}" class="p-5" >
           <h3 class="text-dark">{{title}}</h3>
           <h6 class="fst-italic text-dark">{{subtitle}}</h6>
+        </div>
+        <div class="text-end p-4">
+          <span class="text-end" *ngIf="roleUser ==='leader'">
+            <i class="fa-solid fa-crown h4 text-white" pTooltip="Eres lider de este proyecto"></i>
+          </span>
+          <span class="text-end" *ngIf="roleUser ==='participant'">
+            <i class="fa-solid fa-user h4 text-white" pTooltip="Eres miembro de este proyecto"></i>
+          </span>
+          <span class="text-end" *ngIf="roleUser ==='support'">
+            <i class="fa-solid fa-screwdriver-wrench h4 text-white" pTooltip="Brindas soporte a este proyecto"></i>
+          </span>
         </div>
       </div>
