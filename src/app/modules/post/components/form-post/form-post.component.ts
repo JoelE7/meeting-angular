@@ -11,7 +11,6 @@ import { MessageService } from 'primeng/api';
 import { DataService } from 'src/app/api/services/data/data.service';
 import { Item } from 'src/app/shared/models/model-forms/item-form.interface';
 import { Post } from 'src/app/shared/models/post/post.class';
-import { Project } from 'src/app/shared/models/project/project.class';
 import { User } from 'src/app/shared/models/user/user.class';
 
 @Component({
@@ -42,13 +41,13 @@ export class FormPostComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.startFrom();
     this.getTechnologies();
+    this.startFrom();
   }
 
   getTechnologies() {
-    this.dataService.getTechnologies().subscribe(
-      (data) => {
+    this.dataService.getTechnologies().subscribe({
+      next: (data) => {
         for (let i = 0; i < data.technologies.length; i++) {
           this.technologies.push({
             label: data.technologies[i],
@@ -56,14 +55,14 @@ export class FormPostComponent implements OnInit {
           });
         }
       },
-      (err) => {
+      error: (err) => {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
           detail: err.error ? err.error.message : 'Ups! ocurrio un error',
         });
-      }
-    );
+      },
+    });
   }
 
   startFrom() {
@@ -79,16 +78,14 @@ export class FormPostComponent implements OnInit {
       ]),
     });
   }
+
   submitPost() {
     this.newPost.title = this.form.get('title').value;
     this.newPost.body = this.form.get('body').value;
-    this.newPost.project = this.form.get('project').value._id
+    this.newPost.project = this.form.get('project').value._id;
     this.newPost.date = new Date();
     this.newPost.author = this.user._id;
     this.newPost.technologies = this.form.get('technologies').value;
-
-    console.log(this.newPost);
-    
 
     this.emitPost.emit(this.newPost);
   }

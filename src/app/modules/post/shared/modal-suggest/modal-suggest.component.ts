@@ -37,9 +37,11 @@ export class ModalSuggestComponent {
   emitContact: EventEmitter<MailSuggest> = new EventEmitter();
 
   usersReceptor: User[] = [];
-  filteredCountries: User[] = [];
+  filteredUsers: User[] = [];
 
   messages: Message[] = [];
+
+  spinner = true;
 
   constructor(
     private messageService: MessageService,
@@ -47,37 +49,39 @@ export class ModalSuggestComponent {
   ) {}
 
   ngOnInit(): void {
-    this.startForm();
     this.messages = [
-      { severity: 'info', detail: 'Podes enviarle este post a un conocido por email' }
+      {
+        severity: 'info',
+        detail: 'Podes enviarle este post a un conocido por email',
+      },
     ];
-    // this.formContact.get('post').setValue(this.post.title)
     this.getUsers();
   }
-  startForm() {
+  async startForm(): Promise<void> {
     this.formContact = new FormGroup({
       for: new FormControl('', [Validators.required]),
       message: new FormControl('', []),
-      // post:new FormControl(),
     });
   }
 
   getUsers() {
-    this.userService.getAllUser().subscribe(
-      (data) => {
+    this.userService.getAllUser().subscribe({
+      next: (data) => {
         this.usersReceptor = data;
-        console.log(this.userReceptor);
-        
-        this.removeCurrentUserFilters();
       },
-      (err) => {
+      error: (err) => {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
           detail: err.error ? err.error.message : 'Ups! ocurrio un error',
         });
-      }
-    );
+      },
+      complete: async () => {
+        this.removeCurrentUserFilters();
+        await this.startForm();
+        this.spinner = false;
+      },
+    });
   }
 
   submitContact() {
@@ -96,12 +100,15 @@ export class ModalSuggestComponent {
 
     for (let i = 0; i < this.usersReceptor.length; i++) {
       let user: User = this.usersReceptor[i];
-      if (user.email.toLowerCase().indexOf(query.toLowerCase()) == 0 && user.mailEnabled) {
+      if (
+        user.email.toLowerCase().indexOf(query.toLowerCase()) == 0 &&
+        user.mailEnabled
+      ) {
         filtered.push(user);
       }
     }
 
-    this.filteredCountries = filtered;
+    this.filteredUsers = filtered;
   }
 
   removeCurrentUserFilters() {

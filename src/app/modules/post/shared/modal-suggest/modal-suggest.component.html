@@ -1,4 +1,11 @@
-<form [formGroup]="formContact" (ngSubmit)="submitContact()" class="">
+<div class="card text-center" *ngIf="spinner">
+  <span>
+    <p-progressSpinner></p-progressSpinner>
+  </span>
+  <br>
+  <span class="text-center">Cargando...</span>
+</div>
+<form [formGroup]="formContact" (ngSubmit)="submitContact()" *ngIf="!spinner">
   <div class="row">
     <div class="col">
       <p-messages [(value)]="messages" [enableService]="false" [closable]="true"></p-messages>
@@ -8,7 +15,7 @@
     <div class="col-sm-12 col-md-12">
       <label class="color" for="for">Para:</label>
       <p-autoComplete [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" formControlName="for"
-        [suggestions]="filteredCountries" (completeMethod)="filterUsers($event)" field="email"
+        [suggestions]="filteredUsers" (completeMethod)="filterUsers($event)" field="email"
         [showEmptyMessage]="true" [forceSelection]="true" [emptyMessage]="''">
 
         <ng-template pTemplate="empty">

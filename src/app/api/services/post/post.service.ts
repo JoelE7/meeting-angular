@@ -31,6 +31,11 @@ export class PostService {
   createMessage(data: any) {
     let headers = new HttpHeaders();
 
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+
     return this.http
       .post(`${environment.apiUrl}/messages`, data, { headers: headers })
       .pipe(
@@ -78,7 +83,7 @@ export class PostService {
     let headers = new HttpHeaders();
 
     console.log(id);
-    
+
     // headers = headers.append(
     //   'Authorization',
     //   'Bearer' + localStorage.getItem('token')

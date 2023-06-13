@@ -16,6 +16,7 @@ import { ModalSuggestComponent } from 'src/app/modules/post/shared/modal-suggest
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalContactComponent } from 'src/app/shared/components/modal-contact/modal-contact.component';
 
 describe('DetailsPostComponentConLogin', () => {
   let component: DetailsPostComponent;
@@ -79,7 +80,7 @@ describe('DetailsPostComponentSinLogin', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DetailsPostComponent ],
+      declarations: [ DetailsPostComponent,ModalSuggestComponent,ModalContactComponent ],
       providers: [
         { provide: PostService, useValue: mockPostService },
         MessageService,
@@ -105,6 +106,8 @@ describe('DetailsPostComponentSinLogin', () => {
   })
 
   it("no debería permitir comentar el post si el usuario no está logueado : Form", () => {
+    const detailsPost = spyOn(mockPostService, 'detailsPost');
+    detailsPost.and.returnValue(of<Post>(mockPostDetails));
     component.currentUser = undefined;
     component.ngOnInit();
     expect(component.form.get('comment').disabled).toBeTruthy();

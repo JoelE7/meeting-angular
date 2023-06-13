@@ -16,17 +16,18 @@ import { DataService } from 'src/app/api/services/data/data.service';
   styleUrls: ['./list-post.component.css'],
 })
 export class ListPostComponent implements OnInit {
+  currentUser: User =
+    localStorage.getItem('user') != 'undefined'
+      ? JSON.parse(localStorage.getItem('user'))
+      : undefined;
 
-  currentUser: User = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;  listPost: Post[] = [];
- 
   spinner = true;
 
   paginate: any = 1;
-
   totalRecords = 0;
-
   size = 10;
 
+  listPost: Post[] = [];
   technologies: Item[] = [];
 
   query: any = [];
@@ -34,7 +35,6 @@ export class ListPostComponent implements OnInit {
     autoSend: false,
     method: Method.POST,
     filtersCustom: [
-     
       {
         type: FilterEnum.MULTISELECT,
         col: 'col-12 m-0 p-0',
@@ -44,8 +44,8 @@ export class ListPostComponent implements OnInit {
         items: {
           label: 'label',
           value: 'value',
-          search : true,
-          items: this.technologies
+          search: true,
+          items: this.technologies,
         },
       },
     ],
@@ -56,48 +56,52 @@ export class ListPostComponent implements OnInit {
     private postService: PostService,
     private filtersService: FilterService,
     private dataService: DataService
-
   ) {}
 
   ngOnInit(): void {
-    this.getTechnologies();
     this.getAllPosts();
   }
 
-  getTechnologies() {
-    this.dataService.getTechnologies().subscribe(
-      (data) => {
-        for(let i = 0; i < data.technologies.length; i++){
-          this.technologies.push({"label" : data.technologies[i],value : data.technologies[i]})
-        }
+  getAllPosts() {
+    this.postService.getAllPost(this.query, this.paginate).subscribe({
+      next: (data) => {
+        this.listPost = data.results;
+        this.totalRecords = data.count;
       },
-      (err) => {
+      error: (err) => {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
           detail: err.error ? err.error.message : 'Ups! ocurrio un error',
         });
-      }
-    );
+      },
+      complete: () => {
+        this.getTechnologies();
+      },
+    });
   }
 
-  getAllPosts() {
-       this.postService.getAllPost(this.query,this.paginate).subscribe(
-      (data) => {
-        console.log(data);
-        
-        this.listPost = data.results;
-        this.totalRecords = data.count
-        this.spinner = false;
+  getTechnologies() {
+    this.dataService.getTechnologies().subscribe({
+      next: (data) => {
+        for (let i = 0; i < data.technologies.length; i++) {
+          this.technologies.push({
+            label: data.technologies[i],
+            value: data.technologies[i],
+          });
+        }
       },
-      (err) => {
+      error: (err) => {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
           detail: err.error ? err.error.message : 'Ups! ocurrio un error',
         });
-      }
-    );
+      },
+      complete: () => {
+        this.spinner = false;
+      },
+    });
   }
 
   getFilters() {
@@ -107,7 +111,7 @@ export class ListPostComponent implements OnInit {
     this.getAllPosts();
   }
 
-  paginatePosts(event){
+  paginatePosts(event) {
     this.paginate = event.page + 1;
     this.size = event.rows;
     this.getAllPosts();

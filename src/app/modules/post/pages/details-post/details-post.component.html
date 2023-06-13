@@ -1,5 +1,14 @@
-<!-- modal de enviar sugerencia a un comocido sobre ese post -->
 
+<div class="card text-center" *ngIf="spinner">
+  <span>
+    <p-progressSpinner></p-progressSpinner>
+  </span>
+  <br>
+  <span class="text-center">Cargando...</span>
+</div>
+
+<div *ngIf="!spinner">
+<!-- modal de enviar sugerencia a un comocido sobre ese post -->
 <p-dialog header="Redactar mensaje" *ngIf="currentUser && searchPost._id" [(visible)]="visibleModalSuggest" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
    <app-modal-suggest [post]="searchPost" [userEmisor]="currentUser" [userReceptor]="searchPost.author" (emitContact)="sendMailSuggestPost($event)"></app-modal-suggest>
 </p-dialog>
@@ -160,4 +169,5 @@
 
     </div>
   </div>
+</div>
 </div>

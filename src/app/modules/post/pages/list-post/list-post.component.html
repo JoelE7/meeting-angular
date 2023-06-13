@@ -25,11 +25,7 @@
         <div class="col-sm-12 col-md-4 col-lg-4 mb-sm-4 ">
           <div class="" id="filtro">
             <h2>Filtros</h2>
-
-                  <!-- cambiar en filtros por ahora: -->
-
             <app-filters [filters]="filters"></app-filters>
-           
             <p-button type="button" [style]="{ width: '100%' }" label="Filtrar" class="float-center mt-3 d-block"
               styleClass="p-button-help" icon="pi pi-search" (click)="getFilters()"></p-button>
           </div>
@@ -37,7 +33,7 @@
         <div class="col-sm-12 col-md-8 col-lg-8">
           <!-- componente de card -->
           <app-card-post *ngFor="let post of listPost" [post]="post"></app-card-post>
-          <!--componente de card  -->
+          <!-- paginador  -->
           <p-paginator [totalRecords]="totalRecords" [rows]="size" (onPageChange)="paginatePosts($event)"></p-paginator>
         </div>
       </div>
