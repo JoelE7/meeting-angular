@@ -87,6 +87,9 @@ export class FormPostComponent implements OnInit {
     this.newPost.author = this.user._id;
     this.newPost.technologies = this.form.get('technologies').value;
 
+    console.log(this.newPost);
+    
+
     this.emitPost.emit(this.newPost);
   }
 }

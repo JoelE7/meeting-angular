@@ -41,15 +41,22 @@
           </h3>
           <p class="">{{ searchPost.body }}</p>
 
-          <footer _ngcontent-bug-c114="" class="blockquote-footer mt-3">
-            <b _ngcontent-bug-c114="">Tecnologías utilizadas:</b>
-            <cite
-              *ngFor="let technologie of searchPost.technologies; let l = last"
-              title="Source Title"
-            >
-              {{ technologie }} -</cite
-            >
-          </footer>
+          <div _ngcontent-bug-c114="" class="row mt-3 fs">
+            <div class="col-6">
+              <b _ngcontent-bug-c114="">- Tecnologías utilizadas:</b>
+              <cite
+                *ngFor="let technologie of searchPost.technologies; let l = last"
+                title="{{technologie}}"
+              >
+                {{ technologie }} -</cite
+              >
+            </div>
+            <div class="col-6 text-end" *ngIf="searchPost.project">
+              <p-button type="button" [style]="{'width' : '100%'}" label="Ver proyecto"
+              styleClass="p-button-outlined p-button-help" class="m-1"
+              routerLink="/project/details-project/{{searchPost.project}}"></p-button>
+            </div>
+          </div>
 
           <!--  seccion comentarios del post -->
           <hr />

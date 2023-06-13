@@ -36,6 +36,11 @@ textarea {
 p-chip img {
   border: 1px solid rgb(71, 71, 71);
 }
+
+.fs{
+  font-size: .875em;
+}
+
 /* hasta 767 sea mayor a 767px */
 @media (min-width: 767px) {
   #btnBack {
