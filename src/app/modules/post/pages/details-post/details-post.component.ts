@@ -70,6 +70,9 @@ export class DetailsPostComponent {
           detail: err.error ? err.error.message : 'Ups! ocurrio un error',
         });
       },
+      complete : ()=>{
+        this.spinner = false;
+      }
     });
   }
 
