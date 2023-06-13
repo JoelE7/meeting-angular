@@ -54,30 +54,21 @@
   <!-- type -->
   <div class="row  p-0">
     <div class="offset-0 col-sm-12 col-md-5 offset-md-1">
-      <label for="typePost" class="color mt-3">*Asignar a un proyecto</label>
+      <label for="project" class="color mt-3">*Asignar a un proyecto (Opcional)</label>
        <!-- ADAPTAR ESTE DESPLEGABLE PARA QUE TRAIGA LOS PROYECTOS OPCIONAL TMB POR SI ES UN POST SIN COLABORAR A UN DETERMINADO PROYECTO -->
       <p-dropdown
         [style]="{ width: '100%' }"
-        formControlName="type"
+        formControlName="project"
         placeholder="Seleccione una opción..."
-        [options]="type"
-        optionValue="value"
-        optionLabel="label"
+        [options]="user.projects"
+        optionLabel="name"
       >
         <ng-template let-option pTemplate="item">
-          <span [class]="'type-' + option.value">
-            {{ option.label }}
+          <span [class]="'project-' + option.value">
+            {{ option.name }}
           </span>
         </ng-template>
-      </p-dropdown>
-      <span
-        class="danger"
-        *ngIf="
-          form.get('type').hasError('required') && form.get('type').touched
-        "
-      >
-        <small class="p-error">Este campo es <strong>requerido</strong></small>
-      </span>        
+      </p-dropdown>       
     </div>
      
     <!-- TECNOLOGIAS -->
@@ -85,14 +76,14 @@
       <label for="name" class="color mt-3 ">*Tecnología </label>
       <p-multiSelect
         [style]="{ width: '100%' }"
-        formControlName="technologie"
+        formControlName="technologies"
         placeholder="Seleccione una opción..."
         [options]="technologies"
         optionValue="value"
         optionLabel="label"
       >
         <ng-template let-option pTemplate="item">
-          <span [class]="'type-' + option.value">
+          <span [class]="'technologies-' + option.value">
             {{ option.label }}
           </span>
         </ng-template>          
@@ -100,7 +91,7 @@
       <span
         class="danger"
         *ngIf="
-          form.get('type').hasError('required') && form.get('type').touched
+          form.get('technologies').hasError('required') && form.get('technologies').touched
         "
       >
         <small class="p-error">Este campo es <strong>requerido</strong></small>

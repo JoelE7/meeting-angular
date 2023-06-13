@@ -26,7 +26,7 @@ export class ListProjectComponent implements OnInit {
       ? JSON.parse(localStorage.getItem('user'))
       : undefined;
 
-  searchProjectCurrentUser: boolean = localStorage.getItem('user')  ? true : false;
+  searchProjectCurrentUser: boolean = false;
 
   userExistProject: boolean = false;
 

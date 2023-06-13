@@ -1,4 +1,11 @@
-<div class="postBackground">
+<div class="card text-center" *ngIf="spinner">
+  <span>
+    <p-progressSpinner></p-progressSpinner>
+  </span>
+  <br>
+  <span class="text-center">Cargando...</span>
+</div>
+<div class="postBackground" *ngIf="!spinner">
   <div class="container">
     <!-- Boton de regresar -->
     <span class="fst-italic text-secondary small">
@@ -14,7 +21,7 @@
       <div class="text-center">
         <h2 class="text-dark">Crear Post</h2>
       </div>
-      <app-form-post (emitPost)="createPost($event)"></app-form-post>
+      <app-form-post [user]="user" *ngIf="user._id" (emitPost)="createPost($event)"></app-form-post>
     </div>
   </div>
 </div>

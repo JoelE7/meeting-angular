@@ -4,6 +4,8 @@ import { FormPostComponent } from '../../../../../modules/post/components/form-p
 import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MessageService } from 'primeng/api';
+import { DataService } from 'src/app/api/services/data/data.service';
 
 describe('FormPostComponent', () => {
   let component: FormPostComponent;
@@ -12,7 +14,7 @@ describe('FormPostComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ FormPostComponent ],
-      providers:[],
+      providers:[MessageService,DataService],
       imports:[ PrimengModule,HttpClientTestingModule,RouterTestingModule],
     })
     .compileComponents();

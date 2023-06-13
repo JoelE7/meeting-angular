@@ -7,8 +7,11 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { DataService } from 'src/app/api/services/data/data.service';
 import { Item } from 'src/app/shared/models/model-forms/item-form.interface';
 import { Post } from 'src/app/shared/models/post/post.class';
+import { Project } from 'src/app/shared/models/project/project.class';
 import { User } from 'src/app/shared/models/user/user.class';
 
 @Component({
@@ -18,7 +21,6 @@ import { User } from 'src/app/shared/models/user/user.class';
   encapsulation: ViewEncapsulation.None,
 })
 export class FormPostComponent implements OnInit {
-
   @Input()
   post: Post = new Post();
 
@@ -27,79 +29,43 @@ export class FormPostComponent implements OnInit {
 
   form: FormGroup;
 
-  newPost: Post= new Post();
+  newPost: Post = new Post();
 
-  type:Item[] = [
-    {
-      label:"No aplica a ningún proyecto",
-      value:"NA"
-    },
-    {
-      label:"Project Zomboid",
-      value:"Project Zomboid"
-    },
-    {
-      label:"Project ERT",
-      value:"Project ERT"
-    },
-    {
-      label:"Turisteando",
-      value:"Turisteando"
-    },
-    {
-      label:"Netflix Rey",
-      value:"Netflix Rey"
-    },
-    {
-      label:"App TPI",
-      value:"App TPI"
-    },
-   ]
+  @Input()
+  user: User = new User();
 
-    
-   technologies: Item[] = [
-    {
-      label:"Angular", 
-      value:"Angular"
-    },
-    {
-      label:"React", 
-      value:"React"
-    },
-    {
-      label:"Vue", 
-      value:"Vue"
-    },
-    {
-      label:"Svelte", 
-      value:"Svelte"
-    },{
-      label:"Java", 
-      value:"Java"
-    },{
-      label:"Php", 
-      value:"Php"
-    },{
-      label:"Javascript", 
-      value:"Javascript"
-    },{
-      label:"Go", 
-      value:"Go"
-    },{
-      label:"Kotlin", 
-      value:"Kotlin"
-    },{
-      label:"Node.js", 
-      value:"Nodejs"
-    }
+  technologies: Item[] = [];
 
-  ]
-  
+  constructor(
+    private dataService: DataService,
+    private messageService: MessageService
+  ) {}
 
-  ngOnInit(): void {  
+  ngOnInit(): void {
     this.startFrom();
-  }  
-  
+    this.getTechnologies();
+  }
+
+  getTechnologies() {
+    this.dataService.getTechnologies().subscribe(
+      (data) => {
+        for (let i = 0; i < data.technologies.length; i++) {
+          this.technologies.push({
+            label: data.technologies[i],
+            value: data.technologies[i],
+          });
+        }
+      },
+      (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+        });
+      }
+    );
+  }
+
   startFrom() {
     this.form = new FormGroup({
       title: new FormControl(this.post.title, [Validators.required]),
@@ -107,20 +73,23 @@ export class FormPostComponent implements OnInit {
         Validators.required,
         Validators.minLength(10),
       ]),
-      type: new FormControl(this.post.type, [Validators.required]),
-      technologie: new FormControl(this.post.technologies,[Validators.required]),
+      project: new FormControl(this.post.project, []),
+      technologies: new FormControl(this.post.technologies, [
+        Validators.required,
+      ]),
     });
   }
-   submitPost(){
+  submitPost() {
     this.newPost.title = this.form.get('title').value;
     this.newPost.body = this.form.get('body').value;
-    this.newPost.type = this.form.get('type').value;
+    this.newPost.project = this.form.get('project').value;
     this.newPost.date = new Date();
-    // this.newPost.author= new User();
-    this.newPost.author="64584dfc6e91980ca4954f0c"
-    this.newPost.technologies = this.form.get('technologie').value;
+    this.newPost.author = this.user._id;
+    this.newPost.technologies = this.form.get('technologies').value;
+
+    console.log(this.newPost);
+    
 
     this.emitPost.emit(this.newPost);
-
   }
 }
