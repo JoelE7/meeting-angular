@@ -195,7 +195,7 @@
           </div>
 
         </p-tabPanel>
-        <p-tabPanel header="Métricas" *ngIf="searchProject.urlRepository && currentUser">
+        <p-tabPanel header="Métricas" *ngIf="searchProject.urlRepository">
           <div class="card text-center" *ngIf="spinnerMetric">
             <span>
               <p-progressSpinner></p-progressSpinner>

@@ -82,7 +82,7 @@ export class FormPostComponent implements OnInit {
   submitPost() {
     this.newPost.title = this.form.get('title').value;
     this.newPost.body = this.form.get('body').value;
-    this.newPost.project = this.form.get('project').value;
+    this.newPost.project = this.form.get('project').value._id
     this.newPost.date = new Date();
     this.newPost.author = this.user._id;
     this.newPost.technologies = this.form.get('technologies').value;
