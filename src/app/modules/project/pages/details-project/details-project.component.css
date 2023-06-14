@@ -39,6 +39,10 @@
 .p-button .github{
   background-color: #495057 !important; 
 }
+.p-button-secondary .gitlab  {
+  background-color: #fca326 !important; 
+ }
+
 .link a{
   color: #c42e6c !important;
 }
