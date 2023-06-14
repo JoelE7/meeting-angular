@@ -195,7 +195,7 @@ export class SeeMyProfileComponent {
       this.searchUser._id
     );
 
-    if (this.searchUser) {
+    if (this.searchUser.githubUsername &&   this.languagesMetric.githubLanguages ) {
       let languagesGithub = [];
       let quantityRepositoryByLanguageGithub = [];
 
@@ -214,7 +214,7 @@ export class SeeMyProfileComponent {
       };
     }
 
-    if (this.currentUser.gitlabUsername) {
+    if (this.currentUser.gitlabUsername &&   this.languagesMetric.gitlabLanguages) {
       let languagesGitlab = [];
       let quantityRepositoryByLanguageGitlab = [];
 
