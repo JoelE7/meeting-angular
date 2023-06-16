@@ -38,9 +38,8 @@ export class UpdateProjectComponent {
   }
 
   updateProject(project: Project) {
-    console.log(project);
-    
-    this.projectService.updateProject(this.project).subscribe(
+    project._id = this.project._id;
+    this.projectService.updateProject(project).subscribe(
       (resp) => {
         this.messageService.add({
           severity: 'success',
