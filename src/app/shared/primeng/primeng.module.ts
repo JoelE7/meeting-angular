@@ -49,6 +49,7 @@ import { EditorModule } from 'primeng/editor';
 import { BadgeModule } from 'primeng/badge';
 import {RatingModule} from 'primeng/rating'
 import { SplitterModule } from 'primeng/splitter';
+import { SplitButtonModule } from 'primeng/splitbutton';
 @NgModule({
   providers: [ConfirmationService],
   declarations: [],
@@ -102,7 +103,8 @@ import { SplitterModule } from 'primeng/splitter';
     EditorModule,
     BadgeModule,
     RatingModule,
-    SplitterModule
+    SplitterModule,
+    SplitButtonModule
   ],
 })
 export class PrimengModule {}

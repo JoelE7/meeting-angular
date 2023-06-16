@@ -36,19 +36,19 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-12  col-lg-6">
               <p>
                 <b>Fecha inicio: </b>
                 <span>{{ searchProject.startDate | date : "dd/MM/YYYY" }}</span>
               </p>
             </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-12 col-lg-6">
               <p>
                 <b>Cantidad de participantes: </b>
                 <span> {{searchProject.participants.length}} / {{ searchProject.amountParticipants }}</span>
               </p>
             </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-12  col-lg-6">
               <p>
                 <b>Complejidad: </b>
                 <span>{{ searchProject.complexity }}</span>
@@ -56,7 +56,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-12  col-lg-6">
               <p><b>Tecnologías:</b></p>
               <ul>
                 <li *ngFor="let tecnologie of searchProject.technologies">
@@ -64,7 +64,7 @@
                 </li>
               </ul>
             </div>
-            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-12  col-lg-6">
               <p>
                 <b>Estado del proyecto: </b>
                 <span>{{ searchProject.status }}</span>
@@ -72,7 +72,7 @@
             </div>
           </div>
           <div class="row" *ngIf="searchProject.urlRepository">
-            <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="col-12 col-lg-6">
               <p class="link">
                 <b>Url del repositorio: </b>
                 <a target="_blank" [href]="searchProject.urlRepository">{{
@@ -85,28 +85,28 @@
               !searchProject.urlRepository &&
               searchProject.leader?._id == currentUser?._id
             ">
-            <div class="row" *ngIf="!visibleInputGithub">
+            <div class="row" *ngIf="!visibleInputRepository">
               <div class="col-12">
 
                 <p-button type="button" iconPos="right" icon="bi bi-github" [style]="{ width: '100%' }"
                   label="Vincular con github" class="github" styleClass="p-button-secondary"
-                  (click)="linkInputProjectWithGithub()"></p-button>
+                  (click)="linkInputProjectToRepository()"></p-button>
                 <p-button type="button" iconPos="right" icon='fa-brands fa-square-gitlab' [style]="{ width: '100%' }"
-                  label="Vincular con gitlab" class="gitlab mx-2" styleClass="p-button-secondary" 
-                  (click)="linkInputProjectWithGitlab()"></p-button>
+                  label="Vincular con gitlab" class="gitlab mx-2" styleClass="p-button-secondary"
+                  (click)="linkInputProjectToRepository()"></p-button>
                 <p class="mt-3">
                   <strong>Al vincular el proyecto a github/gitlab tendrás acceso a métricas y a las actividades de los
                     integrantes</strong>
                 </p>
               </div>
             </div>
-            <div class="row mt-3" *ngIf="visibleInputGithub">
+            <div class="row mt-3" *ngIf="visibleInputRepository">
               <div class="col-6">
-                <label for="github">Ingresa el link del repositorio</label>
-                <input type="url" [(ngModel)]="linkGithubProject" class="form-control" id="github-link" />
-                <p-button (click)="linkProjectWithGithub()" type="button" [style]="{ width: '100%' }"
+                <label for="repository">Ingresa el link del repositorio</label>
+                <input type="url" [(ngModel)]="linkRepositoryProject" class="form-control" id="repository-link" />
+                <p-button (click)="linkProjectToRepository()" type="button" [style]="{ width: '100%' }"
                   label="Vincular repositorio" class="mt-3" styleClass="p-button-help"></p-button>
-                <p-button (click)="backLinkWithRepository()" type="button" [style]="{ width: '100%' }" label="Volver"
+                <p-button (click)="backLinkToRepository()" type="button" [style]="{ width: '100%' }" label="Volver"
                   class="mt-3 mx-2" styleClass="p-button-help"></p-button>
               </div>
             </div>
@@ -160,40 +160,92 @@
             <p-tag [severity]="'warning'" value="SIN ASIGNAR"></p-tag>
           </div>
         </p-tabPanel> -->
-        <p-tabPanel header="Colaborar">
+        <p-tabPanel header="Colaborar" *ngIf="!userExistProject">
           <app-support-collaborate (eventEmitterSupportJoinProject)="joinAProject($event)"></app-support-collaborate>
         </p-tabPanel>
         <p-tabPanel header="Integrantes">
           <div *ngIf="!advancement">
-            <h4>Lider</h4>
-            <hr />
-            <app-project-member (eventEmitterUserProgress)="seeProgressMember($event)"
-              [user]="searchProject.leader"></app-project-member>
-            <h4 class="mt-4" *ngIf=" searchProject.participants && searchProject.participants.length > 0">Integrantes
-            </h4>
-            <hr />
-            <app-project-member (eventEmitterUserProgress)="seeProgressMember($event)"
-              *ngFor="let member of searchProject.participants" [user]="member"></app-project-member>
-            <h4 class="mt-4" *ngIf="searchProject.supports.length > 0">Soportes</h4>
-            <hr />
-            <app-project-member (eventEmitterUserProgress)="seeProgressMember($event)"
-              *ngFor="let memberSupport of searchProject.supports" [user]="memberSupport"></app-project-member>
-          </div>
-
-
-          <div class="row" *ngIf="advancement">
-            <div class="col-12">
-              <h4>Integrantes</h4>
-              <app-advancement-members *ngIf="commitActivity" [members]="commitActivity"></app-advancement-members>
+            <div class="row">
+              <div class="col">
+                <h4>Lider</h4>
+              </div>
             </div>
-            <div class="row text-end mt-3">
-              <div class="col-12 col-sm-12">
+            <hr />
+            <div class="row" *ngIf="searchProject.leader;else notLider">
+              <div class="col">
+                <app-project-member (eventEmitterUserProgress)="seeProgressMember($event)"
+                  [user]="searchProject.leader"></app-project-member>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <ng-template #notLider>
+                  <p-messages [value]="[{ severity: 'info', detail: 'Este proyecto no tiene lider actualmente' }]"
+                    [enableService]="false" [closable]="false"></p-messages>
+                </ng-template>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <h4 class="mt-4">Integrantes
+                </h4>
+              </div>
+            </div>
+            <hr />
+            <div class="row" *ngIf="searchProject.participants.length > 0;else notParticipants">
+              <div class="col">
+                <app-project-member (eventEmitterUserProgress)="seeProgressMember($event)"
+                  *ngFor="let member of searchProject.participants" [user]="member"></app-project-member>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <ng-template #notParticipants>
+                  <p-messages
+                    [value]="[{ severity: 'info', detail: 'Este proyecto no tiene participantes actualmente' }]"
+                    [enableService]="false" [closable]="false"></p-messages>
+                </ng-template>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <h4 class="mt-4">Soportes</h4>
+              </div>
+            </div>
+            <hr />
+            <div class="row" *ngIf="searchProject.supports.length > 0;else notSupports">
+              <div class="col">
+                <app-project-member (eventEmitterUserProgress)="seeProgressMember($event)"
+                  *ngFor="let memberSupport of searchProject.supports" [user]="memberSupport"></app-project-member>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <ng-template #notSupports>
+                  <p-messages [value]="[{ severity: 'info', detail: 'Este proyecto no tiene soportes actualmente' }]"
+                    [enableService]="false" [closable]="false"></p-messages>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="advancement">
+            <div class="row">
+              <div class="col-6">
+                <h4>Integrantes</h4>
+              </div>
+              <div class="col-6 text-end">
                 <p-button (click)="backMembersProject()" type="button" [style]="{ width: '100%' }" label="Volver"
                   class="text-end" styleClass="p-button-help"></p-button>
               </div>
             </div>
+            <div class="row mt-3">
+              <div class="col-12">
+                <app-advancement-members *ngIf="commitActivity" [members]="commitActivity"></app-advancement-members>
+              </div>
+            </div>
           </div>
-
         </p-tabPanel>
         <p-tabPanel header="Métricas" *ngIf="searchProject.urlRepository">
           <div class="card text-center" *ngIf="spinnerMetric">
@@ -216,13 +268,14 @@
           </div>
         </p-tabPanel>
         <p-tabPanel header="Post">
-          <div *ngIf="searchProject.posts.length > 0;else notFound">
+          <div *ngIf="searchProject.posts.length > 0;else notFoundPost">
             <app-card-post [post]="post" *ngFor="let post of searchProject.posts"></app-card-post>
           </div>
 
-          <ng-template #notFound class="col-12">
+          <ng-template #notFoundPost class="col-12">
             <div class="col-12">
-              <p-messages [style]="{ width: '100%' }" [(value)]="messages" [enableService]="false" [closable]="true"></p-messages>
+              <p-messages [value]="[{ severity: 'info', detail: 'No se encontraron post' }]" [enableService]="false"
+                [closable]="false"></p-messages>
             </div>
           </ng-template>
         </p-tabPanel>
@@ -239,6 +292,14 @@
                 searchProject?.leader?._id === currentUser._id &&
                 searchProject.status != 'Done'
               " [style]="{ heigth: '30px !important' }" (click)="finishProjectPopUp()"></p-button>
+          </div>
+          <div class="col-12">
+            <p-button class="ms-2" type="button" styleClass="p-button-outlined p-button-help"
+              label="Actualizar Proyecto" *ngIf="
+                currentUser &&
+                searchProject?.leader?._id === currentUser._id 
+              " [style]="{ heigth: '30px !important' }"
+              routerLink="/project/update/{{searchProject._id}}"></p-button>
           </div>
         </div>
       </p-tabView>

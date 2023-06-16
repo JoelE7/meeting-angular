@@ -5,6 +5,12 @@
   padding: 40px 0px;
 }
 
+.custom-menu {
+  position: relative;
+  /* top: calc(100%); 
+  /* left: 0; */
+}
+
 .banner-profile{
   background-image: url('src/assets/img/Banner2.jpg') !important;
   width: 100%;

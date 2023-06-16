@@ -1,4 +1,8 @@
 import {
+  AfterContentChecked,
+  AfterContentInit,
+  AfterViewChecked,
+  AfterViewInit,
   Component,
   EventEmitter,
   Input,
@@ -25,7 +29,7 @@ Component;
   styleUrls: ['./form-project.component.css'],
   encapsulation:ViewEncapsulation.None
 })
-export class FormProjectComponent {
+export class FormProjectComponent implements OnInit{
 
   currentUser: User =
   localStorage.getItem('user') != 'undefined'
@@ -50,6 +54,8 @@ export class FormProjectComponent {
   confirm: Confirm[] = [];
 
   technologies: Item[] = [];
+
+  overlay:boolean = false;
 
   constructor(private dataService:DataService,private messageService:MessageService) {
     this.confirm.push(
@@ -98,11 +104,16 @@ export class FormProjectComponent {
 
   ngOnInit(): void {
     if (this.project._id != undefined) {
-      this.title = 'Editar proyecto';
+      this.title = 'Actualizar proyecto';
+      this.overlay = true;
+      // setTimeout(async()=>{
+      //   await new Promise((resolve,reject)=>{
+      //     this.overlay = false;
+      //   })
+      // },300)
     }
     this.getTechnologies();
     this.startFrom();
-    //this.form.get('startDate').disable();
   }
 
   getTechnologies() {
@@ -132,13 +143,10 @@ export class FormProjectComponent {
         Validators.required,
         Validators.minLength(10),
       ]),
-      startDate: new FormControl(this.project.startDate, [
+      startDate: new FormControl(this.project.startDate ? new Date(this.project.startDate) : "",[
         Validators.required,
       ]),
-      // startDate: new FormControl(this.project.startDate || new Date(), [
-      //   Validators.required,
-      // ]),
-      endDate: new FormControl(this.project.endDate, [Validators.required]),
+      endDate: new FormControl(this.project.endDate ?  new Date(this.project.endDate) : "", [Validators.required]),
       typeProject: new FormControl(this.project.type, [
         Validators.required,
       ]),
@@ -150,10 +158,11 @@ export class FormProjectComponent {
         Validators.min(1),
         Validators.max(10)
       ]),
-      lider: new FormControl(this.project.leader || false, []),
+      lider: new FormControl(this.project.leader ? true : false, []),
+      repository: new FormControl(this.project.urlRepository ? this.project.urlRepository  : "", []),
       requestSupport: new FormControl(this.project.requestSupport || false, []),
-      validateSystem : new FormControl(this.project.validateSystem || false,[]),
-      technologies: new FormControl(this.project.technologies,[Validators.required]),
+      validateSystem : new FormControl(this.project.validateSystem ? true : false,[]),
+      technologies: new FormControl(this.project.technologies ? this.project.technologies : [],[Validators.required]),
     });
   }
 
@@ -172,8 +181,6 @@ export class FormProjectComponent {
     this.newproject.technologies = this.form.get('technologies').value;
     //this.newproject.requestSupport = this.form.get('requestSupport').value;
 
-    console.log(this.newproject);
-    
     this.emitProject.emit(this.newproject);
   }
 }

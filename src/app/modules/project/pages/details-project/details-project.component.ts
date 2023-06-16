@@ -3,9 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from 'src/app/api/services/project/project.service';
 import { Project } from 'src/app/shared/models/project/project.class';
 import { Task } from '../../interfaces/tasks.interface';
-import { Message, MessageService } from 'primeng/api';
+import { MenuItem, Message, MessageService } from 'primeng/api';
 import { User } from 'src/app/shared/models/user/user.class';
-import { MetricProject, CommitByUser } from '../../interfaces/metricProject.interface';
+import {
+  MetricProject,
+  CommitByUser,
+} from '../../interfaces/metricProject.interface';
 import { MailInvitation } from 'src/app/shared/models/model-mail-invitation/model-mail-invitation.interface';
 
 @Component({
@@ -18,10 +21,6 @@ export class DetailsProjectComponent implements OnInit {
   activeIndex: number = 0;
   idParam: any;
 
-  profile: [];
-
-  projectAccept = false;
-
   searchProject: Project = new Project();
 
   currentUser: User =
@@ -31,20 +30,23 @@ export class DetailsProjectComponent implements OnInit {
   userExistProject: boolean = false;
 
   visiblePopUpScore = false;
-  visibleInputGithub: boolean = false;
   visiblePopUpInvitationProject = false;
-  linkGithubProject = '';
   spinner = true;
 
-  integrants: [{ '1' }, { '2' }];
-
-  puntuacion: boolean = false;
-
   metricProject: any;
-
+  linkRepositoryProject = '';
+  visibleInputRepository: boolean = false;
   spinnerMetric = true;
 
-  messages: Message[] = [];
+
+  //integrantes
+  userSeeProgressId: string = '';
+  advancement: boolean = false;
+
+  //métricas
+  commitActivity: any = '';
+  data: any;
+  dataRadar: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -59,23 +61,67 @@ export class DetailsProjectComponent implements OnInit {
     if (this.searchProject.urlRepository) {
       this.getMetricByProject();
     }
-
-    this.messages = [
-      { severity: 'info', detail: 'No se encontraron post' }
-    ];
-
   }
 
   async getDetailsProject(id: string) {
     this.searchProject = await this.projectService.detailsProjectAsync(id);
-    console.log(this.searchProject);
     
-    this.searchProject.roleUser = this.searchProject.leader?._id == this.currentUser?._id ?
-    'leader' : this.searchProject.participants.some(user => user?._id === this.currentUser?._id) ?
-    'participant' : this.searchProject.supports.some(supp => supp?._id === this.currentUser?._id) ?
-    'support' : '';
+    this.searchProject.roleUser =
+      this.searchProject.leader?._id == this.currentUser?._id
+        ? 'leader'
+        : this.searchProject.participants.some(
+            (user) => user?._id === this.currentUser?._id
+          )
+        ? 'participant'
+        : this.searchProject.supports.some(
+            (supp) => supp?._id === this.currentUser?._id
+          )
+        ? 'support'
+        : '';
     this.checkUserIfExistsInProject();
     this.spinner = false;
+  }
+
+  linkInputProjectToRepository() {
+    this.visibleInputRepository = true;
+  }
+
+  backLinkToRepository() {
+    this.visibleInputRepository = false;
+  }
+
+  async linkProjectToRepository() {
+    if (this.linkRepositoryProject == '') {
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Coloca la url de tu proyecto',
+      });
+      return;
+    }
+
+    await new Promise((resolve, reject) => {
+      this.searchProject.urlRepository = this.linkRepositoryProject;
+      resolve('');
+    });
+
+    this.projectService.updateProject(this.searchProject).subscribe(
+      (data) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Hecho',
+          detail: 'El proyecto fue vinculado exitosamente',
+        });
+        this.getMetricByProject();
+      },
+      (err) => {
+        this.messageService.add({
+          key: 'msg',
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+        });
+      }
+    );
   }
 
   joinAProject(support: boolean = false) {
@@ -108,7 +154,7 @@ export class DetailsProjectComponent implements OnInit {
               detail: message,
             });
             this.ngOnInit();
-          }else{
+          } else {
             this.messageService.add({
               severity: 'warn',
               summary: 'No te pudiste unir al proyecto',
@@ -127,129 +173,15 @@ export class DetailsProjectComponent implements OnInit {
       );
   }
 
-  sendMailSuggestProject(mail:MailInvitation){
-    this.projectService.sendMailInvitation(mail).subscribe(
-      (resp) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Enviado',
-          detail: '¡Su sugerencia ha sido enviado con éxito!',
-        });
-        this.visiblePopUpInvitationProject = false;
-      },
-      (err) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
-        });
-      }
-    );
+  seeProgressMember(userId: string) {
+    this.advancement = true;
+    this.userSeeProgressId = userId;
   }
 
-  finishProjectPopUp() {
-    this.puntuacion = true;
-    this.visiblePopUpScore = true;
+  backMembersProject() {
+    this.advancement = false;
   }
 
-  invitationProjectPopUp(){
-    this.visiblePopUpInvitationProject = true;
-  }
-
-  hiddenPopUpScore(hiddenPopUp: any) {
-    this.visiblePopUpScore = !hiddenPopUp;
-  }
-
-  linkInputProjectWithGithub() {
-    this.visibleInputGithub = true;
-  }
-
-  linkInputProjectWithGitlab() {
-    this.visibleInputGithub = true;
-  }
-
-  backLinkWithRepository(){
-    this.visibleInputGithub = false;
-  }
-
-  async linkProjectWithGithub() {
-    if (this.linkGithubProject == '') {
-      this.messageService.add({
-        severity: 'warn',
-        summary: 'Coloca la url de tu proyecto',
-      });
-      return;
-    }
-
-    await new Promise((resolve, reject) => {
-      this.searchProject.urlRepository = this.linkGithubProject;
-      resolve('');
-    });
-
-    this.projectService.updateProject(this.searchProject).subscribe(
-      (data) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Hecho',
-          detail: 'El proyecto fue vinculado exitosamente',
-        });
-        this.getMetricByProject();
-      },
-      (err) => {
-        this.messageService.add({
-          key: 'msg',
-          severity: 'error',
-          summary: 'Error',
-          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
-        });
-      }
-    );
-  }
-
-  checkUserIfExistsInProject() {
-    if (this.currentUser && this.searchProject) {
-      for (let participant of this.searchProject.participants) {
-        participant?._id === this.currentUser._id
-          ? (this.userExistProject = true)
-          : '';
-      }
-      for (let supports of this.searchProject.supports) {
-        supports?._id === this.currentUser._id
-          ? (this.userExistProject = true)
-          : '';
-      }
-
-      this.searchProject.leader?._id === this.currentUser._id
-        ? (this.userExistProject = true)
-        : '';
-    }
-  }
-
-  finishProject(scores: any) {
-    this.projectService
-      .finalizeProject(this.searchProject._id, scores)
-      .subscribe(
-        async (data) => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Hecho!',
-            detail: 'El proyecto fue finalizado con exito',
-          });
-          this.spinner = true;
-          await this.getDetailsProject(this.idParam);
-        },
-        (err) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: err.error ? err.error.message : 'Ups! ocurrio un error',
-          });
-        }
-      );
-  }
-
-
-  commitActivity:any = ""
   async getMetricByProject() {
     this.metricProject = await this.projectService.getMetricByProject(
       this.searchProject._id
@@ -259,46 +191,49 @@ export class DetailsProjectComponent implements OnInit {
     let commits = [];
     let commitsFrequency = [];
 
-
     let types = [];
     let releases = [];
     let pullRequest = [];
     let issues = [];
 
-    this.commitActivity = this.metricProject?.commitActivity
-    this.metricProject.commitByUser.forEach((data:any) => {
+    this.commitActivity = this.metricProject?.commitActivity;
+    this.metricProject.commitByUser.forEach((data: any) => {
       developers.push(data.developerUsername);
-      commits.push(data.commits.commitCount)
+      commits.push(data.commits.commitCount);
       commitsFrequency.push(data.commits.commitFrequencyByDay);
     });
 
-    this.metricProject.contributionDistributionByType.forEach((data:any) => {
+    this.metricProject.contributionDistributionByType.forEach((data: any) => {
       types.push(data.type);
 
-      if(data.type == "commits"){
-
+      if (data.type == 'commits') {
       }
-      if(data.type == "pullRequests"){
-        data.data.forEach((pullRequestUser:any) => {
-          pullRequest.push(pullRequestUser.quantity)
+      if (data.type == 'pullRequests') {
+        data.data.forEach((pullRequestUser: any) => {
+          pullRequest.push(pullRequestUser.quantity);
         });
       }
-      if(data.type == "issues"){
-        data.data.forEach((issuesUser:any) => {
-          issues.push(issuesUser.quantity)
+      if (data.type == 'issues') {
+        data.data.forEach((issuesUser: any) => {
+          issues.push(issuesUser.quantity);
         });
       }
     });
 
     this.getMetricGrafic(developers, commits, commitsFrequency);
-    this.getMetricRadar(developers,types,commits,pullRequest,issues)
+    this.getMetricRadar(developers, types, commits, pullRequest, issues);
     this.spinnerMetric = false;
   }
 
-  data: any;
-  dataRadar: any;
 
-  getMetricRadar(developers:any,types:any,releases:any,pullRequest:any,issues:any){
+
+  getMetricRadar(
+    developers: any,
+    types: any,
+    releases: any,
+    pullRequest: any,
+    issues: any
+  ) {
     const documentStyle = getComputedStyle(document.documentElement);
     this.dataRadar = {
       labels: developers,
@@ -348,15 +283,82 @@ export class DetailsProjectComponent implements OnInit {
     };
   }
 
-  userSeeProgressId: string = '';
-  advancement: boolean = false;
-
-  seeProgressMember(userId: string) {
-    this.advancement = true;
-    this.userSeeProgressId = userId;
+  sendMailSuggestProject(mail: MailInvitation) {
+    this.projectService.sendMailInvitation(mail).subscribe(
+      (resp) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Enviado',
+          detail: '¡Su sugerencia ha sido enviado con éxito!',
+        });
+        this.visiblePopUpInvitationProject = false;
+      },
+      (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+        });
+      }
+    );
   }
 
-  backMembersProject() {
-    this.advancement = false;
+  finishProjectPopUp() {
+    this.visiblePopUpScore = true;
+  }
+
+  invitationProjectPopUp() {
+    this.visiblePopUpInvitationProject = true;
+  }
+
+  hiddenPopUpScore(hiddenPopUp: any) {
+    this.visiblePopUpScore = !hiddenPopUp;
+  }
+
+  finishProject(scores: any) {
+    this.projectService
+      .finalizeProject(this.searchProject._id, scores)
+      .subscribe(
+        async (data) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Hecho!',
+            detail: 'El proyecto fue finalizado con exito',
+          });
+          this.spinner = true;
+          await this.getDetailsProject(this.idParam);
+        },
+        (err) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+          });
+        }
+      );
+  }
+
+ 
+
+
+
+
+  checkUserIfExistsInProject() {
+    if (this.currentUser && this.searchProject) {
+      for (let participant of this.searchProject.participants) {
+        participant?._id === this.currentUser._id
+          ? (this.userExistProject = true)
+          : '';
+      }
+      for (let supports of this.searchProject.supports) {
+        supports?._id === this.currentUser._id
+          ? (this.userExistProject = true)
+          : '';
+      }
+
+      this.searchProject.leader?._id === this.currentUser._id
+        ? (this.userExistProject = true)
+        : '';
+    }
   }
 }

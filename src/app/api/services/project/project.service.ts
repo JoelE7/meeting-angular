@@ -15,7 +15,7 @@ import { MailInvitation } from 'src/app/shared/models/model-mail-invitation/mode
 export class ProjectService {
   constructor(private http: HttpClient, private filterService: FilterService) {}
 
-  detailsProject(id: number): Observable<Project> {
+  detailsProject(id: string): Observable<Project> {
     let headers = new HttpHeaders();
     // headers = headers.append(
     //   'Authorization',
@@ -68,6 +68,7 @@ export class ProjectService {
       'Authorization',
       'Bearer ' + localStorage.getItem('token')
     );
+
     return this.http
       .put(`${environment.apiUrl}/projects/${project._id}`, project, {
         headers: headers,

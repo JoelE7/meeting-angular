@@ -10,7 +10,7 @@ export class Project {
   amountParticipants: number;
   leader: any | User;
   participants: any = [];
-  supports: any;
+  supports: any = [];
   posts: any= [];
   startDate: Date;
   endDate: Date;
