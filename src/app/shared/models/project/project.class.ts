@@ -20,4 +20,5 @@ export class Project {
   urlRepository:string;
   validateSystem:boolean;
   roleUser?:string;
+  requests?:User[] = [];
 }

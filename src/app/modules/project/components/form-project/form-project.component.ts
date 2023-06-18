@@ -106,11 +106,11 @@ export class FormProjectComponent implements OnInit{
     if (this.project._id != undefined) {
       this.title = 'Actualizar proyecto';
       this.overlay = true;
-      // setTimeout(async()=>{
-      //   await new Promise((resolve,reject)=>{
-      //     this.overlay = false;
-      //   })
-      // },300)
+      setTimeout(async()=>{
+        await new Promise((resolve,reject)=>{
+          this.overlay = false;
+        })
+      },300)
     }
     this.getTechnologies();
     this.startFrom();

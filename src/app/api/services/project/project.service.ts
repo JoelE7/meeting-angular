@@ -220,4 +220,78 @@ export class ProjectService {
         })
       );
   }
+
+  sendRequestToJoinTheProject(project:Project,data:any){
+    console.log(data);
+    
+    let headers = new HttpHeaders();
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+
+    return this.http
+      .post(`${environment.apiUrl}/projects/request/${project._id}`, data, {
+        headers: headers,
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  cancelRequestToJoinTheProject(project:Project,data:any){
+    let headers = new HttpHeaders();
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+
+    return this.http
+      .post(`${environment.apiUrl}/projects/request/${project._id}`, data, {
+        headers: headers,
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  leaveProject(project:Project,data:any){
+    let headers = new HttpHeaders();
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+
+    return this.http
+      .put(`${environment.apiUrl}/projects/leave/${project._id}`, data, {
+        headers: headers,
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  userRequestResponses(project: Project,data:any) {
+    let headers = new HttpHeaders();
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+
+    return this.http
+      .put(`${environment.apiUrl}/projects/request/${project._id}`, data, {
+        headers: headers,
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
 }

@@ -13,9 +13,6 @@ Component;
   styleUrls: ['./create-project.component.css'],
 })
 export class CreateProjectComponent {
-
-
-
   newProject: Project = new Project();
 
   constructor(
@@ -28,9 +25,9 @@ export class CreateProjectComponent {
     this.newProject = proyecto;
 
     console.log(this.newProject);
-    
-    this.projectService.createProject(this.newProject).subscribe(
-      (resp) => {
+
+    this.projectService.createProject(this.newProject).subscribe({
+      next: (resp) => {
         this.messageService.add({
           severity: 'success',
           summary: 'Creado',
@@ -38,13 +35,13 @@ export class CreateProjectComponent {
         });
         this.router.navigate(['/project/list-project']);
       },
-      (err) => {
+      error: (err) => {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
           detail: err.error ? err.error.message : 'Ups! ocurrio un error',
         });
-      }
-    );
+      },
+    });
   }
 }
