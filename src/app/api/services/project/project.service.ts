@@ -6,7 +6,6 @@ import { environment } from 'src/environments/environment';
 import { Method } from '../../../shared/filters/enum/method.enum';
 import { FilterService } from 'src/app/shared/filters/services/filter.service';
 import { User } from 'src/app/shared/models/user/user.class';
-import { MetricProject } from 'src/app/modules/project/interfaces/metricProject.interface';
 import { MailInvitation } from 'src/app/shared/models/model-mail-invitation/model-mail-invitation.interface';
 
 @Injectable({
@@ -97,7 +96,7 @@ export class ProjectService {
       'requestSupport',
       'ownProject'
     ];
-  
+
     query.push({col : "ownProject", value : currentUserProjects})
 
     let queryBuild =
@@ -222,9 +221,7 @@ export class ProjectService {
   }
 
   sendRequestToJoinTheProject(project:Project,data:any){
-    console.log("solicitud enviada");
-    console.log(data);
-    
+
     let headers = new HttpHeaders();
     headers = headers.append(
       'Authorization',
@@ -243,38 +240,13 @@ export class ProjectService {
   }
 
   cancelRequestToJoinTheProject(project:Project,data:any){
-    console.log("solicitud cancelada");
-    
-    console.log(data);
     let headers = new HttpHeaders();
     headers = headers.append(
       'Authorization',
       'Bearer ' + localStorage.getItem('token')
     );
-
     return this.http
       .put(`${environment.apiUrl}/projects/request/${project._id}`, data, {
-        headers: headers,
-      })
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
-  userRequestResponsesLeader(project: Project,data:any) {
-    console.log("respuesta lider");
-    console.log(data);
-    
-    let headers = new HttpHeaders();
-    headers = headers.append(
-      'Authorization',
-      'Bearer ' + localStorage.getItem('token')
-    );
-
-    return this.http
-      .post(`${environment.apiUrl}/projects/request/${project._id}`, data, {
         headers: headers,
       })
       .pipe(
@@ -293,6 +265,24 @@ export class ProjectService {
 
     return this.http
       .put(`${environment.apiUrl}/projects/leave/${project._id}`, data, {
+        headers: headers,
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  userRequestResponses(project: Project,data:any) {
+    let headers = new HttpHeaders();
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+
+    return this.http
+      .post(`${environment.apiUrl}/projects/request/${project._id}`, data, {
         headers: headers,
       })
       .pipe(
