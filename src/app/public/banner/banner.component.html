@@ -13,5 +13,14 @@
           <span class="text-end" *ngIf="roleUser ==='support'">
             <i class="fa-solid fa-screwdriver-wrench h4 text-white" pTooltip="Brindas soporte a este proyecto"></i>
           </span>
+          <br>
+          <p-button class="ms-2" type="button" styleClass="p-button-secondary" *ngIf="project && updateProject"
+            icon="pi pi-pencil" pTooltip="Actualizar proyecto" routerLink="/project/update/{{project._id}}" ></p-button>
+
+                            <!-- <p-button class="ms-2" type="button" styleClass="p-button-outlined p-button-help"
+              label="Actualizar Proyecto" *ngIf="
+                currentUser &&
+                searchProject?.leader?._id === currentUser._id 
+              " [style]="{ heigth: '30px !important' }" routerLink="/project/update/{{searchProject._id}}"></p-button> -->
         </div>
       </div>

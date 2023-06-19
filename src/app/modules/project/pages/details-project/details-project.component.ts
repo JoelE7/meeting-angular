@@ -72,9 +72,6 @@ export class DetailsProjectComponent implements OnInit {
 
   async getDetailsProject(id: string) {
     this.searchProject = await this.projectService.detailsProjectAsync(id);
-
-    
-    
     this.searchProject.roleUser =
       this.searchProject.leader?._id == this.currentUser?._id
         ? 'leader'
@@ -89,8 +86,6 @@ export class DetailsProjectComponent implements OnInit {
         : '';
     this.checkUserIfExistsInProject();
     this.checkUserIfSendRequest();
-    console.log(this.userExistProject + " proyecto existe");
-    console.log(this.userExistSendRequest + " envio solicitud");
     this.spinner = false;
   }
 
@@ -408,7 +403,7 @@ export class DetailsProjectComponent implements OnInit {
           this.messageService.add({
             severity: 'success',
             summary: 'Hecho!',
-            detail: '¡Has abandonado el proyecto con uso!',
+            detail: '¡Has abandonado el proyecto con exito!',
           });
           this.messageService.add({
             severity: 'warn',
@@ -428,17 +423,25 @@ export class DetailsProjectComponent implements OnInit {
       });
   }
 
-  userRequestResponses(event: any) {
+  userRequestResponsesLeader(event: any) {
     let response = {
       idUser: event.user._id,
       accepted: event.request,
     };
 
+    let message = response.accepted ? "La solicitud ha sido aceptada con exito" : "La solicitud ha sido rechazada con exito"
+
     this.projectService
-      .userRequestResponses(this.searchProject, response)
+      .userRequestResponsesLeader(this.searchProject, response)
       .subscribe({
         next: (data) => {
-          console.log('solicitud manejada');
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Hecho',
+            detail: message,
+          });
+          this.spinner = true;
+          this.getDetailsProject(this.idParam)
         },
         error: (err) => {
           this.messageService.add({

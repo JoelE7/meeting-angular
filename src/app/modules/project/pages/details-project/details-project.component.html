@@ -29,7 +29,13 @@
         searchProject.name }}</a></span>
     <div class="card shadow-sm" style="width: 100%; min-height: 700px">
       <app-banner [title]="searchProject.name" [subtitle]="'Aplicacion ' + searchProject.type" [short]="true"
-        [roleUser]="searchProject.roleUser"></app-banner>
+        [roleUser]="searchProject.roleUser" [project]="searchProject" [updateProject]="searchProject.leader._id === currentUser._id ? true : false"> 
+      </app-banner>
+                  <!-- <p-button class="ms-2" type="button" styleClass="p-button-outlined p-button-help"
+              label="Actualizar Proyecto" *ngIf="
+                currentUser &&
+                searchProject?.leader?._id === currentUser._id 
+              " [style]="{ heigth: '30px !important' }" routerLink="/project/update/{{searchProject._id}}"></p-button> -->
       <p-tabView class="p-3" [scrollable]="true" [(activeIndex)]="activeIndex">
         <p-tabPanel [cache]="false" header="Datos del proyecto">
           <div class="row">
@@ -271,10 +277,10 @@
           </div>
         </p-tabPanel>
         <p-tabPanel header="Solicitudes" *ngIf="searchProject.leader._id === currentUser._id">
-          <div class="row" *ngIf="searchProject.participants.length > 0;else notRequest">
+          <div class="row" *ngIf="searchProject.requests.length > 0;else notRequest">
             <div class="col">
-              <app-request-member (eventEmitterUserRequest)="userRequestResponses($event)"
-                *ngFor="let member of searchProject.participants" [user]="member"></app-request-member>
+              <app-request-member (eventEmitterUserRequest)="userRequestResponsesLeader($event)"
+                *ngFor="let member of searchProject.requests" [user]="member"></app-request-member>
             </div>
           </div>
           <div class="row">
@@ -313,11 +319,7 @@
               " [style]="{ heigth: '30px !important' }" (click)="showFinishProjectPopUp()"></p-button>
           </div>
           <div class="col-12">
-            <p-button class="ms-2" type="button" styleClass="p-button-outlined p-button-help"
-              label="Actualizar Proyecto" *ngIf="
-                currentUser &&
-                searchProject?.leader?._id === currentUser._id 
-              " [style]="{ heigth: '30px !important' }" routerLink="/project/update/{{searchProject._id}}"></p-button>
+
           </div>
           <div class="col-12">
             <p-button class="ms-2" (click)="

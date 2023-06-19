@@ -12,6 +12,7 @@ import { Project } from 'src/app/shared/models/project/project.class';
 })
 export class UpdateProjectComponent {
   project: Project;
+  spinner = true;
 
   constructor(
     private router: Router,
@@ -33,6 +34,8 @@ export class UpdateProjectComponent {
         summary: 'Error',
         detail: 'Recargue o contacte con el administrador del sistema',
       });
+    }else{
+      this.spinner = false;
     }
   }
 

@@ -1,4 +1,11 @@
-<div class="project">
+<div class="card text-center" *ngIf="spinner">
+  <span>
+    <p-progressSpinner></p-progressSpinner>
+  </span>
+  <br>
+  <span class="text-center">Cargando...</span>
+</div>
+<div class="project" *ngIf="!spinner">
   <div class="container card m-auto mb-5 shadow-sm">
     <div class="row mt-5">
       <div class="offset-md-1 col-8">

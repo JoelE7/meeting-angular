@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ProjectService } from 'src/app/api/services/project/project.service';
@@ -12,20 +12,21 @@ Component;
   templateUrl: './create-project.component.html',
   styleUrls: ['./create-project.component.css'],
 })
-export class CreateProjectComponent {
+export class CreateProjectComponent implements OnInit{
   newProject: Project = new Project();
+  spinner = true;
 
   constructor(
     private projectService: ProjectService,
     private messageService: MessageService,
     private router: Router
   ) {}
+  ngOnInit(): void {
+    this.spinner = false;
+  }
 
   createProject(proyecto: Project) {
     this.newProject = proyecto;
-
-    console.log(this.newProject);
-
     this.projectService.createProject(this.newProject).subscribe({
       next: (resp) => {
         this.messageService.add({
