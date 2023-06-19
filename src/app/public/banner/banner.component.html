@@ -3,7 +3,7 @@
           <h3 class="text-dark">{{title}}</h3>
           <h6 class="fst-italic text-dark">{{subtitle}}</h6>
         </div>
-        <div class="text-end p-4">
+        <div class="text-center p-4">
           <span class="text-end" *ngIf="roleUser ==='leader'">
             <i class="fa-solid fa-crown h4 text-white" pTooltip="Eres lider de este proyecto"></i>
           </span>
@@ -14,13 +14,13 @@
             <i class="fa-solid fa-screwdriver-wrench h4 text-white" pTooltip="Brindas soporte a este proyecto"></i>
           </span>
           <br>
-          <p-button class="ms-2" type="button" styleClass="p-button-secondary" *ngIf="project && updateProject"
+          <p-button class="" type="button" styleClass="p-button-secondary" *ngIf="project && updateProject"
             icon="pi pi-pencil" pTooltip="Actualizar proyecto" routerLink="/project/update/{{project._id}}" ></p-button>
 
                             <!-- <p-button class="ms-2" type="button" styleClass="p-button-outlined p-button-help"
               label="Actualizar Proyecto" *ngIf="
                 currentUser &&
-                searchProject?.leader?._id === currentUser._id 
+                searchProject?.leader?._id === currentUser._id
               " [style]="{ heigth: '30px !important' }" routerLink="/project/update/{{searchProject._id}}"></p-button> -->
         </div>
       </div>
