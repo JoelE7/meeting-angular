@@ -3,7 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from 'src/app/api/services/project/project.service';
 import { Project } from 'src/app/shared/models/project/project.class';
 import { Task } from '../../interfaces/tasks.interface';
-import { MenuItem, Message, MessageService } from 'primeng/api';
+import {
+  ConfirmEventType,
+  ConfirmationService,
+  MenuItem,
+  Message,
+  MessageService,
+} from 'primeng/api';
 import { User } from 'src/app/shared/models/user/user.class';
 import {
   MetricProject,
@@ -28,6 +34,7 @@ export class DetailsProjectComponent implements OnInit {
       ? JSON.parse(localStorage.getItem('user'))
       : undefined;
   userExistProject: boolean = false;
+  userExistSendRequest: boolean = false;
 
   visiblePopUpScore = false;
   visiblePopUpInvitationProject = false;
@@ -37,7 +44,6 @@ export class DetailsProjectComponent implements OnInit {
   linkRepositoryProject = '';
   visibleInputRepository: boolean = false;
   spinnerMetric = true;
-
 
   //integrantes
   userSeeProgressId: string = '';
@@ -51,6 +57,7 @@ export class DetailsProjectComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
+    private confirmationService: ConfirmationService,
     private projectService: ProjectService
   ) {}
 
@@ -65,7 +72,6 @@ export class DetailsProjectComponent implements OnInit {
 
   async getDetailsProject(id: string) {
     this.searchProject = await this.projectService.detailsProjectAsync(id);
-    
     this.searchProject.roleUser =
       this.searchProject.leader?._id == this.currentUser?._id
         ? 'leader'
@@ -79,6 +85,7 @@ export class DetailsProjectComponent implements OnInit {
         ? 'support'
         : '';
     this.checkUserIfExistsInProject();
+    this.checkUserIfSendRequest();
     this.spinner = false;
   }
 
@@ -187,26 +194,48 @@ export class DetailsProjectComponent implements OnInit {
       this.searchProject._id
     );
 
+    /**Commits de los integrantes del proyecto (últimos 3) */
+    this.commitActivity = this.metricProject?.commitActivity;
+
+    /**Obtención de datos de la métrica de commits barra */
     let developers = [];
+
+    this.metricProject.commitByUser.forEach((data: any) => {
+      developers.push(data.developerUsername);
+    });
+
+    this.loadMetricDataBar(developers, this.metricProject.commitByUser);
+
+    /**Cargar datos de la métrica radar */
+    this.loadMetricDataRadar(
+      developers,
+      this.metricProject.contributionDistributionByType
+    );
+
+    this.spinnerMetric = false;
+  }
+
+  loadMetricDataBar(developers: string[], data: any) {
     let commits = [];
     let commitsFrequency = [];
 
-    let types = [];
+    this.metricProject.commitByUser.forEach((data: any) => {
+      commits.push(data.commits.commitCount);
+      commitsFrequency.push(data.commits.commitFrequencyByDay);
+    });
+    this.showMetricGraficBar(developers, commits, commitsFrequency);
+  }
+
+  loadMetricDataRadar(developers: string[], data: any) {
     let releases = [];
     let pullRequest = [];
     let issues = [];
 
-    this.commitActivity = this.metricProject?.commitActivity;
-    this.metricProject.commitByUser.forEach((data: any) => {
-      developers.push(data.developerUsername);
-      commits.push(data.commits.commitCount);
-      commitsFrequency.push(data.commits.commitFrequencyByDay);
-    });
-
-    this.metricProject.contributionDistributionByType.forEach((data: any) => {
-      types.push(data.type);
-
-      if (data.type == 'commits') {
+    data.forEach((data: any) => {
+      if (data.type == 'releases') {
+        data.data.forEach((release: any) => {
+          releases.push(release.quantity);
+        });
       }
       if (data.type == 'pullRequests') {
         data.data.forEach((pullRequestUser: any) => {
@@ -219,17 +248,11 @@ export class DetailsProjectComponent implements OnInit {
         });
       }
     });
-
-    this.getMetricGrafic(developers, commits, commitsFrequency);
-    this.getMetricRadar(developers, types, commits, pullRequest, issues);
-    this.spinnerMetric = false;
+    this.showMetricRadar(developers, releases, pullRequest, issues);
   }
 
-
-
-  getMetricRadar(
+  showMetricRadar(
     developers: any,
-    types: any,
     releases: any,
     pullRequest: any,
     issues: any
@@ -257,7 +280,7 @@ export class DetailsProjectComponent implements OnInit {
     };
   }
 
-  getMetricGrafic(
+  showMetricGraficBar(
     devoloper: string[],
     commits: any[],
     commitsFrequency: string[]
@@ -283,65 +306,211 @@ export class DetailsProjectComponent implements OnInit {
     };
   }
 
-  sendMailSuggestProject(mail: MailInvitation) {
-    this.projectService.sendMailInvitation(mail).subscribe(
-      (resp) => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Enviado',
-          detail: '¡Su sugerencia ha sido enviado con éxito!',
-        });
-        this.visiblePopUpInvitationProject = false;
-      },
-      (err) => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
-        });
-      }
-    );
+  sendRequestToJoinTheProject() {
+    let request = { $push: { requests: this.currentUser._id } };
+
+    this.projectService
+      .sendRequestToJoinTheProject(this.searchProject, request)
+      .subscribe({
+        next: (data) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Enviado',
+            detail: '¡Su solicitud ha sido enviada con éxito!',
+          });
+          this.userExistSendRequest = true;
+        },
+        error: (err) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+          });
+        },
+        complete: async () => {
+          await this.getDetailsProject(this.idParam);
+        },
+      });
   }
 
-  finishProjectPopUp() {
-    this.visiblePopUpScore = true;
+  cancelRequestToJoinTheProject() {
+    let request = { $pull: { requests: this.currentUser._id } };
+
+    this.projectService
+      .cancelRequestToJoinTheProject(this.searchProject, request)
+      .subscribe({
+        next: (data) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Cancelado',
+            detail: '¡Su solicitud ha sido cancelada con éxito!',
+          });
+          this.userExistSendRequest = false;
+        },
+        error: (err) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+          });
+        },
+        complete: async () => {
+          await this.getDetailsProject(this.idParam);
+        },
+      });
+  }
+
+  leaveProjectConfirm() {
+    this.confirmationService.confirm({
+      message:
+        '¿Está seguro que deseas abandonar esté proyecto? Al abandonar un proyecto recibís una penalización de 500 puntos',
+      header: 'Confirmar abandono',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel : "Abandonar",
+      rejectLabel : "Cancelar",
+      accept: () => {
+        this.leaveProject();
+      },
+      reject: (type) => {
+        switch (type) {
+          case ConfirmEventType.REJECT:
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Cancelado',
+              detail: 'Usted ha cancelado',
+            });
+            break;
+          case ConfirmEventType.CANCEL:
+            this.messageService.add({
+              severity: 'warn',
+              summary: 'Cancelado',
+              detail: 'Usted ha cancelado',
+            });
+            break;
+        }
+      },
+    });
+  }
+  leaveProject() {
+    let userLeave = {
+      userId: this.currentUser._id,
+    };
+
+    this.projectService
+      .leaveProject(this.searchProject, userLeave)
+      .subscribe({
+        next: (data) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Hecho!',
+            detail: '¡Has abandonado el proyecto con exito!',
+          });
+          this.messageService.add({
+            severity: 'warn',
+            summary: 'Penalización',
+            detail: 'Se te han quitado 500 puntos',
+          });
+          this.userExistProject = false;
+          this.ngOnInit();
+        },
+        error: (err) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+          });
+        },
+      });
+  }
+
+  userRequestResponsesLeader(event: any) {
+    let response = {
+      idUser: event.user._id,
+      accepted: event.request,
+    };
+
+    let message = response.accepted ? "La solicitud ha sido aceptada con exito" : "La solicitud ha sido rechazada con exito"
+
+    this.projectService
+      .userRequestResponsesLeader(this.searchProject, response)
+      .subscribe({
+        next: (data) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Hecho',
+            detail: message,
+          });
+          this.spinner = true;
+          this.getDetailsProject(this.idParam)
+        },
+        error: (err) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+          });
+        },
+      });
   }
 
   invitationProjectPopUp() {
     this.visiblePopUpInvitationProject = true;
   }
 
-  hiddenPopUpScore(hiddenPopUp: any) {
+  sendMailSuggestProject(mail: MailInvitation) {
+    this.projectService.sendMailInvitation(mail).subscribe({
+      next: (resp) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Enviado',
+          detail: '¡Su sugerencia ha sido enviado con éxito!',
+        });
+      },
+      error: (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+        });
+      },
+      complete: () => {
+        this.visiblePopUpInvitationProject = false;
+      },
+    });
+  }
+
+  showFinishProjectPopUp() {
+    this.visiblePopUpScore = true;
+  }
+
+  finishProjectHiddenPopUp(hiddenPopUp: any) {
     this.visiblePopUpScore = !hiddenPopUp;
   }
 
   finishProject(scores: any) {
-    this.projectService
-      .finalizeProject(this.searchProject._id, scores)
-      .subscribe(
-        async (data) => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Hecho!',
-            detail: 'El proyecto fue finalizado con exito',
-          });
-          this.spinner = true;
-          await this.getDetailsProject(this.idParam);
-        },
-        (err) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: err.error ? err.error.message : 'Ups! ocurrio un error',
-          });
-        }
-      );
+    {
+      this.projectService
+        .finalizeProject(this.searchProject._id, scores)
+        .subscribe({
+          next: async (data) => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Hecho!',
+              detail: 'El proyecto fue finalizado con exito',
+            });
+            this.spinner = true;
+            await this.getDetailsProject(this.idParam);
+          },
+          error: (err) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+            });
+          },
+        });
+    }
   }
-
- 
-
-
-
 
   checkUserIfExistsInProject() {
     if (this.currentUser && this.searchProject) {
@@ -359,6 +528,16 @@ export class DetailsProjectComponent implements OnInit {
       this.searchProject.leader?._id === this.currentUser._id
         ? (this.userExistProject = true)
         : '';
+    }
+  }
+
+  checkUserIfSendRequest() {
+    if (this.currentUser && this.searchProject) {
+      for (let applicant of this.searchProject.requests) {
+        applicant?._id === this.currentUser._id
+          ? (this.userExistSendRequest = true)
+          : '';
+      }
     }
   }
 }

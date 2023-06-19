@@ -1,0 +1,14 @@
+<div class="user"  *ngIf="searchUser">
+    <div class="container card m-auto mb-5 shadow-sm">
+      <div class="row mt-5">
+        <div class="offset-md-1 col-8">
+          <h2 class="text-dark">Editar usuario</h2>
+        </div>
+        <div class="col-4 col-sm-2 col-lg-2 text-end">
+          <p-button class="ms-2" type="button" styleClass="p-button-outlined p-button-help" label="Volver"
+            [style]="{ heigth: '30px !important' }" routerLink="/user/see-my-profile/{{searchUser._id}}"></p-button>
+        </div>
+      </div>
+      <app-form-user [user]="searchUser" (emitUser)="updateUser($event)"></app-form-user>
+    </div>
+  </div>

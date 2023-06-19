@@ -1,0 +1,90 @@
+<form [formGroup]="form" (ngSubmit)="submitProject()" class="form">
+  <div class="row mt-5 p-0">
+    <div class="offset-0 col-sm-12 col-md-5 offset-md-1">
+      <label for="name" class="pl-5">Nombre </label>
+      <input type="text" pInputText formControlName="name" class="form-control"
+        placeholder="Ingrese nombre del usuario" />
+      <span class="danger" *ngIf="
+            form.get('name').hasError('required') && form.get('name').touched
+          ">
+        <small class="p-error">Este campo es <strong>requerido</strong></small>
+      </span>
+    </div>
+    <div class="offset-0 mt-3 col-12 mt-md-0 col-md-5 mt-md-0">
+      <label for="amountParticipants" class="pl-5">Email
+      </label>
+      <input pInputText type="email" formControlName="email" id="" class="form-control" />
+      <span class="danger" *ngIf="
+            form.get('email').hasError('required') &&
+            form.get('email').touched
+          ">
+        <small class="p-error">Este campo es <strong>requerido</strong></small>
+      </span>
+      <span class="danger" *ngIf="
+            form.get('email').hasError('email') &&
+            form.get('email').touched
+          ">
+        <small class="p-error">El email debe ser uno<strong>valido</strong></small>
+      </span>
+    </div>
+  </div>
+
+  <div class="row mt-3 p-0">
+    <div class="offset-0 col-sm-12 col-md-5 offset-md-1">
+      <label for="complexity" class="pl-5">¿Qué tecnologías maneja tu proyecto? </label>
+      <p-multiSelect [style]="{ width: '100%' }" formControlName="technologies" placeholder="Seleccione una opción..."
+        [options]="technologies" defaultLabel="Seleccione una o varias" optionValue="value" optionLabel="label"
+        display="chip" [overlayVisible]="overlay">
+        <ng-template let-option pTemplate="item">
+          <span [class]="'technologie-' + option.value">
+            {{ option.label }}
+          </span>
+        </ng-template>
+      </p-multiSelect>
+      <span class="danger" *ngIf="
+            form.get('technologies').hasError('required') && form.get('technologies').touched
+          ">
+        <small class="p-error">Este campo es <strong>requerido</strong></small>
+      </span>
+    </div>
+    <div class="offset-0 mt-3 col-12 mt-3 col-md-5 mt-md-0">
+      <label for="complexity" class="pl-5">Perfil </label>
+      <p-dropdown [style]="{ width: '100%' }" formControlName="profile" optionValue="valueProfile" [options]="profiles"
+        placeholder="Seleccione una opción..." optionLabel="description" id="role">
+        <ng-template let-option pTemplate="item">
+          <span [class]="'description-' + option.valueProfile">
+            {{ option.description }}
+          </span>
+        </ng-template>
+      </p-dropdown>
+      <span class="text-danger" *ngIf="form.get('profile').hasError('required') && form.get('profile').touched">
+        Este campo es obligatorio
+      </span>
+    </div>
+  </div>
+
+  <div class="row mt-3 p-0">
+    <div class="offset-0 col-sm-12 col-md-5 offset-md-1">
+      <label for="github" class="pl-5">Github </label>
+      <input type="text" pInputText formControlName="github" class="form-control"
+        placeholder="Ingrese nombre de github" />
+    </div>
+    <div class="offset-0 mt-3 col-12 mt-md-0 col-md-5 mt-md-0">
+      <label for="gitlab" class="pl-5">gitlab
+      </label>
+      <input pInputText placeholder="Ingrese nombre de gitlab" type="text" formControlName="gitlab" id=""
+        class="form-control" />
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="offset-0 col-sm-12 col-md-5 offset-md-1">
+        <p-checkbox label="Quiero recibir notificaciones por mail" formControlName="mailEnabled" [binary]="true" inputId="binary"></p-checkbox>
+    </div>
+</div>
+
+  <div class="text-center p-4">
+    <p-button [disabled]="form.invalid" type="submit" [style]="{ width: '100%' }" [label]="title" class="text-center"
+      styleClass="p-button-help"></p-button>
+  </div>
+</form>

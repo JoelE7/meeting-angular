@@ -1,11 +1,19 @@
-<div class="container m-auto">
+<div class="card text-center" *ngIf="spinner">
+  <span>
+    <p-progressSpinner></p-progressSpinner>
+  </span>
+  <br>
+  <span class="text-center">Cargando...</span>
+</div>
+
+<div class="container m-auto" *ngIf="!spinner">
   <div class="row mt-5">
     <div class="offset-md-1 col-8">
       <h2 class="text-dark">Actualizar proyecto</h2>
     </div>
     <div class="col-4 col-sm-2 col-lg-2 text-end" *ngIf="project">
-      <p-button class="ms-2" type="button" styleClass="p-button-outlined p-button-help" label="Volver"
-        [style]="{ heigth: '30px !important' }" routerLink="/project/details-project/project._id"></p-button>
+      <p-button *ngIf="project" class="ms-2" type="button" styleClass="p-button-outlined p-button-help" label="Volver"
+        [style]="{ heigth: '30px !important' }" routerLink="/project/details-project/{{project._id}}"></p-button>
     </div>
   </div>
   <div class="card m-auto mb-5">

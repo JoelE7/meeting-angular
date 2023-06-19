@@ -46,7 +46,7 @@
               </p>
             </div>
           </div>
-          <p-button class="" icon="pi pi-file-edit" type="submit" [style]="{ width: '100%' }" label="Editar"
+          <p-button class="" routerLink="/user/update/{{searchUser._id}}" icon="pi pi-file-edit" type="button" [style]="{ width: '100%' }" label="Editar"
             styleClass="p-button-help"></p-button>
           <div class="" *ngIf="!searchUser.githubUsername &&
           searchUser._id == currentUser?._id || !searchUser.gitlabUsername &&

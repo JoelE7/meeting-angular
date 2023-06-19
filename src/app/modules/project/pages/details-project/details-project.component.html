@@ -1,5 +1,8 @@
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+
 <p-dialog [header]="'Finalizar proyecto'" [(visible)]="visiblePopUpScore" *ngIf="visiblePopUpScore">
-  <app-modal-score [users]="searchProject.participants" (eventEmitterHiddenPopUpScore)="hiddenPopUpScore($event)"
+  <app-modal-score [users]="searchProject.participants"
+    (eventEmitterHiddenPopUpScore)="finishProjectHiddenPopUp($event)"
     (eventEmitterScoreUsers)="finishProject($event)"></app-modal-score>
 </p-dialog>
 
@@ -26,7 +29,13 @@
         searchProject.name }}</a></span>
     <div class="card shadow-sm" style="width: 100%; min-height: 700px">
       <app-banner [title]="searchProject.name" [subtitle]="'Aplicacion ' + searchProject.type" [short]="true"
-        [roleUser]="searchProject.roleUser"></app-banner>
+        [roleUser]="searchProject.roleUser" [project]="searchProject" [updateProject]="searchProject.leader._id === currentUser._id ? true : false"> 
+      </app-banner>
+                  <!-- <p-button class="ms-2" type="button" styleClass="p-button-outlined p-button-help"
+              label="Actualizar Proyecto" *ngIf="
+                currentUser &&
+                searchProject?.leader?._id === currentUser._id 
+              " [style]="{ heigth: '30px !important' }" routerLink="/project/update/{{searchProject._id}}"></p-button> -->
       <p-tabView class="p-3" [scrollable]="true" [(activeIndex)]="activeIndex">
         <p-tabPanel [cache]="false" header="Datos del proyecto">
           <div class="row">
@@ -267,6 +276,22 @@
             </div>
           </div>
         </p-tabPanel>
+        <p-tabPanel header="Solicitudes" *ngIf="searchProject.leader._id === currentUser._id">
+          <div class="row" *ngIf="searchProject.requests.length > 0;else notRequest">
+            <div class="col">
+              <app-request-member (eventEmitterUserRequest)="userRequestResponsesLeader($event)"
+                *ngFor="let member of searchProject.requests" [user]="member"></app-request-member>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <ng-template #notRequest>
+                <p-messages [value]="[{ severity: 'info', detail: 'No hay solicitudes pendientes' }]"
+                  [enableService]="false" [closable]="false"></p-messages>
+              </ng-template>
+            </div>
+          </div>
+        </p-tabPanel>
         <p-tabPanel header="Post">
           <div *ngIf="searchProject.posts.length > 0;else notFoundPost">
             <app-card-post [post]="post" *ngFor="let post of searchProject.posts"></app-card-post>
@@ -284,22 +309,35 @@
             <p-button class="ms-2" *ngIf="currentUser" type="button" styleClass="p-button-outlined p-button-help"
               label="Sugerir Proyecto" [style]="{ heigth: '30px !important' }"
               (click)="invitationProjectPopUp()"></p-button>
-            <p-button (click)="joinAProject()" *ngIf="!userExistProject" type="button" [style]="{ width: '100%' }"
+            <p-button (click)="joinAProject()" *ngIf="searchProject.validateSystem && !userExistProject" type="button" [style]="{ width: '100%' }"
               label="Unirse al Proyecto" class="mx-2" styleClass="p-button-help"></p-button>
             <p-button class="ms-2" type="button" styleClass="p-button-outlined p-button-help" label="Finalizar Proyecto"
               *ngIf="
                 currentUser &&
                 searchProject?.leader?._id === currentUser._id &&
                 searchProject.status != 'Done'
-              " [style]="{ heigth: '30px !important' }" (click)="finishProjectPopUp()"></p-button>
+              " [style]="{ heigth: '30px !important' }" (click)="showFinishProjectPopUp()"></p-button>
           </div>
           <div class="col-12">
-            <p-button class="ms-2" type="button" styleClass="p-button-outlined p-button-help"
-              label="Actualizar Proyecto" *ngIf="
-                currentUser &&
-                searchProject?.leader?._id === currentUser._id 
-              " [style]="{ heigth: '30px !important' }"
-              routerLink="/project/update/{{searchProject._id}}"></p-button>
+
+          </div>
+          <div class="col-12">
+            <p-button class="ms-2" (click)="
+            sendRequestToJoinTheProject()" type="button" styleClass="p-button-outlined p-button-help"
+              label="Enviar solicitud" *ngIf="!searchProject.validateSystem && !userExistSendRequest && !userExistProject"
+              [style]="{ heigth: '30px !important' }"></p-button>
+          </div>
+          <div class="col-12">
+            <p-button class="ms-2" (click)="
+            cancelRequestToJoinTheProject()" type="button" styleClass="p-button-outlined p-button-help"
+              label="Cancelar solicitud" *ngIf="!searchProject.validateSystem && userExistSendRequest && !userExistProject"
+              [style]="{ heigth: '30px !important' }"></p-button>
+          </div>
+          <div class="col-12">
+            <p-button class="ms-2" (click)="
+            leaveProjectConfirm()" type="button" styleClass="p-button-outlined p-button-help"
+              label="Abandonar proyecto" *ngIf="this.searchProject.leader._id != currentUser._id && userExistProject"
+              [style]="{ heigth: '30px !important' }"></p-button>
           </div>
         </div>
       </p-tabView>

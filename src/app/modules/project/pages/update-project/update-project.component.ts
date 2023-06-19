@@ -11,8 +11,8 @@ import { Project } from 'src/app/shared/models/project/project.class';
   encapsulation: ViewEncapsulation.None,
 })
 export class UpdateProjectComponent {
-
   project: Project;
+  spinner = true;
 
   constructor(
     private router: Router,
@@ -28,19 +28,21 @@ export class UpdateProjectComponent {
 
   async getDetailsProject(id: string) {
     this.project = await this.projectService.detailsProjectAsync(id);
-    if(!this.project){
+    if (!this.project) {
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
         detail: 'Recargue o contacte con el administrador del sistema',
       });
+    }else{
+      this.spinner = false;
     }
   }
 
   updateProject(project: Project) {
     project._id = this.project._id;
-    this.projectService.updateProject(project).subscribe(
-      (resp) => {
+    this.projectService.updateProject(project).subscribe({
+      next: (resp) => {
         this.messageService.add({
           severity: 'success',
           summary: 'Actualizado',
@@ -48,13 +50,13 @@ export class UpdateProjectComponent {
         });
         this.router.navigate(['/project/details-project/' + this.project._id]);
       },
-      (err) => {
+      error: (err) => {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
           detail: err.error ? err.error.message : 'Ups! ocurrio un error',
         });
-      }
-    );
+      },
+    });
   }
 }
