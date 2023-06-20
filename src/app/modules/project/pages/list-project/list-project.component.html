@@ -13,27 +13,27 @@
     </div>
   </div>
   <div class="container p-3 mb-2 d-flex flex-column standingOut shadow-sm " *ngIf="!spinner">
-    <div class="card mb-2">
+    <div class="card p-3 mb-2">
       <!-- seccion titulo mas boton -->
-      <div class="row d-flex mt-3">
-        <div class="col-sm-6 col-md-9 col-lg-9">
-          <h3 class="title mt-sm-4 m-0">Proyectos</h3>
+      <div class="row" id="titProy">
+        <div class="col-sm-6 col-md-8 col-lg-9 col-xl-9  ps-md-5 ps-lg-5 ps-xl-5">
+          <h3 id="titleP" class="ps-3 ps-sm-3 ">Proyectos</h3>
         </div>
-        <div class="col-sm-6 col-md-3 col-lg-3  mb-md-0 mb-4">
-          <p-button type="button" [style]="{ width: '100%' }" label="Crear Proyecto" class=" pt-3 float-end"
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-md-0 mb-4 pe-4 ">
+          <p-button type="button" [style]="{ width: '100%' }" label="Crear Proyecto" class=" ml-5 float-end"
             styleClass=" p-button-help" routerLink="/project/create" *ngIf="currentUser"></p-button>
         </div>
       </div>
       <!----------------- COMPONENTE FILTRO-------------------->
       <div class="container">
         <div class="row p-0">
-          <div class="col-12 col-sm-12 col-md-4 col-lg-4">
-            <div class="" id="filtro">
+          <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4">
+            <div id="filtro">
               <div class="row">
-                <div class="col-6">
-                  <h2>Filtros</h2>
+                <div class="col-5 col-sm-6 col-md-6 col-lg-6 col-xl-6 mb-sm-4">
+                  <h3 class="p-0 m-0">Filtros</h3>
                 </div>
-                <div class="col-6">
+                <div class="col-7 col-sm-6 col-md-6 col-lg-6 col-xl-6 mt-sm-2 mt-md-2 mb-2 text-end">
                   <p-checkbox *ngIf="currentUser" label="Mis proyectos" [(ngModel)]="searchProjectCurrentUser"
                     [binary]="true" inputId="binary"></p-checkbox>
                 </div>
@@ -44,18 +44,17 @@
                 (click)="getFilters()"></p-button>
             </div>
           </div>
-          <div class="col-12 col-sm-12 col-md-8 col-lg-8" *ngIf="listProject.length > 0;else noFound">
+          <div class="col-12 col-sm-12 col-md-7 col-lg-8 col-xl-8" *ngIf="listProject.length > 0;else noFound">
             <app-card-project *ngFor="let project of listProject" [project]="project"></app-card-project>
             <p-paginator [totalRecords]="totalRecords" [rows]="size"
               (onPageChange)="paginatePosts($event)"></p-paginator>
           </div>
-          <ng-template #noFound class="col-12 col-sm-12 col-md-8 col-lg-8">
-            <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+          <ng-template #noFound class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+            <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
             <p-messages [(value)]="messages" [enableService]="false" [closable]="true"></p-messages>
             </div>
           </ng-template>
         </div>
-
 
       </div>
       <!----------------- COMPONENTE modal-------------------->
