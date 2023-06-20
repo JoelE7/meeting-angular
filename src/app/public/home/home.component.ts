@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { User } from 'src/app/shared/models/user/user.class';
 
@@ -7,7 +7,7 @@ import { User } from 'src/app/shared/models/user/user.class';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent{
+export class HomeComponent implements OnInit{
   users: User[] = [];
   usersAsync: User[] = [];
 
@@ -15,8 +15,10 @@ export class HomeComponent{
 
   spinner = true;
 
-  constructor(
-    private messageService: MessageService
-  ) {}
+  constructor(private messageService: MessageService) {
+    
+  }
+  ngOnInit(): void {
 
+  }
 }

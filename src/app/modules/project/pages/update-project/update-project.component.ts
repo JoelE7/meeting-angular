@@ -11,7 +11,8 @@ import { Project } from 'src/app/shared/models/project/project.class';
   encapsulation: ViewEncapsulation.None,
 })
 export class UpdateProjectComponent {
-  editProject: Project = new Project();
+  project: Project;
+  spinner = true;
 
   constructor(
     private router: Router,
@@ -20,45 +21,42 @@ export class UpdateProjectComponent {
     private projectService: ProjectService
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     let { id } = this.activatedRouter.snapshot.params;
-
-    this.projectService.detailsProject(id).subscribe(
-      (project) => {
-        this.editProject = project;
-      },
-      (err) => {
-        console.log(err);
-        this.messageService.add({
-          key: 'msg',
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Recargue o contacte con el administrador del sistema',
-        });
-      }
-    );
+    await this.getDetailsProject(id);
   }
 
-  updateProject(proyecto: Project) {
-    this.editProject = proyecto;
-    this.projectService.updateProject(this.editProject).subscribe(
-      (resp) => {
+  async getDetailsProject(id: string) {
+    this.project = await this.projectService.detailsProjectAsync(id);
+    if (!this.project) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Recargue o contacte con el administrador del sistema',
+      });
+    }else{
+      this.spinner = false;
+    }
+  }
+
+  updateProject(project: Project) {
+    project._id = this.project._id;
+    this.projectService.updateProject(project).subscribe({
+      next: (resp) => {
         this.messageService.add({
-          key: 'msg',
           severity: 'success',
-          summary: 'Editado',
-          detail: '¡El Proyecto fue editado con exito!',
+          summary: 'Actualizado',
+          detail: '¡El Proyecto fue actualizado con exito!',
         });
-        this.router.navigate(['/list-project']);
+        this.router.navigate(['/project/details-project/' + this.project._id]);
       },
-      (err) => {
+      error: (err) => {
         this.messageService.add({
-          key: 'msg',
           severity: 'error',
           summary: 'Error',
           detail: err.error ? err.error.message : 'Ups! ocurrio un error',
         });
-      }
-    );
+      },
+    });
   }
 }

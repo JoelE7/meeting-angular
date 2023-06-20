@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="submitScore()">
+<form [formGroup]="form" (ngSubmit)="submitScore()" *ngIf="users.length > 0"> 
     <div class="container">
         <div class="row">
             <div class="col">
@@ -6,7 +6,7 @@
                     <ng-template pTemplate="header" let-columns>
                         <tr>
                             <th class="text-dark">Integrante</th>
-                            <th class="text-dark">Puntuacion</th>
+                            <th class="text-dark">Puntuación</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-rowIndex="rowIndex" let-user>
@@ -14,7 +14,7 @@
                             <td>Ezequiel Sanson</td>
                             <td formArrayName="starArray">
                                 <div [formGroupName]="rowIndex">
-                                    <p-rating formControlName="star"></p-rating>
+                                    <p-rating [cancel]="false" formControlName="star"></p-rating>
                                 </div>
                                 <span class="danger" *ngIf="starArray.controls[rowIndex].get('star').hasError('required') && starArray.controls[rowIndex].get('star').touched
                                 ">

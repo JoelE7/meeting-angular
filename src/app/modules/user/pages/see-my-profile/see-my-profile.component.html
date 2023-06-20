@@ -1,128 +1,191 @@
+<p-dialog header="Redactar mensaje" (onHide)="hiddenPopUpInvitation()" *ngIf="currentUser && userReceptor._id"
+  [(visible)]="visibleModalInvitation" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false"
+  [resizable]="false">
+  <app-modal-invitation [userEmisor]="currentUser" [userReceptor]="userReceptor"
+    (emitContact)="sendMailInvitation($event)"></app-modal-invitation>
+</p-dialog>
 <div class="profile">
   <div class="container rounded">
-    <div class="card shadow-sm" style="width:100%; min-height: 700px;">
+    <span class="fst-italic text-secondary small">
+      <i class="m-1 pi pi-arrow-circle-left"></i>
+      <a href="" class="text-secondary" routerLink="/project/list-project">Volver</a></span>
+    <div class="card shadow-sm" style="width: 100%; min-height: 800px">
       <div class="d-flex banner-profile">
-        <img src="../../../../../assets/img/profile.jfif" alt="Foto de usuario" id="profile" class="mt-2 ms-5">
-        <div class="p-5">
-          <h3 class="text-white">Ezequiel Sanson</h3>
-          <h6 class="fst-italic text-secondary">Software Developer</h6>
-          <span class="fst-italic text-secondary small">1500pts - Semi Senior</span>
+        <img src="assets/img/no-user.jpg" alt="Foto de usuario" id="profile" class="img-fluid" />
+        <div class="infoName">
+          <h3 class="text-light" style="text-shadow: 1px 1px 1px #000;">{{ searchUser.name }}</h3>
+          <h6 class="fst-italic text-dark">
+            {{ searchUser.role }} Developer
+          </h6> <span class="fst-italic text-dark small"> {{ searchUser.score }} pts - {{ searchUser.level }}</span>
         </div>
       </div>
-      <p-tabView class="p-3">
-        <p-tabPanel header="Mi Perfil">
-            <h5>Conocimientos:</h5>
-            <app-technologies></app-technologies>
-            <h5>Experiencia Laboral:</h5>
-            <p>Mercado Libre</p>
-            <p>Accenture</p>
-            <p-button class="" icon="pi pi-file-edit" type="submit" [style]="{'width' : '100%'}"
-            label="Editar" styleClass="p-button-help"></p-button>
-        </p-tabPanel>
-        <p-tabPanel header="Proyectos">
-          <div class="row">
-              <app-card-project></app-card-project>
+      <p-tabView id="tableProfile" [scrollable]="true" class="p-3" [(activeIndex)]="activeIndex">
+        <p-tabPanel header="Mi Perfil" id="tableHeader">
+          <h5>Preferencias:</h5>
+          <app-technologies [technologies]="searchUser.preferences"></app-technologies>
+          <h5>Experiencia Laboral:</h5>
+          <p>Mercado Libre</p>
+          <p>Accenture</p>
+          <div class="row" *ngIf="searchUser.githubUsername">
+            <div class="col-12">
+              <p class="link">
+                <b>Usuario de github: </b>
+                <a target="_blank" [href]="'https://github.com/' + searchUser.githubUsername">{{
+                  searchUser.githubUsername
+                  }}</a>
+              </p>
+            </div>
           </div>
-        </p-tabPanel>
-        <p-tabPanel header="Estadísticas">
-          <div class="row">
-            <p-table [value]="[metrics]">
-              <ng-template pTemplate="header">
-                <tr>
-                  <th>Contribuciones</th>
-                  <th>Frecuencia de contribuciones</th>
-                  <th>Comentarios en el código</th>
-                  <th>Uso de herramientas de control de calidad</th>
-                  <th>Uso de ramas</th>
-                  <th>Tiempo de respuesta</th>
-                  <th>Popularidad del proyecto</th>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-metric>
-                <tr>
-                  <td [ngClass]="{'good': metric.contributions > 100, 'bad': metric.contributions <= 100}">
-                    {{metric.contributions}}
-                    <i *ngIf="metric.contributions > 100" class="pi pi-check"></i>
-                    <i *ngIf="metric.contributions <= 100" class="pi pi-times"></i>
-                  </td>
-                  <td [ngClass]="{'good': metric.contributionFrequency > 5, 'bad': metric.contributionFrequency <= 5}">
-                    {{metric.contributionFrequency}}
-                    <i *ngIf="metric.contributionFrequency > 5" class="pi pi-check"></i>
-                    <i *ngIf="metric.contributionFrequency <= 5" class="pi pi-times"></i>
-                  </td>
-                  <td [ngClass]="{'good': metric.codeComments, 'bad': !metric.codeComments}">
-                    {{metric.codeComments ? 'Sí' : 'No'}}
-                    <i *ngIf="metric.codeComments" class="pi pi-check"></i>
-                    <i *ngIf="!metric.codeComments" class="pi pi-times"></i>
-                  </td>
-                  <td [ngClass]="{'good': metric.qualityToolsUsed, 'bad': !metric.qualityToolsUsed}">
-                    {{metric.qualityToolsUsed ? 'Sí' : 'No'}}
-                    <i *ngIf="metric.qualityToolsUsed" class="pi pi-check"></i>
-                    <i *ngIf="!metric.qualityToolsUsed" class="pi pi-times"></i>
-                  </td>
-                  <td [ngClass]="{'good': metric.branchUsage > 3, 'bad': metric.branchUsage <= 3}">
-                    {{metric.branchUsage}}
-                    <i *ngIf="metric.branchUsage > 3" class="pi pi-check"></i>
-                    <i *ngIf="metric.branchUsage <= 3" class="pi pi-times"></i>
-                  </td>
-                  <td [ngClass]="{'good': metric.responseTime < 24, 'bad': metric.responseTime >= 24}">
-                    {{metric.responseTime}} horas
-                    <i *ngIf="metric.responseTime < 24" class="pi pi-check"></i>
-                    <i *ngIf="metric.responseTime >= 24" class="pi pi-times"></i>
-                  </td>
-                  <td [ngClass]="{'good': metric.popularity > 1000, 'bad': metric.popularity <= 1000}">
-                    {{metric.popularity}}
-                    <i *ngIf="metric.popularity > 1000" class="pi pi-check"></i>
-                    <i *ngIf="metric.popularity <= 1000" class="pi pi-times"></i>
-                  </td>
-                </tr>
-              </ng-template>
-            </p-table>
+          <div class="row" *ngIf="searchUser.gitlabUsername">
+            <div class="col-12">
+              <p class="link">
+                <b>Usuario de gitlab: </b>
+                <a target="_blank" [href]="'https://gitlab.com/' + searchUser.gitlabUsername">{{
+                  searchUser.gitlabUsername
+                  }}</a>
+              </p>
+            </div>
           </div>
-          <div class="row p-2">
-            <div class="d-flex justify-content-center">
-              <div class="w-75">
-                <app-chart-bar></app-chart-bar>
+          <p-button class="" routerLink="/user/update/{{searchUser._id}}" icon="pi pi-file-edit" type="button" [style]="{ width: '100%' }" label="Editar"
+            styleClass="p-button-help"></p-button>
+          <div class="" *ngIf="!searchUser.githubUsername &&
+          searchUser._id == currentUser?._id || !searchUser.gitlabUsername &&
+          searchUser._id == currentUser?._id
+          ">
+            <div>
+              <div class="row mt-3">
+                <div class="col-12">
+                  <p>
+                    Al vincular el proyecto a github/gitlab tendrás acceso a métricas y a las actividades de los
+                    integrantes.
+                  </p>
+                </div>
+                <div class="col-3" *ngIf="!visibleInputGithub && !searchUser.githubUsername &&
+                searchUser._id == currentUser?._id">
+                  <p-button type="button" iconPos="right" icon="bi bi-github" [style]="{ width: '100%' }"
+                    label="Vincular con github" class="github" styleClass="p-button-secondary"
+                    (click)="linkInputUserWithGithub()"></p-button>
+                </div>
+                <div class="col-3" *ngIf="!visibleInputGitlab">
+                  <p-button type="button" iconPos="right" icon="fa-brands fa-square-gitlab" [style]="{ width: '100%' }"
+                    label="Vincular con gitlab" class="github" styleClass="p-button-secondary"
+                    (click)="linkInputUserWithGitlab()"></p-button>
+                </div>
+              </div>
+              <div class="row mt-3" *ngIf="visibleInputGithub">
+                <div class="col-6">
+                  <label for="github">Ingresa tu nombre de usuario en github</label>
+                  <input type="url" [(ngModel)]="userNameGithub" class="form-control" id="github-link" />
+                  <p-button (click)="linkUsertWithGithub()" type="button" [style]="{ width: '100%' }"
+                    label="Vincular usuario" class="mt-3" styleClass="p-button-help"></p-button>
+                  <p-button (click)="backLinkWithGithub()" type="button" [style]="{ width: '100%' }" label="Volver"
+                    class="mt-3 mx-2" styleClass="p-button-help"></p-button>
+                </div>
+              </div>
+
+              <div class="row mt-3" *ngIf="visibleInputGitlab && !searchUser.gitlabUsername &&
+              searchUser._id == currentUser?._id">
+                <div class="col-6">
+                  <label for="gitlab">Ingresa tu nombre de usuario en gitlab</label>
+                  <input type="url" [(ngModel)]="userNameGitlab" class="form-control" id="github-link" />
+                  <p-button (click)="linkUsertWithGitlab()" type="button" [style]="{ width: '100%' }"
+                    label="Vincular usuario" class="mt-3" styleClass="p-button-help"></p-button>
+                  <p-button (click)="backLinkWithGitlab()" type="button" [style]="{ width: '100%' }" label="Volver"
+                    class="mt-3 mx-2" styleClass="p-button-help"></p-button>
+                </div>
               </div>
             </div>
-            <div class="col-6">
-              <app-chart-doughnut></app-chart-doughnut>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel header="Proyectos">
+          <div class="row" *ngIf="searchUser.projects.length > 0;else notFound">
+            <app-card-project *ngFor="let project of searchUser.projects" [project]="project"></app-card-project>
+          </div>
+          <div class="row">
+            <ng-template #notFound class="col-12">
+              <div class="col-12">
+                <p-messages [style]="{ width: '100%' }" [(value)]="messages" [enableService]="false" [closable]="true"></p-messages>
+              </div>
+            </ng-template>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel header="Estadísticas" *ngIf="searchUser.githubUsername || searchUser.gitlabUsername">
+          <div class="card text-center" *ngIf="spinnerMetric">
+            <span>
+              <p-progressSpinner></p-progressSpinner>
+            </span>
+            <br>
+            <span class="text-center">Cargando...</span>
+          </div>
+          <div *ngIf="!spinnerMetric">
+            <div class="row mt-3">
+              <div class="border-right col-6" *ngIf="searchUser.githubUsername"
+                style="border-right: 1px solid #000 !important;">
+                <h3 class="text-center">Github</h3>
+                <app-chart-doughnut *ngIf="languagesUserGithub" [data]="languagesUserGithub"></app-chart-doughnut>
+              </div>
+              <div class="col-6" *ngIf="searchUser.gitlabUsername">
+                <h3 class="text-center">Gitlab</h3>
+                <app-chart-doughnut *ngIf="languagesUserGitlab" [data]="languagesUserGitlab"></app-chart-doughnut>
+              </div>
             </div>
-            <div class="col-6">
-              <app-chart-line></app-chart-line>
+            <div class="row mt-3">
+              <div class="col-6" *ngIf="searchUser.githubUsername" style="border-right: 1px solid #000 !important;">
+                <app-chart-bar *ngIf="repositorysCommitsGithub" [data]="repositorysCommitsGithub"></app-chart-bar>
+              </div>
+              <div class="col-6" *ngIf="searchUser.gitlabUsername">
+                <app-chart-bar *ngIf="repositorysCommitsGitlab" [data]="repositorysCommitsGitlab"></app-chart-bar>
+              </div>
             </div>
           </div>
         </p-tabPanel>
         <p-tabPanel header="Contacto">
           <div class="row">
-            <p><b>Email:</b> ezequiel.sanson@hotmail.com</p>
+            <p><b>Email:</b> {{ searchUser.email }}</p>
             <p><b>País:</b> Argentina</p>
             <p><b>Provincia:</b> Buenos Aires</p>
             <p><b>Idiomas:</b> Castellano, Inglés</p>
-            <div>
-              <p-button class="mt-2 me-2" icon="pi pi-instagram" type="submit" [style]="{'minWidth' : '40px'}" label="" styleClass="p-button-help"></p-button>
-              <p-button class="mt-2 me-2" icon="pi pi-twitter" type="submit" [style]="{'minWidth' : '40px'}" label="" styleClass="p-button-help"></p-button>
-              <p-button class="mt-2 me-2" icon="pi pi-linkedin" type="submit" [style]="{'minWidth' : '40px'}" label="" styleClass="p-button-help"></p-button>
-              <p-button class="mt-2 me-2" icon="pi pi-discord" type="submit" [style]="{'minWidth' : '40px'}" label="" styleClass="p-button-help"></p-button>
+            <div class="">
+              <p-button class="mt-2 me-2" icon="pi pi-instagram" type="submit" [style]="{ minWidth: '40px' }" label=""
+                routerLink="https://www.instagram.com/_meetingmk" styleClass="p-button-help"></p-button>
+              <p-button class="mt-2 me-2" icon="pi pi-twitter" type="submit" [style]="{ minWidth: '40px' }" label=""
+                styleClass="p-button-help"></p-button>
+              <p-button class="mt-2 me-2" icon="pi pi-linkedin" type="submit" [style]="{ minWidth: '40px' }" label=""
+                styleClass="p-button-help"></p-button>
+              <p-button class="mt-2 me-2" icon="pi pi-discord" type="submit" [style]="{ minWidth: '40px' }" label=""
+                styleClass="p-button-help"></p-button>
             </div>
+            <!-- boton para contactar a la persona routerLink="/post/details-post/{{  }}" -->
+            <div class="boton text-end m-2">
+              <span>
+                <p-button (click)="showModalInvitation()" type="button" [style]="{ width: '100%' }" iconPos="right"
+                  icon="bi bi-envelope" label="Enviar invitación" class="" styleClass="p-button-help"
+                  *ngIf="currentUser && currentUser._id != id">
+                </p-button>
+              </span>
+            </div>
+            <!-- boton para contactar a la persona -->
+
           </div>
         </p-tabPanel>
-        <p-tabPanel header="Reseñas">
+        <!-- <p-tabPanel header="Reseñas">
           <div class="row reviews m-1 py-2">
             <h5>"Gran Compañero"</h5>
-            <p>Coincidimos en un proyecto y realizamos un gran trabajo de equipo.</p>
+            <p>
+              Coincidimos en un proyecto y realizamos un gran trabajo de equipo.
+            </p>
             <span class="fst-italic text-secondary">- Nahuel Savedra</span>
           </div>
-          <form action="" class="d-flex flex-column w-50 mt-2">
+          <form action="" class="d-flex flex-column  mt-2">
             <h5>Deja tu opinión</h5>
-            <input type="text" pInputText class="" placeholder="Título">
-            <textarea name="" id="" cols="30" rows="10" pInputTextarea class="mt-2" placeholder="Ingresa un comentario"></textarea>
-            <p-button class="mt-2" icon="pi pi-thumbs-up" type="submit" [style]="{'minWidth' : '14rem'}"
-            label="Comentar" styleClass="p-button-help"></p-button>
+            <input type="text" pInputText class="" placeholder="Título" />
+            <textarea name="" id="" cols="30" rows="10" pInputTextarea class="mt-2"
+              placeholder="Ingresa un comentario..."></textarea>
+            <p-button class="text-end mt-2" type="submit" [style]="{ minWidth: '14rem' }" label="Comentar"
+              styleClass="p-button-help"></p-button>
           </form>
-        </p-tabPanel>
-    </p-tabView>
+        </p-tabPanel> -->
+      </p-tabView>
     </div>
   </div>
 </div>
-

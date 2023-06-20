@@ -1,9 +1,10 @@
 export interface QuestionPreferenceUser {
+    type:   string;
     result: Result;
 }
 
 export interface Result {
-    type:        string;
-    question:    string;
     technologie: string;
+    question:    string;
+    results:     any[];
 }

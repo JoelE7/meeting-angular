@@ -1,28 +1,62 @@
+
+<div class="card text-center" *ngIf="spinner">
+  <span>
+    <p-progressSpinner></p-progressSpinner>
+  </span>
+  <br>
+  <span class="text-center">Cargando...</span>
+</div>
+
+<div *ngIf="!spinner">
+<!-- modal de enviar sugerencia a un comocido sobre ese post -->
+<p-dialog header="Redactar mensaje" *ngIf="currentUser && searchPost._id" [(visible)]="visibleModalSuggest" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+   <app-modal-suggest [post]="searchPost" [userEmisor]="currentUser" [userReceptor]="searchPost.author" (emitContact)="sendMailSuggestPost($event)"></app-modal-suggest>
+</p-dialog>
+
+<!-- modal de contactar a ese usuario -->
+<p-dialog header="Redactar mensaje" *ngIf="currentUser && userReceptor._id" [(visible)]="visibleModalContact" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+  <app-modal-contact [userEmisor]="currentUser" [userReceptor]="userReceptor" (emitContact)="sendMailContact($event)"></app-modal-contact>
+</p-dialog>
+
 <div class="postBackground">
   <div class="container">
+    <span id="btnBack" class="fst-italic text-secondary small">
+      <i class="m-1 pi pi-arrow-circle-left"></i>
+      <a class="text-secondary" routerLink="/post/list-post">Volver</a></span
+    >
     <div class="row justify-content-center">
       <div class="col-sm-12 col-md-10 col-lg-6">
         <div class="card p-3">
           <p-chip
-            label="{{ searchPost.author?.name }} "
-            image="https://bootdey.com/img/Content/avatar/avatar4.png"
+            label="{{ searchPost.author?.name }} (
+              {{ searchPost.author?.level }})"
+            image="https://bootdey.com/img/Content/avatar/avatar2.png"
           ></p-chip>
 
-          <!-- <small>Posteo 30 de abril</small> -->
-          <small>Posteo {{ searchPost.date | date }}</small>
+          <small class="text-secondary"
+            >Posteo {{ searchPost.date | date : "short" }}hs</small
+          >
           <h3 class="titulo">
             {{ searchPost.title }}
           </h3>
           <p class="">{{ searchPost.body }}</p>
-          <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
-          <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
-          <p-skeleton width="100%" height="150px"></p-skeleton>
-          <p>
-            <strong> Reference: </strong>
-            <a class="text-dark"
-              >dev.to/mahinash26/easy-installation-guide-for-age-and-postgresql-with-minute-changes-j07</a
-            >
-          </p>
+
+          <div _ngcontent-bug-c114="" class="row mt-3 fs">
+            <div class="col-6">
+              <b _ngcontent-bug-c114="">- Tecnologías utilizadas:</b>
+              <cite
+                *ngFor="let technologie of searchPost.technologies; let l = last"
+                title="{{technologie}}"
+              >
+                {{ technologie }} -</cite
+              >
+            </div>
+            <div class="col-6 text-end" *ngIf="searchPost.project">
+              <p-button type="button" [style]="{'width' : '100%'}" label="Ver proyecto"
+              styleClass="p-button-outlined p-button-help" class="m-1"
+              routerLink="/project/details-project/{{searchPost.project}}"></p-button>
+            </div>
+          </div>
 
           <!--  seccion comentarios del post -->
           <hr />
@@ -36,8 +70,8 @@
               *ngFor="let message of searchPost.messages"
             >
               <p-chip
-                label="{{ message?.author?.name}} "
-                image="https://bootdey.com/img/Content/avatar/avatar4.png"
+                label="{{ message?.author?.name }}"
+                image="assets/img/no-user.jpg"
               ></p-chip>
               <p>{{ message.message }}</p>
               <div class="text-end mb-2">
@@ -67,7 +101,7 @@
                 [style]="{ width: '100%' }"
                 label="Comentar"
                 class="d-block py-2"
-                styleClass="p-button"
+                styleClass="p-button-help"
                 [disabled]="form.invalid"
               ></p-button>
             </form>
@@ -76,41 +110,71 @@
         </div>
       </div>
       <!-- segunda columna -->
-      <div class="col-sm-12 col-md-10 col-lg-4">
+      <div class="col-sm-12 col-md-10 col-lg-4 mt-4 mt-sm-4 mt-lg-0">
         <div class="card">
-          <div class="card flex align-items-center py-3 flex-wrap">
+          <div class="card flex align-items-start p-3 flex-wrap">
             <p-chip
-              label="{{ searchPost.author?.name }} "
-              image="https://bootdey.com/img/Content/avatar/avatar3.png"
+              label="{{ searchPost.author?.name }} (
+                {{ searchPost.author?.level }}) "
+              image="https://bootdey.com/img/Content/avatar/avatar2.png"
             ></p-chip>
           </div>
-          <p class="m-2">
-            Hola soy Analia Martinez me encuentro en último año de Ingeniería de
-            Software en la Unlam y soy pasante en Globant. También soy exalumna
-            del Programa de Intercambio Global UGRAD Primavera 2023.
+          <p class="px-3">
+            Hola soy {{ searchPost.author?.name }} me encuentro en último año de
+            Ingeniería de Software en la Unlam y trabajo como pasante en
+            Globant. También soy exalumno del Programa de Intercambio Global
+            UGRAD Primavera 2023.
           </p>
-          <!-- <div class="boton text-end m-3">
-            <p-button
-              type="button"
-              [style]="{ width: '100%' }"
-              label="Conectar"
-              class="d-block py-2"
-              styleClass="p-button-outlined"
-              routerLink="/post/details-post/1"
-            ></p-button>
-          </div> -->
+          <!-- boton para contactar a la persona -->
+          <div class="boton text-center m-2">
+            <span>
+              <p-button
+              (click)="showModalContact(searchPost.author)"
+                type="submit"
+                [style]="{ width: '100%' }"
+                iconPos="right"
+                icon="bi bi-envelope"
+                label="Contactar"
+                styleClass="p-button-help"
+                *ngIf="searchPost.author?.mailEnabled"
+              >
+              </p-button>
+            </span>
+          </div>
+          <!-- boton para contactar a la persona -->
         </div>
 
         <!-- mas datos del autor -->
-        <div class="card mt-4 cardPost p-3">
-          <h6>Otros post de Analia Martinez</h6>
+        <div class="card mt-4 cardPost p-3 ml-3">
+          <h6>Otros post de {{ searchPost.author?.name }}</h6>
           <p class="text-dark my-2">Sobre POSTGRESQL</p>
           <small>#apacheage #postgres #database</small>
           <p class="text-dark my-2">Que es Apache Age?</p>
           <small>#blog #apacheage #postgres #database</small>
         </div>
         <!-- mas datos del autor -->
+
+        <!-- boton para sugerir post" -->
+        <div class="boton text-center mt-4">
+          <span>
+            <p-button
+            (click)="showModalSuggest()"
+              type="submit"
+              [style]="{ width: '100%' }"
+              iconPos="right"
+              icon="bi bi-share"
+              label="Compartir"
+              class=""
+              styleClass="p-button-help"
+            >
+            </p-button>
+          </span>
+        </div>
+        <!-- boton para contactar a la persona -->
       </div>
+
+
     </div>
   </div>
+</div>
 </div>

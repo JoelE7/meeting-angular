@@ -9,6 +9,10 @@ import { ProjectModule } from '../project/project.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TableUserComponent } from './components/table-user/table-user.component';
 import { SearchUserComponent } from './pages/search-user/search-user.component';
+import { ModalInvitationComponent } from './shared/modal-invitation/modal-invitation.component';
+import { UpdateUserComponent } from './pages/update-user/update-user.component';
+import { CreateUserComponent } from './pages/create-user/create-user.component';
+import { FormUserComponent } from './components/form-user/form-user.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +20,11 @@ import { SearchUserComponent } from './pages/search-user/search-user.component';
     TechnologiesComponent,
     ListUserComponent,
     TableUserComponent,
-    SearchUserComponent
+    SearchUserComponent,
+    ModalInvitationComponent,
+    UpdateUserComponent,
+    CreateUserComponent,
+    FormUserComponent,
   ],
   imports: [
     CommonModule,
@@ -25,6 +33,11 @@ import { SearchUserComponent } from './pages/search-user/search-user.component';
     PrimengModule,
     ProjectModule,
   ],
-  exports: [SeeMyProfileComponent,TableUserComponent,SearchUserComponent],
+  exports: [
+    SeeMyProfileComponent,
+    TableUserComponent,
+    SearchUserComponent,
+    ModalInvitationComponent
+  ],
 })
 export class UserModule {}

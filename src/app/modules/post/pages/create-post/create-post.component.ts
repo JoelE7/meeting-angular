@@ -2,7 +2,9 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { PostService } from 'src/app/api/services/post/post.service';
+import { UserService } from 'src/app/api/services/user/user.service';
 import { Post } from 'src/app/shared/models/post/post.class';
+import { User } from 'src/app/shared/models/user/user.class';
 
 @Component({
   selector: 'app-create-post',
@@ -10,16 +12,30 @@ import { Post } from 'src/app/shared/models/post/post.class';
   styleUrls: ['./create-post.component.css'], 
   encapsulation : ViewEncapsulation.None
 })
-export class CreatePostComponent  {
+export class CreatePostComponent implements OnInit {
+
+  currentUser: User = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;
+
   newPost: Post= new Post();
 
+  user:User = new User();
+
+  spinner = true;
+
  constructor(
+  private userService:UserService,
   private postService: PostService,
   private messageService: MessageService,
   private router: Router
 ) {}
+  ngOnInit(): void {
+    this.getUser();
+  }
 
-
+async getUser(){
+  this.user = await this.userService.detailsUserAsync(this.currentUser._id);
+  this.spinner = false;
+} 
 
 createPost(post: Post) {
   this.newPost = post;
@@ -31,7 +47,7 @@ createPost(post: Post) {
         summary: 'Creado',
         detail: '¡El post fue creado con exito!',
       });
-      this.router.navigate(['post/list-post']);
+      this.router.navigate(['/post/list-post']);
     },
     (err) => {
       this.messageService.add({

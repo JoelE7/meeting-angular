@@ -1,0 +1,16 @@
+<div class="container-fluid" *ngIf="projects.length > 0">
+
+  <div class="row">
+      <div class="col-12">
+          <p class="h5 text-center mt-3">{{projects[0].name}}</p>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-12">
+        <p-button type="button" [style]="{'width' : '100%'}" label="Ver detalle"
+          styleClass="p-button-help" class="m-1 project-button"
+          routerLink="/project/details-project/{{projects[0]._id}}"></p-button>
+      </div>
+  </div>
+
+</div>

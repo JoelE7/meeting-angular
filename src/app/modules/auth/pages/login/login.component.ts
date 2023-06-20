@@ -28,27 +28,29 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  login():void {
+  login(): void {
     this.userLogin.email = this.form.get('email').value;
     this.userLogin.password = this.form.get('pass').value;
 
     this.authService.loginUser(this.userLogin).subscribe(
-      (data:User) => {
+      (data: any) => {
+        console.log(data.user);
+        
         this.messageService.add({
           severity: 'success',
           summary: '¡Hecho!',
           detail: '¡Inicio de sesión exitoso!',
         });
-        localStorage.setItem('token',"login");
-        localStorage.setItem('user',JSON.stringify(data));
-        this.router.navigate(['/home']);    
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+        this.router.navigate(['/home']);
         this.authService.setLogin(true);
       },
       (err) => {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Usuario o contraseña incorretos',
+          detail: 'Usuario o contraseña incorrectos',
         });
       }
     );

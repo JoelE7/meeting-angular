@@ -9,7 +9,12 @@ import { User } from 'src/app/shared/models/user/user.class';
   encapsulation: ViewEncapsulation.None,
 })
 export class ListUserComponent implements OnInit {
+
+  currentUser: User = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;
+
   developers: User[] = [];
+
+  spinner = true;
 
   paginate: any = 1;
 
@@ -26,8 +31,12 @@ export class ListUserComponent implements OnInit {
   getUsersByRanking() {
     this.usersService.getAllUsersByRanking(this.paginate).subscribe(
       (data) => {
-        this.developers = data.users;
+        console.log(data);
+        // this.developers = data.users;
+
+        this.developers = data.results;
         this.totalRecords = data.count;
+        this.spinner = false;
       },
       (err) => {
         console.log(err);

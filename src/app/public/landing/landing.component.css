@@ -1,0 +1,164 @@
+#page2 {
+  min-height: 80vh !important;
+}
+#page3 {
+  min-height: 140vh !important;
+}
+#page3 p {
+  font-size: 20px;
+}
+.description {
+  height: 40%;
+  margin: auto;
+}
+#page4{
+  min-height: 110vh !important;
+}
+@media screen and (min-width: 1100px) {
+  
+  #page3 img {
+    width: 350px !important;
+    height: 350px !important;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  #page1,
+  #page4,
+  #page5 {
+    height: 100% !important;
+    min-height: 100vh !important;
+  }
+
+  #page1 #banner {
+    display: none;
+  }
+  #page1 #calltoaction {
+    width: 100% !important;
+  }
+
+  #page1 #calltoaction h1 {
+    font-size: 40px !important;
+  }
+  /* #page2 img{
+    min-height: 60vh !important;
+    height: 150px !important;
+  }   */
+  #page3 {
+    height: 100% !important;
+  }
+  #page3 img {
+    width: 300px !important;
+    height: 250px !important;
+  } 
+  #page5 div {
+    width: 100% !important;
+  }
+}
+@media screen and (max-width: 992px) {
+  #page3 img {
+    width: 250px !important;
+    height: 250px !important;
+  }
+}
+@media screen and (min-width: 992px) {
+   #page2 #page2section1{
+    align-items: center;
+    justify-content: end;
+  }
+}
+@media screen and (max-width: 767px) {
+  #page3 img {
+    width: 350px !important;
+    height: 350px !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #page1 {
+    height: 100% !important;
+    min-height: 0vh !important;
+  }
+  #page1 #calltoaction h1 {
+    font-size: 1.5em !important;
+    text-align: center !important;
+  }
+  #page1 button {
+    padding: 10px 30px !important;
+    width: 100% !important;
+    font-size: 10px !important;
+  }
+
+  #page2 img {
+    
+    margin: auto;
+    /* margin-left: 20px; */
+    width: 200px !important;
+    height: 200px !important;
+  }
+  #page2 h1 {
+    font-size: 35px !important;
+    text-align: center !important;
+  }
+  #page2 p {
+    font-size: 15px !important;
+    text-align: center !important;
+  }
+
+  #page3 {
+    height: 100% !important;
+  }
+
+  #page3 h1 {
+    font-size: 35px !important;
+    text-align: center !important;
+  }
+
+  #page3 p {
+    font-size: 16px;
+  }
+
+  #page4 {
+    height: 100% !important;
+    /* min-height: 110vh !important; */
+  }
+
+  #page4 h1 {
+    font-size: 35px !important;
+    text-align: center !important;
+  }
+
+  #page4 #citas div {
+    width: 100% !important;
+    font-size: 15px !important;
+  }
+
+  #page4 #citas img {
+    width: 50px !important;
+    height: 30px !important;
+  }
+
+  #page5 {
+    height: 100% !important;
+  }
+
+  #page5 div {
+    width: 100% !important;
+  }
+
+  #page5 h2 {
+    font-size: 35px !important;
+    text-align: center !important;
+  }
+
+  #page5 div div {
+    flex-direction: column !important;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  #page2 img {
+    min-height: 60vh !important;
+    height: 150px !important;
+  }
+}

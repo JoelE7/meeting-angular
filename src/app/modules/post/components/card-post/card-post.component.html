@@ -1,38 +1,41 @@
- <!-- card para listados 2-->
- <div class="card mt-4 cardPost p-3">
-<p-chip
-    label="{{post.author?.name}}"
-    image="https://bootdey.com/img/Content/avatar/avatar4.png"
-  ></p-chip>
-
-  <small> {{ post.date| date }} 
-  </small>
-  <h3 class="titulo">
-    {{ post.title }} 
-  </h3>
-  <!-- botones -->
-  <div class="text-end m-3">
-    <p-button
-      type="button"
-      icon="pi pi-bookmark"
-      styleClass="p-button-rounded p-button-outlined"
-    >
-    </p-button>
-
-    <p-button
-      type="button"
-      icon="pi pi-thumbs-up-fill"
-      styleClass="p-button-rounded p-button-outlined mx-2"
-    ></p-button>
-    <p-button
-      type="button"
-      [style]="{ width: '100%' }"
-      label="Ver post"
-      class="py-2"
-      styleClass="p-button"
-      routerLink="/post/details-post/{{post._id}}"
-      ></p-button>
+<div class="card mt-4 mt-sm-4 cardPost p-3" *ngIf="post">
+  <div class="row d-lg-none">
+    <div class="col-8">
+      <p-chip
+        label="{{ post.author?.name? post.author?.name :'Jonatan' }} ({{ post.author?.level? post.author?.level :'Junior' }})"
+        image="https://bootdey.com/img/Content/avatar/avatar{{post.random}}.png"></p-chip>
+    </div>
+    <div class="col-4 text-end">
+      <p-button type="button" icon="pi pi-thumbs-up-fill" styleClass="p-button-rounded p-button-outlined mx-2"
+      class="btnPostRounded"></p-button>
+    </div>
   </div>
-  <!-- botones -->
+  <div class="row">
+    <div class="col-12 d-none d-lg-block">
+      <p-chip
+        label="{{ post.author?.name? post.author?.name :'Jonatan' }} ({{ post.author?.level? post.author?.level :'Junior' }})"
+        image="https://bootdey.com/img/Content/avatar/avatar{{post.random}}.png"></p-chip>
+    </div>
+    <div class="col-12">
+      <small>Posteo {{ post.date | date:'short'}}hs</small>
+    </div>
+    <div class="col-12">
+      <h4 class="titulo">
+        {{ post.title }}
+      </h4>
+    </div>
+    <div class="col-12">
+      <footer _ngcontent-bug-c114="" class="blockquote-footer mt-3"><b _ngcontent-bug-c114="">Tecnologías:</b>
+        <cite *ngFor="let technologie of post.technologies; let l = last" title="Source Title"> {{technologie}} -</cite>
+      </footer>
+    </div>
+    <div class="col-12 text-lg-end">
+          <p-button type="button" icon="pi pi-thumbs-up-fill" styleClass="p-button-rounded p-button-outlined mx-2"
+          class="btnPostRounded d-none d-lg-inline"></p-button>
+          <div class="d-grid d-lg-inline gap-2">
+          <p-button type="button" [style]="{ width: '100%' }" label="Ver post" class="py-2 btn-block" styleClass="p-button-help"
+          routerLink="/post/details-post/{{ post._id }}"></p-button>
+        </div>
+    </div>
+  </div>
 </div>
-<!-- card para listados 2 -->

@@ -1,29 +1,80 @@
+.row-accessories {
+  background-color: #ec81ad !important;
+}
+
 .developer-avatar {
+  display: flex;
+  justify-content: center;
+}
+.developer-avatar img {
+  width: 50px;
+ height: 50px;
+ border-radius: 50%;
+ border: 1px solid rgb(71, 71, 71);
+ object-fit: cover;
+}
+
+.developer-skills {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.developer-skills li {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 15px;
+  color: #666;
+  color: #0f0f0f;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.rankingBackground {
+  background-color: rgb(241, 241, 241);
+}
+
+.p-datatable .p-datatable-thead tr th {
+   border: 1px solid #f1bcd173;
+   background-color: #f1bcd173 !important;
+}
+.p-datatable .p-datatable-tbody{
+  border-left:solid 1px #ccc;
+  border-right:solid 1px #ccc;
+}
+.p-dialog .p-dialog-header {
+  background-color: #ced4da !important;
+  padding:1rem;
+}
+
+/* desde 991.98px sea menor a 991.98px */
+@media (max-width: 991.98px) {
+ .p-datatable .sticky{
+  position: sticky;
+  left:0 ;
+ }
+ p-table tbody tr .sticky{
+  background-color: #fff;
+ }
+
+ /* .p-datatable .p-datatable-thead tr th .sticky {
+  background-color: #fff;
+ } */
+
+  p-table thead th .sticky{
+  background-color:#333;
+ }
+}
+
+/* hasta 767 sea mayor a 767px */
+/* @media (min-width: 767px) {
+  .btnPost {
+    text-align: end;
+  }
+} */
+
+@media (max-width: 1200px) {
+  .btnes {
     display: flex;
     justify-content: center;
+    align-items: center;
   }
-  
-  .developer-skills {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .developer-skills li {
-    display: inline-block;
-    margin-right: 10px;
-    font-size: 25px;
-    color: #666;
-    color: #0f0f0f;
-    padding: 5px 10px;
-    border-radius: 5px;
-  }
-  .rankingBackground {
-    background-color: rgb(241, 241, 241);
-  }
-  
-  .p-datatable .p-datatable-thead tr th {
-     border: 1px solid #f1bcd173;
-     background: #f1bcd173 !important;
-  }
-  
+}

@@ -5,8 +5,10 @@ import { FilterEnum } from 'src/app/shared/filters/enum/filters.enum';
 import { Method } from 'src/app/shared/filters/enum/method.enum';
 import { Filters } from 'src/app/shared/filters/interface/filters.interface';
 import { Post } from 'src/app/shared/models/post/post.class';
-import { FilterService } from '../../../../shared/filters/services/filter.service';
+import { FilterService } from 'src/app/shared/filters/services/filter.service';
 import { User } from 'src/app/shared/models/user/user.class';
+import { Item } from 'src/app/shared/models/model-forms/item-form.interface';
+import { DataService } from 'src/app/api/services/data/data.service';
 
 @Component({
   selector: 'app-list-post',
@@ -14,91 +16,36 @@ import { User } from 'src/app/shared/models/user/user.class';
   styleUrls: ['./list-post.component.css'],
 })
 export class ListPostComponent implements OnInit {
-
-  currentUser: User = JSON.parse(localStorage.getItem('user')) || undefined;
-  listPost: Post[] = [];
-
-  query: any = [];
-
-  title: string = 'General';
+  currentUser: User =
+    localStorage.getItem('user') != 'undefined'
+      ? JSON.parse(localStorage.getItem('user'))
+      : undefined;
 
   spinner = true;
 
+  paginate: any = 1;
+  totalRecords = 0;
+  size = 10;
+
+  listPost: Post[] = [];
+  technologies: Item[] = [];
+
+  query: any = [];
   filters: Filters = {
     autoSend: false,
     method: Method.POST,
     filtersCustom: [
       {
-        type: FilterEnum.DROPDOWN,
+        type: FilterEnum.MULTISELECT,
         col: 'col-12 m-0 p-0',
-        title: 'Tipo de post',
-        nameFilter: 'type',
+        title: 'Tecnologías',
+        nameFilter: 'technologies',
         valueFilter: '',
         items: {
           label: 'label',
           value: 'value',
-          items: [
-            {
-              label: 'Informativo',
-              value: 'informative',
-            },
-            {
-              label: 'Colaborativo',
-              value: 'collaborative',
-            },
-          ],
-        },
-      },
-      {
-        type: FilterEnum.CHECKBOX,
-        col: 'col-12 mt-3 mt-md-2',
-        title: 'Tecnologías',
-        nameFilter: 'technologies',
-        valueFilter: '',
-        checkboxItems: {
-          column: false,
-          items: [
-            {
-              label: 'Angular',
-              value: 'Angular',
-            },
-            {
-              label: 'React',
-              value: 'React',
-            },
-            {
-              label: 'Vue',
-              value: 'Vue',
-            },
-            {
-              label: 'Spring',
-              value: 'Spring',
-            },
-            {
-              label: 'Node.js',
-              value: 'Nodejs',
-            },
-            {
-              label: 'Javascript',
-              value: 'Javascript',
-            },
-            {
-              label: 'Java',
-              value: 'Java',
-            },
-            {
-              label: 'Python',
-              value: 'python',
-            },
-            {
-              label: 'C',
-              value: 'c',
-            },
-            {
-              label: 'Typescript',
-              value: 'typescript',
-            },
-          ],
+          search: true,
+          items: this.technologies,
         },
       },
     ],
@@ -107,7 +54,8 @@ export class ListPostComponent implements OnInit {
   constructor(
     private messageService: MessageService,
     private postService: PostService,
-    private filtersService: FilterService
+    private filtersService: FilterService,
+    private dataService: DataService
   ) {}
 
   ngOnInit(): void {
@@ -115,31 +63,57 @@ export class ListPostComponent implements OnInit {
   }
 
   getAllPosts() {
-    let { value } = this.query[0] || [];
-    if( value ){
-      this.title = value == "informative" ? "Informativo" : "Colaborativo";
-    } else{
-      this.title="General"
-    }
-    this.postService.getAllPost(this.query).subscribe(
-      (data) => {
-        this.listPost = data;
-        this.spinner = false;
+    this.postService.getAllPost(this.query, this.paginate).subscribe({
+      next: (data) => {
+        this.listPost = data.results;
+        this.totalRecords = data.count;
       },
-      (err) => {
+      error: (err) => {
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
           detail: err.error ? err.error.message : 'Ups! ocurrio un error',
         });
-      }
-    );
+      },
+      complete: () => {
+        this.getTechnologies();
+      },
+    });
+  }
+
+  getTechnologies() {
+    this.dataService.getTechnologies().subscribe({
+      next: (data) => {
+        for (let i = 0; i < data.technologies.length; i++) {
+          this.technologies.push({
+            label: data.technologies[i],
+            value: data.technologies[i],
+          });
+        }
+      },
+      error: (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+        });
+      },
+      complete: () => {
+        this.spinner = false;
+      },
+    });
   }
 
   getFilters() {
     this.query = this.filtersService.getFilters();
     this.query.method = this.filters.method;
     this.spinner = true;
+    this.getAllPosts();
+  }
+
+  paginatePosts(event) {
+    this.paginate = event.page + 1;
+    this.size = event.rows;
     this.getAllPosts();
   }
 }

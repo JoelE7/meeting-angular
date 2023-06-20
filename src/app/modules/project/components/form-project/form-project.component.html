@@ -1,258 +1,179 @@
 <form [formGroup]="form" (ngSubmit)="submitProject()" class="form">
   <div class="row mt-5 p-0">
     <div class="offset-0 col-sm-12 col-md-5 offset-md-1">
-      <label for="name" class="pl-5">*Nombre </label>
-      <input
-        type="text"
-        pInputText
-        formControlName="name"
-        class="form-control"
-        placeholder="Ingrese nombre del proyecto"
-      />
-      <span
-        class="danger"
-        *ngIf="
+      <label for="name" class="pl-5">Nombre </label>
+      <input type="text" pInputText formControlName="name" class="form-control"
+        placeholder="Ingrese nombre del proyecto" />
+      <span class="danger" *ngIf="
           form.get('name').hasError('required') && form.get('name').touched
-        "
-      >
+        ">
         <small class="p-error">Este campo es <strong>requerido</strong></small>
       </span>
     </div>
-    <div class="offset-0 mt-1 col-sm-12 mt-md-0 col-md-5 mt-md-0">
-        <label for="amountParticipants" class="pl-5"
-        >Cantidad de participantes
+    <div class="offset-0 mt-3 col-12 mt-md-0 col-md-5 mt-md-0">
+      <label for="amountParticipants" class="pl-5">Cantidad de participantes
       </label>
-      <div class="d-flex align-items-center h-75">
-        <i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i><i class="pi pi-user"></i>
-      </div>
-      <!--<input
-        pInputText
-        type="number"
-        formControlName="amountParticipants"
-        id=""
-        class="form-control"
-      />
-       <span
-        class="danger"
-        *ngIf="
+      <input pInputText type="number" formControlName="amountParticipants" id="" class="form-control" />
+      <span class="danger" *ngIf="
           form.get('amountParticipants').hasError('required') &&
           form.get('amountParticipants').touched
-        "
-      >
+        ">
         <small class="p-error">Este campo es <strong>requerido</strong></small>
       </span>
-      <span
-        class="danger"
-        *ngIf="
+      <span class="danger" *ngIf="
           form.get('amountParticipants').hasError('min') &&
           form.get('amountParticipants').touched
-        "
-      >
-        <small class="p-error"
-          >Debe tener al menos <strong>1 </strong>participante</small
-        >
-      </span> -->
+        ">
+        <small class="p-error">Debe tener al menos <strong>1 </strong>participante</small>
+      </span>
+      <span class="danger" *ngIf="
+          form.get('amountParticipants').hasError('max') &&
+          form.get('amountParticipants').touched
+        ">
+        <small class="p-error">La cantidad maxima de participantes es de <strong>10</strong></small>
+      </span>
     </div>
   </div>
-  <div class="row mt-5">
+  <div class="row mt-3">
     <div class="offset-0 col-sm-12 col-md-10 offset-md-1">
-      <label for="description" class="pl-5">*Descripción del proyecto </label>
-      <textarea
-        [style]="{ width: '100%' }"
-        formControlName="description"
-        placeholder="Ingrese una breve descripción..."
-        rows="5"
-        cols="30"
-        pInputTextarea
-        [autoResize]="true"
-      ></textarea>
-      <span
-        class="danger"
-        *ngIf="
+      <label for="description" class="pl-5">Descripción del proyecto </label>
+      <textarea [style]="{ width: '100%' }" formControlName="description" placeholder="Ingrese una breve descripción..."
+        rows="5" cols="30" pInputTextarea [autoResize]="true"></textarea>
+      <span class="danger" *ngIf="
           form.get('description').hasError('required') &&
           form.get('description').touched
-        "
-      >
-        <small class="p-error"
-          >Debe agregar una <strong>descripción</strong> del proyecto</small
-        >
+        ">
+        <small class="p-error">Debe agregar una <strong>descripción</strong> del proyecto</small>
       </span>
-      <span
-        class="danger"
-        *ngIf="
+      <span class="danger" *ngIf="
           form.get('description').hasError('minlength') &&
           form.get('description').touched
-        "
-      >
-        <small class="p-error"
-          >Debe agregar minimo <strong>10</strong> caracteres</small
-        >
+        ">
+        <small class="p-error">Debe agregar minimo <strong>10</strong> caracteres</small>
       </span>
     </div>
-  </div>
-  <div class="row mt-5 p-0">
+  </div> 
+  <div class="row mt-3 p-0">
     <div class="offset-0 col-sm-12 col-md-5 offset-md-1">
 
-        <label for="complexity" class="pl-5 mt-5 mt-md-0">*Fecha Inicial </label>
-        <p-calendar [showIcon]="true"  [style]="{ width: '100%' }"
-        formControlName="startDate"
+      <label for="complexity" class="pl-5 mt-md-0">Fecha Inicial </label>
+      <p-calendar [showIcon]="true" [style]="{ width: '100%' }" formControlName="startDate"
         dateFormat="dd/mm/yy"></p-calendar>
-        <span
-          class="danger"
-          *ngIf="
+      <span class="danger" *ngIf="
             form.get('endDate').hasError('required') &&
             form.get('endDate').touched
-          "
-        >
-          <small class="p-error">Este campo es <strong>requerido</strong></small>
-        </span>
+          ">
+        <small class="p-error">Este campo es <strong>requerido</strong></small>
+      </span>
     </div>
-    <div class="offset-0 col-sm-12 col-md-5">
-      <label for="complexity" class="pl-5 mt-5 mt-md-0">*Fecha Fin </label>
-      <p-calendar  [showIcon]="true"  [style]="{ width: '100%' }"
-      formControlName="endDate"
-      dateFormat="dd/mm/yy"></p-calendar>
-      <span
-        class="danger"
-        *ngIf="
+    <div class="offset-0 col-sm-12 col-md-5" *ngIf="this.form">
+      <label for="complexity" class="pl-5 mt-3 mt-md-0">Fecha Fin </label>
+      <p-calendar [minDate]="this.form.get('startDate').value" [showIcon]="true" [style]="{ width: '100%' }" formControlName="endDate"
+        dateFormat="dd/mm/yy"></p-calendar>
+      <span class="danger" *ngIf="
           form.get('endDate').hasError('required') &&
           form.get('endDate').touched
-        "
-      >
+        ">
         <small class="p-error">Este campo es <strong>requerido</strong></small>
       </span>
     </div>
   </div>
-  <div class="row mt-5 p-0">
+  <div class="row mt-3 p-0">
     <div class="offset-0 col-sm-12 col-md-5 offset-md-1">
-      <label for="typeProject" class="pl-5 mt-5 mt-md-0"
-        >*Tipo de proyecto
+      <label for="typeProject" class="pl-5 mt-md-0">Tipo de proyecto
       </label>
-      <p-dropdown
-        [style]="{ width: '100%' }"
-        formControlName="typeProject"
-        optionValue="value"
-        [options]="typeProject"
-        placeholder="Seleccione una opción..."
-        optionLabel="type"
-      >
+      <p-dropdown [style]="{ width: '100%' }" formControlName="typeProject" optionValue="value" [options]="typeProject"
+        placeholder="Seleccione una opción..." optionLabel="type">
         <ng-template let-option pTemplate="item">
           <span [class]="'type-' + option.value">
             {{ option.type }}
           </span>
         </ng-template>
       </p-dropdown>
-      <span
-        class="danger"
-        *ngIf="
+      <span class="danger" *ngIf="
           form.get('typeProject').hasError('required') &&
           form.get('typeProject').touched
-        "
-      >
+        ">
         <small class="p-error">Este campo es <strong>requerido</strong></small>
       </span>
     </div>
-    <div class="offset-0 mt-1 col-sm-12 mt-md-0 col-md-5 mt-md-0">
-      <label for="complexity" class="pl-5">*Complejidad </label>
-      <p-dropdown
-        [style]="{ width: '100%' }"
-        formControlName="complexity"
-        optionLabel="level"
-        optionValue="value"
-        [options]="complexityProject"
-        placeholder="Seleccione una opción..."
-      >
+    <div class="offset-0 mt-3 col-sm-12 mt-md-0 col-md-5 mt-md-0">
+      <label for="complexity" class="pl-5">Complejidad </label>
+      <p-dropdown [style]="{ width: '100%' }" formControlName="complexity" optionLabel="level" optionValue="value"
+        [options]="complexityProject" placeholder="Seleccione una opción...">
         <ng-template let-option pTemplate="item">
           <span [class]="'complexity-' + option.value">
             {{ option.level }}
           </span>
         </ng-template>
       </p-dropdown>
-      <span
-        class="danger"
-        *ngIf="
+      <span class="danger" *ngIf="
           form.get('complexity').hasError('required') &&
           form.get('complexity').touched
-        "
-      >
+        ">
         <small class="p-error">Este campo es <strong>requerido</strong></small>
       </span>
     </div>
   </div>
-  <!-- Para la seccion de editar -->
-  <!--<div class="row mt-5 p-0">
-                <div class="offset-0 col-sm-12 col-md-5">
-            <label for="complexity" class="pl-5 mt-5 mt-md-0">Estado </label>
-            <p-dropdown [style]="{width: '100%'}" formControlName="status" optionLabel="status" optionValue="value"
-                [options]="statusProject" placeholder="-- SELECCIONE --">
-                <ng-template let-option pTemplate="item">
-                    <span [class]="'status-' + option.value">
-                        {{option.level}}
-                    </span>
-                </ng-template>
-            </p-dropdown>
-            <span class="danger" *ngIf="
-            form.get('status').hasError('required') &&
-            form.get('status').touched
-          ">
-            <small class="p-error">Este campo es <strong>requerido</strong></small>
-        </span>
-        </div>
-    </div>-->
-  <div class="row mt-5 p-0">
+  <div class="row mt-3 p-0">
     <div class="offset-0 col-sm-12 col-md-5 offset-md-1">
-      <!--otra opcion con radio button -->
-      <!-- <label for="complexity" class="pl-5">¿Querés aplicar como lider? </label>
-<div class="row py-4">
-    <div class="col-4">
-        <p-radioButton formControlName="requestSupport"
-        value="Si" inputId="Si"></p-radioButton>
-        <label for="Si" class="ml-2">Si</label>
-    </div>
-
-    <div class="col-4">
-        <p-radioButton formControlName="requestSupport"
-        value="No"  inputId="No"></p-radioButton>
-        <label for="No" class="ml-2">No</label>
-    </div>
-</div>  -->
-<label for="complexity" class="pl-5">¿Querés aplicar como lider? </label>
-<p-dropdown
-  [style]="{ width: '100%' }"
-  formControlName="requestSupport"
-  optionLabel="label"
-  optionValue="value"
-  [options]="confirm"
-  placeholder="Seleccione una opción..."
->
-  <ng-template let-option pTemplate="item">
-    <span [class]="'requestSupport-' + option.value">
-      {{ option.label }}
-    </span>
-  </ng-template>
-</p-dropdown>
+      <label for="complexity" class="pl-5">¿Querés aplicar como lider? </label>
+      <p-dropdown [style]="{ width: '100%' }" formControlName="lider" optionLabel="label" optionValue="value"
+        [options]="confirm" placeholder="Seleccione una opción...">
+        <ng-template let-option pTemplate="item">
+          <span [class]="'lider-' + option.value">
+            {{ option.label }}
+          </span>
+        </ng-template>
+      </p-dropdown>
     </div>
 
     <div class="offset-0 col-sm-12 col-md-5 mt-md-0">
-        <label for="name" class="pl-5">Tenes un repositorio? Agregalo aqui! </label>
-        <input
-          type="text"
-          pInputText
-          formControlName="name"
-          class="form-control"
-          placeholder="Ingrese URL del repositorio"
-        />
+      <label for="name" class="pl-5 mt-3 mt-lg-0">Tenes un repositorio? Agregalo aqui! </label>
+      <input type="text" pInputText formControlName="repository" class="form-control"
+        placeholder="Ingrese URL del repositorio" />
+    </div>
+  </div>
+
+  <div class="row mt-3 p-0">
+    <div class="offset-0 col-sm-12 col-md-5 offset-md-1">
+      <label for="complexity" class="pl-5">¿Qué tecnologías maneja tu proyecto? </label>
+      <p-multiSelect
+        [style]="{ width: '100%' }"
+        formControlName="technologies"
+        placeholder="Seleccione una opción..."
+        [options]="technologies"
+        defaultLabel="Seleccione una o varias"
+        optionValue="value"
+        optionLabel="label"
+        display="chip"
+        [overlayVisible]="overlay"
+      >
+        <ng-template let-option pTemplate="item">
+          <span [class]="'technologie-' + option.value">
+            {{ option.label }}
+          </span>
+        </ng-template>          
+      </p-multiSelect>
+      <span
+        class="danger"
+        *ngIf="
+          form.get('technologies').hasError('required') && form.get('technologies').touched
+        "
+      >
+        <small class="p-error">Este campo es <strong>requerido</strong></small>
+      </span> 
+
+    </div>
+
+    <div class="offset-0 mt-3 col-sm-12 col-md-5 mt-lg-0">
+      <p class="d-inline mx-3 mt-3">¿Querés que nuestro sistema valide quien se une a tu proyecto?</p>
+      <p-inputSwitch class="pl-5" formControlName="validateSystem"></p-inputSwitch>
     </div>
   </div>
 
   <div class="text-center p-4">
-    <p-button
-      type="button"
-      [style]="{ width: '100%' }"
-      label="Crear proyecto"
-      class="text-center"
-      styleClass="p-button-help"
-      routerLink="/project/list-project"
-    ></p-button>
+    <p-button [disabled]="form.invalid" type="submit" [style]="{ width: '100%' }" [label]="title"
+      class="text-center" styleClass="p-button-help"></p-button>
   </div>
 </form>

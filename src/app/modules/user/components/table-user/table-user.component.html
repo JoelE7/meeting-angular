@@ -1,29 +1,89 @@
-<p-table [value]="developers">
-    <ng-template pTemplate="header">
-        <tr>
-            <th class="text-center">Foto</th>
-            <th class="text-center">Nombre</th>
-            <th class="text-center">Tecnologías/Lenguajes</th>
-            <th class="text-center">Puntaje</th>
-        </tr>
+<p-dialog (onHide)="hiddenPopUpModalContact()" header="Redactar mensaje" *ngIf="currentUser && userReceptor._id"
+  [(visible)]="visibleModalContact" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+  <app-modal-contact [userEmisor]="currentUser" [userReceptor]="userReceptor"
+    (emitContact)="sendMailContact($event)"></app-modal-contact>
+</p-dialog>
+<div class="table-scroll">
+  <p-table [value]="developers" dataKey="developers._id" [tableStyle]="{'min-width': '50rem'}">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th class="text-center">Posición</th>
+        <th class="text-center">Seniority</th>
+        <th class="sticky text-center ">Nombre</th>
+        <th class="text-center">Tecnologías/Lenguajes</th>
+        <th class="text-center">Puntaje</th>
+        <th *ngIf="currentUser" class="text-center">Contacto</th>
+      </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-developer>
-        <tr>
-            <td>
-                <div class="developer-avatar">
-                    <p-avatar [image]="developer.avatarUrl" size="large" shape="circle"></p-avatar>
-                </div>
-            </td>
-            <td class="text-center">{{ developer.name }}</td>
-            <td class="text-center">
-                <ul class="developer-skills">
-                    <li *ngFor="let skill of developer.skills">
-                        <i class="{{ skill }}"></i>
-                    </li>
-                </ul>
-            </td>
-            <td class="text-center">{{ developer.score }}</td>
-        </tr>
+    <ng-template pTemplate="body" let-developer let-rowIndex="rowIndex">
+      <tr [ngClass]="{'row-accessories': currentUser?._id === developer._id}">
+        <td class="text-center fw-bold">{{rowIndex + 1 + (paginate * 10 - 10)}}</td>
+        <td >
+          <div class="developer-avatar d-flex flex-column w-100 h-100 justify-content-center align-items-center" *ngIf="developer.level === 'Trainee'">
+            <p-avatar *ngIf="currentUser?._id === developer._id;else trainee" image="assets/img/stormtrooper.png" pBadge
+            size="xlarge" severity="danger">
+            </p-avatar>
+            <!-- <p-avatar *ngIf="currentUser?._id === developer._id;else trainee" image="assets/img/C-3po.png" pBadge
+              severity="danger">
+            </p-avatar> -->
+            <p class="m-0 text-center">Trainee</p>
+            <ng-template #trainee>
+               <p-avatar image="assets/img/stormtrooper.png" size="xlarge" severity="danger"></p-avatar>
+            </ng-template>
+          </div>
+          <div class="developer-avatar d-flex flex-column w-100 h-100 justify-content-center align-items-center" *ngIf="developer.level === 'Junior'">
+            <p-avatar class="p-avatar-icon" *ngIf="currentUser?._id === developer._id; else junior"
+              image="assets/img/chewbacca.png" pBadge severity="danger">
+              </p-avatar>
+            <p class="m-0 text-center">Junior</p>
+            <ng-template #junior>
+               <p-avatar image="assets/img/chewbacca.png" size="xlarge"  severity="danger"></p-avatar>
+            </ng-template>
+          </div>
+          <div class="developer-avatar d-flex flex-column w-100 h-100 justify-content-center align-items-center" *ngIf="developer.level === 'Semi Senior'">
+            <p-avatar *ngIf="currentUser?._id === developer._id;else semisenior" image="assets/img/Darth-Vader.png"
+              pBadge severity="danger"></p-avatar>
+            <p class="m-0 text-center">Semi Senior</p>
+            <ng-template #semisenior>
+               <p-avatar image="assets/img/darth-vader.png" size="xlarge" severity="danger"></p-avatar>
+            </ng-template>
+          </div>
+          <div class="developer-avatar d-flex flex-column w-100 h-100 justify-content-center align-items-center" *ngIf="developer.level === 'Senior'">
+            <p-avatar *ngIf="currentUser?._id === developer._id;else senior" image="assets/img/baby-yoda.png"   pBadge
+              severity="danger"></p-avatar>
+            <p class="m-0 text-center">Senior</p>
+            <ng-template #senior>
+              <p-avatar  image="assets/img/baby-yoda.png" size="xlarge"  severity="danger"></p-avatar> 
+            </ng-template>
+          </div>
+
+        </td>
+        <td class="text-center sticky">{{ developer.name }}</td>
+        <td class="text-center">
+          <ul class="developer-skills d-inline" *ngFor="let technologies of developer.preferences.slice(0,3); let i = index">
+            <li class="text-center">
+              <div *ngIf="i < 3" class="d-flex flex-column w-100 h-100 justify-content-center align-items-center">
+                <p-avatar image="assets/img/stormtrooper.png" pTooltip="Nivel Trainee" *ngIf="i == 0"></p-avatar>
+                <!-- <p-avatar image="assets/img/chewbacca.png" pTooltip="Nivel Junior" *ngIf="i == 0"></p-avatar> -->
+                <p-avatar image="assets/img/darth-vader.png" pTooltip="Nivel Semi Senior" *ngIf="i == 1"></p-avatar>
+                <p-avatar image="assets/img/baby-yoda.png" pTooltip="Nivel Senior" *ngIf="i == 2"></p-avatar>
+                {{technologies}}
+              </div>
+            </li>
+          </ul>
+        </td>
+        <td class="text-center">{{ developer.score }}</td>
+        <td *ngIf="currentUser" class="btnes text-center">
+          <p-button *ngIf="currentUser._id != developer._id && developer.mailEnabled" (click)="showModalContact(developer)" type="button" pTooltip="Contactar" icon="pi pi-envelope"
+            styleClass="p-button-rounded p-button-help p-button-outlined" class="mx-2"></p-button>
+          <p-button *ngIf="currentUser._id == developer._id || !developer.mailEnabled" [disabled]="true" type="button" icon="pi pi-times" pTooltip="Este usuario no quiere recibir mails"
+            styleClass="p-button-rounded p-button-help p-button-outlined" class="mx-2"></p-button>
+          <p-button (click)="seeProfile(developer._id)" type="button" pTooltip="Ver perfil" icon="pi pi-eye"
+            styleClass="p-button-rounded p-button-help p-button-outlined"
+            [routerLink]="'/user/see-profile/' + developer._id"></p-button>
+        </td>
+      </tr>
     </ng-template>
-</p-table>
-<p-paginator [totalRecords]="totalRecords" [rows]="size" (onPageChange)="paginateEmit($event)"></p-paginator>
+  </p-table>
+
+  <p-paginator [totalRecords]="totalRecords" [rows]="size" (onPageChange)="paginateEmit($event)"></p-paginator>

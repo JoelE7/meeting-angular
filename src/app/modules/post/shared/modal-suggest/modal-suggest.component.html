@@ -1,0 +1,59 @@
+<div class="card text-center" *ngIf="spinner">
+  <span>
+    <p-progressSpinner></p-progressSpinner>
+  </span>
+  <br>
+  <span class="text-center">Cargando...</span>
+</div>
+<form [formGroup]="formContact" (ngSubmit)="submitContact()" *ngIf="!spinner">
+  <div class="row">
+    <div class="col">
+      <p-messages [(value)]="messages" [enableService]="false" [closable]="true"></p-messages>
+    </div>
+  </div>
+  <div class="row mt-3 p-0">
+    <div class="col-sm-12 col-md-12">
+      <label class="color" for="for">Para:</label>
+      <p-autoComplete [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" formControlName="for"
+        [suggestions]="filteredUsers" (completeMethod)="filterUsers($event)" field="email"
+        [showEmptyMessage]="true" [forceSelection]="true" [emptyMessage]="''">
+
+        <ng-template pTemplate="empty">
+          <p>No se encontró ningún usuario</p>
+        </ng-template>
+      </p-autoComplete>
+      <span class="danger" *ngIf="
+         formContact.get('for').hasError('required') &&
+         formContact.get('for').touched
+       ">
+        <small class="p-error">Este campo es <strong>requerido</strong></small>
+      </span>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-sm-12 col-md-12">
+      <label for="message" class="color">Mensaje:</label>
+      <textarea [style]="{ height:'200px !important' ,width: '100%' }" placeholder="Ingrese su mensaje:"
+        formControlName="message" pInputTextarea [autoResize]="true" rows="5" cols="30"></textarea>
+    </div>
+  </div>
+  <!-- 
+ <div class="row mt-3 p-0">
+  <div class="col-sm-12 col-md-12">
+    <label class="color" for="post">Post:</label>
+    <input
+      type="text"
+      pInputText
+      formControlName="post"
+      class="form-control "
+      placeholder="Seleccione el post:"
+    />
+  </div>
+</div>  -->
+
+  <div class="text-center p-4">
+    <p-button type="submit" [disabled]="formContact.invalid" [style]="{ width: '100%' }" label="Enviar"
+      class="text-center" styleClass="p-button-help d-block"></p-button>
+  </div>
+</form>

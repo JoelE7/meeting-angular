@@ -1,4 +1,8 @@
 import {
+  AfterContentChecked,
+  AfterContentInit,
+  AfterViewChecked,
+  AfterViewInit,
   Component,
   EventEmitter,
   Input,
@@ -12,6 +16,10 @@ import { TypeProject } from '../../interfaces/typeProject.interface';
 import { ComplexityProject } from '../../interfaces/complexityProject.interface';
 import { StatusProject } from '../../interfaces/statusProject.interface';
 import { Confirm } from '../../interfaces/confirm.interface';
+import { User } from 'src/app/shared/models/user/user.class';
+import { DataService } from 'src/app/api/services/data/data.service';
+import { Item } from 'src/app/shared/models/model-forms/item-form.interface';
+import { MessageService } from 'primeng/api';
 
 Component;
 
@@ -21,7 +29,13 @@ Component;
   styleUrls: ['./form-project.component.css'],
   encapsulation:ViewEncapsulation.None
 })
-export class FormProjectComponent {
+export class FormProjectComponent implements OnInit{
+
+  currentUser: User =
+  localStorage.getItem('user') != 'undefined'
+    ? JSON.parse(localStorage.getItem('user'))
+    : undefined;
+
   title: string = 'Crear proyecto';
 
   @Input()
@@ -39,7 +53,11 @@ export class FormProjectComponent {
   statusProject: StatusProject[] = [];
   confirm: Confirm[] = [];
 
-  constructor() {
+  technologies: Item[] = [];
+
+  overlay:boolean = false;
+
+  constructor(private dataService:DataService,private messageService:MessageService) {
     this.confirm.push(
       {
         label: 'SI',
@@ -53,39 +71,69 @@ export class FormProjectComponent {
     this.typeProject.push(
       {
         type: 'Web',
-        value: '1',
+        value: 'Web',
       },
       {
-        type: 'Mobile',
-        value: '2',
+        type: 'Movil',
+        value: 'Mobile',
       },
       {
-        type: 'VideoGames',
-        value: '3',
-      }
+        type: 'Videojuegos',
+        value: 'Videogames',
+      },
+      {
+        type: 'Escritorio',
+        value: 'Desktop',
+      },
     );
     this.complexityProject.push(
       {
         level: 'Trainee',
-        value: '1',
+        value: 'Trainee',
       },
       {
         level: 'Junior',
-        value: '2',
+        value: 'Junior',
       },
       {
         level: 'Senior',
-        value: '3',
+        value: 'Senior',
       }
     );
   }
 
   ngOnInit(): void {
     if (this.project._id != undefined) {
-      this.title = 'Editar proyecto';
+      this.title = 'Actualizar proyecto';
+      this.overlay = true;
+      setTimeout(async()=>{
+        await new Promise((resolve,reject)=>{
+          this.overlay = false;
+        })
+      },300)
     }
+    this.getTechnologies();
     this.startFrom();
-    //this.form.get('startDate').disable();
+  }
+
+  getTechnologies() {
+    this.dataService.getTechnologies().subscribe(
+      (data) => {
+        for (let i = 0; i < data.technologies.length; i++) {
+          this.technologies.push({
+            label: data.technologies[i],
+            value: data.technologies[i],
+          });
+        }
+      },
+      (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+        });
+      }
+    );
   }
 
   startFrom() {
@@ -95,26 +143,26 @@ export class FormProjectComponent {
         Validators.required,
         Validators.minLength(10),
       ]),
-      startDate: new FormControl(this.project.startDate, [
+      startDate: new FormControl(this.project.startDate ? new Date(this.project.startDate) : "",[
         Validators.required,
       ]),
-      // startDate: new FormControl(this.project.startDate || new Date(), [
-      //   Validators.required,
-      // ]),
-      endDate: new FormControl(this.project.endDate, [Validators.required]),
+      endDate: new FormControl(this.project.endDate ?  new Date(this.project.endDate) : "", [Validators.required]),
       typeProject: new FormControl(this.project.type, [
         Validators.required,
       ]),
       complexity: new FormControl(this.project.complexity, [
         Validators.required,
       ]),
-      status: new FormControl(this.project.status, [Validators.required]),
       amountParticipants: new FormControl(this.project.amountParticipants, [
         Validators.required,
         Validators.min(1),
+        Validators.max(10)
       ]),
-      lider: new FormControl(this.project.leader || false, []),
+      lider: new FormControl(this.project.leader ? true : false, []),
+      repository: new FormControl(this.project.urlRepository ? this.project.urlRepository  : "", []),
       requestSupport: new FormControl(this.project.requestSupport || false, []),
+      validateSystem : new FormControl(this.project.validateSystem ? true : false,[]),
+      technologies: new FormControl(this.project.technologies ? this.project.technologies : [],[Validators.required]),
     });
   }
 
@@ -128,7 +176,9 @@ export class FormProjectComponent {
     this.newproject.amountParticipants =
       this.form.get('amountParticipants').value;
     //this.newproject.status = this.form.get('status').value;
-    this.newproject.leader = this.form.get('lider').value;
+    this.newproject.leader = this.form.get('lider').value ? this.currentUser._id : "";
+    this.newproject.validateSystem = this.form.get('validateSystem').value;
+    this.newproject.technologies = this.form.get('technologies').value;
     //this.newproject.requestSupport = this.form.get('requestSupport').value;
 
     this.emitProject.emit(this.newproject);

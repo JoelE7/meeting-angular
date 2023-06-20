@@ -8,9 +8,9 @@ export class Project {
   type: string;
   complexity: string;
   amountParticipants: number;
-  leader: any;
-  participants: any;
-  supports: any;
+  leader: any | User;
+  participants: any = [];
+  supports: any = [];
   posts: any= [];
   startDate: Date;
   endDate: Date;
@@ -18,4 +18,7 @@ export class Project {
   status: string;
   requestSupport: Boolean;
   urlRepository:string;
+  validateSystem:boolean;
+  roleUser?:string;
+  requests?:User[] = [];
 }

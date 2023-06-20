@@ -1,0 +1,16 @@
+<div class="container-fluid" *ngIf="posts.length > 0">
+
+    <div class="row">
+        <div class="col-12">
+            <p class="h6 text-center mt-3">{{posts[0].title}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <p-button type="button" [style]="{'width' : '100%'}" label="Ver post"
+          styleClass="p-button-help" class="m-1 post-button"
+          routerLink="/post/details-post/{{ posts[0]._id }}"></p-button>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,36 @@
+.p-button-outlined-3{
+    padding: 0 !important;
+    border: 2px solid #ff9ec5 !important;
+    background-color: white !important;
+    color: #ff9ec5 !important;
+  }
+.p-button-outlined-4{
+    padding: 0 !important;
+    border: 2px solid #ff9ec5 !important;
+    background-color: white !important;
+    color: #ff9ec5 !important;
+  }
+
+.p-button-outlined-5{
+    padding: 0 !important;
+    border: 2px solid #ff9ec5 !important;
+    background-color: white !important;
+    color: #ff9ec5 !important;
+  }
+
+.p-button-outlined-3:hover{
+    border: 2px solid #22c55e !important;
+    background-color: #22c55e !important;
+    color: white !important;
+  }
+
+.p-button-outlined-4:hover{
+    border: 2px solid #ef4444 !important;
+    background-color: #ef4444 !important;
+    color: white !important;
+  }
+.p-button-outlined-5:hover{
+    border: 2px solid #3b82f6 !important;
+    background-color: #3b82f6 !important;
+    color: white !important;
+  }

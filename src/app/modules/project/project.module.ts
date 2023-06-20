@@ -12,11 +12,21 @@ import { UpdateProjectComponent } from './pages/update-project/update-project.co
 import { RequestSendModalComponent } from './shared/request-send-modal/request-send-modal.component';
 import { RequestAcceptModalComponent } from './shared/request-accept-modal/request-accept-modal.component';
 import { StartModule } from 'src/app/public/start.module';
-import { ModalQuestionComponent } from './shared/question-modal/modal-question.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SearchProjectComponent } from './pages/search-project/search-project.component';
 import { PostModule } from '../post/post.module';
 import { ModalScoreComponent } from './shared/modal-score/modal-score.component';
+import { SupportCollaborateComponent } from './components/support-collaborate/support-collaborate.component';
+import { ProjectMemberComponent } from './components/project-member/project-member.component';
+import { AdvancementMembersComponent } from './components/advancement-members/advancement-members.component';
+import { ProjectProfilesComponent } from './components/project-profiles/project-profiles.component';
+import { RecommendationsPostModalComponent } from './shared/recommendations-post-modal/recommendations-post-modal.component';
+import { RecommendationsProjectModalComponent } from './shared/recommendations-project-modal/recommendations-project-modal.component';
+import { RecommendationsTechnologiesModalComponent } from './shared/recommendations-technologies-modal/recommendations-technologies-modal.component';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalInvitationProjectComponent } from './shared/modal-invitation-project/modal-invitation-project.component';
+import { RequestMemberComponent } from './components/request-member/request-member.component';
 
 
 @NgModule({
@@ -30,17 +40,26 @@ import { ModalScoreComponent } from './shared/modal-score/modal-score.component'
     DetailsProjectComponent,
     RequestSendModalComponent,
     RequestAcceptModalComponent,
-    ModalQuestionComponent,
     SearchProjectComponent,
-    ModalScoreComponent
+    ModalScoreComponent,
+    SupportCollaborateComponent,
+    ProjectMemberComponent,
+    AdvancementMembersComponent,
+    ProjectProfilesComponent,
+    RecommendationsPostModalComponent,
+    RecommendationsProjectModalComponent,
+    RecommendationsTechnologiesModalComponent,
+    ModalInvitationProjectComponent,
+    RequestMemberComponent,
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ProjectRoutingModule,
     PrimengModule,
     StartModule,
     SharedModule,
-    PostModule
+    PostModule,
   ],
   exports:[
     CreateProjectComponent,
@@ -51,8 +70,14 @@ import { ModalScoreComponent } from './shared/modal-score/modal-score.component'
     DetailsProjectComponent,
     RequestSendModalComponent,
     RequestAcceptModalComponent,
-    ModalQuestionComponent,
-    SearchProjectComponent
+    SearchProjectComponent,
+    SupportCollaborateComponent,
+    ProjectMemberComponent,
+    AdvancementMembersComponent,
+    ProjectProfilesComponent,
+    RecommendationsPostModalComponent,
+    RecommendationsProjectModalComponent,
+    RecommendationsTechnologiesModalComponent,
   ]
 })
 export class ProjectModule { }

@@ -8,8 +8,37 @@ import { MenuComponent } from 'src/app/public/menu/menu.component';
 import { MainComponent } from 'src/app/public/main/main.component';
 import { FooterComponent } from 'src/app/public/footer/footer.component';
 import { MessageService } from 'primeng/api';
+import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
 
-describe('MenuComponent', () => {
+describe('MenuComponentConLogin', () => {
+  let component: MenuComponent;
+  let fixture: ComponentFixture<MenuComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ MenuComponent,MainComponent,FooterComponent ],
+      providers : [AuthService,MessageService],
+      imports : [HttpClientTestingModule,RouterTestingModule,PrimengModule]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(MenuComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+
+    localStorage.setItem('user',JSON.stringify(userMock))
+  });
+
+  afterEach(() => {
+    localStorage.removeItem("user");
+  })
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+
+describe('MenuComponentSinLogin', () => {
   let component: MenuComponent;
   let fixture: ComponentFixture<MenuComponent>;
 

@@ -1,11 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, lastValueFrom, map } from 'rxjs';
 import { Project } from 'src/app/shared/models/project/project.class';
 import { environment } from 'src/environments/environment';
 import { Method } from '../../../shared/filters/enum/method.enum';
 import { FilterService } from 'src/app/shared/filters/services/filter.service';
 import { User } from 'src/app/shared/models/user/user.class';
+import { MailInvitation } from 'src/app/shared/models/model-mail-invitation/model-mail-invitation.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ import { User } from 'src/app/shared/models/user/user.class';
 export class ProjectService {
   constructor(private http: HttpClient, private filterService: FilterService) {}
 
-  detailsProject(id: number): Observable<Project> {
+  detailsProject(id: string): Observable<Project> {
     let headers = new HttpHeaders();
     // headers = headers.append(
     //   'Authorization',
@@ -21,7 +22,9 @@ export class ProjectService {
     // );
 
     return this.http
-      .get<Project>(`${environment.apiUrl}/projects/${id}`, { headers: headers })
+      .get<Project>(`${environment.apiUrl}/projects/${id}`, {
+        headers: headers,
+      })
       .pipe(
         map((res: any) => {
           return res;
@@ -29,12 +32,26 @@ export class ProjectService {
       );
   }
 
-  createProject(data: Project) {
+  detailsProjectAsync(id: string): Promise<Project> {
     let headers = new HttpHeaders();
     // headers = headers.append(
     //   'Authorization',
     //   'Bearer' + localStorage.getItem('token')
     // );
+
+    return lastValueFrom<Project>(
+      this.http.get<Project>(`${environment.apiUrl}/projects/${id}`, {
+        headers: headers,
+      })
+    );
+  }
+
+  createProject(data: Project) {
+    let headers = new HttpHeaders();
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
     return this.http
       .post(`${environment.apiUrl}/projects/`, data, { headers: headers })
       .pipe(
@@ -46,12 +63,15 @@ export class ProjectService {
 
   updateProject(project: Project) {
     let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+
     return this.http
-      .put(`${environment.apiUrl}/projects/${project._id}`, project, { headers: headers })
+      .put(`${environment.apiUrl}/projects/${project._id}`, project, {
+        headers: headers,
+      })
       .pipe(
         map((res: any) => {
           return res;
@@ -59,8 +79,7 @@ export class ProjectService {
       );
   }
 
-  //TODO: REVISAR ESTO, LA ENTIDAD CAMBIO
-  getAllProjects(query: any = []) {
+  getAllProjects(query: any = [],paginate: any,currenUser:any,currentUserProjects:boolean) {
     let filtersAccept = [
       'name',
       'description',
@@ -75,7 +94,10 @@ export class ProjectService {
       'technologies',
       'status',
       'requestSupport',
+      'ownProject'
     ];
+
+    query.push({col : "ownProject", value : currentUserProjects})
 
     let queryBuild =
       query.method === Method.POST
@@ -83,13 +105,16 @@ export class ProjectService {
         : this.filterService.getFiltersForGet(query, filtersAccept);
 
     let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
+    if(currenUser){
+      headers = headers.append(
+        'Authorization',
+        'Bearer ' + localStorage.getItem('token')
+      );
+    }
+
 
     return this.http
-      .post(`${environment.apiUrl}/projects/filter`, queryBuild, {
+      .post(`${environment.apiUrl}/projects/filter/${paginate}`, queryBuild, {
         headers: headers,
       })
       .pipe(
@@ -118,10 +143,10 @@ export class ProjectService {
 
   finalizeProject(idProject: string, scores: any) {
     let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
+    headers = headers.append(
+      'Authorization',
+      'Bearer' + localStorage.getItem('token')
+    );
 
     return this.http
       .post(`${environment.apiUrl}/projects/finish/${idProject}`, scores, {
@@ -134,4 +159,136 @@ export class ProjectService {
       );
   }
 
+  getMetricByProject(idProject: string): Promise<any> {
+    let headers = new HttpHeaders();
+    // headers = headers.append(
+    //   'Authorization',
+    //   'Bearer' + localStorage.getItem('token')
+    // );
+
+    return lastValueFrom<any>(
+      this.http.get<any>(
+        `${environment.apiUrl}/projects/getMetrics/${idProject}`,
+        {
+          headers: headers,
+        }
+      )
+    );
+  }
+
+  joinProject(userId:string,projectId:string,supportRequired:boolean = false){
+
+    let data = {
+      userId,
+      projectId,
+      support : supportRequired
+    }
+
+    let headers = new HttpHeaders();
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+
+    return this.http
+      .post(`${environment.apiUrl}/projects/join/`, data, {
+        headers: headers, observe : 'response'
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+
+  sendMailInvitation(data:MailInvitation){
+    let headers = new HttpHeaders();
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+
+  // api/projects/invite
+
+    return this.http
+      .post<Project>(`${environment.apiUrl}/projects/invite`, data, { headers: headers })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  sendRequestToJoinTheProject(project:Project,data:any){
+
+    let headers = new HttpHeaders();
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+
+    return this.http
+      .put(`${environment.apiUrl}/projects/request/${project._id}`, data, {
+        headers: headers,
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  cancelRequestToJoinTheProject(project:Project,data:any){
+    let headers = new HttpHeaders();
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+    return this.http
+      .put(`${environment.apiUrl}/projects/request/${project._id}`, data, {
+        headers: headers,
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  leaveProject(project:Project,data:any){
+    let headers = new HttpHeaders();
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+
+    return this.http
+      .put(`${environment.apiUrl}/projects/leave/${project._id}`, data, {
+        headers: headers,
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  userRequestResponsesLeader(project: Project,data:any) {
+    let headers = new HttpHeaders();
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
+
+    return this.http
+      .post(`${environment.apiUrl}/projects/request/${project._id}`, data, {
+        headers: headers,
+      })
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
 }

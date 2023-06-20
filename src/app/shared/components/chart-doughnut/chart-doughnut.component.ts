@@ -1,50 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { MetricLanguage } from 'src/app/modules/user/interfaces/metricLanguage.interface';
+import { ChartDoughnutData } from '../../models/model-metric/DoughnutMetric.interface';
+import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 
 @Component({
   selector: 'app-chart-doughnut',
   templateUrl: './chart-doughnut.component.html',
-  styleUrls: ['./chart-doughnut.component.css']
+  styleUrls: ['./chart-doughnut.component.css'],
+  encapsulation : ViewEncapsulation.None
 })
 export class ChartDoughnutComponent implements OnInit {
-    data: any;
 
-    options: any;
-  
-    ngOnInit() {
-      const documentStyle = getComputedStyle(document.documentElement);
-      const textColor = documentStyle.getPropertyValue('--text-color');
-  
-  
-      this.data = {
-        labels: ['Contribución', 'Popularidad del proyecto', 'Uso de ramas'],
-        datasets: [
-          {
-            data: [200, 250, 100],
-            backgroundColor: [
-              documentStyle.getPropertyValue('--purple-300'),
-              documentStyle.getPropertyValue('--purple-600'),
-              documentStyle.getPropertyValue('--purple-900'),
-            ],
-            hoverBackgroundColor: [
-              documentStyle.getPropertyValue('--purple-200'),
-              documentStyle.getPropertyValue('--purple-500'),
-              documentStyle.getPropertyValue('--purple-800'),
-            ],
-          },
-        ],
-      };
-  
-  
-      this.options = {
-        cutout: '60%',
-        plugins: {
-          legend: {
-            labels: {
-              color: textColor,
-            },
+
+  @Input()
+  data:any;
+
+  options: any;
+
+  ngOnInit() {
+    const documentStyle = getComputedStyle(document.documentElement);
+    const textColor = documentStyle.getPropertyValue('--text-color');
+
+    this.options = {
+      cutout: '60%',
+      plugins: {
+        legend: {
+          labels: {
+            color: textColor,
           },
         },
-      };
-    }
+      },
+    };
   }
-  
+}

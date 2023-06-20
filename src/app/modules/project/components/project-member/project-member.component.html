@@ -1,0 +1,15 @@
+<div class="row mt-5 mt-lg-3" *ngIf="user">
+    <div class="col-12 col-lg-3 d-flex justify-content-center">
+        <img width="100" height="100" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="user"
+            class="rounded-circle m-auto" />
+    </div>
+    <div class="col-12 col-lg-7 mt-3 mt-lg-0 text-center text-lg-start">
+        <h4>{{ user.name }}</h4>
+        <h6>{{ user.role }} Developer</h6>
+        <h6 (click)="seeProgress(user)" class="cursor-pointer"><b>Ver avances</b></h6>
+    </div>
+    <div class="col-12 col-lg-2 mt-3 mt-lg-0 text-center text-lg-start">
+        <p-button type="button" [style]="{ width: '100%' }" label="Ver perfil" class=""
+            styleClass="p-button-outlined p-button-help" routerLink="/user/see-profile/{{ user._id }}"></p-button>
+    </div>
+</div>

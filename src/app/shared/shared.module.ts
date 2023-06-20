@@ -5,6 +5,8 @@ import { ChartDoughnutComponent } from './components/chart-doughnut/chart-doughn
 import { ChartLineComponent } from './components/chart-line/chart-line.component';
 import { PrimengModule } from './primeng/primeng.module';
 import { FiltersComponent } from './filters/filters.component';
+import { ModalContactComponent } from './components/modal-contact/modal-contact.component';
+import { CharRadarComponent } from './components/char-radar/char-radar.component';
 
 @NgModule({
   declarations: [
@@ -12,6 +14,9 @@ import { FiltersComponent } from './filters/filters.component';
     ChartDoughnutComponent,
     ChartLineComponent,
     FiltersComponent,
+    ModalContactComponent,
+    CharRadarComponent,
+    CharRadarComponent,
   ],
   imports: [CommonModule, PrimengModule],
   exports: [
@@ -19,6 +24,8 @@ import { FiltersComponent } from './filters/filters.component';
     ChartDoughnutComponent,
     ChartLineComponent,
     FiltersComponent,
+    ModalContactComponent,
+    CharRadarComponent,
   ],
 })
 export class SharedModule {}

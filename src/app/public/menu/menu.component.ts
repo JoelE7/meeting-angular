@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterContentChecked, Component, DoCheck, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Menu } from './interfaces/menu.interface';
 import { User } from '../../shared/models/user/user.class';
@@ -11,21 +11,38 @@ import { AuthService } from 'src/app/api/services/auth/auth.service';
   styleUrls: ['./menu.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit,DoCheck {
   menu: Menu[] = [];
   url: string = '';
   session: any = localStorage.getItem('token');
-  currentUser: boolean = JSON.parse(localStorage.getItem('user')) ? true : false;
-
+  currentUser: User = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
     private authService:AuthService
   ) {}
+  ngDoCheck(): void {
+    this.currentUser = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;
+  }
 
   ngOnInit(): void {
     this.menu = [
+      {
+        name: 'Home',
+        icon: 'bi bi-houses text-center ',
+        url: '/home',
+        urlActiveClass: 'active',
+        tooltip: 'Home',
+        tooltipOptions: {
+          showDelay: 1000,
+          autoHide: false,
+          tooltipEvent: 'hover',
+          tooltipPosition: 'bottom',
+        },
+        visible: false,
+        class: 'nav-link items-nav d-flex flex-column',
+      },
       {
         name: 'Proyectos',
         icon: 'bi bi-clipboard-minus text-center ',
