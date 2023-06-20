@@ -98,6 +98,7 @@ export class FormPostComponent implements OnInit {
     this.newPost.date = new Date();
     this.newPost.author = this.user._id;
     this.newPost.technologies = this.form.get('technologies').value;
+    this.newPost.messages = [];
 
     console.log(this.newPost);
     
