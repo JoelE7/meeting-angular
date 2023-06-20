@@ -17,7 +17,7 @@
   border-radius: 3px 3px 0 0;
   font-size: 1.5rem;
   font-weight: 500;
-  background: url("../../../../../assets/img/Banner5.png");
+  background: url("src/assets/img/Banner5.png");
   background-position: 50% 90% !important;
   background-size: cover;
   color: rgb(255, 255, 255);

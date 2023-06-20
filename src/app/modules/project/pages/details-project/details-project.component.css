@@ -7,18 +7,20 @@
 
 .custom-menu {
   position: relative;
-  /* top: calc(100%); 
+  /* top: calc(100%);
   /* left: 0; */
 }
 
 .banner-profile{
-  background-image: url('src/assets/img/Banner2.jpg') !important;
+  background-image: url('src/assets/img/Banner5.png') !important;
+  background-size: cover;
   width: 100%;
   height: 200px;
-  border-radius: 5px 5px 0px 0px; 
+  border-radius: 5px 5px 0px 0px;
 }
 .banner {
-  background-image: url('src/assets/img/Banner2.jpg');
+  background-image: url('src/assets/img/Banner5.png');
+  background-position: 50% 50%;
 }
 
 #profile{
@@ -43,12 +45,12 @@
 
 
 .p-button .github{
-  background-color: #495057 !important; 
+  background-color: #495057 !important;
 }
 
 .p-button-danger  {
-  background-color:#fca326 !important; 
-  border: 1px solid #fca326 !important; 
+  background-color:#fca326 !important;
+  border: 1px solid #fca326 !important;
  }
 
 .link a{
@@ -95,7 +97,7 @@ list-project.component.css
  .p-dialog .p-dialog-header{
   background-color: #ced4da !important;
   padding:1rem;
-} 
+}
 
 canvas{
   min-height: 400px !important;
@@ -146,7 +148,7 @@ canvas{
   .p-tabview .p-tabview-nav-btn.p-link {
     display: none;
   }
- 
+
 }
 @media (max-width: 991.98px) {
   .p-tabview .p-tabview-nav-btn.p-link {
