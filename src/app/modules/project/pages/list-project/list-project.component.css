@@ -36,16 +36,37 @@
   background-color: #ced4da !important;
   padding: 1rem;
 }
-
+@media screen and (max-width: 480px) {
+  /* #titProy{
+    align-items: center;
+    text-align: center; 
+  } */
+  p {
+    font-size: 12px;
+  }
+  #titleP {
+    text-align: start; 
+    margin-left: 20px; 
+ }
+}
 
 @media screen and (max-width: 767.98px) {
-  .title {
+ 
+  #titleP {
+    align-items: center;
     text-align: start;
   }
 }
 
 @media screen and (min-width: 767.98px) {
-  .title {
+  
+  #titProy{
+    align-items: center;
+    text-align: center; 
+  }
+  #titleP {
+    align-items: center; 
     text-align: center;
+    /* margin-left: 180px;   */
   }
 }

@@ -23,6 +23,11 @@
   p {
     font-size: 12px;
   }
+  #titlePosts{
+    text-align: start; 
+    margin-left: 20px; 
+
+ }
 }
 
 /* cuando sea menor a 767px */
@@ -32,4 +37,17 @@
     align-items: center;
     text-align: start; 
  }
+} 
+/* cuando sea mayor a 767px */
+@media(min-width: 767px){
+
+  #tit{
+    align-items: center; 
+    text-align: center; 
+ }
+  #titlePosts{
+    align-items: center;
+    text-align: center; 
+    margin-left: 40px; 
+  }
 } 

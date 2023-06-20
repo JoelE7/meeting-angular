@@ -31,6 +31,8 @@
       <app-banner [title]="searchProject.name" [subtitle]="'Aplicacion ' + searchProject.type" [short]="true"
         [roleUser]="searchProject.roleUser" [project]="searchProject" [updateProject]="searchProject.leader._id === currentUser._id ? true : false"> 
       </app-banner>
+
+
                   <!-- <p-button class="ms-2" type="button" styleClass="p-button-outlined p-button-help"
               label="Actualizar Proyecto" *ngIf="
                 currentUser &&
@@ -95,17 +97,16 @@
               searchProject.leader?._id == currentUser?._id
             ">
             <div class="row" *ngIf="!visibleInputRepository">
-              <div class="col-12">
-
+              <div class="col-12 col-sm-12 col-dm-12 col-lg-12 col-xl-12 ">
                 <p-button type="button" iconPos="right" icon="bi bi-github" [style]="{ width: '100%' }"
-                  label="Vincular con github" class="github" styleClass="p-button-secondary"
+                  label="Vincular con github" class="github me-2" styleClass="p-button-secondary"
                   (click)="linkInputProjectToRepository()"></p-button>
                 <p-button type="button" iconPos="right" icon='fa-brands fa-square-gitlab' [style]="{ width: '100%' }"
-                  label="Vincular con gitlab" class="gitlab mx-2" styleClass="p-button-secondary"
+                  label="Vincular con gitlab" class="mt-2 " styleClass="p-button-danger"
                   (click)="linkInputProjectToRepository()"></p-button>
                 <p class="mt-3">
                   <strong>Al vincular el proyecto a github/gitlab tendrás acceso a métricas y a las actividades de los
-                    integrantes</strong>
+                    integrantes.</strong>
                 </p>
               </div>
             </div>
@@ -114,61 +115,14 @@
                 <label for="repository">Ingresa el link del repositorio</label>
                 <input type="url" [(ngModel)]="linkRepositoryProject" class="form-control" id="repository-link" />
                 <p-button (click)="linkProjectToRepository()" type="button" [style]="{ width: '100%' }"
-                  label="Vincular repositorio" class="mt-3" styleClass="p-button-help"></p-button>
+                  label="Vincular repositorio" class="mt-3 mb-2 me-2" styleClass="p-button-help"></p-button>
                 <p-button (click)="backLinkToRepository()" type="button" [style]="{ width: '100%' }" label="Volver"
-                  class="mt-3 mx-2" styleClass="p-button-help"></p-button>
+                  class="mt-3 " styleClass="p-button-help"></p-button>
               </div>
             </div>
           </div>
         </p-tabPanel>
-        <!-- <p-tabPanel header="Perfiles">
-          <div class="w-50 d-flex justify-content-between align-items-center">
-            <div class="d-flex">
-              <p-radioButton name="profile" value="front-1" inputId="1" class="me-1"
-                [(ngModel)]="profile"></p-radioButton>
-              <p style="margin: 0">Front End Developer Angular</p>
-            </div>
-            <p-tag [severity]="'warning'" value="SIN ASIGNAR"></p-tag>
-          </div>
-          <div class="w-50 d-flex justify-content-between">
-            <div class="d-flex">
-              <p-radioButton name="profile" value="front-2" inputId="2" class="me-1"
-                [(ngModel)]="profile"></p-radioButton>
-              <p style="margin: 0">Front End Developer Angular</p>
-            </div>
-            <p-tag [severity]="'warning'" value="SIN ASIGNAR"></p-tag>
-          </div>
-          <div class="w-50 d-flex justify-content-between">
-            <div class="d-flex">
-              <p-radioButton name="profile" value="back-1" inputId="3" class="me-1"
-                [(ngModel)]="profile"></p-radioButton>
-              <p style="margin: 0">Back End Developer Node JS</p>
-            </div>
-            <p-tag [severity]="'warning'" value="SIN ASIGNAR"></p-tag>
-          </div>
-          <div class="w-50 d-flex justify-content-between">
-            <div class="d-flex">
-              <p-radioButton name="profile" value="back-2" inputId="4" class="me-1"
-                [(ngModel)]="profile"></p-radioButton>
-              <p style="margin: 0">Back End Developer Node JS</p>
-            </div>
-            <p-tag [severity]="'warning'" value="SIN ASIGNAR"></p-tag>
-          </div>
-          <div class="w-50 d-flex justify-content-between">
-            <div class="d-flex">
-              <p-radioButton name="profile" value="ux" inputId="2" class="me-1" [(ngModel)]="profile"></p-radioButton>
-              <p style="margin: 0">UX Designer</p>
-            </div>
-            <p-tag [severity]="'warning'" value="SIN ASIGNAR"></p-tag>
-          </div>
-          <div class="w-50 d-flex justify-content-between">
-            <div class="d-flex">
-              <p-radioButton name="profile" value="bbd" inputId="2" class="me-1" [(ngModel)]="profile"></p-radioButton>
-              <p style="margin: 0">Gestor de Base de Datos MongoDB</p>
-            </div>
-            <p-tag [severity]="'warning'" value="SIN ASIGNAR"></p-tag>
-          </div>
-        </p-tabPanel> -->
+       
         <p-tabPanel header="Colaborar" *ngIf="!userExistProject">
           <app-support-collaborate (eventEmitterSupportJoinProject)="joinAProject($event)"></app-support-collaborate>
         </p-tabPanel>
@@ -304,37 +258,34 @@
             </div>
           </ng-template>
         </p-tabPanel>
-        <div class="row text-end mt-5">
-          <div class="col-12">
-            <p-button class="ms-2" *ngIf="currentUser" type="button" styleClass="p-button-outlined p-button-help"
+        <div class="row btnCenter mt-5">
+          <div class="col-12 col-lg-6 mx-auto">
+            <p-button class="mb-2" *ngIf="currentUser" type="button" styleClass="p-button-outlined p-button-help"
               label="Sugerir Proyecto" [style]="{ heigth: '30px !important' }"
               (click)="invitationProjectPopUp()"></p-button>
             <p-button (click)="joinAProject()" *ngIf="searchProject.validateSystem && !userExistProject" type="button" [style]="{ width: '100%' }"
-              label="Unirse al Proyecto" class="mx-2" styleClass="p-button-help"></p-button>
-            <p-button class="ms-2" type="button" styleClass="p-button-outlined p-button-help" label="Finalizar Proyecto"
+              label="Unirse al Proyecto" class=" btnCenter float-end me-2 me-sm-2 me-md-2" styleClass="p-button-help"></p-button>
+            <p-button class="float-end " type="button" styleClass="p-button-outlined p-button-help" label="Finalizar Proyecto"
               *ngIf="
                 currentUser &&
                 searchProject?.leader?._id === currentUser._id &&
                 searchProject.status != 'Done'
               " [style]="{ heigth: '30px !important' }" (click)="showFinishProjectPopUp()"></p-button>
           </div>
-          <div class="col-12">
-
-          </div>
-          <div class="col-12">
+          <!-- <div class="col-12 col-lg-6">
             <p-button class="ms-2" (click)="
             sendRequestToJoinTheProject()" type="button" styleClass="p-button-outlined p-button-help"
               label="Enviar solicitud" *ngIf="!searchProject.validateSystem && !userExistSendRequest && !userExistProject"
               [style]="{ heigth: '30px !important' }"></p-button>
-          </div>
-          <div class="col-12">
+          </div> -->
+          <!-- <div class="col-12 col-lg-6">
             <p-button class="ms-2" (click)="
             cancelRequestToJoinTheProject()" type="button" styleClass="p-button-outlined p-button-help"
               label="Cancelar solicitud" *ngIf="!searchProject.validateSystem && userExistSendRequest && !userExistProject"
               [style]="{ heigth: '30px !important' }"></p-button>
-          </div>
-          <div class="col-12">
-            <p-button class="ms-2" (click)="
+          </div> -->
+          <div class="col-12 col-lg-6">
+            <p-button class="" (click)="
             leaveProjectConfirm()" type="button" styleClass="p-button-outlined p-button-help"
               label="Abandonar proyecto" *ngIf="this.searchProject.leader._id != currentUser._id && userExistProject"
               [style]="{ heigth: '30px !important' }"></p-button>

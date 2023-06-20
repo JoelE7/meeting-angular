@@ -20,21 +20,24 @@
         <td class="text-center fw-bold">{{rowIndex + 1 + (paginate * 10 - 10)}}</td>
         <td >
           <div class="developer-avatar d-flex flex-column w-100 h-100 justify-content-center align-items-center" *ngIf="developer.level === 'Trainee'">
-            <p-avatar *ngIf="currentUser?._id === developer._id;else trainee" image="assets/img/C-3po.png" pBadge
-              severity="danger">
+            <p-avatar *ngIf="currentUser?._id === developer._id;else trainee" image="assets/img/stormtrooper.png" pBadge
+            size="xlarge" severity="danger">
             </p-avatar>
+            <!-- <p-avatar *ngIf="currentUser?._id === developer._id;else trainee" image="assets/img/C-3po.png" pBadge
+              severity="danger">
+            </p-avatar> -->
             <p class="m-0 text-center">Trainee</p>
             <ng-template #trainee>
-              <p-avatar image="assets/img/C-3po.png" severity="danger"></p-avatar>
+               <p-avatar image="assets/img/stormtrooper.png" size="xlarge" severity="danger"></p-avatar>
             </ng-template>
           </div>
           <div class="developer-avatar d-flex flex-column w-100 h-100 justify-content-center align-items-center" *ngIf="developer.level === 'Junior'">
             <p-avatar class="p-avatar-icon" *ngIf="currentUser?._id === developer._id; else junior"
-              image="assets/img/Stormtrooper.png" pBadge severity="danger">
+              image="assets/img/chewbacca.png" pBadge severity="danger">
               </p-avatar>
             <p class="m-0 text-center">Junior</p>
             <ng-template #junior>
-              <p-avatar image="assets/img/Stormtrooper.png" severity="danger"></p-avatar>
+               <p-avatar image="assets/img/chewbacca.png" size="xlarge"  severity="danger"></p-avatar>
             </ng-template>
           </div>
           <div class="developer-avatar d-flex flex-column w-100 h-100 justify-content-center align-items-center" *ngIf="developer.level === 'Semi Senior'">
@@ -42,15 +45,15 @@
               pBadge severity="danger"></p-avatar>
             <p class="m-0 text-center">Semi Senior</p>
             <ng-template #semisenior>
-              <p-avatar image="assets/img/Darth-Vader.png" severity="danger"></p-avatar>
+               <p-avatar image="assets/img/darth-vader.png" size="xlarge" severity="danger"></p-avatar>
             </ng-template>
           </div>
           <div class="developer-avatar d-flex flex-column w-100 h-100 justify-content-center align-items-center" *ngIf="developer.level === 'Senior'">
-            <p-avatar *ngIf="currentUser?._id === developer._id;else senior" image="assets/img/Yoda.png" pBadge
+            <p-avatar *ngIf="currentUser?._id === developer._id;else senior" image="assets/img/baby-yoda.png"   pBadge
               severity="danger"></p-avatar>
             <p class="m-0 text-center">Senior</p>
             <ng-template #senior>
-              <p-avatar image="assets/img/Yoda.png" severity="danger"></p-avatar>
+              <p-avatar  image="assets/img/baby-yoda.png" size="xlarge"  severity="danger"></p-avatar> 
             </ng-template>
           </div>
 
@@ -60,9 +63,10 @@
           <ul class="developer-skills d-inline" *ngFor="let technologies of developer.preferences.slice(0,3); let i = index">
             <li class="text-center">
               <div *ngIf="i < 3" class="d-flex flex-column w-100 h-100 justify-content-center align-items-center">
-                <p-avatar image="assets/img/C-3po.png" *ngIf="i == 0"></p-avatar>
-                <p-avatar image="assets/img/Darth-Vader.png" *ngIf="i == 1"></p-avatar>
-                <p-avatar image="assets/img/Yoda.png" *ngIf="i == 2"></p-avatar>
+                <p-avatar image="assets/img/stormtrooper.png" pTooltip="Nivel Trainee" *ngIf="i == 0"></p-avatar>
+                <!-- <p-avatar image="assets/img/chewbacca.png" pTooltip="Nivel Junior" *ngIf="i == 0"></p-avatar> -->
+                <p-avatar image="assets/img/darth-vader.png" pTooltip="Nivel Semi Senior" *ngIf="i == 1"></p-avatar>
+                <p-avatar image="assets/img/baby-yoda.png" pTooltip="Nivel Senior" *ngIf="i == 2"></p-avatar>
                 {{technologies}}
               </div>
             </li>

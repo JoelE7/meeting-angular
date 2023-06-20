@@ -9,11 +9,11 @@
 
   <div class="container card p-3 mb-2 shadow-sm">
     <!-- seccion titulo mas boton -->
-    <div class="row d-flex mt-3">
-      <div class="col-sm-6 col-md-9 col-lg-9">
-        <h3 id="titlePosts" class="p-0">Posteos</h3>
+    <div class="row" id="tit">
+      <div class="col-sm-6 col-md-9 col-lg-9 col-xl-9">
+        <h3 id="titlePosts" class="ps-3 ps-sm-3">Posteos</h3>
       </div>
-      <div class="col-sm-6 col-md-3 col-lg-3">
+      <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 mb-md-0 mb-4 pe-4 pe-sm-4 px-md-4">
         <p-button *ngIf="currentUser" type="button" [style]="{ width: '100%' }" label="Crear post"
           class="float-end ml-5" id="btnPost" styleClass="p-button-help" routerLink="/post/create"></p-button>
       </div>
@@ -22,15 +22,15 @@
     <!----------------- COMPONENTE FILTRO-------------------->
     <div class="container">
       <div class="row">
-        <div class="col-sm-12 col-md-4 col-lg-4 mb-sm-4 ">
+        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-sm-4 ">
           <div class="" id="filtro">
-            <h2>Filtros</h2>
+            <h3 class="p-0 m-0">Filtros</h3>
             <app-filters [filters]="filters"></app-filters>
             <p-button type="button" [style]="{ width: '100%' }" label="Filtrar" class="float-center mt-3 d-block"
               styleClass="p-button-help" icon="pi pi-search" (click)="getFilters()"></p-button>
           </div>
         </div>
-        <div class="col-sm-12 col-md-8 col-lg-8">
+        <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
           <!-- componente de card -->
           <app-card-post *ngFor="let post of listPost" [post]="post"></app-card-post>
           <!-- paginador  -->
