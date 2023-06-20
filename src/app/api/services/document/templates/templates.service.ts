@@ -23,7 +23,7 @@ export class TemplatesService {
       <div class="container">
         <div id="htmlData" class="row">
           <div class="d-flex text-center" style="padding: 30px 100px 20px 100px">      
-            <img src="assets/Logo_final.jpg" alt="" width="70" height="100" />
+            <img src="https://github.com/JoelE7/meeting-angular/blob/desa/src/assets/img/logo-final.png?raw=true" alt="" width="70" height="100" />
             <p
               class="fw-bold d-flex justify-content-end align-items-end"
               style="margin-bottom: 3px !important"

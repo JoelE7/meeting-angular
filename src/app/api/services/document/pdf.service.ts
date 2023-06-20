@@ -13,21 +13,23 @@ export class PdfService {
 
   downloadCertificate(html:any) {
     let headers = new HttpHeaders({
-      "Content-Type": "text/html",
+      // 'Content-Type': 'application/json',
     });
-    headers = headers.append(
-      "Authorization",
-      "Bearer " + localStorage.getItem("token")
-    );
+    // headers = headers.append(
+    //   "Authorization",
+    //   "Bearer " + localStorage.getItem("token")
+    // );
 
     return this.http
       .post(
-        `${environment.apiUrl}/generar-pdf`,
-        html,
+        `${environment.apiUrl}/projects/download`,
+        {html},
         { headers: headers, responseType: "blob" }
       )
       .pipe(
         map((res: any) => {
+          console.log(res);
+          
           return res;
         })
       );

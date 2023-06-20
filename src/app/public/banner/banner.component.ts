@@ -1,5 +1,9 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { PdfService } from 'src/app/api/services/document/pdf.service';
+import { TemplatesService } from 'src/app/api/services/document/templates/templates.service';
 import { Project } from 'src/app/shared/models/project/project.class';
+import { User } from 'src/app/shared/models/user/user.class';
 
 @Component({
   selector: 'app-banner',
@@ -8,6 +12,12 @@ import { Project } from 'src/app/shared/models/project/project.class';
   encapsulation: ViewEncapsulation.None,
 })
 export class BannerComponent {
+
+  currentUser: User =
+  localStorage.getItem('user') != 'undefined'
+    ? JSON.parse(localStorage.getItem('user'))
+    : undefined;
+
   @Input()
   title: string = ' ';
 
@@ -25,4 +35,29 @@ export class BannerComponent {
 
   @Input()
   project:Project;
+
+  constructor(private templateService:TemplatesService,private pdfService:PdfService,private messageService:MessageService){
+
+  }
+
+  generatePdf(){ 
+    this.pdfService.downloadCertificate(this.templateService.downloadCertificate(this.project,this.currentUser)).subscribe({
+      next : (data)=>{
+        let dowload = URL.createObjectURL(data);
+        var link = document.createElement("a");
+        link.href = dowload;
+        link.download = `Certificado proyecto - ${this.project.name}`;
+        link.click();
+      },
+      error : (err)=>{
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+        });
+      }
+    })
+
+  }
+
 }

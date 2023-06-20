@@ -202,8 +202,6 @@ export class ListProjectComponent implements OnInit {
   getProjects() {
     this.projectService.getAllProjects(this.query, this.paginate,this.currentUser, this.searchProjectCurrentUser).subscribe(
       (data) => {
-        console.log(data);
-        
         this.listProject = data.results;
         this.totalRecords = data.count;
         this.spinner = false;

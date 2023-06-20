@@ -18,7 +18,8 @@ export const mockProjectDetails: Project = {
   posts : [],
   supports : [],
   urlRepository : "",
-  validateSystem : false
+  validateSystem : false,
+  requests : []
 };
 
 export const mockGetAllProjects: any =  {"results" : [new Project(), new Project(), new Project()],"count" : 3};
