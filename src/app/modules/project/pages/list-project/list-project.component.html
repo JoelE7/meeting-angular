@@ -7,31 +7,32 @@
 </div>
 
 <div class="m-auto projects">
-  <div class="container row standingOut shadow-sm" style="margin: 10px 0px;" *ngIf="!spinnerSuggestion && suggestionsProject.length > 0">
+  <div class="container row standingOut shadow-sm" style="margin: 10px 0px;"
+    *ngIf="!spinnerSuggestion && suggestionsProject.length > 0">
     <div class="col-12 col-sm-12 col-md-12 col-lg-12">
       <app-suggestions-project *ngIf="suggestionsProject" [suggestions]="suggestionsProject"></app-suggestions-project>
     </div>
   </div>
   <div class="container p-3 mb-2 d-flex flex-column standingOut shadow-sm " *ngIf="!spinner">
     <div class="card p-3 mb-2">
-      <!-- seccion titulo mas boton -->
-      <div class="row" id="titProy">
-        <div class="col-sm-6 col-md-8 col-lg-9 col-xl-9  ps-md-5 ps-lg-5 ps-xl-5">
-          <h3 id="titleP" class="ps-3 ps-sm-3 ">Proyectos</h3>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-md-0 mb-4 pe-4 ">
-          <p-button type="button" [style]="{ width: '100%' }" label="Crear Proyecto" class=" ml-5 float-end"
-            styleClass=" p-button-help" routerLink="/project/create" *ngIf="currentUser"></p-button>
-        </div>
-      </div>
-      <!----------------- COMPONENTE FILTRO-------------------->
       <div class="container">
+          <!-- seccion titulo mas boton -->
+        <div class="row" id="">
+          <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4 m-0 p-0"></div>
+          <div class="col-12 col-sm-12 col-md-7 col-lg-8 col-xl-8 m-0">
+            <h3 id="" class="d-inline">Proyectos</h3>
+            <p-button type="button" [style]="{ width: '100%' }" label="Crear Proyecto" class=" ml-5 float-end"
+            styleClass=" p-button-help" routerLink="/project/create" *ngIf="currentUser"></p-button>
+          </div>
+        </div>
+      <!----------------- COMPONENTE FILTRO-------------------->
+
         <div class="row p-0">
           <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-4">
             <div id="filtro">
               <div class="row">
-                <div class="col-5 col-sm-6 col-md-6 col-lg-6 col-xl-6 mb-sm-4">
-                  <h3 class="p-0 m-0">Filtros</h3>
+                <div class="col-5 col-sm-6 col-md-6 col-lg-6 col-xl-6 mb-sm-4 p-0">
+                  <h3 class="">Filtros</h3>
                 </div>
                 <div class="col-7 col-sm-6 col-md-6 col-lg-6 col-xl-6 mt-sm-2 mt-md-2 mb-2 text-end">
                   <p-checkbox *ngIf="currentUser" label="Mis proyectos" [(ngModel)]="searchProjectCurrentUser"
@@ -51,7 +52,7 @@
           </div>
           <ng-template #noFound class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
             <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
-            <p-messages [(value)]="messages" [enableService]="false" [closable]="true"></p-messages>
+              <p-messages [(value)]="messages" [enableService]="false" [closable]="true"></p-messages>
             </div>
           </ng-template>
         </div>

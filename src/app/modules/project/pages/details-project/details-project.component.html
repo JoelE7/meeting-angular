@@ -29,15 +29,8 @@
         searchProject.name }}</a></span>
     <div class="card shadow-sm" style="width: 100%; min-height: 700px">
       <app-banner [title]="searchProject.name" [subtitle]="'Aplicacion ' + searchProject.type" [short]="true"
-        [roleUser]="searchProject.roleUser" [project]="searchProject" [updateProject]="searchProject.leader._id === currentUser._id ? true : false"> 
+        [roleUser]="searchProject.roleUser" [project]="searchProject" [updateProject]="searchProject.leader._id === currentUser?._id ? true : false"> 
       </app-banner>
-
-
-                  <!-- <p-button class="ms-2" type="button" styleClass="p-button-outlined p-button-help"
-              label="Actualizar Proyecto" *ngIf="
-                currentUser &&
-                searchProject?.leader?._id === currentUser._id 
-              " [style]="{ heigth: '30px !important' }" routerLink="/project/update/{{searchProject._id}}"></p-button> -->
       <p-tabView class="p-3" [scrollable]="true" [(activeIndex)]="activeIndex">
         <p-tabPanel [cache]="false" header="Datos del proyecto">
           <div class="row">
@@ -230,7 +223,7 @@
             </div>
           </div>
         </p-tabPanel>
-        <p-tabPanel header="Solicitudes" *ngIf="searchProject.leader._id === currentUser._id">
+        <p-tabPanel header="Solicitudes" *ngIf="searchProject.leader._id === currentUser?._id">
           <div class="row" *ngIf="searchProject.requests.length > 0;else notRequest">
             <div class="col">
               <app-request-member (eventEmitterUserRequest)="userRequestResponsesLeader($event)"
@@ -287,7 +280,7 @@
           <div class="col-12 col-lg-6">
             <p-button class="" (click)="
             leaveProjectConfirm()" type="button" styleClass="p-button-outlined p-button-help"
-              label="Abandonar proyecto" *ngIf="this.searchProject.leader._id != currentUser._id && userExistProject"
+              label="Abandonar proyecto" *ngIf="this.searchProject.leader._id != currentUser?._id && userExistProject"
               [style]="{ heigth: '30px !important' }"></p-button>
           </div>
         </div>

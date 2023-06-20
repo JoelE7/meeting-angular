@@ -3,19 +3,11 @@
   <div class="row p-0">
     <div class="offset-0 col-sm-12 col-md-10 offset-md-1">
       <label for="title" class="color">*Titulo </label>
-      <input
-        type="text"
-        pInputText
-        formControlName="title"
-        class="form-control borderInput"
-        placeholder="Ingrese titulo "
-      />
-      <span
-        class="danger"
-        *ngIf="
+      <input type="text" pInputText formControlName="title" class="form-control borderInput"
+        placeholder="Ingrese titulo " />
+      <span class="danger" *ngIf="
           form.get('title').hasError('required') && form.get('title').touched
-        "
-      >
+        ">
         <small class="p-error">Este campo es <strong>requerido</strong></small>
       </span>
     </div>
@@ -27,89 +19,81 @@
       <label for="body" class="color mt-3">*Descripción </label>
       <!-- componente textare de  -->
       <div class="editor pb-5 ">
-        <p-editor formControlName="body"></p-editor>
+        <p-editor (onTextChange)="textChange($event)"
+          formControlName="body">
+          <!-- <ng-template pTemplate="header">
+            <span class="ql-formats">
+              <button (click)="changeModeCodeBlock()" type="button" class="ql-code-block" pTooltip="Escribir código" aria-label="Insert Code Block"></button>
+            </span>
+          </ng-template> -->
+        </p-editor>
+
+
+
       </div>
-      <span
-        class="danger"
-        *ngIf="
+      <span class="danger" *ngIf="
           form.get('body').hasError('required') && form.get('body').touched
-        "
-      >
-        <small class="p-error"
-          >Debe agregar una <strong>descripción</strong></small
-        >
+        ">
+        <small class="p-error">Debe agregar una <strong>descripción</strong></small>
       </span>
-      <span
-        class="danger"
-        *ngIf="
+      <span class="danger" *ngIf="
           form.get('body').hasError('minlength') && form.get('body').touched
-        "
-      >
-        <small class="p-error"
-          >Debe agregar minimo <strong>10</strong> caracteres</small
-        >
+        ">
+        <small class="p-error">Debe agregar minimo <strong>10</strong> caracteres</small>
       </span>
     </div>
   </div>
+  <!-- <div class="row">
+    <div id="inner">
+
+    </div>
+    <div class="offset-0 col-sm-12 col-md-10 offset-md-1">
+      <label for="body" class="color mt-3">*Descripción </label>
+      <p-editor (onTextChange)="textChange($event)"
+      [(ngModel)]="editor">
+
+    </p-editor>
+    </div>
+  </div> -->
   <!-- type -->
-  <div class="row  p-0">
+  <div class="row mt-5  p-0">
     <div class="offset-0 col-sm-12 col-md-5 offset-md-1">
       <label for="project" class="color mt-3">*Asignar a un proyecto (Opcional)</label>
-       <!-- ADAPTAR ESTE DESPLEGABLE PARA QUE TRAIGA LOS PROYECTOS OPCIONAL TMB POR SI ES UN POST SIN COLABORAR A UN DETERMINADO PROYECTO -->
-      <p-dropdown
-        [style]="{ width: '100%' }"
-        formControlName="project"
-        placeholder="Seleccione una opción..."
-        [options]="user.projects"
-        optionLabel="name"
-      >
+      <!-- ADAPTAR ESTE DESPLEGABLE PARA QUE TRAIGA LOS PROYECTOS OPCIONAL TMB POR SI ES UN POST SIN COLABORAR A UN DETERMINADO PROYECTO -->
+      <p-dropdown [style]="{ width: '100%' }" formControlName="project" placeholder="Seleccione una opción..."
+        [options]="user.projects" optionLabel="name">
         <ng-template let-option pTemplate="item">
           <span [class]="'project-' + option.value">
             {{ option.name }}
           </span>
         </ng-template>
-      </p-dropdown>       
+      </p-dropdown>
     </div>
-     
+
     <!-- TECNOLOGIAS -->
     <div class="offset-0 col-sm-12 col-md-5">
       <label for="name" class="color mt-3 ">*Tecnología </label>
-      <p-multiSelect
-        [style]="{ width: '100%' }"
-        formControlName="technologies"
-        placeholder="Seleccione una opción..."
-        [options]="technologies"
-        optionValue="value"
-        optionLabel="label"
-      >
+      <p-multiSelect [style]="{ width: '100%' }" formControlName="technologies" placeholder="Seleccione una opción..."
+        [options]="technologies" optionValue="value" optionLabel="label">
         <ng-template let-option pTemplate="item">
           <span [class]="'technologies-' + option.value">
             {{ option.label }}
           </span>
-        </ng-template>          
+        </ng-template>
       </p-multiSelect>
-      <span
-        class="danger"
-        *ngIf="
+      <span class="danger" *ngIf="
           form.get('technologies').hasError('required') && form.get('technologies').touched
-        "
-      >
+        ">
         <small class="p-error">Este campo es <strong>requerido</strong></small>
-      </span> 
+      </span>
     </div>
   </div>
-      <!-- TECNOLOGIAS -->
+  <!-- TECNOLOGIAS -->
 
-    
+
   <div class="text-center p-4">
-    <p-button
-      [disabled]="form.invalid"
-      type="submit"
-      [style]="{ width: '100%' }"
-      label="Crear"
-      class="text-center"
-      styleClass="p-button-help"
-    ></p-button>
+    <p-button [disabled]="form.invalid" type="submit" [style]="{ width: '100%' }" label="Crear" class="text-center"
+      styleClass="p-button-help"></p-button>
   </div>
 </form>
 

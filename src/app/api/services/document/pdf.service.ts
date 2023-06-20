@@ -12,13 +12,11 @@ export class PdfService {
 
 
   downloadCertificate(html:any) {
-    let headers = new HttpHeaders({
-      // 'Content-Type': 'application/json',
-    });
-    // headers = headers.append(
-    //   "Authorization",
-    //   "Bearer " + localStorage.getItem("token")
-    // );
+    let headers = new HttpHeaders();
+    headers = headers.append(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('token')
+    );
 
     return this.http
       .post(

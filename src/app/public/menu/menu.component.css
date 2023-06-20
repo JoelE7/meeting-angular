@@ -2,6 +2,10 @@ p-menubarsub {
   margin-left: auto;
 }
 
+.w-88{
+  width: 86% !important;
+}
+
 
 .nav-background{
   background: rgba(255, 255, 255, 0.535) !important;

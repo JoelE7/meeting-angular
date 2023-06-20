@@ -39,7 +39,10 @@
           <h3 class="titulo">
             {{ searchPost.title }}
           </h3>
-          <p class="">{{ searchPost.body }}</p>
+          <p-editor class="" [(ngModel)]="searchPost.body" [readonly]="true">
+            <ng-template pTemplate="header">
+            </ng-template>
+          </p-editor>
 
           <div _ngcontent-bug-c114="" class="row mt-3 fs">
             <div class="col-6">

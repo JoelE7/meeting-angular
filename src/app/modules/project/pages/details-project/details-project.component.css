@@ -11,16 +11,12 @@
   /* left: 0; */
 }
 
-.banner-profile{
+.banner-details{
   background-image: url('src/assets/img/Banner5.png') !important;
   background-size: cover;
   width: 100%;
   height: 200px;
   border-radius: 5px 5px 0px 0px;
-}
-.banner {
-  background-image: url('src/assets/img/Banner5.png');
-  background-position: 50% 50%;
 }
 
 #profile{

@@ -41,7 +41,7 @@ export class BannerComponent {
   }
 
   generatePdf(){ 
-    this.pdfService.downloadCertificate(this.templateService.downloadCertificate(this.project,this.currentUser)).subscribe({
+    this.pdfService.downloadCertificate(this.templateService.downloadCertificate(this.project,this.currentUser,this.selectPdfAccordingToRole())).subscribe({
       next : (data)=>{
         let dowload = URL.createObjectURL(data);
         var link = document.createElement("a");
@@ -57,7 +57,30 @@ export class BannerComponent {
         });
       }
     })
-
   }
+
+  selectPdfAccordingToRole(){
+    let rol = "";
+    switch (this.roleUser) {
+      case "leader":
+        rol = "Lider"
+        break;
+      case "participant":
+        rol = "Participante"
+        break;
+      case "support":
+        rol = "Soporte"
+        break;
+      default:
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Ups! ocurrio un error',
+        });
+        break;
+    }
+    return rol;
+  }
+
 
 }

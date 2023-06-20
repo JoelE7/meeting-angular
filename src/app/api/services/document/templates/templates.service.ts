@@ -8,7 +8,8 @@ import { User } from 'src/app/shared/models/user/user.class';
 export class TemplatesService {
   constructor() {}
 
-  downloadCertificate(project: Project, user: User) {
+  downloadCertificate(project: Project, user: User,rol:string) {
+    
     let html = `
     <!DOCTYPE html>
     <html lang="es">
@@ -52,13 +53,13 @@ export class TemplatesService {
             </p>
           </div>
           <div class="col-12 col-md-12 col-md-12 col-lg-12 text-center">
-            <img src="assets/medalla.jpg" alt="" width="70" height="100" />
+            <img src="https://github.com/JoelE7/meeting-angular/blob/desa/src/assets/img/medalla.jpg?raw=true" alt="" width="70" height="100" />
           </div>
                                     <!-- seccion firma -->
           <div class="container">
             <div class="d-flex align-items-end flex-column my-5">
               <div class="mb-auto p-0 text-center">
-                  <img src="assets/img/firma2.jpg" alt="" width="150" height="100" />
+                  <img src="https://github.com/JoelE7/meeting-angular/blob/desa/src/assets/img/firma2.jpg?raw=true" alt="" width="150" height="100" />
               </div>
               <div
                   class="border-dark border-3 border-top mb-5 w-25 text-center"
@@ -85,4 +86,5 @@ export class TemplatesService {
     // `;
     return html;
   }
+
 }
