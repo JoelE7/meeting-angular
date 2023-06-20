@@ -8,9 +8,9 @@
   <ng-template let-technologie pTemplate="item" let-rowIndex="rowIndex">
     <div class="item-technologie m-2 text-center py-5 px-3">
       <div>
-        <p-avatar image="assets/img/C-3po.png" *ngIf="technologie.length <= 2"></p-avatar>
-        <p-avatar image="assets/img/Darth-Vader.png" *ngIf="technologie.length > 2 && technologie.length < 4"></p-avatar>
-        <p-avatar image="assets/img/Yoda.png" *ngIf="technologie.length >= 4"></p-avatar>
+        <p-avatar image="assets/img/stormtrooper.png" pTooltip="Nivel Trainee" *ngIf="technologie.length <= 2"></p-avatar>
+        <p-avatar image="assets/img/darth-vader.png" pTooltip="Nivel Semi Senior" *ngIf="technologie.length > 2 && technologie.length < 4"></p-avatar>
+        <p-avatar image="assets/img/baby-yoda.png" pTooltip="Nivel Senior" *ngIf="technologie.length >= 4"></p-avatar>
         <h6 class="mt-0 mb-3">{{ technologie }}</h6>
         <!-- <i class="{{technologie.icon}}"></i>  -->
         <!-- <h4 class="mb-1">{{ technologie.level }}</h4> -->
