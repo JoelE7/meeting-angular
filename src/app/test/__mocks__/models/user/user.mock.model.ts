@@ -14,5 +14,8 @@ export const userMock: User = {
   score: 10,
   skills: [],
   password: '1234',
-  level:'level'
+  level:'level',
+  random:1
+
+
 };
