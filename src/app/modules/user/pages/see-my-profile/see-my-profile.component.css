@@ -47,6 +47,10 @@ canvas {
   font-weight: 700;
 }
 
+.p-button-danger  {
+  background-color:#fca326 !important;
+  border: 1px solid #fca326 !important;
+ }
 .link a {
   color: #c42e6c !important;
 }

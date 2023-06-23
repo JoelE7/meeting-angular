@@ -11,7 +11,9 @@
       <a href="" class="text-secondary" routerLink="/project/list-project">Volver</a></span>
     <div class="card shadow-sm" style="width: 100%; min-height: 800px">
       <div class="d-flex banner-profile">
-        <img src="assets/img/no-user.jpg" alt="Foto de usuario" id="profile" class="img-fluid" />
+        <img src="https://bootdey.com/img/Content/avatar/avatar{{currentUser.random}}.png" alt="Foto de usuario" id="profile" class="img-fluid" />
+        
+        <!-- <img src="assets/img/no-user.jpg" alt="Foto de usuario" id="profile" class="img-fluid" /> -->
         <div class="infoName">
           <h3 class="text-light" style="text-shadow: 1px 1px 1px #000;">{{ searchUser.name }}</h3>
           <h6 class="fst-italic text-dark">
@@ -46,31 +48,29 @@
               </p>
             </div>
           </div>
-          <p-button class="" routerLink="/user/update/{{searchUser._id}}" icon="pi pi-file-edit" type="button" [style]="{ width: '100%' }" label="Editar"
+          <p-button class="mb-3" routerLink="/user/update/{{searchUser._id}}" icon="pi pi-file-edit" type="button" [style]="{ width: '100%' }" label="Editar"
             styleClass="p-button-help"></p-button>
           <div class="" *ngIf="!searchUser.githubUsername &&
           searchUser._id == currentUser?._id || !searchUser.gitlabUsername &&
           searchUser._id == currentUser?._id
           ">
             <div>
-              <div class="row mt-3">
-                <div class="col-12">
-                  <p>
-                    Al vincular el proyecto a github/gitlab tendrás acceso a métricas y a las actividades de los
-                    integrantes.
-                  </p>
-                </div>
-                <div class="col-3" *ngIf="!visibleInputGithub && !searchUser.githubUsername &&
+              <div class="row">              
+                <div class="col-12 col-sm-12 col-dm-4 col-lg-4 col-xl-3 mb-3 mb-sm-3" *ngIf="!visibleInputGithub && !searchUser.githubUsername &&
                 searchUser._id == currentUser?._id">
                   <p-button type="button" iconPos="right" icon="bi bi-github" [style]="{ width: '100%' }"
                     label="Vincular con github" class="github" styleClass="p-button-secondary"
                     (click)="linkInputUserWithGithub()"></p-button>
                 </div>
-                <div class="col-3" *ngIf="!visibleInputGitlab">
+                <div class="col-12 col-sm-12 col-dm-8 col-lg-8 col-xl-9 " *ngIf="!visibleInputGitlab">
                   <p-button type="button" iconPos="right" icon="fa-brands fa-square-gitlab" [style]="{ width: '100%' }"
-                    label="Vincular con gitlab" class="github" styleClass="p-button-secondary"
+                    label="Vincular con gitlab" class="github" styleClass="p-button-danger"
                     (click)="linkInputUserWithGitlab()"></p-button>
                 </div>
+                <p class="mt-3">
+                  <strong>Al vincular el proyecto a github/gitlab tendrás acceso a métricas y a las actividades de los
+                    integrantes.</strong>
+                </p>
               </div>
               <div class="row mt-3" *ngIf="visibleInputGithub">
                 <div class="col-6">
