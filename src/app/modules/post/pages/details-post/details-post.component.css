@@ -10,9 +10,8 @@
 
 .postBackground .container span a {
   text-decoration: none;
-  /* margin-left: 95px;  */
 }
-.postBackground span a:hover {
+.postBackground .container span a:hover {
   font-weight: 700;
 }
 .borderInput:hover {
@@ -39,17 +38,4 @@ p-chip img {
 
 .fs{
   font-size: .875em;
-}
-
-/* hasta 767 sea mayor a 767px */
-@media (min-width: 767px) {
-  #btnBack {
-    margin: auto;  
-  }
-}
-
-@media (min-width: 960px) {
-  #btnBack {
-    margin: auto;  
-  }
 }

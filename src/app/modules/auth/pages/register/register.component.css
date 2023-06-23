@@ -18,20 +18,34 @@
 .p-card-body{
   padding-top: 0px !important;
 }
+
 .borderInput:hover{
   border: 1px solid #ad2c73 !important;
 }
-
+.p-inputtext:enabled:focus{
+   outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 0.2rem #f1bcd173;
+    border-color: #c42e6c!important;
+}
 .p-dropdown:not(.p-disabled):hover {
+  border: 1px solid #ad2c73 !important;
+}
+.p-dropdown:enabled:focus{
+  outline: 0 none;
+   outline-offset: 0;
+   box-shadow: 0 0 0 0.2rem #f1bcd173;
+   border-color: #c42e6c!important;
+}
+.p-multiselect:not(.p-disabled):hover {
   border: 1px solid #ad2c73 !important;
 }
 .link a{
   color: #c42e6c !important;
 }
 
-/* .p-inputtext:enabled:hover {
-  border-color: #c42e6c!important;
-} */
+
+  
 
 /* hasta 767px sea menor a 767px */
  @media (max-width: 767px) {

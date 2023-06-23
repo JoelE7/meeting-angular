@@ -18,4 +18,6 @@ export class User {
   gitlabUsername?:string;
   level:string;
   mailEnabled?:boolean;
+  random?:any;
+
 }

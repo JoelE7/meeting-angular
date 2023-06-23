@@ -46,6 +46,8 @@ export class SeeMyProfileComponent {
 
   messages:Message[] = []
 
+  random: number=0;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
@@ -81,6 +83,12 @@ export class SeeMyProfileComponent {
     this.messages = [
       { severity: 'info', detail: 'No se encontraron proyectos' }
     ];
+// seccion random
+      while(this.random == 0||this.random == 3){
+      this.random =Math.floor(Math.random() * 8);
+    }
+    this.currentUser["random"]=this.random;
+  
   }
 
   async getDetailsUser(id: any) {

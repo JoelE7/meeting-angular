@@ -8,8 +8,7 @@ import { User } from 'src/app/shared/models/user/user.class';
 export class TemplatesService {
   constructor() {}
 
-  downloadCertificate(project: Project, user: User,rol:string) {
-    
+  downloadCertificate(project: Project, user: User, rol: string) {
     let html = `
     <!DOCTYPE html>
     <html lang="es">
@@ -19,21 +18,49 @@ export class TemplatesService {
       <title>Certificado ${project.name}</title>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+      crossorigin="anonymous"></script>
     </head>
     <body>
+    <style>
+    .logo{
+      display: flex;
+      align-items: center;
+      padding: 30px 100px 20px 100px;
+    }
+    .fuente{
+      font-weight: bold;
+      justify-content: end;
+      align-items: end;
+      margin-bottom: 3px !important
+    }
+    h1{
+      font-size: 75px;
+      text-align: center;
+      padding: 50px 0";
+    }
+    img{
+      text-align: center;
+    }
+    #line{
+      padding: 50px 0";
+      border-top:2px solid #000;
+     
+    }
+</style>
       <div class="container">
         <div id="htmlData" class="row">
-          <div class="d-flex text-center" style="padding: 30px 100px 20px 100px">      
+          <div class="logo text-center ">      
             <img src="https://github.com/JoelE7/meeting-angular/blob/desa/src/assets/img/logo-final.png?raw=true" alt="" width="70" height="100" />
             <p
-              class="fw-bold d-flex justify-content-end align-items-end"
-              style="margin-bottom: 3px !important"
+              class="fuente"
             >
               M E E T I N G
             </p>
           </div>
             <h1
-            style="font-size: 75px; text-align: center; padding: 50px 0"
             class="h-25"
           >
             Certificado de Finalización
@@ -44,7 +71,7 @@ export class TemplatesService {
             <h2 class="text-center">${user.name}</h2>
       
             <p class="text-center">
-              por completar con éxito su proyecto
+              por completar con éxito como ${rol} su proyecto 
               <strong>"${project.name}"</strong> el dia 16 de junio de 2023.
             </p>
       
@@ -58,11 +85,9 @@ export class TemplatesService {
                                     <!-- seccion firma -->
           <div class="container">
             <div class="d-flex align-items-end flex-column my-5">
-              <div class="mb-auto p-0 text-center">
                   <img src="https://github.com/JoelE7/meeting-angular/blob/desa/src/assets/img/firma2.jpg?raw=true" alt="" width="150" height="100" />
-              </div>
               <div
-                  class="border-dark border-3 border-top mb-5 w-25 text-center"
+                  class="mb-5  w-25 text-center text-secondary"
                   id="line"
                 >
                   Ezequiel Sanson CEO de Meeting
@@ -82,9 +107,8 @@ export class TemplatesService {
     // }
 
     // html = `
-    
+
     // `;
     return html;
   }
-
 }
