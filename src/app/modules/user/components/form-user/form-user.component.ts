@@ -59,7 +59,7 @@ export class FormUserComponent {
 
   ngOnInit(): void {
     if (this.user._id != undefined) {
-      this.title = 'Actualizar usuario';
+      this.title = 'Actualizar perfil';
       this.overlay = true;
       setTimeout(async()=>{
         await new Promise((resolve,reject)=>{
@@ -94,11 +94,6 @@ export class FormUserComponent {
   startFrom() {
     this.form = new FormGroup({
       name: new FormControl(this.user.name, [Validators.required]),
-
-      email: new FormControl(this.user.email, [
-        Validators.required,
-        Validators.email,
-      ]),
       technologies: new FormControl(this.user.preferences ? this.user.preferences : [],[Validators.required]),
       profile: new FormControl(this.user.role ? this.user.role : "",[Validators.required]),
       github: new FormControl(this.user.githubUsername, []),
@@ -109,7 +104,6 @@ export class FormUserComponent {
 
   submitProject() {
     this.user.name = this.form.get('name').value;
-    this.user.email = this.form.get('email').value;
     this.user.preferences = this.form.get('technologies').value;
     this.user.role = this.form.get('profile').value;
     this.user.githubUsername = this.form.get('github').value;

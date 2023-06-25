@@ -17,6 +17,10 @@ import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
 import { RecommendationsPostModalComponent } from 'src/app/modules/project/shared/recommendations-post-modal/recommendations-post-modal.component';
 import { RecommendationsProjectModalComponent } from 'src/app/modules/project/shared/recommendations-project-modal/recommendations-project-modal.component';
 import { RecommendationsTechnologiesModalComponent } from 'src/app/modules/project/shared/recommendations-technologies-modal/recommendations-technologies-modal.component';
+import { QuestionPreferenceUser } from 'src/app/modules/project/interfaces/questionPreferenceUser.interface';
+import { UserService } from 'src/app/api/services/user/user.service';
+import { mockUserService, questionUserPost, questionUserProject } from 'src/app/test/__mocks__/services/user/user.service.mock';
+import { questionUserTechnologie } from '../../../../__mocks__/services/user/user.service.mock';
 
 describe('ListProjectComponentConLogin', () => {
   let component: ListProjectComponent;
@@ -33,7 +37,10 @@ describe('ListProjectComponentConLogin', () => {
         RecommendationsProjectModalComponent,
         RecommendationsTechnologiesModalComponent
       ],
-      providers: [MessageService,FilterService, { provide: ProjectService, useValue: mockProjectService },],
+      providers: [MessageService,FilterService,
+         { provide: ProjectService, useValue: mockProjectService }
+        ,{ provide : UserService, useValue : mockUserService}
+      ],
       imports: [
         SharedModule,
         PrimengModule,
@@ -48,8 +55,39 @@ describe('ListProjectComponentConLogin', () => {
     fixture.detectChanges();
 
     localStorage.setItem('user',JSON.stringify(userMock))
+    component.currentUser = userMock;
 
   });
+
+  it("al iniciar el componente con ngOnInit se active : getQuestion() : y que se devuelva la sugerencia de tipo proyecto",()=>{
+    component.currentUser = userMock;
+    const getRecommendationQuestionUser = spyOn(mockUserService, 'getRecommendationQuestionUser');
+    getRecommendationQuestionUser.and.returnValue(of<any>(questionUserProject));
+    component.ngOnInit();
+    expect(mockUserService.getRecommendationQuestionUser).toHaveBeenCalled();
+    component.spinner = false;
+    expect(component.recommendationsQuestionUser.result.results).toHaveSize(1)
+  })
+
+  it("al iniciar el componente con ngOnInit se active : getQuestion() : y que se devuelva la sugerencia de tipo post",()=>{
+    component.currentUser = userMock;
+    const getRecommendationQuestionUser = spyOn(mockUserService, 'getRecommendationQuestionUser');
+    getRecommendationQuestionUser.and.returnValue(of<any>(questionUserPost));
+    component.ngOnInit();
+    expect(mockUserService.getRecommendationQuestionUser).toHaveBeenCalled();
+    component.spinner = false;
+    expect(component.recommendationsQuestionUser.result.results).toHaveSize(2)
+  })
+
+  it("al iniciar el componente con ngOnInit se active : getQuestion() : y que se devuelva la sugerencia de tipo technologie",()=>{
+    component.currentUser = userMock;
+    const getRecommendationQuestionUser = spyOn(mockUserService, 'getRecommendationQuestionUser');
+    getRecommendationQuestionUser.and.returnValue(of<any>(questionUserTechnologie));
+    component.ngOnInit();
+    expect(mockUserService.getRecommendationQuestionUser).toHaveBeenCalled();
+    component.spinner = false;
+    expect(component.recommendationsQuestionUser.result.technologie).toEqual('React')
+  })
 
   afterEach(() => {
     localStorage.removeItem("user");

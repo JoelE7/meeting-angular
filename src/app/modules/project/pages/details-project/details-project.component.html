@@ -64,7 +64,7 @@
               <p><b>Tecnologías:</b></p>
               <ul>
                 <li *ngFor="let tecnologie of searchProject.technologies">
-                  {{ tecnologie }}
+                  <img pTooltip="{{tecnologie}}" class="mx-2 img-technologie" width="25px" height="25px" [src]="'assets/img/technologies/' + getIcon(tecnologie)" [alt]="tecnologie">
                 </li>
               </ul>
             </div>
@@ -253,7 +253,7 @@
         </p-tabPanel>
         <div class="row mt-3">
           <div class="col-12 btnInd">
-            <p-button class=" mb-3 mb-sm-3 me-sm-2 me-md-2" *ngIf="currentUser" type="button" styleClass="p-button-outlined p-button-help"
+            <p-button class=" mb-3 me-2 mb-sm-3 me-sm-2 me-md-2" *ngIf="currentUser" type="button" styleClass="p-button-outlined p-button-help"
               label="Sugerir Proyecto" [style]="{ heigth: '30px !important' }"
               (click)="invitationProjectPopUp()"></p-button>
             <p-button class=" me-sm-2 me-md-2" (click)="joinAProject()" *ngIf="searchProject.validateSystem && !userExistProject" type="button" [style]="{ width: '100%' }"
@@ -269,23 +269,17 @@
                 label="Abandonar proyecto" *ngIf="this.searchProject.leader._id != currentUser?._id && userExistProject"
                 [style]="{ heigth: '30px !important' }"></p-button>
           </div>
-          <!-- <div class="col-12">
+          <div class="col-12">
             <p-button class="btnInd  me-sm-2 me-md-2" (click)="
             sendRequestToJoinTheProject()" type="button" styleClass="p-button-outlined p-button-help"
               label="Enviar solicitud" *ngIf="!searchProject.validateSystem && !userExistSendRequest && !userExistProject"
               [style]="{ heigth: '30px !important' }"></p-button>
-          </div> -->
-          <!-- <div class="col-12 ">
+          </div>
+          <div class="col-12 ">
             <p-button class="btnInd me-sm-2 me-md-2" (click)="
             cancelRequestToJoinTheProject()" type="button" styleClass="p-button-outlined p-button-help"
               label="Cancelar solicitud" *ngIf="!searchProject.validateSystem && userExistSendRequest && !userExistProject"
               [style]="{ heigth: '30px !important' }"></p-button>
-          </div> -->
-          <div class="col-12 btnInd">
-            <!-- <p-button class="me-sm-2 me-md-2" (click)="
-            leaveProjectConfirm()" type="button" styleClass="p-button-help"
-              label="Abandonar proyecto" *ngIf="this.searchProject.leader._id != currentUser?._id && userExistProject"
-              [style]="{ heigth: '30px !important' }"></p-button> -->
           </div>
         </div>
       </p-tabView>

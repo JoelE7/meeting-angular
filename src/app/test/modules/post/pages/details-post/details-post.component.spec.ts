@@ -17,6 +17,10 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalContactComponent } from 'src/app/shared/components/modal-contact/modal-contact.component';
+import { UserService } from 'src/app/api/services/user/user.service';
+import { mockUserService } from 'src/app/test/__mocks__/services/user/user.service.mock';
+import { Mail } from '../../../../../shared/models/model-mail-contact/model-mail.interface';
+import { TechnologiesService } from 'src/app/api/services/data/technologies.service';
 
 describe('DetailsPostComponentConLogin', () => {
   let component: DetailsPostComponent;
@@ -27,7 +31,9 @@ describe('DetailsPostComponentConLogin', () => {
       declarations: [ DetailsPostComponent ,ModalSuggestComponent ],
       providers: [
         { provide: PostService, useValue: mockPostService },
+        { provide: UserService, useValue: mockUserService },
         MessageService,
+        TechnologiesService
       ],
       imports:[ PrimengModule,RouterTestingModule,HttpClientTestingModule,BrowserAnimationsModule],
       schemas : [CUSTOM_ELEMENTS_SCHEMA]
@@ -39,6 +45,7 @@ describe('DetailsPostComponentConLogin', () => {
     fixture.detectChanges();
 
     localStorage.setItem('user',JSON.stringify(userMock))
+    component.currentUser = userMock
 
   });
   
@@ -71,6 +78,37 @@ describe('DetailsPostComponentConLogin', () => {
     expect(isFormValidBeforeSubmit).toBeTruthy();
     expect(mockPostService.createMessage).toHaveBeenCalled();
   });
+
+  it("que se abra el modal showModalSuggest : showModalSuggest()", () => {
+    expect(component.visibleModalSuggest).toBeFalsy();
+    component.showModalSuggest();
+    expect(component.visibleModalSuggest).toBeTruthy()
+  });
+
+  it("que se abra el modal showModalContact : showModalContact()", () => {
+    expect(component.visibleModalContact).toBeFalsy();
+    component.showModalContact(new User());
+    expect(component.visibleModalContact).toBeTruthy()
+  });
+    
+  it("que se envíe el mail de contacto al usuario creador del post y se cierre el modal : sendMailContact()", () => {
+    const sendMailContact = spyOn(mockUserService, 'sendMailContact');
+    sendMailContact.and.returnValue(of<any>({}));
+    component.showModalContact(new User());
+    component.sendMailContact({email : "", message : "", user : userMock})
+    expect(mockUserService.sendMailContact).toHaveBeenCalled();
+    expect(component.visibleModalContact).toBeFalsy();
+  });
+
+  it("que se pueda compartir el post y se cierre el modal : sendMailSuggestPost()", () => {
+    const sendMailSuggestPost = spyOn(mockPostService, 'sendMailSuggestPost');
+    sendMailSuggestPost.and.returnValue(of<any>({}));
+    component.showModalSuggest();
+    component.sendMailSuggestPost({email : "", message : "", user : userMock})
+    expect(mockPostService.sendMailSuggestPost).toHaveBeenCalled();
+    expect(component.visibleModalSuggest).toBeFalsy();
+  });
+
 
 });
 

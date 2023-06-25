@@ -1,3 +1,4 @@
+import { ExperiencePostTechnologie } from 'src/app/modules/post/interfaces/experience-post.interface';
 import { Message } from '../message/message.interface';
 import { Project } from '../project/project.class';
 import { User } from '../user/user.class';
@@ -13,5 +14,6 @@ export class Post {
   technologies: string[];
   random:any;
   project?:any;
+  experience:ExperiencePostTechnologie[] = []
  
 }

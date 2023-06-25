@@ -11,6 +11,10 @@
   /* left: 0; */
 }
 
+.img-technologie{
+  filter: grayscale(100%);
+}
+
 .banner-details{
   background-image: url('src/assets/img/Banner5.png') !important;
   background-size: cover;

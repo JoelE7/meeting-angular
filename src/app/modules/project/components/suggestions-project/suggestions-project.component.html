@@ -11,7 +11,9 @@
           <p class="mt-1 mb-1 fst-italic"><b>Tipo: </b>{{ suggestion.type }}</p>
           <!-- boton necesita ayuda<p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)"></p-tag> -->
           <p class="mt-0 mb-1 fst-italic"><b>Lenguajes:</b></p>
-          <p class="mt-0 mb-1 fst-italic d-inline" *ngFor="let technologie of suggestion.technologies">{{ technologie}}</p>
+          <cite class="mt-0 mb-1 fst-italic d-inline" *ngFor="let technologie of suggestion.technologies">
+            <img pTooltip="{{technologie}}" class="mx-2 img-technologie" width="25px" height="25px" [src]="'assets/img/technologies/' + getIcon(technologie)" [alt]="technologie">
+          </cite>
           <p class="mt-0 mb-1 fst-italic"><b>Complejidad: </b>{{ suggestion.complexity }}</p>
 
           <div class="row">

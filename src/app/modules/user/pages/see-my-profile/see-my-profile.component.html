@@ -4,16 +4,22 @@
   <app-modal-invitation [userEmisor]="currentUser" [userReceptor]="userReceptor"
     (emitContact)="sendMailInvitation($event)"></app-modal-invitation>
 </p-dialog>
-<div class="profile">
+<div class="card text-center" *ngIf="spinner">
+  <span>
+    <p-progressSpinner></p-progressSpinner>
+  </span>
+  <br>
+  <span class="text-center">Cargando...</span>
+</div>
+<div class="profile" *ngIf="!spinner">
   <div class="container rounded">
     <span class="fst-italic text-secondary small">
       <i class="m-1 pi pi-arrow-circle-left"></i>
       <a href="" class="text-secondary" routerLink="/project/list-project">Volver</a></span>
     <div class="card shadow-sm" style="width: 100%; min-height: 800px">
       <div class="d-flex banner-profile">
-        <img src="https://bootdey.com/img/Content/avatar/avatar{{currentUser.random}}.png" alt="Foto de usuario" id="profile" class="img-fluid" />
-        
-        <!-- <img src="assets/img/no-user.jpg" alt="Foto de usuario" id="profile" class="img-fluid" /> -->
+        <img [src]="searchUser?.urlImage || 'assets/img/no-user.jpg'" alt="Foto de usuario" id="profile"
+          class="img-fluid" />
         <div class="infoName">
           <h3 class="text-light" style="text-shadow: 1px 1px 1px #000;">{{ searchUser.name }}</h3>
           <h6 class="fst-italic text-dark">
@@ -23,8 +29,11 @@
       </div>
       <p-tabView id="tableProfile" [scrollable]="true" class="p-3" [(activeIndex)]="activeIndex">
         <p-tabPanel header="Mi Perfil" id="tableHeader">
-          <h5>Preferencias:</h5>
-          <app-technologies [technologies]="searchUser.preferences"></app-technologies>
+          <h5>Tecnologías:</h5>
+          <div *ngIf="searchUser.technologies">
+            <app-technologies *ngIf="searchUser.technologies.length > 0"
+              [technologies]="searchUser.technologies"></app-technologies>
+          </div>
           <h5>Experiencia Laboral:</h5>
           <p>Mercado Libre</p>
           <p>Accenture</p>
@@ -48,14 +57,14 @@
               </p>
             </div>
           </div>
-          <p-button class="mb-3" routerLink="/user/update/{{searchUser._id}}" icon="pi pi-file-edit" type="button" [style]="{ width: '100%' }" label="Editar"
-            styleClass="p-button-help"></p-button>
+          <p-button *ngIf="currentUser?._id === searchUser?._id" class="mb-3" routerLink="/user/update/{{searchUser._id}}" icon="pi pi-file-edit" type="button"
+            [style]="{ width: '100%' }" label="Editar" styleClass="p-button-help"></p-button>
           <div class="" *ngIf="!searchUser.githubUsername &&
           searchUser._id == currentUser?._id || !searchUser.gitlabUsername &&
           searchUser._id == currentUser?._id
           ">
             <div>
-              <div class="row">              
+              <div class="row">
                 <div class="col-12 col-sm-12 col-dm-4 col-lg-4 col-xl-3 mb-3 mb-sm-3" *ngIf="!visibleInputGithub && !searchUser.githubUsername &&
                 searchUser._id == currentUser?._id">
                   <p-button type="button" iconPos="right" icon="bi bi-github" [style]="{ width: '100%' }"
@@ -104,7 +113,8 @@
           <div class="row">
             <ng-template #notFound class="col-12">
               <div class="col-12">
-                <p-messages [style]="{ width: '100%' }" [(value)]="messages" [enableService]="false" [closable]="true"></p-messages>
+                <p-messages [style]="{ width: '100%' }" [(value)]="messages" [enableService]="false"
+                  [closable]="true"></p-messages>
               </div>
             </ng-template>
           </div>
@@ -119,21 +129,25 @@
           </div>
           <div *ngIf="!spinnerMetric">
             <div class="row mt-3">
-              <div class="border-right col-6" *ngIf="searchUser.githubUsername"
-                style="border-right: 1px solid #000 !important;">
+              <div [ngClass]="{'col-12': searchUser.githubUsername && !searchUser.gitlabUsername,
+                              'col-6 border-right'  : searchUser.githubUsername && searchUser.gitlabUsername}" class="border-right col-6"
+                *ngIf="searchUser.githubUsername" style="border-right: 1px solid #000 !important;">
                 <h3 class="text-center">Github</h3>
                 <app-chart-doughnut *ngIf="languagesUserGithub" [data]="languagesUserGithub"></app-chart-doughnut>
               </div>
-              <div class="col-6" *ngIf="searchUser.gitlabUsername">
+              <div [ngClass]="{'col-12': searchUser.githubUsername && !searchUser.gitlabUsername,
+              'col-6'  : searchUser.githubUsername && searchUser.gitlabUsername}"  *ngIf="searchUser.gitlabUsername">
                 <h3 class="text-center">Gitlab</h3>
                 <app-chart-doughnut *ngIf="languagesUserGitlab" [data]="languagesUserGitlab"></app-chart-doughnut>
               </div>
             </div>
             <div class="row mt-3">
-              <div class="col-6" *ngIf="searchUser.githubUsername" style="border-right: 1px solid #000 !important;">
+              <div [ngClass]="{'col-12': searchUser.githubUsername && !searchUser.gitlabUsername,
+              'col-6 border-right'  : searchUser.githubUsername && searchUser.gitlabUsername}"  *ngIf="searchUser.githubUsername" style="border-right: 1px solid #000 !important;">
                 <app-chart-bar *ngIf="repositorysCommitsGithub" [data]="repositorysCommitsGithub"></app-chart-bar>
               </div>
-              <div class="col-6" *ngIf="searchUser.gitlabUsername">
+              <div [ngClass]="{'col-12': searchUser.githubUsername && !searchUser.gitlabUsername,
+              'col-6'  : searchUser.githubUsername && searchUser.gitlabUsername}"  *ngIf="searchUser.gitlabUsername">
                 <app-chart-bar *ngIf="repositorysCommitsGitlab" [data]="repositorysCommitsGitlab"></app-chart-bar>
               </div>
             </div>

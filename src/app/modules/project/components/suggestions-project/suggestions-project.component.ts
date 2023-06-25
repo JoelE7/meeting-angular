@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { TechnologiesService } from 'src/app/api/services/data/technologies.service';
 import { ProjectService } from 'src/app/api/services/project/project.service';
 import { Project } from 'src/app/shared/models/project/project.class';
 
@@ -16,7 +17,8 @@ export class SuggestionsProjectComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private technologiesService:TechnologiesService
   ) {}
 
   ngOnInit(): void {
@@ -27,4 +29,8 @@ export class SuggestionsProjectComponent implements OnInit {
     { breakpoint: '991px', numVisible: 2, numScroll: 1 },
     { breakpoint: '767px', numVisible: 1, numScroll: 1 },
   ];
+
+  getIcon(technologie:string){
+    return this.technologiesService.getIcon(technologie);
+  }
 }

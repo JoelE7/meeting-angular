@@ -8,6 +8,7 @@ import { MailSuggest } from 'src/app/shared/models/model-mail-suggest/model-mail
 import { Post } from 'src/app/shared/models/post/post.class';
 import { User } from 'src/app/shared/models/user/user.class';
 import { UserService } from 'src/app/api/services/user/user.service';
+import { TechnologiesService } from 'src/app/api/services/data/technologies.service';
 
 @Component({
   selector: 'app-details-post',
@@ -35,7 +36,8 @@ export class DetailsPostComponent {
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
     private postService: PostService,
-    private userService: UserService
+    private userService: UserService,
+    private technologiesService:TechnologiesService
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +47,10 @@ export class DetailsPostComponent {
     if (!this.currentUser) {
       this.form.get('comment').disable();
     }
+  }
+
+  getIcon(technologie:string){
+    return this.technologiesService.getIcon(technologie);
   }
 
   startFrom() {

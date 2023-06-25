@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { TechnologiesService } from 'src/app/api/services/data/technologies.service';
 import { Post } from 'src/app/shared/models/post/post.class';
 import { User } from 'src/app/shared/models/user/user.class';
 
@@ -13,14 +14,19 @@ export class CardPostComponent implements OnInit {
   post: Post= new Post();
 
   currentUser: User = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;
-  random: number=0;
+
+  constructor(
+    private technologiesService:TechnologiesService
+    ){
+    
+  }
 
   ngOnInit(): void {
-    while(this.random == 0||this.random == 3){
-      this.random =Math.floor(Math.random() * 8);
-
-    }
-    this.post["random"]=this.random;
 
   }
+
+  getIcon(technologie:string){
+    return this.technologiesService.getIcon(technologie);
+  }
+
 }

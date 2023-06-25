@@ -4,6 +4,7 @@ import { CardPostComponent } from '../../../../../modules/post/components/card-p
 import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
+import { TechnologiesService } from 'src/app/api/services/data/technologies.service';
 
 describe('CardPostComponentConLogin', () => {
   let component: CardPostComponent;
@@ -12,7 +13,7 @@ describe('CardPostComponentConLogin', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ CardPostComponent ],
-      providers:[],
+      providers:[TechnologiesService],
       imports:[ PrimengModule,RouterTestingModule],
     })
     .compileComponents();

@@ -16,6 +16,7 @@ import {
   CommitByUser,
 } from '../../interfaces/metricProject.interface';
 import { MailInvitation } from 'src/app/shared/models/model-mail-invitation/model-mail-invitation.interface';
+import { TechnologiesService } from 'src/app/api/services/data/technologies.service';
 
 @Component({
   selector: 'app-details-project',
@@ -58,20 +59,27 @@ export class DetailsProjectComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private technologiesService:TechnologiesService
   ) {}
 
-  async ngOnInit() {
+   ngOnInit() :void{
     let { id } = this.activatedRoute.snapshot.params;
     this.idParam = id;
-    await this.getDetailsProject(id);
+    this.getDetailsProject(id);
+    
     if (this.searchProject.urlRepository) {
       this.getMetricByProject();
     }
   }
 
+  getIcon(technologie:string){
+    return this.technologiesService.getIcon(technologie);
+  }
+
   async getDetailsProject(id: string) {
     this.searchProject = await this.projectService.detailsProjectAsync(id);
+    
     this.searchProject.roleUser =
       this.searchProject.leader?._id == this.currentUser?._id
         ? 'leader'

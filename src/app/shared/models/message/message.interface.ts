@@ -19,4 +19,5 @@ export interface Author {
   projects:    any[];
   score:       number;
   supporting:  string[];
+  urlImage: string;
 }

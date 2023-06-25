@@ -14,6 +14,8 @@ export class UpdateUserComponent implements OnInit{
 
   searchUser:User;
 
+  spinner = true;
+
   constructor(private userService:UserService, private activatedRoute:ActivatedRoute,
      private messageService:MessageService,private route:Router){
 
@@ -27,6 +29,7 @@ export class UpdateUserComponent implements OnInit{
 
   async getUser(id:string){
     this.searchUser = await this.userService.detailsUserAsync(id);
+    this.spinner = false;
   }
 
   updateUser(user:User){

@@ -6,6 +6,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MessageService } from 'primeng/api';
 import { DataService } from 'src/app/api/services/data/data.service';
+import { mockDataService, mockTechnologies } from 'src/app/test/__mocks__/services/data/data.service.mock';
+import { of } from 'rxjs';
 
 describe('FormPostComponent', () => {
   let component: FormPostComponent;
@@ -14,7 +16,7 @@ describe('FormPostComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ FormPostComponent ],
-      providers:[MessageService,DataService],
+      providers:[MessageService,{ provide: DataService, useValue: mockDataService }],
       imports:[ PrimengModule,HttpClientTestingModule,RouterTestingModule],
     })
     .compileComponents();
@@ -22,9 +24,23 @@ describe('FormPostComponent', () => {
     fixture = TestBed.createComponent(FormPostComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    const getTechnologies = spyOn(mockDataService, 'getTechnologies');
+    getTechnologies.and.returnValue(of<any[]>(mockTechnologies));
+
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('que se valide el formulario : form.invalid',()=>{
+    let form = component.form;
+    expect(form.invalid).toBeTruthy()
+    form.get('title').setValue("titulo")
+    form.get('body').setValue("10 caracteres minimo")
+    form.get('project').setValue("2421423as")
+    form.get('technologies').setValue(["Angular"])
+    expect(form.invalid).toBeFalsy()
+  })
 });

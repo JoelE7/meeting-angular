@@ -7,11 +7,11 @@
     "build": "ng build",
     "delete:docs": "del-cli -f docs",
     "build:href": "ng build --configuration development --base-href ./",
-    "copy:dist" : "copyfiles dist/meeting-frontend/* ./docs -f && copyfiles -u 2 dist/meeting-frontend/assets/** ./docs",
-    "build:github" : "npm run delete:docs && npm run build:href && npm run copy:dist",
+    "copy:dist": "copyfiles dist/meeting-frontend/* ./docs -f && copyfiles -u 2 dist/meeting-frontend/assets/** ./docs",
+    "build:github": "npm run delete:docs && npm run build:href && npm run copy:dist",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy" : "ng deploy --base-href=/meeting-angular/"
+    "deploy": "ng deploy --base-href=/meeting-angular/"
   },
   "private": true,
   "dependencies": {
@@ -28,6 +28,7 @@
     "chart.js": "^4.3.0",
     "copyfiles": "^2.4.1",
     "del-cli": "^5.0.0",
+    "netlify-cli": "^15.6.0",
     "primeicons": "^6.0.1",
     "primeng": "^15.4.1",
     "quill": "^1.3.7",

@@ -9,6 +9,7 @@ import { FilterService } from 'src/app/shared/filters/services/filter.service';
 import { User } from 'src/app/shared/models/user/user.class';
 import { Item } from 'src/app/shared/models/model-forms/item-form.interface';
 import { DataService } from 'src/app/api/services/data/data.service';
+import { TechnologiesService } from '../../../../api/services/data/technologies.service';
 
 @Component({
   selector: 'app-list-post',
@@ -55,12 +56,14 @@ export class ListPostComponent implements OnInit {
     private messageService: MessageService,
     private postService: PostService,
     private filtersService: FilterService,
-    private dataService: DataService
+    private dataService: DataService,
   ) {}
 
   ngOnInit(): void {
     this.getAllPosts();
   }
+
+
 
   getAllPosts() {
     this.postService.getAllPost(this.query, this.paginate).subscribe({

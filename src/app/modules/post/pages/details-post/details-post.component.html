@@ -25,12 +25,12 @@
       <a class="text-secondary" routerLink="/post/list-post">Volver</a></span
     >
   </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center m-0">
       <div class="col-sm-12 col-md-10 col-lg-6">
         <div class="card p-3">
           <p-chip
             label="{{ searchPost.author?.name }} ({{ searchPost.author?.level }})"
-            image="https://bootdey.com/img/Content/avatar/avatar2.png"
+            [image]="searchPost.author?.urlImage || 'assets/img/no-user.jpg'"
           ></p-chip>
 
           <small class="text-secondary"
@@ -45,13 +45,14 @@
           </p-editor>
 
           <div _ngcontent-bug-c114="" class="row mt-3 fs">
-            <div class="col-6">
+            <div class="col-6" *ngIf="searchPost.experience">
               <b _ngcontent-bug-c114="">- Tecnologías utilizadas:</b>
               <cite
-                *ngFor="let technologie of searchPost.technologies; let l = last"
+                *ngFor="let technologie of searchPost.experience; let l = last"
                 title="{{technologie}}"
               >
-                {{ technologie }} -</cite
+              <img pTooltip="{{technologie.nameTechnologie}} - {{technologie.experience}}" class="mx-2 img-technologie" width="25px" height="25px" [src]="'assets/img/technologies/' + getIcon(technologie.nameTechnologie)" [alt]="technologie">
+              </cite
               >
             </div>
             <div class="col-6 text-end" *ngIf="searchPost.project">
@@ -74,7 +75,7 @@
             >
               <p-chip
                 label="{{ message?.author?.name }}"
-                image="assets/img/no-user.jpg"
+                [image]="message.author?.urlImage || 'assets/img/no-user.jpg'"
               ></p-chip>
               <p>{{ message.message }}</p>
               <div class="text-end mb-2">
@@ -118,7 +119,7 @@
           <div class="card flex align-items-start p-3 flex-wrap">
             <p-chip
               label="{{ searchPost.author?.name }} ({{ searchPost.author?.level }}) "
-              image="https://bootdey.com/img/Content/avatar/avatar2.png"
+              [image]="searchPost.author?.urlImage || 'assets/img/no-user.jpg'"
             ></p-chip>
           </div>
           <p class="px-3">

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TechnologiesService } from 'src/app/api/services/data/technologies.service';
 import { CardProjectComponent } from 'src/app/modules/project/components/card-project/card-project.component';
 import { Project } from 'src/app/shared/models/project/project.class';
 import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
@@ -11,6 +12,7 @@ describe('CardProjectComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [CardProjectComponent],
+      providers : [TechnologiesService],
       imports: [PrimengModule, RouterTestingModule],
     }).compileComponents();
 
@@ -24,8 +26,6 @@ describe('CardProjectComponent', () => {
   });
 
   it('Verificar que el proyecto hijo llegue', () => {
-    cardProjectComponent = new CardProjectComponent();
-
     const project = new Project();
 
     expect(cardProjectComponent.project._id).toBe(undefined);

@@ -1,6 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="submitProject()" class="form">
   <div class="row mt-5 p-0">
-    <div class="offset-0 col-sm-12 col-md-5 offset-md-1">
+    <div class="offset-0 offset-md-1 col-sm-12 col-md-10">
       <label for="name" class="pl-5">Nombre </label>
       <input type="text" pInputText formControlName="name" class="form-control"
         placeholder="Ingrese nombre del usuario" />
@@ -10,28 +10,11 @@
         <small class="p-error">Este campo es <strong>requerido</strong></small>
       </span>
     </div>
-    <div class="offset-0 mt-3 col-12 mt-md-0 col-md-5 mt-md-0">
-      <label for="amountParticipants" class="pl-5">Email
-      </label>
-      <input pInputText type="email" formControlName="email" id="" class="form-control" />
-      <span class="danger" *ngIf="
-            form.get('email').hasError('required') &&
-            form.get('email').touched
-          ">
-        <small class="p-error">Este campo es <strong>requerido</strong></small>
-      </span>
-      <span class="danger" *ngIf="
-            form.get('email').hasError('email') &&
-            form.get('email').touched
-          ">
-        <small class="p-error">El email debe ser uno<strong>valido</strong></small>
-      </span>
-    </div>
   </div>
 
   <div class="row mt-3 p-0">
     <div class="offset-0 col-sm-12 col-md-5 offset-md-1">
-      <label for="complexity" class="pl-5">¿Qué tecnologías maneja tu proyecto? </label>
+      <label for="complexity" class="pl-5">¿Qué tecnologías son de tu preferencia? </label>
       <p-multiSelect [style]="{ width: '100%' }" formControlName="technologies" placeholder="Seleccione una opción..."
         [options]="technologies" defaultLabel="Seleccione una o varias" optionValue="value" optionLabel="label"
         display="chip" [overlayVisible]="overlay">
@@ -70,7 +53,7 @@
         placeholder="Ingrese nombre de github" />
     </div>
     <div class="offset-0 mt-3 col-12 mt-md-0 col-md-5 mt-md-0">
-      <label for="gitlab" class="pl-5">gitlab
+      <label for="gitlab" class="pl-5">Gitlab
       </label>
       <input pInputText placeholder="Ingrese nombre de gitlab" type="text" formControlName="gitlab" id=""
         class="form-control" />

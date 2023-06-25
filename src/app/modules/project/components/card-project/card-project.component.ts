@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TechnologiesService } from 'src/app/api/services/data/technologies.service';
 import { Project } from 'src/app/shared/models/project/project.class';
 
 @Component({
@@ -11,10 +12,14 @@ export class CardProjectComponent implements OnInit {
   @Input()
   project:Project = new Project();
 
-  constructor() {}
+  constructor(private technologiesService:TechnologiesService) {}
 
   ngOnInit(): void {
     
 
+  }
+
+  getIcon(technologie:string){
+    return this.technologiesService.getIcon(technologie);
   }
 }

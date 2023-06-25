@@ -19,5 +19,7 @@ export class User {
   level:string;
   mailEnabled?:boolean;
   random?:any;
+  technologies:any;
+  urlImage?:any;
 
 }

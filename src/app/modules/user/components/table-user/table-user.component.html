@@ -57,14 +57,14 @@
         </td>
         <td class="text-center sticky">{{ developer.name }}</td>
         <td class="text-center">
-          <ul class="developer-skills d-inline" *ngFor="let technologies of developer.preferences.slice(0,3); let i = index">
+          <ul class="developer-skills d-inline" *ngFor="let technologie of developer.technologies let i = index">
             <li class="text-center">
-              <div *ngIf="i < 3" class="d-flex flex-column w-100 h-100 justify-content-center align-items-center">
-                <p-avatar image="assets/img/stormtrooper.png" pTooltip="Nivel Trainee" *ngIf="i == 0"></p-avatar>
-                <!-- <p-avatar image="assets/img/chewbacca.png" pTooltip="Nivel Junior" *ngIf="i == 0"></p-avatar> -->
-                <p-avatar image="assets/img/darth-vader.png" pTooltip="Nivel Semi Senior" *ngIf="i == 1"></p-avatar>
-                <p-avatar image="assets/img/baby-yoda.png" pTooltip="Nivel Senior" *ngIf="i == 2"></p-avatar>
-                {{technologies}}
+              <div class="d-flex flex-column w-100 h-100 justify-content-center align-items-center">
+                <p-avatar image="assets/img/stormtrooper.png" pTooltip="Trainee" *ngIf="technologie.experience === 'Trainee'"></p-avatar>
+                <p-avatar image="assets/img/chewbacca.png" pTooltip="Junior" *ngIf="technologie.experience === 'Junior'"></p-avatar>
+                <p-avatar image="assets/img/darth-vader.png" pTooltip="Semi Senior" *ngIf="technologie.experience === 'Semi Senior'"></p-avatar>
+                <p-avatar image="assets/img/baby-yoda.png" pTooltip="Senior" *ngIf="technologie.experience === 'Senior'"></p-avatar>
+                {{technologie.nameTechnologie}}
               </div>
             </li>
           </ul>

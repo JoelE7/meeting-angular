@@ -233,7 +233,6 @@ export class ListProjectComponent implements OnInit {
   }
 
   answerQuestion(answer: Boolean) {
-
     this.userService
       .updatePreferences(this.currentUser, {
         $push: {
@@ -275,8 +274,6 @@ export class ListProjectComponent implements OnInit {
   getQuestion() {
     this.userService.getRecommendationQuestionUser(this.currentUser).subscribe(
       (data: QuestionPreferenceUser) => {
-        console.log(data);
-
         this.recommendationsQuestionUser = data;
       },
       (err) => {

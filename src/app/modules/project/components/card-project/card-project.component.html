@@ -27,8 +27,9 @@
       </footer>
       <footer class="blockquote-footer">
         <b>Tecnologías: </b>
-        <cite *ngFor="let technologie of project.technologies; let l = last" title="Source Title"> {{technologie}}
-          -</cite>
+        <cite *ngFor="let technologie of project.technologies; let l = last" title="Source Title"> 
+          <img pTooltip="{{technologie}}" class="mx-2 img-technologie" width="25px" height="25px" [src]="'assets/img/technologies/' + getIcon(technologie)" [alt]="technologie">
+        </cite>
       </footer>
       <footer class="blockquote-footer">
         <b>Complejidad: </b><cite title="Source Title">{{project.complexity}}</cite>

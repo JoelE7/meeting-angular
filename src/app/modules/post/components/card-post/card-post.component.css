@@ -6,3 +6,7 @@
 .cardPost {
   border: 1px solid #ad2c73 !important;
 }
+
+.img-technologie{
+  filter: grayscale(100%);
+}

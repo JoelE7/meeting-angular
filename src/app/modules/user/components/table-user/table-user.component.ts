@@ -2,6 +2,7 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnInit,
   Output,
   ViewEncapsulation,
 } from '@angular/core';
@@ -17,7 +18,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./table-user.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class TableUserComponent {
+export class TableUserComponent implements OnInit{
   @Input()
   developers: User[] = [];
 
@@ -51,6 +52,10 @@ export class TableUserComponent {
     private messageService: MessageService,
     private router: Router
   ) {}
+  ngOnInit(): void {
+    console.log(this.developers);
+    
+  }
 
   paginateEmit(event: any) {
     this.eventEmitterPaginate.emit(event);
@@ -68,8 +73,6 @@ export class TableUserComponent {
 
   sendMailContact(mail: Mail) {
     this.newContact = mail;
-    console.log(this.newContact);
-
     this.userService.sendMailContact(this.newContact).subscribe(
       (resp) => {
         this.messageService.add({

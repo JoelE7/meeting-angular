@@ -34,6 +34,7 @@ export class SeeMyProfileComponent {
   searchUser: User = new User();
 
   spinnerMetric: boolean = true;
+  spinner:boolean = true;
 
   visibleModalInvitation: boolean = false;
   userReceptor: User = new User();
@@ -45,8 +46,6 @@ export class SeeMyProfileComponent {
   activeIndex = 0;
 
   messages:Message[] = []
-
-  random: number=0;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -83,30 +82,7 @@ export class SeeMyProfileComponent {
     this.messages = [
       { severity: 'info', detail: 'No se encontraron proyectos' }
     ];
-// seccion random
-      while(this.random == 0||this.random == 3){
-      this.random =Math.floor(Math.random() * 8);
-    }
-    this.currentUser["random"]=this.random;
-  
-  }
-
-  async getDetailsUser(id: any) {
-    await new Promise((resolve, reject) => {
-      this.userService.detailsUser(id).subscribe(
-        (user) => {
-          this.searchUser = user;
-        },
-        (err) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: err.error ? err.error.message : 'Ups! ocurrio un error',
-          });
-        }
-      );
-      resolve('');
-    });
+    this.spinner = false;
   }
 
   linkInputUserWithGithub() {
