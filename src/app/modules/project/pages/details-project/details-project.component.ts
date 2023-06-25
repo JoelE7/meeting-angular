@@ -68,9 +68,9 @@ export class DetailsProjectComponent implements OnInit {
     this.idParam = id;
     this.getDetailsProject(id);
     
-    if (this.searchProject.urlRepository) {
-      this.getMetricByProject();
-    }
+    // if (this.searchProject.urlRepository) {
+    //   this.getMetricByProject();
+    // }
   }
 
   getIcon(technologie:string){
@@ -79,6 +79,9 @@ export class DetailsProjectComponent implements OnInit {
 
   async getDetailsProject(id: string) {
     this.searchProject = await this.projectService.detailsProjectAsync(id);
+    if (this.searchProject.urlRepository) {
+     await  this.getMetricByProject();
+    }
     
     this.searchProject.roleUser =
       this.searchProject.leader?._id == this.currentUser?._id
