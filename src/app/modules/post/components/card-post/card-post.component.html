@@ -27,7 +27,7 @@
     <div class="col-12" *ngIf="post.experience">
       <footer *ngIf="post.experience.length > 0" class="blockquote-footer mt-3"><b>Tecnologías:</b>
         <cite *ngFor="let technologie of post.experience; let l = last" title="Source Title">
-          <!-- <img pTooltip="{{technologie.nameTechnologie}} - {{technologie.experience}}" class="mx-2 img-technologie" width="25px" height="25px" [src]="'assets/img/technologies/' + getIcon(technologie.nameTechnologie)" [alt]="technologie.nameTechnologie"> -->
+          <img pTooltip="{{technologie.nameTechnologie}} - {{technologie.experience}}" class="mx-2 img-technologie" width="25px" height="25px" [src]="'assets/img/technologies/' + getIcon(technologie.nameTechnologie)" [alt]="technologie.nameTechnologie">
         </cite> 
       </footer>
     </div>
