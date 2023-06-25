@@ -63,14 +63,14 @@ export class DetailsProjectComponent implements OnInit {
     private technologiesService:TechnologiesService
   ) {}
 
-   ngOnInit() :void{
+   async ngOnInit(){
     let { id } = this.activatedRoute.snapshot.params;
     this.idParam = id;
-    this.getDetailsProject(id);
+    await this.getDetailsProject(id);
     
-    // if (this.searchProject.urlRepository) {
-    //   this.getMetricByProject();
-    // }
+    if (this.searchProject?.urlRepository) {
+      this.getMetricByProject();
+    }
   }
 
   getIcon(technologie:string){
@@ -78,11 +78,7 @@ export class DetailsProjectComponent implements OnInit {
   }
 
   async getDetailsProject(id: string) {
-    this.searchProject = await this.projectService.detailsProjectAsync(id);
-    if (this.searchProject.urlRepository) {
-     await  this.getMetricByProject();
-    }
-    
+    this.searchProject = await this.projectService.detailsProjectAsync(id);    
     this.searchProject.roleUser =
       this.searchProject.leader?._id == this.currentUser?._id
         ? 'leader'

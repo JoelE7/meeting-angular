@@ -7,6 +7,10 @@ import { MessageService } from 'primeng/api';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule  } from '@angular/common/http/testing';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { mockUserService } from 'src/app/test/__mocks__/services/user/user.service.mock';
+import { of } from 'rxjs';
+import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
+import { User } from 'src/app/shared/models/user/user.class';
 
 describe('TableUserComponent', () => {
   let component: TableUserComponent;
@@ -15,7 +19,7 @@ describe('TableUserComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TableUserComponent, ModalContactComponent],
-      providers: [UserService, MessageService],
+      providers: [{provide : UserService, useValue : mockUserService}, MessageService],
       imports: [PrimengModule, RouterTestingModule, HttpClientTestingModule,SharedModule],
     }).compileComponents();
 
@@ -26,5 +30,14 @@ describe('TableUserComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it("que se envíe el mail de contacto al usuario creador del post y se cierre el modal : sendMailContact()", () => {
+    const sendMailContact = spyOn(mockUserService, 'sendMailContact');
+    sendMailContact.and.returnValue(of<any>({}));
+    component.showModalContact(new User());
+    component.sendMailContact({email : "", message : "", user : userMock})
+    expect(mockUserService.sendMailContact).toHaveBeenCalled();
+    expect(component.visibleModalContact).toBeFalsy();
   });
 });

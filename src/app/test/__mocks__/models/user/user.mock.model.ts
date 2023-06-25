@@ -43,7 +43,8 @@ export const userMock3: User = {
   avatarUrl: '',
   disinterest: [],
   email: 'diegomock@gmail.com',
-  githubUsername: 'diegoGithub',
+  githubUsername: '',
+  gitlabUsername : "",
   posts: [],
   preferences: [],
   projects: [],
@@ -91,3 +92,22 @@ export const userMock5: User = {
   random: '5',
   technologies: []
 };
+
+export const userMockMetric = {
+  githubMetrics : {
+    commitCounts : [
+      {
+        nameRepository : "s",
+        quantityCommits : 2,
+      }
+    ]
+  },
+  gitlabMetrics : {
+    commitCounts : [
+      {
+        nameRepository : "s",
+        quantityCommits : 2,
+      }
+    ]
+  }
+}

@@ -2,9 +2,10 @@ import { Observable, of } from 'rxjs';
 import { QuestionPreferenceUser } from 'src/app/modules/project/interfaces/questionPreferenceUser.interface';
 import { Post } from 'src/app/shared/models/post/post.class';
 import { Project } from 'src/app/shared/models/project/project.class';
+import { userMock } from '../../models/user/user.mock.model';
 
 export const mockProjectDetails: Project = {
-  _id: "1",
+  _id: "2",
   name: 'Menú fácil',
   amountParticipants: 2,
   complexity: 'junior',
@@ -16,13 +17,13 @@ export const mockProjectDetails: Project = {
   technologies: [],
   type: 'web',
   leader : "",
-  participants : [],
+  participants : [userMock],
   posts : [],
   supports : [],
   urlRepository : "",
   validateSystem : false,
   requests : [],
-  roleUser : "leader"
+  roleUser : "participant"
 };
 
 export const mockProjectDetailsWithRepository: Project = {
@@ -43,7 +44,7 @@ export const mockProjectDetailsWithRepository: Project = {
   supports : [],
   urlRepository : "https://github.com",
   validateSystem : false,
-  requests : [],
+  requests : [userMock],
   roleUser : "participant"
 };
 
@@ -93,14 +94,32 @@ export const mockGetSuggestedProjects: any = {"result" : [new Project(), new Pro
 export const mockProjectService: {
   detailsProject: () => Observable<Project>;
   createProject: () => Observable<any>;
+  updateProject: () => Observable<any>;
+  joinProject: () => Observable<any>;
+  sendRequestToJoinTheProject: () => Observable<any>;
+  cancelRequestToJoinTheProject: () => Observable<any>;
+  leaveProject: () => Observable<any>;
+  userRequestResponsesLeader: () => Observable<any>;
+  sendMailInvitation: () => Observable<any>;
+  finalizeProject: () => Observable<any>;
   getMetricByProject: () => Promise<any>;
   getAllProjects: () => Observable<any[]>;
   getSuggestedProjects: () => Observable<any[]>;
   detailsProjectAsync: () => Promise<Project>;
+  
+
 } = {
   detailsProject: () => of(mockProjectDetails),
   detailsProjectAsync: () => new Promise((resolve,reject)=>{resolve(mockProjectDetailsWithRepository)}),
   createProject: () => of({}),
+  updateProject: () => of({}),
+  joinProject: () => of({}),
+  sendRequestToJoinTheProject: () => of({}),
+  cancelRequestToJoinTheProject: () => of({}),
+  leaveProject: () => of({}),
+  userRequestResponsesLeader: () => of({}),
+  sendMailInvitation: () => of({}),
+  finalizeProject: () => of({}),
   getMetricByProject: () => new Promise((resolve,reject)=>{resolve("")}),
   getAllProjects: () => of(mockGetAllProjects),
   getSuggestedProjects: () => of(mockGetSuggestedProjects),

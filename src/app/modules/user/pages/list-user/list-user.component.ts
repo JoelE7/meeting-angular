@@ -31,9 +31,6 @@ export class ListUserComponent implements OnInit {
   getUsersByRanking() {
     this.usersService.getAllUsersByRanking(this.paginate).subscribe(
       (data) => {
-        console.log(data);
-        // this.developers = data.users;
-
         this.developers = data.results;
         this.totalRecords = data.count;
         this.spinner = false;

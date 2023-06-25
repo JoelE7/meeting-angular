@@ -34,7 +34,7 @@ export class SeeMyProfileComponent {
   searchUser: User = new User();
 
   spinnerMetric: boolean = true;
-  spinner:boolean = true;
+  spinner: boolean = true;
 
   visibleModalInvitation: boolean = false;
   userReceptor: User = new User();
@@ -45,7 +45,7 @@ export class SeeMyProfileComponent {
 
   activeIndex = 0;
 
-  messages:Message[] = []
+  messages: Message[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -55,7 +55,7 @@ export class SeeMyProfileComponent {
   ) {}
 
   async ngOnInit() {
-    let seeProjects = history.state.seeProjects;
+    let seeProjects = history.state?.seeProjects;
     if (seeProjects) {
       this.activeIndex = 1;
     }
@@ -64,23 +64,20 @@ export class SeeMyProfileComponent {
     this.id = id;
     this.searchUser = await this.userService.detailsUserAsync(id);
     this.userReceptor = this.searchUser;
-    this.currentUser = await this.userService.detailsUserAsync(
-      this.currentUser._id
-    );
-    this.idCurrentUser = this.currentUser._id;
-    // this.listProjectsUserEmisor = this.currentUser.projects;
-
-    if (this.searchUser.githubUsername) {
-      this.getLanguagesGithub();
-      this.getCommitsByUserGithub();
+    if (this.currentUser) {
+      this.currentUser = await this.userService.detailsUserAsync(
+        this.currentUser?._id
+      );
+      this.idCurrentUser = this.currentUser._id;
     }
-    if (this.searchUser.githubUsername) {
+
+    if (this.searchUser?.githubUsername || this.searchUser?.gitlabUsername) {
       this.getLanguagesGithub();
       this.getCommitsByUserGithub();
     }
 
     this.messages = [
-      { severity: 'info', detail: 'No se encontraron proyectos' }
+      { severity: 'info', detail: 'No se encontraron proyectos' },
     ];
     this.spinner = false;
   }
@@ -123,7 +120,6 @@ export class SeeMyProfileComponent {
         });
         this.ngOnInit();
         this.backLinkWithGithub();
-
       },
       (err) => {
         this.messageService.add({
@@ -179,7 +175,10 @@ export class SeeMyProfileComponent {
       this.searchUser._id
     );
 
-    if (this.searchUser.githubUsername &&   this.languagesMetric.githubLanguages ) {
+    if (
+      this.searchUser?.githubUsername &&
+      this.languagesMetric.githubLanguages
+    ) {
       let languagesGithub = [];
       let quantityRepositoryByLanguageGithub = [];
 
@@ -198,7 +197,10 @@ export class SeeMyProfileComponent {
       };
     }
 
-    if (this.currentUser.gitlabUsername &&   this.languagesMetric.gitlabLanguages) {
+    if (
+      this.currentUser?.gitlabUsername &&
+      this.languagesMetric.gitlabLanguages
+    ) {
       let languagesGitlab = [];
       let quantityRepositoryByLanguageGitlab = [];
 
@@ -226,7 +228,7 @@ export class SeeMyProfileComponent {
     let nameRepositorysGithub = [];
     let commitsGithub = [];
 
-    if(this.searchUser.githubUsername){
+    if (this.searchUser?.githubUsername) {
       this.commitsByUser.githubMetrics.commitCounts.forEach((project) => {
         nameRepositorysGithub.push(project.nameRepository);
         commitsGithub.push(project.quantityCommits);
@@ -236,7 +238,7 @@ export class SeeMyProfileComponent {
     let nameRepositorysGitlab = [];
     let commitsGitlab = [];
 
-    if(this.searchUser.gitlabUsername){
+    if (this.searchUser?.gitlabUsername) {
       this.commitsByUser.gitlabMetrics.commitCounts.forEach((project) => {
         nameRepositorysGitlab.push(project.nameRepository);
         commitsGitlab.push(project.quantityCommits);

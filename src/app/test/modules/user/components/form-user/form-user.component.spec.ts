@@ -27,4 +27,17 @@ describe('FormUserComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  
+  it('que se valide el formulario correctamente',()=>{
+    let form = component.form
+    expect(form.invalid).toBeTruthy()
+    form.get('name').setValue("prueba proyecto")
+    form.get('profile').setValue("FullStack")
+    form.get('github').setValue("userGithub")
+    form.get('gitlab').setValue("userGitlab")
+    form.get('mailEnabled').setValue(true)
+    form.get('technologies').setValue(["Angular","Node.js"])
+    expect(form.invalid).toBeFalsy()
+  })
 });

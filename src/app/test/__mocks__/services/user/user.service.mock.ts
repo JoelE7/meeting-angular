@@ -22,6 +22,7 @@ export const mockTechnologies:Item[]=[
 ]
 
 export const mockGetAllUser = [userMock,userMock2,userMock3,userMock4,userMock5]
+export const mockGetAllUserRanking = {result : [userMock,userMock2,userMock3,userMock4,userMock5], count : 4}
 
 export const questionUserTechnologie:QuestionPreferenceUser = {
     result : {
@@ -51,10 +52,22 @@ export const questionUserTechnologie:QuestionPreferenceUser = {
 export const mockUserService: {
     sendMailContact: () => Observable<any>;
     getAllUser: () => Observable<any>;
+    getAllUsersByRanking: () => Observable<any>;
+    updateUser: () => Observable<any>;
+    getLanguagesGithub: () => Promise<any>;
+    getCommitsByUserGithub: () => Promise<any>;
+    detailsUserAsync: () => Promise<any>;
     getRecommendationQuestionUser: ()=> Observable<QuestionPreferenceUser>
+    
   
   } = {
     sendMailContact: () => of({}),
+    updateUser: () => of({}),
+    getLanguagesGithub: () => new Promise((resolve,reject)=>{resolve("")}),
+    getCommitsByUserGithub: () => new Promise((resolve,reject)=>{resolve("")}),
+    detailsUserAsync: () => new Promise((resolve,reject)=>{resolve(userMock)}),
     getAllUser: () => of(mockGetAllUser),
+    getAllUsersByRanking: () => of(mockGetAllUserRanking),
     getRecommendationQuestionUser : ()=> of(questionUserProject)
+    
   };

@@ -53,8 +53,6 @@ export class TableUserComponent implements OnInit{
     private router: Router
   ) {}
   ngOnInit(): void {
-    console.log(this.developers);
-    
   }
 
   paginateEmit(event: any) {
