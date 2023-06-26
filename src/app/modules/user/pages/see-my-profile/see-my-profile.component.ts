@@ -228,7 +228,7 @@ export class SeeMyProfileComponent {
     let nameRepositorysGithub = [];
     let commitsGithub = [];
 
-    if (this.searchUser?.githubUsername) {
+    if (this.searchUser?.githubUsername && this.commitsByUser) {
       this.commitsByUser.githubMetrics.commitCounts.forEach((project) => {
         nameRepositorysGithub.push(project.nameRepository);
         commitsGithub.push(project.quantityCommits);
@@ -315,8 +315,6 @@ export class SeeMyProfileComponent {
 
   sendMailInvitation(mail: MailInvitation) {
     this.newInvitation = mail;
-    console.log(this.newInvitation);
-
     this.projectService.sendMailInvitation(this.newInvitation).subscribe(
       (resp) => {
         this.messageService.add({

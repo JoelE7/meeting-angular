@@ -1,6 +1,6 @@
 import { Observable, of } from "rxjs";
 import { Item } from "src/app/shared/models/model-forms/item-form.interface";
-import { userMock, userMock2, userMock3, userMock4, userMock5 } from "../../models/user/user.mock.model";
+import { userMock, userMock2, userMock3, userMock4, userMock5, userMockMetric } from "../../models/user/user.mock.model";
 import { QuestionPreferenceUser } from "src/app/modules/project/interfaces/questionPreferenceUser.interface";
 import { mockProjectDetails } from "../project/project.service.mock";
 import { Post } from "src/app/shared/models/post/post.class";
@@ -64,7 +64,7 @@ export const mockUserService: {
     sendMailContact: () => of({}),
     updateUser: () => of({}),
     getLanguagesGithub: () => new Promise((resolve,reject)=>{resolve("")}),
-    getCommitsByUserGithub: () => new Promise((resolve,reject)=>{resolve("")}),
+    getCommitsByUserGithub: () => new Promise((resolve,reject)=>{resolve(userMockMetric)}),
     detailsUserAsync: () => new Promise((resolve,reject)=>{resolve(userMock)}),
     getAllUser: () => of(mockGetAllUser),
     getAllUsersByRanking: () => of(mockGetAllUserRanking),

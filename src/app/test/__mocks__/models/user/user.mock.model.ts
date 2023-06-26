@@ -14,10 +14,10 @@ export const userMock: User = {
   score: 10,
   skills: [],
   password: '1234',
-  level:'level',
+  level: 'level',
   random: '1',
   technologies: [],
-  urlImage : ""
+  urlImage: '',
 };
 export const userMock2: User = {
   _id: '2',
@@ -33,9 +33,9 @@ export const userMock2: User = {
   score: 10,
   skills: [],
   password: '1234',
-  level:'level',
+  level: 'level',
   random: '2',
-  technologies: []
+  technologies: [],
 };
 export const userMock3: User = {
   _id: '3',
@@ -44,7 +44,7 @@ export const userMock3: User = {
   disinterest: [],
   email: 'diegomock@gmail.com',
   githubUsername: '',
-  gitlabUsername : "",
+  gitlabUsername: '',
   posts: [],
   preferences: [],
   projects: [],
@@ -52,9 +52,9 @@ export const userMock3: User = {
   score: 10,
   skills: [],
   password: '1234',
-  level:'level',
+  level: 'level',
   random: '3',
-  technologies: []
+  technologies: [],
 };
 export const userMock4: User = {
   _id: '4',
@@ -70,9 +70,9 @@ export const userMock4: User = {
   score: 10,
   skills: [],
   password: '1234',
-  level:'level',
+  level: 'level',
   random: '4',
-  technologies: []
+  technologies: [],
 };
 export const userMock5: User = {
   _id: '5',
@@ -88,26 +88,46 @@ export const userMock5: User = {
   score: 10,
   skills: [],
   password: '1234',
-  level:'level',
+  level: 'level',
   random: '5',
-  technologies: []
+  technologies: [],
 };
 
 export const userMockMetric = {
-  githubMetrics : {
-    commitCounts : [
+  githubMetrics: {
+    issues: 2,
+    pullRequests: 1,
+    projectStats: {
+      averagePopularity: 0,
+      maxStars: 0,
+    },
+    quantityProjects: {
+      quantityPersonalProjects: 21,
+      quantityOutsidelProjects: 9,
+    },
+    commitCounts: [
       {
-        nameRepository : "s",
-        quantityCommits : 2,
-      }
-    ]
+        nameRepository: 'APIREST-postman',
+        quantityCommits: 1,
+      },
+    ],
   },
-  gitlabMetrics : {
-    commitCounts : [
+  gitlabMetrics: {
+    issues: 2,
+    pullRequests: 1,
+    projectStats: {
+      averagePopularity: 0,
+      maxStars: 0,
+    },
+    quantityProjects: {
+      quantityPersonalProjects: 21,
+      quantityOutsidelProjects: 9,
+    },
+    commitCounts: [
       {
-        nameRepository : "s",
-        quantityCommits : 2,
-      }
-    ]
+        nameRepository: 'APIREST-postman',
+        quantityCommits: 1,
+      },
+    ],
   }
-}
+};

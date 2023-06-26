@@ -10,13 +10,17 @@ import { ChartBarComponent } from 'src/app/shared/components/chart-bar/chart-bar
 import { ChartDoughnutComponent } from 'src/app/shared/components/chart-doughnut/chart-doughnut.component';
 import { ChartLineComponent } from 'src/app/shared/components/chart-line/chart-line.component';
 import { HttpClientModule } from '@angular/common/http';
-import { userMock, userMock3 } from 'src/app/test/__mocks__/models/user/user.mock.model';
+import { userMock, userMock2, userMock3, userMockMetric } from 'src/app/test/__mocks__/models/user/user.mock.model';
 import { ModalInvitationComponent } from 'src/app/modules/user/shared/modal-invitation/modal-invitation.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CharRadarComponent } from 'src/app/shared/components/char-radar/char-radar.component';
 import { UserService } from 'src/app/api/services/user/user.service';
 import { mockUserService } from 'src/app/test/__mocks__/services/user/user.service.mock';
 import { of } from 'rxjs';
+import { ProjectService } from 'src/app/api/services/project/project.service';
+import { mockProjectService } from 'src/app/test/__mocks__/services/project/project.service.mock';
+import { User } from 'src/app/shared/models/user/user.class';
+import { Project } from 'src/app/shared/models/project/project.class';
 
 describe('See my profileConLogin', () => {
   let component: SeeMyProfileComponent;
@@ -34,7 +38,7 @@ describe('See my profileConLogin', () => {
         CharRadarComponent,
         ModalInvitationComponent
       ],
-      providers:[MessageService,{provide : UserService, useValue : mockUserService}],
+      providers:[MessageService,{provide : UserService, useValue : mockUserService},{provide:ProjectService, useValue:mockProjectService}],
       imports: [PrimengModule, RouterTestingModule, SharedModule,HttpClientTestingModule],
     }).compileComponents();
 
@@ -73,7 +77,7 @@ describe('See my profileConLogin', () => {
     expect(mockUserService.getLanguagesGithub).toHaveBeenCalled();
   })
 
-  it('si el usuario NO tiene vinculado  github o gitlab que traiga sus metricas',async ()=>{
+  it('si el usuario NO tiene vinculado  github o gitlab que NO traiga sus metricas',async ()=>{
     component.currentUser = userMock3
     const detailsUserAsync = spyOn(mockUserService,'detailsUserAsync');
     detailsUserAsync.and.returnValue(Promise.resolve(userMock3));
@@ -89,10 +93,48 @@ describe('See my profileConLogin', () => {
 
   it('que el usuario pueda vincularse con gitlab',async ()=>{
     const updateUser = spyOn(mockUserService,'updateUser')
+    const getCommitsByUserGithub = spyOn(mockUserService,'getCommitsByUserGithub')
     updateUser.and.returnValue(of<any>({}));
+    getCommitsByUserGithub.and.returnValue(Promise.resolve(userMockMetric));
     component.userNameGitlab = "gitlabName";
-    component.linkUsertWithGitlab();
+    await component.linkUsertWithGitlab();
     expect(mockUserService.updateUser).toHaveBeenCalled();
+  })
+
+  it('que el usuario pueda vincularse con github',async ()=>{
+    const updateUser = spyOn(mockUserService,'updateUser')
+    const getCommitsByUserGithub = spyOn(mockUserService,'getCommitsByUserGithub')
+    updateUser.and.returnValue(of<any>({}));
+    getCommitsByUserGithub.and.returnValue(Promise.resolve(userMockMetric));
+    component.userNameGithub = "githubName";
+    await component.linkUsertWithGithub();
+    expect(mockUserService.updateUser).toHaveBeenCalled();
+  })
+
+  it('que el usuario no pueda vincularse con gitlab',async ()=>{
+    const updateUser = spyOn(mockUserService,'updateUser')
+    const getCommitsByUserGithub = spyOn(mockUserService,'getCommitsByUserGithub')
+    updateUser.and.returnValue(of<any>({}));
+    getCommitsByUserGithub.and.returnValue(Promise.resolve(userMockMetric));
+    await component.linkUsertWithGitlab();
+    expect(mockUserService.updateUser).not.toHaveBeenCalled();
+  })
+
+  it('que el usuario no pueda vincularse con gitlab',async ()=>{
+    const updateUser = spyOn(mockUserService,'updateUser')
+    const getCommitsByUserGithub = spyOn(mockUserService,'getCommitsByUserGithub')
+    updateUser.and.returnValue(of<any>({}));
+    getCommitsByUserGithub.and.returnValue(Promise.resolve(userMockMetric));
+    await component.linkUsertWithGithub();
+    expect(mockUserService.updateUser).not.toHaveBeenCalled();
+  })
+
+  it('que el usuario pueda invitar a un proyecto a otro usuario', ()=>{
+    component.currentUser = userMock2
+    const sendMailInvitation = spyOn(mockProjectService,'sendMailInvitation')
+    sendMailInvitation.and.returnValue(of<any>({}));
+    component.sendMailInvitation({user : new User(),email : "", project: new Project(), message : ""});
+    expect(mockProjectService.sendMailInvitation).toHaveBeenCalled();
   })
 });
 

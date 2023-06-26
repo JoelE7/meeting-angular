@@ -16,6 +16,9 @@ export class ProjectMemberComponent implements OnInit,DoCheck{
   }
 
   @Input()
+  githubRepo:any
+
+  @Input()
   user:User;
 
   @Output()

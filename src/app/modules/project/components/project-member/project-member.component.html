@@ -6,7 +6,7 @@
     <div class="col-12 col-lg-7 mt-3 mt-lg-0 text-center text-lg-start">
         <h4>{{ user.name }}</h4>
         <h6>{{ user.role }} Developer</h6>
-        <h6 (click)="seeProgress(user)" class="cursor-pointer"><b>Ver avances</b></h6>
+        <h6 (click)="seeProgress(user)" class="cursor-pointer" *ngIf="githubRepo"><b>Ver avances</b></h6>
     </div>
     <div class="col-12 col-lg-2 mt-3 mt-lg-0 text-center text-lg-start">
         <p-button type="button" [style]="{ width: '100%' }" label="Ver perfil" class=""

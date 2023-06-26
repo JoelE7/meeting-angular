@@ -111,6 +111,8 @@ export class ListPostComponent implements OnInit {
     this.query = this.filtersService.getFilters();
     this.query.method = this.filters.method;
     this.spinner = true;
+    console.log(this.query);
+    
     this.getAllPosts();
   }
 

@@ -82,8 +82,6 @@ export class PostService {
   detailsPost(id: number): Observable<Post> {
     let headers = new HttpHeaders();
 
-    console.log(id);
-
     // headers = headers.append(
     //   'Authorization',
     //   'Bearer' + localStorage.getItem('token')
@@ -105,7 +103,6 @@ export class PostService {
       'Bearer ' + localStorage.getItem('token')
     );
 
-    // api/posts/suggest
     return this.http
       .post<Post>(`${environment.apiUrl}/posts/suggest`, data, {
         headers: headers,
