@@ -145,7 +145,7 @@ export class ProjectService {
     let headers = new HttpHeaders();
     headers = headers.append(
       'Authorization',
-      'Bearer' + localStorage.getItem('token')
+      'Bearer ' + localStorage.getItem('token')
     );
 
     return this.http

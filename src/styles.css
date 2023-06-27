@@ -13,3 +13,13 @@
   background-color: #ff9ec5 !important;
   color: white !important;
 }
+
+
+.p-confirm-dialog-reject{
+  background-color: #c42e6c !important;
+  border: 1px solid #ad2c73 !important;
+}
+.p-confirm-dialog-accept{
+  background-color: #c42e6c !important;
+  border: 1px solid #ad2c73 !important;
+}
