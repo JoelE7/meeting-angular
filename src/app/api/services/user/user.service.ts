@@ -144,28 +144,6 @@ export class UserService {
       );
   }
 
-  linkUserWithGithub(username: string): Observable<any> {
-    let headers = new HttpHeaders();
-    // headers = headers.append(
-    //   'Authorization',
-    //   'Bearer' + localStorage.getItem('token')
-    // );
-
-    return this.http
-      .post<QuestionPreferenceUser>(
-        `${environment.apiUrl}/recommendations/`,
-        username,
-        {
-          headers: headers,
-        }
-      )
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
-  }
-
   detailsUser(id: string): Observable<User> {
     let headers = new HttpHeaders();
     // headers = headers.append(

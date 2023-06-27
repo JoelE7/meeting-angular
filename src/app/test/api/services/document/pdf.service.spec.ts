@@ -20,7 +20,10 @@ describe('PdfService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('getTechnologies()',(done:DoneFn)=>{
+  it('downloadCertificate()',(done:DoneFn)=>{
+
+    let response = new Blob();
+
     service.downloadCertificate("<h1>Test</h1>").subscribe({
       next : (data)=>{
         done()
@@ -31,7 +34,7 @@ describe('PdfService', () => {
 
     expect(req.request.method).toEqual('POST')
 
-    req.flush({});
+    req.flush(response);
 
   })
 

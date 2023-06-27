@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { User } from 'src/app/shared/models/user/user.class';
 import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
 import { lastValueFrom } from 'rxjs';
+import { Mail } from 'src/app/shared/models/model-mail-contact/model-mail.interface';
 
 describe('UserService', () => {
   let service: UserService;
@@ -96,21 +97,117 @@ describe('UserService', () => {
     req.flush({});
   });
 
-  it('getLanguagesGithub()', async(done: DoneFn) => {
-    let username = "JoelE7"
-    let languages = await service.getLanguagesGithub(username);
+  it('getLanguagesGithub', () => {
+    const username = 'JoelE7';
 
-    
+    service.getLanguagesGithub(username).then((result) => {
+      expect(result).toBeTruthy();
+    });
 
-    const req: TestRequest = httpClient.expectOne(
+    const req = httpClient.expectOne(
       `${environment.apiUrl}/users/languages/${username}`
     );
 
     expect(req.request.method).toEqual('GET');
-    // expect(req.request.urlWithParams).toEqual(`${environment.apiUrl}/users/languages/${username}`)
-
-    req.flush("");
+    expect(req.request.urlWithParams).toEqual(`${environment.apiUrl}/users/languages/${username}`)
+    req.flush({}); 
   });
 
+  it('getRecommendationQuestionUser()', (done: DoneFn) => {
+    service.getRecommendationQuestionUser(userMock).subscribe({
+      next: (data) => {
+        done();
+      },
+    });
+
+    const req: TestRequest = httpClient.expectOne(
+      `${environment.apiUrl}/recommendations/`
+    );
+
+    expect(req.request.method).toEqual('POST');
+    expect(req.request.urlWithParams).toEqual(`${environment.apiUrl}/recommendations/`)
+    expect(req.request.body).toEqual(userMock)
+
+    req.flush({});
+  });
+
+  it('getRecommendationQuestionUser()', (done: DoneFn) => {
+    service.getRecommendationQuestionUser(userMock).subscribe({
+      next: (data) => {
+        done();
+      },
+    });
+
+    const req: TestRequest = httpClient.expectOne(
+      `${environment.apiUrl}/recommendations/`
+    );
+
+    expect(req.request.method).toEqual('POST');
+    expect(req.request.urlWithParams).toEqual(`${environment.apiUrl}/recommendations/`)
+    expect(req.request.body).toEqual(userMock)
+
+    req.flush({});
+  });
+
+  it('detailsUser()', (done: DoneFn) => {
+    let id = "1";
+    service.detailsUser(id).subscribe({
+      next: (data) => {
+        done();
+      },
+    });
+
+    const req: TestRequest = httpClient.expectOne(
+      `${environment.apiUrl}/users/${id}`
+    );
+
+    expect(req.request.method).toEqual('GET');
+    expect(req.request.urlWithParams).toEqual(`${environment.apiUrl}/users/${id}`)
+
+    req.flush({});
+  });
+
+  it('detailsUserAsync()', () => {
+    let id = "1"
+
+    service.detailsUserAsync(id).then((result) => {
+      expect(result).toBeTruthy();
+    });
+
+    const req = httpClient.expectOne(
+      `${environment.apiUrl}/users/${id}`
+    );
+
+    expect(req.request.method).toEqual('GET');
+    expect(req.request.urlWithParams).toEqual(`${environment.apiUrl}/users/${id}`)
+    req.flush({}); 
+  });
+
+  it('sendMailContact()', (done: DoneFn) => {
+    let email:Mail = {
+      email : "mock@gmail.com",
+      message : "mensage",
+      user : userMock
+    }
+    service.sendMailContact(email).subscribe({
+      next: (data) => {
+        done();
+      },
+    });
+
+    const req: TestRequest = httpClient.expectOne(
+      `${environment.apiUrl}/users/contact`
+    );
+
+    expect(req.request.method).toEqual('POST');
+    expect(req.request.urlWithParams).toEqual(`${environment.apiUrl}/users/contact`)
+    expect(req.request.body).toEqual(email)
+
+    req.flush({});
+  });
+
+  afterEach(() => {
+    httpClient.verify();
+  });
 
 });

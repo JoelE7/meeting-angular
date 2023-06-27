@@ -220,7 +220,7 @@ export class ProjectService {
       );
   }
 
-  sendRequestToJoinTheProject(project:Project,data:any){
+  sendRequestToJoinTheProject(project:Project,request:any){
 
     let headers = new HttpHeaders();
     headers = headers.append(
@@ -229,7 +229,7 @@ export class ProjectService {
     );
 
     return this.http
-      .put(`${environment.apiUrl}/projects/request/${project._id}`, data, {
+      .put(`${environment.apiUrl}/projects/request/${project._id}`, request, {
         headers: headers,
       })
       .pipe(
@@ -239,14 +239,14 @@ export class ProjectService {
       );
   }
 
-  cancelRequestToJoinTheProject(project:Project,data:any){
+  cancelRequestToJoinTheProject(project:Project,request:any){
     let headers = new HttpHeaders();
     headers = headers.append(
       'Authorization',
       'Bearer ' + localStorage.getItem('token')
     );
     return this.http
-      .put(`${environment.apiUrl}/projects/request/${project._id}`, data, {
+      .put(`${environment.apiUrl}/projects/request/${project._id}`, request, {
         headers: headers,
       })
       .pipe(
@@ -256,7 +256,7 @@ export class ProjectService {
       );
   }
 
-  leaveProject(project:Project,data:any){
+  leaveProject(project:Project,userLeave:any){
     let headers = new HttpHeaders();
     headers = headers.append(
       'Authorization',
@@ -264,7 +264,7 @@ export class ProjectService {
     );
 
     return this.http
-      .put(`${environment.apiUrl}/projects/leave/${project._id}`, data, {
+      .put(`${environment.apiUrl}/projects/leave/${project._id}`, userLeave, {
         headers: headers,
       })
       .pipe(
@@ -274,7 +274,7 @@ export class ProjectService {
       );
   }
 
-  userRequestResponsesLeader(project: Project,data:any) {
+  userRequestResponsesLeader(project: Project,response:any) {
     let headers = new HttpHeaders();
     headers = headers.append(
       'Authorization',
@@ -282,7 +282,7 @@ export class ProjectService {
     );
 
     return this.http
-      .post(`${environment.apiUrl}/projects/request/${project._id}`, data, {
+      .post(`${environment.apiUrl}/projects/request/${project._id}`, response, {
         headers: headers,
       })
       .pipe(
