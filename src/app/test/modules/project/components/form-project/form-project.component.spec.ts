@@ -8,7 +8,7 @@ import { DataService } from 'src/app/api/services/data/data.service';
 import { FormProjectComponent } from 'src/app/modules/project/components/form-project/form-project.component';
 import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
-import { mockDataService, mockTechnologies } from 'src/app/test/__mocks__/services/data/data.service.mock';
+import { mockDataService, mockResponseTechnologies, mockTechnologies } from 'src/app/test/__mocks__/services/data/data.service.mock';
 
 
 describe('FormProjectComponentConLogin', () => {
@@ -35,7 +35,7 @@ describe('FormProjectComponentConLogin', () => {
     localStorage.removeItem("user");
   })
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
@@ -56,14 +56,14 @@ describe('FormProjectComponentSinLogin', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     const getTechnologies = spyOn(mockDataService, 'getTechnologies');
-    getTechnologies.and.returnValue(of<any[]>(mockTechnologies));
+    getTechnologies.and.returnValue(of<any[]>(mockResponseTechnologies));
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('que se valide el formulario correctamente',()=>{
+  it('que se valide el formulario correctamente',()=>{
     let form = component.form
     expect(form.invalid).toBeTruthy()
     form.get('name').setValue("prueba proyecto")

@@ -21,11 +21,11 @@ describe('CardProjectComponent', () => {
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(cardProjectComponent).toBeTruthy();
   });
 
-  xit('Verificar que el proyecto hijo llegue', () => {
+  it('Verificar que el proyecto hijo llegue', () => {
     const project = new Project();
 
     expect(cardProjectComponent.project._id).toBe(undefined);
