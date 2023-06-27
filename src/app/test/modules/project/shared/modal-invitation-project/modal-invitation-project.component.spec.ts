@@ -30,14 +30,14 @@ describe('ModalInvitationProjectComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('que traiga todos los usuarios receptores : getUsers()', () => {
+  it('que traiga todos los usuarios receptores : getUsers()', () => {
     const getAllUser = spyOn(mockUserService,'getAllUser');
     getAllUser.and.returnValue(of(mockGetAllUser))
     component.ngOnInit();
     expect(mockUserService.getAllUser).toHaveBeenCalled();
   });
 
-  xit('que quite al usuario emisor de la lista de usuarios receptores: removeCurrentUserFilters()', () => {
+  it('que quite al usuario emisor de la lista de usuarios receptores: removeCurrentUserFilters()', () => {
     const getAllUser = spyOn(mockUserService,'getAllUser');
     getAllUser.and.returnValue(of(mockGetAllUser))
     component.userEmisor = userMock
