@@ -150,7 +150,7 @@ describe('DetailsProjectComponentConLogin', () => {
     expect(mockProjectService.joinProject).toHaveBeenCalled();
   })
 
-  xit('que se pueda cancelar una solicitud para unirse a un proyecto : cancelRequestToJoinTheProject()',()=>{
+  it('que se pueda cancelar una solicitud para unirse a un proyecto : cancelRequestToJoinTheProject()',()=>{
     component.currentUser = userMock2
     const cancelRequestToJoinTheProject = spyOn(mockProjectService,'cancelRequestToJoinTheProject')
     cancelRequestToJoinTheProject.and.returnValue(of<any>({}));
@@ -158,7 +158,7 @@ describe('DetailsProjectComponentConLogin', () => {
     expect(mockProjectService.cancelRequestToJoinTheProject).toHaveBeenCalled();
   })
 
-  xit('que se pueda enviar una solicitud para unirse a un proyecto : sendRequestToJoinTheProject()',()=>{
+  it('que se pueda enviar una solicitud para unirse a un proyecto : sendRequestToJoinTheProject()',()=>{
     component.currentUser = userMock2
     const sendRequestToJoinTheProject = spyOn(mockProjectService,'sendRequestToJoinTheProject')
     sendRequestToJoinTheProject.and.returnValue(of<any>({}));
@@ -166,7 +166,7 @@ describe('DetailsProjectComponentConLogin', () => {
     expect(mockProjectService.sendRequestToJoinTheProject).toHaveBeenCalled();
   })
 
-  xit('que el usuario pueda abandonar un proyecto : leaveProject()',()=>{
+  it('que el usuario pueda abandonar un proyecto : leaveProject()',()=>{
     component.currentUser = userMock2
     const leaveProject = spyOn(mockProjectService,'leaveProject')
     leaveProject.and.returnValue(of<any>({}));
@@ -174,7 +174,7 @@ describe('DetailsProjectComponentConLogin', () => {
     expect(mockProjectService.leaveProject).toHaveBeenCalled();
   })
 
-  xit('que el usuario pueda aceptar o rechazar una solicitud',()=>{
+  it('que el usuario pueda aceptar o rechazar una solicitud',()=>{
     component.currentUser = userMock2
     const userRequestResponsesLeader = spyOn(mockProjectService,'userRequestResponsesLeader')
     userRequestResponsesLeader.and.returnValue(of<any>({}));
