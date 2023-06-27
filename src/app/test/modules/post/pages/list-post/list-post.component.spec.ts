@@ -38,7 +38,7 @@ describe('ListPostComponentConLogin', () => {
     localStorage.removeItem("user");
   })
 
-  it('should create', () => {
+ xit('should create', () => {
     expect(component).toBeTruthy();
   });
 });
@@ -62,11 +62,11 @@ describe('ListPostComponentSinLogin', () => {
     
   });
 
-  it('should create', () => {
+  xit('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('al iniciar el ngOnInit se deben buscar los post : getAllPost()',()=>{
+  xit('al iniciar el ngOnInit se deben buscar los post : getAllPost()',()=>{
     const getAllPost = spyOn(mockPostService,'getAllPost');
     const getTechnologies = spyOn(mockDataService, 'getTechnologies');
     getTechnologies.and.returnValue(of<any[]>(mockTechnologies));

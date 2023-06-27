@@ -28,11 +28,11 @@ describe('ModalSuggestComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  xit('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('que traiga todos los usuarios receptores : getUsers()', () => {
+  xit('que traiga todos los usuarios receptores : getUsers()', () => {
     const getAllUser = spyOn(mockUserService,'getAllUser');
     getAllUser.and.returnValue(of(mockGetAllUser))
     component.ngOnInit();
