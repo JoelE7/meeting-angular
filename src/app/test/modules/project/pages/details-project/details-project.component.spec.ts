@@ -126,7 +126,7 @@ describe('DetailsProjectComponentConLogin', () => {
     expect(component.userExistSendRequest).toBeTruthy()
   })
 
-  xit('que se pueda linkear el proyecto a un repositorio de github/gitlab : linkProjectToRepository()',async ()=>{
+  it('que se pueda linkear el proyecto a un repositorio de github/gitlab : linkProjectToRepository()',async ()=>{
     const updateProject = spyOn(mockProjectService,'updateProject')
     updateProject.and.returnValue(of<any>({}));
     component.linkRepositoryProject = "https:github.com"
@@ -135,14 +135,14 @@ describe('DetailsProjectComponentConLogin', () => {
   })
 
 
-  xit('que falle en caso de que no haya puesto una url de proyecto a un repositorio de github/gitlab : linkProjectToRepository()',async ()=>{
+  it('que falle en caso de que no haya puesto una url de proyecto a un repositorio de github/gitlab : linkProjectToRepository()',async ()=>{
     const updateProject = spyOn(mockProjectService,'updateProject')
     updateProject.and.returnValue(of<any>({}));
     await component.linkProjectToRepository();
     expect(mockProjectService.updateProject).not.toHaveBeenCalled();
   })
 
-  xit('que el usuario logueado se pueda unir a un proyecto : joinProject()',()=>{
+  it('que el usuario logueado se pueda unir a un proyecto : joinProject()',()=>{
     component.currentUser = userMock2
     const joinProject = spyOn(mockProjectService,'joinProject')
     joinProject.and.returnValue(of<any>({}));
@@ -150,7 +150,7 @@ describe('DetailsProjectComponentConLogin', () => {
     expect(mockProjectService.joinProject).toHaveBeenCalled();
   })
 
-  xit('que se pueda cancelar una solicitud para unirse a un proyecto : cancelRequestToJoinTheProject()',()=>{
+  it('que se pueda cancelar una solicitud para unirse a un proyecto : cancelRequestToJoinTheProject()',()=>{
     component.currentUser = userMock2
     const cancelRequestToJoinTheProject = spyOn(mockProjectService,'cancelRequestToJoinTheProject')
     cancelRequestToJoinTheProject.and.returnValue(of<any>({}));
@@ -158,7 +158,7 @@ describe('DetailsProjectComponentConLogin', () => {
     expect(mockProjectService.cancelRequestToJoinTheProject).toHaveBeenCalled();
   })
 
-  xit('que se pueda enviar una solicitud para unirse a un proyecto : sendRequestToJoinTheProject()',()=>{
+  it('que se pueda enviar una solicitud para unirse a un proyecto : sendRequestToJoinTheProject()',()=>{
     component.currentUser = userMock2
     const sendRequestToJoinTheProject = spyOn(mockProjectService,'sendRequestToJoinTheProject')
     sendRequestToJoinTheProject.and.returnValue(of<any>({}));
@@ -166,7 +166,7 @@ describe('DetailsProjectComponentConLogin', () => {
     expect(mockProjectService.sendRequestToJoinTheProject).toHaveBeenCalled();
   })
 
-  xit('que el usuario pueda abandonar un proyecto : leaveProject()',()=>{
+  it('que el usuario pueda abandonar un proyecto : leaveProject()',()=>{
     component.currentUser = userMock2
     const leaveProject = spyOn(mockProjectService,'leaveProject')
     leaveProject.and.returnValue(of<any>({}));
@@ -174,7 +174,7 @@ describe('DetailsProjectComponentConLogin', () => {
     expect(mockProjectService.leaveProject).toHaveBeenCalled();
   })
 
-  xit('que el usuario pueda aceptar o rechazar una solicitud',()=>{
+  it('que el usuario pueda aceptar o rechazar una solicitud',()=>{
     component.currentUser = userMock2
     const userRequestResponsesLeader = spyOn(mockProjectService,'userRequestResponsesLeader')
     userRequestResponsesLeader.and.returnValue(of<any>({}));
@@ -182,7 +182,7 @@ describe('DetailsProjectComponentConLogin', () => {
     expect(mockProjectService.userRequestResponsesLeader).toHaveBeenCalled();
   })
 
-  xit('que el usuario pueda sugerir un proyecto : sendMailInvitation()',()=>{
+  it('que el usuario pueda sugerir un proyecto : sendMailInvitation()',()=>{
     component.currentUser = userMock2
     const sendMailInvitation = spyOn(mockProjectService,'sendMailInvitation')
     sendMailInvitation.and.returnValue(of<any>({}));
@@ -191,7 +191,7 @@ describe('DetailsProjectComponentConLogin', () => {
   })
 
 
-  xit('que se pueda finalizar un proyecto : finalizeProject()',()=>{
+  it('que se pueda finalizar un proyecto : finalizeProject()',()=>{
     component.currentUser = userMock2
     const finalizeProject = spyOn(mockProjectService,'finalizeProject')
     finalizeProject.and.returnValue(of<any>({}));
