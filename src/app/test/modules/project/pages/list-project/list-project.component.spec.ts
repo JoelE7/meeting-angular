@@ -21,6 +21,8 @@ import { QuestionPreferenceUser } from 'src/app/modules/project/interfaces/quest
 import { UserService } from 'src/app/api/services/user/user.service';
 import { mockUserService, questionUserPost, questionUserProject } from 'src/app/test/__mocks__/services/user/user.service.mock';
 import { questionUserTechnologie } from '../../../../__mocks__/services/user/user.service.mock';
+import { mockDataService, mockResponseTechnologies } from 'src/app/test/__mocks__/services/data/data.service.mock';
+import { DataService } from 'src/app/api/services/data/data.service';
 
 describe('ListProjectComponentConLogin', () => {
   let component: ListProjectComponent;
@@ -39,7 +41,8 @@ describe('ListProjectComponentConLogin', () => {
       ],
       providers: [MessageService,FilterService,
          { provide: ProjectService, useValue: mockProjectService }
-        ,{ provide : UserService, useValue : mockUserService}
+        ,{ provide : UserService, useValue : mockUserService},
+        {provide :DataService, useValue: mockDataService}
       ],
       imports: [
         SharedModule,
@@ -56,10 +59,11 @@ describe('ListProjectComponentConLogin', () => {
 
     localStorage.setItem('user',JSON.stringify(userMock))
     component.currentUser = userMock;
-
+    const getTechnologies = spyOn(mockDataService, 'getTechnologies');
+    getTechnologies.and.returnValue(of<any>(mockResponseTechnologies));
   });
 
-  xit("al iniciar el componente con ngOnInit se active : getQuestion() : y que se devuelva la sugerencia de tipo proyecto",()=>{
+  it("al iniciar el componente con ngOnInit se active : getQuestion() : y que se devuelva la sugerencia de tipo proyecto",()=>{
     component.currentUser = userMock;
     const getRecommendationQuestionUser = spyOn(mockUserService, 'getRecommendationQuestionUser');
     getRecommendationQuestionUser.and.returnValue(of<any>(questionUserProject));
@@ -69,7 +73,7 @@ describe('ListProjectComponentConLogin', () => {
     expect(component.recommendationsQuestionUser.result.results).toHaveSize(1)
   })
 
-  xit("al iniciar el componente con ngOnInit se active : getQuestion() : y que se devuelva la sugerencia de tipo post",()=>{
+  it("al iniciar el componente con ngOnInit se active : getQuestion() : y que se devuelva la sugerencia de tipo post",()=>{
     component.currentUser = userMock;
     const getRecommendationQuestionUser = spyOn(mockUserService, 'getRecommendationQuestionUser');
     getRecommendationQuestionUser.and.returnValue(of<any>(questionUserPost));
@@ -79,7 +83,7 @@ describe('ListProjectComponentConLogin', () => {
     expect(component.recommendationsQuestionUser.result.results).toHaveSize(2)
   })
 
- xit("al iniciar el componente con ngOnInit se active : getQuestion() : y que se devuelva la sugerencia de tipo technologie",()=>{
+ it("al iniciar el componente con ngOnInit se active : getQuestion() : y que se devuelva la sugerencia de tipo technologie",()=>{
     component.currentUser = userMock;
     const getRecommendationQuestionUser = spyOn(mockUserService, 'getRecommendationQuestionUser');
     getRecommendationQuestionUser.and.returnValue(of<any>(questionUserTechnologie));
@@ -93,7 +97,7 @@ describe('ListProjectComponentConLogin', () => {
     localStorage.removeItem("user");
   })
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
@@ -128,11 +132,11 @@ describe('ListProjectComponentSinLogin', () => {
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('al iniciar el componente con ngOnInit se active : getAllProjects() ', () => {
+  it('al iniciar el componente con ngOnInit se active : getAllProjects() ', () => {
     const getAllProjects = spyOn(mockProjectService, 'getAllProjects');
     getAllProjects.and.returnValue(of<any[]>(mockGetAllProjects));
     component.ngOnInit();
@@ -140,7 +144,7 @@ describe('ListProjectComponentSinLogin', () => {
     component.spinner = false;
     expect(component.listProject).toHaveSize(3)
   });
-  xit('al iniciar el componente con ngOnInit se active : getSuggestedProjects() ', () => {
+  it('al iniciar el componente con ngOnInit se active : getSuggestedProjects() ', () => {
     const getSuggestedProjects = spyOn(mockProjectService, 'getSuggestedProjects');
     getSuggestedProjects.and.returnValue(of<any[]>(mockGetSuggestedProjects));
     component.ngOnInit();

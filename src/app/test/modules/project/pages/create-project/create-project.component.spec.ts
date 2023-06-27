@@ -49,11 +49,11 @@ describe('CreateProjectComponent', () => {
     localStorage.removeItem("user");
   })
   
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('al crear un proyecto que se llame al método del servicio y redirija a /project/list-project : createProject', () => {
+  it('al crear un proyecto que se llame al método del servicio y redirija a /project/list-project : createProject', () => {
     const createProject = spyOn(mockProjectService, 'createProject');
     const navigateSpy = spyOn(router, 'navigate');
     createProject.and.returnValue(of<any>({}));
@@ -62,7 +62,7 @@ describe('CreateProjectComponent', () => {
     expect(navigateSpy).toHaveBeenCalledWith(['/project/list-project']);
   });
 
-  xit('al crear un proyecto y este da error que no redirija a /project/list-project : createProject', () => {
+  it('al crear un proyecto y este da error que no redirija a /project/list-project : createProject', () => {
     const createProject = spyOn(mockProjectService, 'createProject');
     const navigateSpy = spyOn(router, 'navigate');
     createProject.and.returnValue(
