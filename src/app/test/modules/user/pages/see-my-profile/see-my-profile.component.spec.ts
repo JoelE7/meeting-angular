@@ -54,11 +54,11 @@ describe('See my profileConLogin', () => {
     localStorage.removeItem("user");
   })
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('que se busque el usuario del perfil : detailsUserAsync',async ()=>{
+  it('que se busque el usuario del perfil : detailsUserAsync',async ()=>{
     const detailsUserAsync = spyOn(mockUserService,'detailsUserAsync');
     detailsUserAsync.and.returnValue(Promise.resolve(userMock));
     await component.ngOnInit();
@@ -66,7 +66,7 @@ describe('See my profileConLogin', () => {
     expect(component.searchUser._id).toEqual(userMock._id);
   })
 
-  xit('si el usuario tiene vinculado github o gitlab que traiga sus metricas',async ()=>{
+  it('si el usuario tiene vinculado github o gitlab que traiga sus metricas',async ()=>{
     component.currentUser = userMock
     const detailsUserAsync = spyOn(mockUserService,'detailsUserAsync');
     detailsUserAsync.and.returnValue(Promise.resolve(userMock));
@@ -77,7 +77,7 @@ describe('See my profileConLogin', () => {
     expect(mockUserService.getLanguagesGithub).toHaveBeenCalled();
   })
 
-  xit('si el usuario NO tiene vinculado  github o gitlab que NO traiga sus metricas',async ()=>{
+  it('si el usuario NO tiene vinculado  github o gitlab que NO traiga sus metricas',async ()=>{
     component.currentUser = userMock3
     const detailsUserAsync = spyOn(mockUserService,'detailsUserAsync');
     detailsUserAsync.and.returnValue(Promise.resolve(userMock3));
@@ -88,10 +88,7 @@ describe('See my profileConLogin', () => {
     expect(mockUserService.getLanguagesGithub).not.toHaveBeenCalled();
   })
 
-  xit('que el usuario pueda vincularse con github',async ()=>{
-  })
-
-  xit('que el usuario pueda vincularse con gitlab',async ()=>{
+  it('que el usuario pueda vincularse con gitlab',async ()=>{
     const updateUser = spyOn(mockUserService,'updateUser')
     const getCommitsByUserGithub = spyOn(mockUserService,'getCommitsByUserGithub')
     updateUser.and.returnValue(of<any>({}));
@@ -101,7 +98,7 @@ describe('See my profileConLogin', () => {
     expect(mockUserService.updateUser).toHaveBeenCalled();
   })
 
-  xit('que el usuario pueda vincularse con github',async ()=>{
+  it('que el usuario pueda vincularse con github',async ()=>{
     const updateUser = spyOn(mockUserService,'updateUser')
     const getCommitsByUserGithub = spyOn(mockUserService,'getCommitsByUserGithub')
     updateUser.and.returnValue(of<any>({}));
@@ -111,7 +108,7 @@ describe('See my profileConLogin', () => {
     expect(mockUserService.updateUser).toHaveBeenCalled();
   })
 
-  xit('que el usuario no pueda vincularse con gitlab',async ()=>{
+  it('que el usuario no pueda vincularse con gitlab',async ()=>{
     const updateUser = spyOn(mockUserService,'updateUser')
     const getCommitsByUserGithub = spyOn(mockUserService,'getCommitsByUserGithub')
     updateUser.and.returnValue(of<any>({}));
@@ -120,7 +117,7 @@ describe('See my profileConLogin', () => {
     expect(mockUserService.updateUser).not.toHaveBeenCalled();
   })
 
-  xit('que el usuario no pueda vincularse con gitlab',async ()=>{
+  it('que el usuario no pueda vincularse con gitlab',async ()=>{
     const updateUser = spyOn(mockUserService,'updateUser')
     const getCommitsByUserGithub = spyOn(mockUserService,'getCommitsByUserGithub')
     updateUser.and.returnValue(of<any>({}));
@@ -129,7 +126,7 @@ describe('See my profileConLogin', () => {
     expect(mockUserService.updateUser).not.toHaveBeenCalled();
   })
 
-  xit('que el usuario pueda invitar a un proyecto a otro usuario', ()=>{
+  it('que el usuario pueda invitar a un proyecto a otro usuario', ()=>{
     component.currentUser = userMock2
     const sendMailInvitation = spyOn(mockProjectService,'sendMailInvitation')
     sendMailInvitation.and.returnValue(of<any>({}));
@@ -161,7 +158,7 @@ describe('See my profileSinLogin', () => {
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
