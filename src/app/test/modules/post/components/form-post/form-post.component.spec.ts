@@ -30,7 +30,7 @@ describe('FormPostComponent', () => {
 
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
