@@ -58,8 +58,8 @@ describe('ListPostComponentSinLogin', () => {
     fixture = TestBed.createComponent(ListPostComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    const getTechnologies = spyOn(mockDataService, 'getTechnologies');
-    getTechnologies.and.returnValue(of<any[]>(mockTechnologies));
+
+    
   });
 
   it('should create', () => {
@@ -68,6 +68,8 @@ describe('ListPostComponentSinLogin', () => {
 
   it('al iniciar el ngOnInit se deben buscar los post : getAllPost()',()=>{
     const getAllPost = spyOn(mockPostService,'getAllPost');
+    const getTechnologies = spyOn(mockDataService, 'getTechnologies');
+    getTechnologies.and.returnValue(of<any[]>(mockTechnologies));
     getAllPost.and.returnValue(of(mockGetAllPost))
     component.ngOnInit();
     expect(mockPostService.getAllPost).toHaveBeenCalled();
