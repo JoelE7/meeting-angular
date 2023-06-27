@@ -17,8 +17,13 @@ export const mockTechnologies:Item[]=[
     }
 ]
 
+export const mockResponseTechnologies:any = {
+    technologies : mockTechnologies,
+    technologiesLength : mockTechnologies.length
+}
+
 export const mockDataService: {
     getTechnologies: () => Observable<any>;
   } = {
-    getTechnologies: () => of({technologies : mockTechnologies,technologiesLength : mockTechnologies.length}),
+    getTechnologies: () => of(mockResponseTechnologies),
   };

@@ -12,7 +12,7 @@ import { mockGetAllPost, mockPostService } from 'src/app/test/__mocks__/services
 import { of } from 'rxjs';
 import { userMock } from 'src/app/test/__mocks__/models/user/user.mock.model';
 import { DataService } from 'src/app/api/services/data/data.service';
-import { mockDataService, mockTechnologies } from 'src/app/test/__mocks__/services/data/data.service.mock';
+import { mockDataService, mockResponseTechnologies, mockTechnologies } from 'src/app/test/__mocks__/services/data/data.service.mock';
 
 describe('ListPostComponentConLogin', () => {
   let component: ListPostComponent;
@@ -69,7 +69,7 @@ describe('ListPostComponentSinLogin', () => {
   it('al iniciar el ngOnInit se deben buscar los post : getAllPost()',()=>{
     const getAllPost = spyOn(mockPostService,'getAllPost');
     const getTechnologies = spyOn(mockDataService, 'getTechnologies');
-    getTechnologies.and.returnValue(of<any[]>(mockTechnologies));
+    getTechnologies.and.returnValue(of<any>(mockResponseTechnologies));
     getAllPost.and.returnValue(of(mockGetAllPost))
     component.ngOnInit();
     expect(mockPostService.getAllPost).toHaveBeenCalled();
