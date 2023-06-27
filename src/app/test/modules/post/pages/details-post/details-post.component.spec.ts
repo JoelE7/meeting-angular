@@ -132,18 +132,18 @@ describe('DetailsPostComponentSinLogin', () => {
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  xit("Al iniciar el ngOnInit que se busque el proyecto por id : detailsPost()",()=>{
+  it("Al iniciar el ngOnInit que se busque el proyecto por id : detailsPost()",()=>{
     const detailsPost = spyOn(mockPostService, 'detailsPost');
     detailsPost.and.returnValue(of<Post>(mockPostDetails));
     component.ngOnInit();
     expect(mockPostService.detailsPost).toHaveBeenCalled();
   })
 
-  xit("no debería permitir comentar el post si el usuario no está logueado : Form", () => {
+  it("no debería permitir comentar el post si el usuario no está logueado : Form", () => {
     const detailsPost = spyOn(mockPostService, 'detailsPost');
     detailsPost.and.returnValue(of<Post>(mockPostDetails));
     component.currentUser = undefined;
