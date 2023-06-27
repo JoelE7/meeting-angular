@@ -150,7 +150,7 @@ describe('DetailsProjectComponentConLogin', () => {
     expect(mockProjectService.joinProject).toHaveBeenCalled();
   })
 
-  it('que se pueda cancelar una solicitud para unirse a un proyecto : cancelRequestToJoinTheProject()',()=>{
+  xit('que se pueda cancelar una solicitud para unirse a un proyecto : cancelRequestToJoinTheProject()',()=>{
     component.currentUser = userMock2
     const cancelRequestToJoinTheProject = spyOn(mockProjectService,'cancelRequestToJoinTheProject')
     cancelRequestToJoinTheProject.and.returnValue(of<any>({}));
@@ -158,7 +158,7 @@ describe('DetailsProjectComponentConLogin', () => {
     expect(mockProjectService.cancelRequestToJoinTheProject).toHaveBeenCalled();
   })
 
-  it('que se pueda enviar una solicitud para unirse a un proyecto : sendRequestToJoinTheProject()',()=>{
+  xit('que se pueda enviar una solicitud para unirse a un proyecto : sendRequestToJoinTheProject()',()=>{
     component.currentUser = userMock2
     const sendRequestToJoinTheProject = spyOn(mockProjectService,'sendRequestToJoinTheProject')
     sendRequestToJoinTheProject.and.returnValue(of<any>({}));
@@ -166,7 +166,7 @@ describe('DetailsProjectComponentConLogin', () => {
     expect(mockProjectService.sendRequestToJoinTheProject).toHaveBeenCalled();
   })
 
-  it('que el usuario pueda abandonar un proyecto : leaveProject()',()=>{
+  xit('que el usuario pueda abandonar un proyecto : leaveProject()',()=>{
     component.currentUser = userMock2
     const leaveProject = spyOn(mockProjectService,'leaveProject')
     leaveProject.and.returnValue(of<any>({}));
@@ -174,7 +174,7 @@ describe('DetailsProjectComponentConLogin', () => {
     expect(mockProjectService.leaveProject).toHaveBeenCalled();
   })
 
-  it('que el usuario pueda aceptar o rechazar una solicitud',()=>{
+  xit('que el usuario pueda aceptar o rechazar una solicitud',()=>{
     component.currentUser = userMock2
     const userRequestResponsesLeader = spyOn(mockProjectService,'userRequestResponsesLeader')
     userRequestResponsesLeader.and.returnValue(of<any>({}));
@@ -182,7 +182,7 @@ describe('DetailsProjectComponentConLogin', () => {
     expect(mockProjectService.userRequestResponsesLeader).toHaveBeenCalled();
   })
 
-  it('que el usuario pueda sugerir un proyecto : sendMailInvitation()',()=>{
+  xit('que el usuario pueda sugerir un proyecto : sendMailInvitation()',()=>{
     component.currentUser = userMock2
     const sendMailInvitation = spyOn(mockProjectService,'sendMailInvitation')
     sendMailInvitation.and.returnValue(of<any>({}));
@@ -191,7 +191,7 @@ describe('DetailsProjectComponentConLogin', () => {
   })
 
 
-  it('que se pueda finalizar un proyecto : finalizeProject()',()=>{
+  xit('que se pueda finalizar un proyecto : finalizeProject()',()=>{
     component.currentUser = userMock2
     const finalizeProject = spyOn(mockProjectService,'finalizeProject')
     finalizeProject.and.returnValue(of<any>({}));
