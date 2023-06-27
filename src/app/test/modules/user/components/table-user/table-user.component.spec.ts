@@ -28,11 +28,11 @@ describe('TableUserComponent', () => {
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  xit("que se envíe el mail de contacto al usuario creador del post y se cierre el modal : sendMailContact()", () => {
+  it("que se envíe el mail de contacto al usuario creador del post y se cierre el modal : sendMailContact()", () => {
     const sendMailContact = spyOn(mockUserService, 'sendMailContact');
     sendMailContact.and.returnValue(of<any>({}));
     component.showModalContact(new User());

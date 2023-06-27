@@ -6,6 +6,8 @@ import { MessageService } from 'primeng/api';
 import { PrimengModule } from 'src/app/shared/primeng/primeng.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { mockDataService, mockResponseTechnologies } from '../../../../__mocks__/services/data/data.service.mock';
+import { of } from 'rxjs';
 
 describe('FormUserComponent', () => {
   let component: FormUserComponent;
@@ -14,7 +16,7 @@ describe('FormUserComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ FormUserComponent ],
-      providers : [DataService,MessageService],
+      providers : [{provide : DataService, mockDataService},MessageService],
       imports : [PrimengModule,ReactiveFormsModule,HttpClientTestingModule]
     })
     .compileComponents();
@@ -22,14 +24,16 @@ describe('FormUserComponent', () => {
     fixture = TestBed.createComponent(FormUserComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    const getTechnologies = spyOn(mockDataService, 'getTechnologies');
+    getTechnologies.and.returnValue(of<any>(mockResponseTechnologies));
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
   
-  xit('que se valide el formulario correctamente',()=>{
+  it('que se valide el formulario correctamente',()=>{
     let form = component.form
     expect(form.invalid).toBeTruthy()
     form.get('name').setValue("prueba proyecto")
