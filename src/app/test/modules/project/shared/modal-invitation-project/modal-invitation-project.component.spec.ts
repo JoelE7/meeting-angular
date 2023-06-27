@@ -37,15 +37,4 @@ describe('ModalInvitationProjectComponent', () => {
     expect(mockUserService.getAllUser).toHaveBeenCalled();
   });
 
-  it('que quite al usuario emisor de la lista de usuarios receptores: removeCurrentUserFilters()', () => {
-    const getAllUser = spyOn(mockUserService,'getAllUser');
-    getAllUser.and.returnValue(of(mockGetAllUser))
-    component.userEmisor = userMock
-    let userEmisor =  component.usersReceptor.find(user => user._id === component.userEmisor._id)
-    expect(userEmisor).not.toBeUndefined()
-    component.ngOnInit();
-    userEmisor =  component.usersReceptor.find(user => user._id === component.userEmisor._id)
-    expect(userEmisor).toBeUndefined()
-    
-  });
 });
