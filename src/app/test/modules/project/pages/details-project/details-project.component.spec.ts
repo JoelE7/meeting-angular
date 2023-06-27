@@ -102,7 +102,7 @@ describe('DetailsProjectComponentConLogin', () => {
     expect(mockProjectService.getMetricByProject).not.toHaveBeenCalled();
   });
 
-  xit('verificar si el usuario existe en el proyecto : checkUserIfExistsInProject()',async ()=>{
+  it('verificar si el usuario existe en el proyecto : checkUserIfExistsInProject()',async ()=>{
     component.currentUser = userMock
     const detailsProjectAsync = spyOn(mockProjectService,'detailsProjectAsync')
     detailsProjectAsync.and.returnValue(
@@ -115,7 +115,7 @@ describe('DetailsProjectComponentConLogin', () => {
     expect(component.userExistProject).toBeTruthy()
   })
   
-  xit('verificar si el usuario envío solicitud al proyecto : checkUserIfSendRequest()',async ()=>{
+  it('verificar si el usuario envío solicitud al proyecto : checkUserIfSendRequest()',async ()=>{
     component.currentUser = userMock
     const detailsProjectAsync = spyOn(mockProjectService,'detailsProjectAsync')
     detailsProjectAsync.and.returnValue(
