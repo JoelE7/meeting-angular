@@ -81,8 +81,6 @@ describe('DetailsProjectComponentConLogin', () => {
       Promise.resolve(mockProjectDetailsWithRepository)
     );
 
-    const getMetricByProject = spyOn(mockProjectService, 'getMetricByProject');
-    getMetricByProject.and.returnValue(Promise.resolve(metricProject));
 
    await component.ngOnInit();
 
@@ -95,7 +93,6 @@ describe('DetailsProjectComponentConLogin', () => {
     detailsProjectAsync.and.returnValue(
       Promise.resolve(mockProjectDetails)
     );
-    const getMetricByProject = spyOn(mockProjectService, 'getMetricByProject');
   
     await component.ngOnInit();
   
