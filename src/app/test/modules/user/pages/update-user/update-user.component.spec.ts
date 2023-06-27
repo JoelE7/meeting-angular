@@ -35,11 +35,11 @@ describe('UpdateUserComponent', () => {
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('al editar un usuario que se llame al método del servicio : updateUser y que este rediriga a /user/list-users', () => {
+  it('al editar un usuario que se llame al método del servicio : updateUser y que este rediriga a /user/list-users', () => {
     component.searchUser = userMock3
     const updateUser = spyOn(mockUserService, 'updateUser');
     const navigateSpy = spyOn(router, 'navigate');
@@ -51,7 +51,7 @@ describe('UpdateUserComponent', () => {
 
   });
   
-  xit('al editar mal un usuario que se llame al método del servicio : updateUser y que esté no rediriga', () => {
+  it('al editar mal un usuario que se llame al método del servicio : updateUser y que esté no rediriga', () => {
     component.searchUser = userMock3
     const updateUser = spyOn(mockUserService, 'updateUser');
     const navigateSpy = spyOn(router, 'navigate');

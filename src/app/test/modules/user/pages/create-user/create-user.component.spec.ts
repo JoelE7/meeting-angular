@@ -38,7 +38,7 @@ describe('CreateUserComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('al crear un usuario que se llame al método del servicio : registerUser y que este rediriga a /user/list-users', () => {
+  it('al crear un usuario que se llame al método del servicio : registerUser y que este rediriga a /user/list-users', () => {
     const registerUser = spyOn(mockAuthService, 'registerUser');
     const navigateSpy = spyOn(router, 'navigate');
 
@@ -48,7 +48,7 @@ describe('CreateUserComponent', () => {
     expect(navigateSpy).toHaveBeenCalledWith(['/user/list-users']);
   });
   
-  xit('al crear mal un usuario que se llame al método del servicio : registerUser y que esté no rediriga', () => {
+  it('al crear mal un usuario que se llame al método del servicio : registerUser y que esté no rediriga', () => {
     const registerUser = spyOn(mockAuthService, 'registerUser');
     const navigateSpy = spyOn(router, 'navigate');
 

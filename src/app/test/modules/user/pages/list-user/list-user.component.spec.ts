@@ -31,7 +31,7 @@ describe('Listar usuarios', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('que se puedan listar los usuarios : getAllUsersByRanking()',()=>{
+  it('que se puedan listar los usuarios : getAllUsersByRanking()',()=>{
     const getAllUsersByRanking = spyOn(mockUserService,'getAllUsersByRanking');
     getAllUsersByRanking.and.returnValue(of(mockGetAllUserRanking))
     component.ngOnInit();
