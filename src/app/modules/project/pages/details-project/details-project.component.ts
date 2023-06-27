@@ -60,25 +60,25 @@ export class DetailsProjectComponent implements OnInit {
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private projectService: ProjectService,
-    private technologiesService:TechnologiesService
+    private technologiesService: TechnologiesService
   ) {}
 
-   async ngOnInit(){
+  async ngOnInit() {
     let { id } = this.activatedRoute.snapshot.params;
     this.idParam = id;
     await this.getDetailsProject(id);
-    
+
     if (this.searchProject?.urlRepository) {
       this.getMetricByProject();
     }
   }
 
-  getIcon(technologie:string){
+  getIcon(technologie: string) {
     return this.technologiesService.getIcon(technologie);
   }
 
   async getDetailsProject(id: string) {
-    this.searchProject = await this.projectService.detailsProjectAsync(id);    
+    this.searchProject = await this.projectService.detailsProjectAsync(id);
     this.searchProject.roleUser =
       this.searchProject.leader?._id == this.currentUser?._id
         ? 'leader'
@@ -207,16 +207,18 @@ export class DetailsProjectComponent implements OnInit {
     /**Obtención de datos de la métrica de commits barra */
     let developers = [];
 
-    this.metricProject.commitByUser.forEach((data: any) => {
-      developers.push(data.developerUsername);
-    });
+    if (this.metricProject?.commitByUser) {
+      this.metricProject?.commitByUser.forEach((data: any) => {
+        developers.push(data.developerUsername);
+      });
+    }
 
-    this.loadMetricDataBar(developers, this.metricProject.commitByUser);
+    this.loadMetricDataBar(developers, this.metricProject?.commitByUser);
 
     /**Cargar datos de la métrica radar */
     this.loadMetricDataRadar(
       developers,
-      this.metricProject.contributionDistributionByType
+      this.metricProject?.contributionDistributionByType
     );
 
     this.spinnerMetric = false;
@@ -373,8 +375,8 @@ export class DetailsProjectComponent implements OnInit {
         '¿Está seguro que deseas abandonar esté proyecto? Al abandonar un proyecto recibís una penalización de 500 puntos',
       header: 'Confirmar abandono',
       icon: 'pi pi-exclamation-triangle',
-      acceptLabel : "Abandonar",
-      rejectLabel : "Cancelar",
+      acceptLabel: 'Abandonar',
+      rejectLabel: 'Cancelar',
       accept: () => {
         this.leaveProject();
       },
@@ -403,31 +405,29 @@ export class DetailsProjectComponent implements OnInit {
       userId: this.currentUser._id,
     };
 
-    this.projectService
-      .leaveProject(this.searchProject, userLeave)
-      .subscribe({
-        next: (data) => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Hecho!',
-            detail: '¡Has abandonado el proyecto con exito!',
-          });
-          this.messageService.add({
-            severity: 'warn',
-            summary: 'Penalización',
-            detail: 'Se te han quitado 500 puntos',
-          });
-          this.userExistProject = false;
-          this.ngOnInit();
-        },
-        error: (err) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: err.error ? err.error.message : 'Ups! ocurrio un error',
-          });
-        },
-      });
+    this.projectService.leaveProject(this.searchProject, userLeave).subscribe({
+      next: (data) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Hecho!',
+          detail: '¡Has abandonado el proyecto con exito!',
+        });
+        this.messageService.add({
+          severity: 'warn',
+          summary: 'Penalización',
+          detail: 'Se te han quitado 500 puntos',
+        });
+        this.userExistProject = false;
+        this.ngOnInit();
+      },
+      error: (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+        });
+      },
+    });
   }
 
   userRequestResponsesLeader(event: any) {
@@ -436,7 +436,9 @@ export class DetailsProjectComponent implements OnInit {
       accepted: event.request,
     };
 
-    let message = response.accepted ? "La solicitud ha sido aceptada con exito" : "La solicitud ha sido rechazada con exito"
+    let message = response.accepted
+      ? 'La solicitud ha sido aceptada con exito'
+      : 'La solicitud ha sido rechazada con exito';
 
     this.projectService
       .userRequestResponsesLeader(this.searchProject, response)
@@ -448,7 +450,7 @@ export class DetailsProjectComponent implements OnInit {
             detail: message,
           });
           this.spinner = true;
-          this.getDetailsProject(this.idParam)
+          this.getDetailsProject(this.idParam);
         },
         error: (err) => {
           this.messageService.add({
