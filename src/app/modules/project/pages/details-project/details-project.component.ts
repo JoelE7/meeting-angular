@@ -172,7 +172,7 @@ export class DetailsProjectComponent implements OnInit {
             this.messageService.add({
               severity: 'warn',
               summary: 'No te pudiste unir al proyecto',
-              detail: data.body.message,
+              detail: data.body?.message,
             });
           }
         },
