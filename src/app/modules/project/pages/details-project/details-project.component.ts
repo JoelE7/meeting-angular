@@ -211,9 +211,9 @@ export class DetailsProjectComponent implements OnInit {
       this.metricProject?.commitByUser.forEach((data: any) => {
         developers.push(data.developerUsername);
       });
+    this.loadMetricDataBar(developers, this.metricProject?.commitByUser);
     }
 
-    this.loadMetricDataBar(developers, this.metricProject?.commitByUser);
 
     /**Cargar datos de la métrica radar */
     this.loadMetricDataRadar(
