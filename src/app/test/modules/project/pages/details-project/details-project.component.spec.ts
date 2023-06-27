@@ -168,6 +168,13 @@ describe('DetailsProjectComponentConLogin', () => {
 
   it('que el usuario pueda abandonar un proyecto : leaveProject()',()=>{
     component.currentUser = userMock2
+    const detailsProjectAsync = spyOn(
+      mockProjectService,
+      'detailsProjectAsync'
+    );
+    detailsProjectAsync.and.returnValue(
+      Promise.resolve(mockProjectDetailsWithRepository)
+    );
     const leaveProject = spyOn(mockProjectService,'leaveProject')
     leaveProject.and.returnValue(of<any>({}));
     component.leaveProject();

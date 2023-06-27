@@ -418,7 +418,7 @@ export class DetailsProjectComponent implements OnInit {
             detail: 'Se te han quitado 500 puntos',
           });
           this.userExistProject = false;
-          // this.ngOnInit();
+          this.ngOnInit();
         },
         error: (err) => {
           this.messageService.add({
