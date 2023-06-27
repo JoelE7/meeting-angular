@@ -87,6 +87,8 @@ export class ListPostComponent implements OnInit {
   getTechnologies() {
     this.dataService.getTechnologies().subscribe({
       next: (data) => {
+        console.log(data);
+        
         for (let i = 0; i < data.technologies.length; i++) {
           this.technologies.push({
             label: data.technologies[i],
