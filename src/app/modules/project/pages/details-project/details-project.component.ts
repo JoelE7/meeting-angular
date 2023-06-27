@@ -214,12 +214,13 @@ export class DetailsProjectComponent implements OnInit {
     this.loadMetricDataBar(developers, this.metricProject?.commitByUser);
     }
 
-
     /**Cargar datos de la métrica radar */
-    this.loadMetricDataRadar(
-      developers,
-      this.metricProject?.contributionDistributionByType
-    );
+    if(this.metricProject?.contributionDistributionByType){
+      this.loadMetricDataRadar(
+        developers,
+        this.metricProject?.contributionDistributionByType
+      );
+    }
 
     this.spinnerMetric = false;
   }
