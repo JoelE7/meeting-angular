@@ -68,7 +68,7 @@ describe('DetailsProjectComponentConLogin', () => {
     localStorage.removeItem('user');
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
@@ -239,13 +239,15 @@ describe('DetailsProjectComponentSinLogin', () => {
     fixture = TestBed.createComponent(DetailsProjectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    const getMetricByProject = spyOn(mockProjectService, 'getMetricByProject');
+    getMetricByProject.and.returnValue(Promise.resolve(metricProject));
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('que al iniciar el componente se llame a : detailsProject', () => {
+  it('que al iniciar el componente se llame a : detailsProject', () => {
     const detailsProjectAsync = spyOn(
       mockProjectService,
       'detailsProjectAsync'
@@ -260,7 +262,7 @@ describe('DetailsProjectComponentSinLogin', () => {
     expect(component.searchProject._id).toEqual('1');
   });
 
-  xit('si el usuario no está logueado que no se pueda unir a un proyecto',()=>{
+  it('si el usuario no está logueado que no se pueda unir a un proyecto',()=>{
     const joinProject = spyOn(mockProjectService,'joinProject')
     joinProject.and.returnValue(of<any>({}));
     component.joinAProject();
