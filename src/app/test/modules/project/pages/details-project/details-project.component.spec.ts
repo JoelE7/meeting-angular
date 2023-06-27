@@ -166,7 +166,7 @@ describe('DetailsProjectComponentConLogin', () => {
     expect(mockProjectService.sendRequestToJoinTheProject).toHaveBeenCalled();
   })
 
-  xit('que el usuario pueda abandonar un proyecto : leaveProject()',()=>{
+  it('que el usuario pueda abandonar un proyecto : leaveProject()',()=>{
     component.currentUser = userMock2
     const leaveProject = spyOn(mockProjectService,'leaveProject')
     leaveProject.and.returnValue(of<any>({}));
@@ -174,7 +174,7 @@ describe('DetailsProjectComponentConLogin', () => {
     expect(mockProjectService.leaveProject).toHaveBeenCalled();
   })
 
-  xit('que el usuario pueda aceptar o rechazar una solicitud',()=>{
+  it('que el usuario pueda aceptar o rechazar una solicitud',()=>{
     component.currentUser = userMock2
     const userRequestResponsesLeader = spyOn(mockProjectService,'userRequestResponsesLeader')
     userRequestResponsesLeader.and.returnValue(of<any>({}));
