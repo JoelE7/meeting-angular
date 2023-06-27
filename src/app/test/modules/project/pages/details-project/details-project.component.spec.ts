@@ -59,7 +59,8 @@ describe('DetailsProjectComponentConLogin', () => {
     fixture.detectChanges();
 
     localStorage.setItem('user', JSON.stringify(userMock));
-
+    const getMetricByProject = spyOn(mockProjectService, 'getMetricByProject');
+    getMetricByProject.and.returnValue(Promise.resolve(metricProject));
   });
 
   afterEach(() => {
