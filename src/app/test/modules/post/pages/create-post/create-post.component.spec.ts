@@ -40,11 +40,11 @@ describe('CreatePostComponent', () => {
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('al crear un post que se llame al método del servicio : createPost y que este rediriga a /post/list-post', () => {
+  it('al crear un post que se llame al método del servicio : createPost y que este rediriga a /post/list-post', () => {
     const createPost = spyOn(mockPostService, 'createPost');
     const navigateSpy = spyOn(router, 'navigate');
 
@@ -54,7 +54,7 @@ describe('CreatePostComponent', () => {
     expect(navigateSpy).toHaveBeenCalledWith(['/post/list-post']);
   });
   
-  xit('al crear mal un post que se llame al método del servicio : createPost y que esté no rediriga', () => {
+  it('al crear mal un post que se llame al método del servicio : createPost y que esté no rediriga', () => {
     const createPost = spyOn(mockPostService, 'createPost');
     const navigateSpy = spyOn(router, 'navigate');
 

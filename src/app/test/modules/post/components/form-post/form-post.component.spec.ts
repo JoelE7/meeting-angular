@@ -34,7 +34,7 @@ describe('FormPostComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('que se valide el formulario : form.invalid',()=>{
+  it('que se valide el formulario : form.invalid',()=>{
     let form = component.form;
     expect(form.invalid).toBeTruthy()
     form.get('title').setValue("titulo")
