@@ -61,7 +61,7 @@ export class ModalScoreComponent implements OnInit {
     this.starArray.controls.forEach((scoreForm: FormGroup) => {
       let scoreUser = {
         userId: scoreForm.value.userId,
-        score: scoreForm.value.star * 10 + scoreForm.value.score,
+        score: scoreForm.value.star,
       };
       object.scores.push(scoreUser);
     });
