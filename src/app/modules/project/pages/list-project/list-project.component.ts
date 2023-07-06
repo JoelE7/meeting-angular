@@ -175,7 +175,7 @@ export class ListProjectComponent implements OnInit {
     }
 
     this.messages = [
-      { severity: 'info', detail: 'No se encontraron proyectos con la busqueda realizada' }
+      { severity: 'info', detail: 'No se encontraron proyectos con la búsqueda realizada' }
     ];
   }
 
