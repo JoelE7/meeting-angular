@@ -1,5 +1,5 @@
 .loginBackground{
-  min-height: 500px;
+  min-height: 600px;
   background-color: rgb(241, 241, 241);
   padding: 80px 0px;
   display: flex;
@@ -38,8 +38,8 @@
     flex-direction: column;
     justify-content: center;
     min-height: 100%;
-    min-width: 365px; 
+    min-width: 365px;
     width:300px;
-    margin: 0px 25px;  
+    margin: 0px 25px;
   }
 }
