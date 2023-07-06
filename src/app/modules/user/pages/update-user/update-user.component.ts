@@ -38,7 +38,7 @@ export class UpdateUserComponent implements OnInit{
         this.messageService.add({
           severity: 'success',
           summary: '¡Hecho!',
-          detail: 'El usuario fue actualizado con exito',
+          detail: 'El usuario fue actualizado con éxito',
         });
         this.route.navigate(['/user/see-my-profile/' + this.searchUser._id])
       },

@@ -34,13 +34,11 @@
 }
 
 .p-datatable .p-datatable-thead tr th {
-   border: 1px solid #f1bcd173;
-   background-color: #f1bcd173 !important;
+   border: 1px solid #c42e6c;
+   background-color: #c42e6c !important;
+   color: #fff;
 }
-.p-datatable .p-datatable-tbody{
-  border-left:solid 1px #ccc;
-  border-right:solid 1px #ccc;
-}
+
 .p-dialog .p-dialog-header {
   background-color: #ced4da !important;
   padding:1rem;
@@ -51,17 +49,6 @@
  .p-datatable .sticky{
   position: sticky;
   left:0 ;
- }
- p-table tbody tr .sticky{
-  background-color: #fff;
- }
-
- /* .p-datatable .p-datatable-thead tr th .sticky {
-  background-color: #fff;
- } */
-
-  p-table thead th .sticky{
-  background-color:#333;
  }
 }
 
