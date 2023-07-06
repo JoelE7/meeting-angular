@@ -129,26 +129,28 @@
           </div>
           <div *ngIf="!spinnerMetric">
             <div class="row mt-3">
-              <div [ngClass]="{'col-12': searchUser.githubUsername && !searchUser.gitlabUsername,
-                              'col-6 border-right'  : searchUser.githubUsername && searchUser.gitlabUsername}" class="border-right col-6"
-                *ngIf="searchUser.githubUsername" style="border-right: 1px solid #000 !important;">
+              <div [ngClass]="{'col-12  ': searchUser.githubUsername && !searchUser.gitlabUsername,
+                              'col-12 col-sm-6 border-right'  : searchUser.githubUsername && searchUser.gitlabUsername}" class="border-right "
+                *ngIf="searchUser.githubUsername" >
                 <h3 class="text-center">Github</h3>
                 <app-chart-doughnut *ngIf="languagesUserGithub" [data]="languagesUserGithub"></app-chart-doughnut>
               </div>
-              <div [ngClass]="{'col-12': searchUser.githubUsername && !searchUser.gitlabUsername,
-              'col-6'  : searchUser.githubUsername && searchUser.gitlabUsername}"  *ngIf="searchUser.gitlabUsername">
+              <div [ngClass]="{'col-12 col-sm-12': searchUser.githubUsername && !searchUser.gitlabUsername,
+              'col-12 col-sm-6 '  : searchUser.githubUsername && searchUser.gitlabUsername}"  *ngIf="searchUser.gitlabUsername">
                 <h3 class="text-center">Gitlab</h3>
                 <app-chart-doughnut *ngIf="languagesUserGitlab" [data]="languagesUserGitlab"></app-chart-doughnut>
               </div>
             </div>
             <div class="row mt-3">
-              <div [ngClass]="{'col-12': searchUser.githubUsername && !searchUser.gitlabUsername,
-              'col-6 border-right'  : searchUser.githubUsername && searchUser.gitlabUsername}"  *ngIf="searchUser.githubUsername" style="border-right: 1px solid #000 !important;">
-                <app-chart-bar *ngIf="repositorysCommitsGithub" [data]="repositorysCommitsGithub"></app-chart-bar>
+              <div [ngClass]="{'col-12 col-sm-12': searchUser.githubUsername && !searchUser.gitlabUsername,
+              'col-12 col-sm-6  border-right'  : searchUser.githubUsername && searchUser.gitlabUsername}"  *ngIf="searchUser.githubUsername">
+              <h3 class="text-center">Github</h3> 
+              <app-chart-bar *ngIf="repositorysCommitsGithub" [data]="repositorysCommitsGithub"></app-chart-bar>
               </div>
-              <div [ngClass]="{'col-12': searchUser.githubUsername && !searchUser.gitlabUsername,
-              'col-6'  : searchUser.githubUsername && searchUser.gitlabUsername}"  *ngIf="searchUser.gitlabUsername">
-                <app-chart-bar *ngIf="repositorysCommitsGitlab" [data]="repositorysCommitsGitlab"></app-chart-bar>
+              <div [ngClass]="{'col-12 col-sm-12': searchUser.githubUsername && !searchUser.gitlabUsername,
+              'col-12 col-sm-6 '  : searchUser.githubUsername && searchUser.gitlabUsername}"  *ngIf="searchUser.gitlabUsername">
+              <h3 class="text-center">Gitlab</h3>  
+              <app-chart-bar *ngIf="repositorysCommitsGitlab" [data]="repositorysCommitsGitlab"></app-chart-bar>
               </div>
             </div>
           </div>
