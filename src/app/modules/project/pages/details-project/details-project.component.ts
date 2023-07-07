@@ -446,8 +446,8 @@ export class DetailsProjectComponent implements OnInit {
     };
 
     let message = response.accepted
-      ? 'La solicitud ha sido aceptada con exito'
-      : 'La solicitud ha sido rechazada con exito';
+      ? 'La solicitud ha sido aceptada con éxito'
+      : 'La solicitud ha sido rechazada con éxito';
 
     this.projectService
       .userRequestResponsesLeader(this.searchProject, response)
@@ -514,7 +514,7 @@ export class DetailsProjectComponent implements OnInit {
             this.messageService.add({
               severity: 'success',
               summary: 'Hecho!',
-              detail: 'El proyecto fue finalizado con exito',
+              detail: 'El proyecto fue finalizado con éxito',
             });
             this.spinner = true;
             await this.getDetailsProject(this.idParam);
