@@ -82,6 +82,7 @@ export class DetailsProjectComponent implements OnInit {
 
   async getDetailsProject(id: string) {
     this.searchProject = await this.projectService.detailsProjectAsync(id);
+    console.log(this.searchProject);
     
     this.searchProject.roleUser =
       this.searchProject.leader?._id == this.currentUser?._id

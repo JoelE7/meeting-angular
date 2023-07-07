@@ -138,10 +138,11 @@ export class FormProjectComponent implements OnInit{
 
   startFrom() {
     this.form = new FormGroup({
-      name: new FormControl(this.project.name, [Validators.required]),
+      name: new FormControl(this.project.name, [Validators.required,Validators.minLength(3)]),
       description: new FormControl(this.project.description, [
         Validators.required,
         Validators.minLength(10),
+        Validators.maxLength(500),
       ]),
       startDate: new FormControl(this.project.startDate ? new Date(this.project.startDate) : "",[
         Validators.required,

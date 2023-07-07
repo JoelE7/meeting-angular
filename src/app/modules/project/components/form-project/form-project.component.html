@@ -9,6 +9,11 @@
         ">
         <small class="p-error">Este campo es <strong>requerido</strong></small>
       </span>
+      <span class="danger" *ngIf="
+          form.get('name').hasError('minlength') && form.get('name').touched
+        ">
+        <small class="p-error">El nombre debe tener un mínimo de <strong>3 caracteres</strong></small>
+      </span>
     </div>
     <div class="offset-0 mt-3 col-12 mt-md-0 col-md-5 mt-md-0">
       <label for="amountParticipants" class="pl-5">Cantidad de participantes
@@ -49,7 +54,13 @@
           form.get('description').hasError('minlength') &&
           form.get('description').touched
         ">
-        <small class="p-error">Debe agregar minimo <strong>10</strong> caracteres</small>
+        <small class="p-error">Debe agregar mínimo <strong>10</strong> caracteres</small>
+      </span>
+      <span class="danger" *ngIf="
+          form.get('description').hasError('maxlength') &&
+          form.get('description').touched
+        ">
+        <small class="p-error">Debe agregar máximo <strong>500</strong> caracteres</small>
       </span>
     </div>
   </div> 
