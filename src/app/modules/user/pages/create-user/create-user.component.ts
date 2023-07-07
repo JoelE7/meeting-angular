@@ -15,8 +15,8 @@ export class CreateUserComponent {
 
   constructor(
     private messageService: MessageService,
-    private authService:AuthService,
-    private route:Router
+    private authService: AuthService,
+    private route: Router
   ) {}
 
   createUser(user: User) {
@@ -25,9 +25,9 @@ export class CreateUserComponent {
         this.messageService.add({
           severity: 'success',
           summary: '¡Hecho!',
-          detail: 'El usuario fue creado con exito',
+          detail: 'El usuario fue creado con éxito',
         });
-        this.route.navigate(['/user/list-users'])
+        this.route.navigate(['/user/list-users']);
       },
       error: (err) => {
         this.messageService.add({

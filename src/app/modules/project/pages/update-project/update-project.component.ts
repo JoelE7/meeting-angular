@@ -34,7 +34,7 @@ export class UpdateProjectComponent {
         summary: 'Error',
         detail: 'Recargue o contacte con el administrador del sistema',
       });
-    }else{
+    } else {
       this.spinner = false;
     }
   }
@@ -46,7 +46,7 @@ export class UpdateProjectComponent {
         this.messageService.add({
           severity: 'success',
           summary: 'Actualizado',
-          detail: '¡El Proyecto fue actualizado con exito!',
+          detail: '¡El Proyecto fue actualizado con éxito!',
         });
         this.router.navigate(['/project/details-project/' + this.project._id]);
       },
