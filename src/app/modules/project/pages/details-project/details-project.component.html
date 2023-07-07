@@ -47,6 +47,16 @@
               </p>
             </div>
             <div class="col-12 col-lg-6">
+              <p *ngIf="searchProject.status != 'Done'">
+                <b>Fecha fin estimativa: </b>
+                <span>{{ searchProject.endDate | date : "dd/MM/YYYY" }}</span>
+              </p>
+              <p *ngIf="searchProject.status === 'Done'">
+                <b>Fecha fin: </b>
+                <span>{{ searchProject.endDate | date : "dd/MM/YYYY" }}</span>
+              </p>
+            </div>
+            <div class="col-12 col-lg-6">
               <p>
                 <b>Cantidad de participantes: </b>
                 <span> {{searchProject.participants.length}} / {{ searchProject.amountParticipants }}</span>
@@ -223,7 +233,7 @@
             </div>
           </div>
         </p-tabPanel>
-        <p-tabPanel header="Solicitudes" *ngIf="searchProject.leader._id === currentUser?._id">
+        <p-tabPanel header="Solicitudes" *ngIf="searchProject.leader._id === currentUser?._id && !searchProject.validateSystem">
           <div class="row" *ngIf="searchProject.requests.length > 0;else notRequest">
             <div class="col">
               <app-request-member (eventEmitterUserRequest)="userRequestResponsesLeader($event)"
@@ -270,12 +280,12 @@
                 [style]="{ heigth: '30px !important' }"></p-button>
                 <p-button class="btnInd me-sm-2 me-md-2" (click)="
                 cancelRequestToJoinTheProject()" type="button" styleClass="p-button-outlined p-button-help"
-                  label="Cancelar solicitud" *ngIf="!searchProject.validateSystem && userExistSendRequest && !userExistProject"
+                  label="Cancelar solicitud" [loading]="cancelRequestProjectSpinner" *ngIf="!searchProject.validateSystem && userExistSendRequest && !userExistProject"
                   [style]="{ heigth: '30px !important' }"></p-button>
                   <p-button class="btnInd  me-sm-2 me-md-2" (click)="
-                  sendRequestToJoinTheProject()" type="button" styleClass="p-button-outlined p-button-help"
-                    label="Enviar solicitud" *ngIf="!searchProject.validateSystem && !userExistSendRequest && !userExistProject && currentUser"
-                    [style]="{ heigth: '30px !important' }"></p-button>
+                  sendRequestToJoinTheProject()" type="button" styleClass="p-button-help"
+                    label="Enviar solicitud"  *ngIf="!searchProject.validateSystem && !userExistSendRequest && !userExistProject && currentUser"
+                    [style]="{ heigth: '30px !important' }" [loading]="sendRequestProjectSpinner" ></p-button>
           </div>
         </div>
       </p-tabView>

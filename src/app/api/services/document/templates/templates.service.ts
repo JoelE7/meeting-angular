@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { Project } from 'src/app/shared/models/project/project.class';
 import { User } from 'src/app/shared/models/user/user.class';
@@ -6,7 +7,7 @@ import { User } from 'src/app/shared/models/user/user.class';
   providedIn: 'root',
 })
 export class TemplatesService {
-  constructor() {}
+  constructor(private date:DatePipe) {}
 
   downloadCertificate(project: Project, user: User, rol: string) {
     let html = `
@@ -72,7 +73,7 @@ export class TemplatesService {
       
             <p class="text-center">
               por completar con éxito como ${rol} su proyecto 
-              <strong>"${project.name}"</strong> el dia 16 de junio de 2023.
+              <strong>"${project.name}"</strong> el dia ${this.date.transform(project.endDate, 'dd/MM/yyyy')}
             </p>
       
             <p class="text-center">

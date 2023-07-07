@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { ProjectRoutingModule } from './project-routing.module';
 import { CreateProjectComponent } from './pages/create-project/create-project.component';
 import { FormProjectComponent } from './components/form-project/form-project.component';
@@ -78,6 +78,7 @@ import { RequestMemberComponent } from './components/request-member/request-memb
     RecommendationsPostModalComponent,
     RecommendationsProjectModalComponent,
     RecommendationsTechnologiesModalComponent,
-  ]
+  ],
+  providers :[DatePipe]
 })
 export class ProjectModule { }

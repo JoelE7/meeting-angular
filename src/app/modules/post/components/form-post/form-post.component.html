@@ -71,7 +71,7 @@
     </div>
 
     <!-- TECNOLOGIAS -->
-    <div class="offset-0 col-sm-12 col-md-5">
+    <div class="offset-0 col-sm-12 col-md-5" >
       <label for="name" class="color mt-3 ">*Tecnología </label>
       <p-multiSelect [style]="{ width: '100%' }" formControlName="technologies" placeholder="Seleccione una opción..."
         [options]="technologies" optionValue="value" optionLabel="label">
@@ -85,6 +85,11 @@
           form.get('technologies').hasError('required') && form.get('technologies').touched
         ">
         <small class="p-error">Este campo es <strong>requerido</strong></small>
+      </span>
+      <span class="danger" *ngIf="
+          form.get('technologies').hasError('maxlength') && form.get('technologies').touched
+        ">
+        <small class="p-error">Máximo se permiten <strong>3 tecnologías</strong></small>
       </span>
     </div>
   </div>

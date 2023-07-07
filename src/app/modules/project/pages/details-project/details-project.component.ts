@@ -55,6 +55,9 @@ export class DetailsProjectComponent implements OnInit {
   data: any;
   dataRadar: any;
 
+  sendRequestProjectSpinner = false;
+  cancelRequestProjectSpinner = false;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
@@ -79,6 +82,8 @@ export class DetailsProjectComponent implements OnInit {
 
   async getDetailsProject(id: string) {
     this.searchProject = await this.projectService.detailsProjectAsync(id);
+    console.log(this.searchProject);
+    
     this.searchProject.roleUser =
       this.searchProject.leader?._id == this.currentUser?._id
         ? 'leader'
@@ -317,6 +322,7 @@ export class DetailsProjectComponent implements OnInit {
   }
 
   sendRequestToJoinTheProject() {
+    this.sendRequestProjectSpinner = true;
     let request = { $push: { requests: this.currentUser._id } };
 
     this.projectService
@@ -329,6 +335,7 @@ export class DetailsProjectComponent implements OnInit {
             detail: '¡Su solicitud ha sido enviada con éxito!',
           });
           this.userExistSendRequest = true;
+          this.sendRequestProjectSpinner = false;
         },
         error: (err) => {
           this.messageService.add({
@@ -344,6 +351,7 @@ export class DetailsProjectComponent implements OnInit {
   }
 
   cancelRequestToJoinTheProject() {
+    this.cancelRequestProjectSpinner = true;
     let request = { $pull: { requests: this.currentUser._id } };
 
     this.projectService
@@ -356,6 +364,7 @@ export class DetailsProjectComponent implements OnInit {
             detail: '¡Su solicitud ha sido cancelada con éxito!',
           });
           this.userExistSendRequest = false;
+          this.cancelRequestProjectSpinner = false;
         },
         error: (err) => {
           this.messageService.add({

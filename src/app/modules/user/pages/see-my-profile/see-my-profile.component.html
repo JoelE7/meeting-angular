@@ -29,14 +29,23 @@
       </div>
       <p-tabView id="tableProfile" [scrollable]="true" class="p-3" [(activeIndex)]="activeIndex">
         <p-tabPanel header="Mi Perfil" id="tableHeader">
-          <h5>Tecnologías:</h5>
-          <div *ngIf="searchUser.technologies">
-            <app-technologies *ngIf="searchUser.technologies.length > 0"
-              [technologies]="searchUser.technologies"></app-technologies>
+          <div *ngIf="searchUser.technologies && searchUser.technologies.length > 0">
+            <h5>Tecnologías:</h5>
+            <div >
+              <app-technologies *ngIf="searchUser.technologies.length > 0"
+                [technologies]="searchUser.technologies"></app-technologies>
+            </div>
           </div>
           <h5>Experiencia Laboral:</h5>
           <p>Mercado Libre</p>
           <p>Accenture</p>
+
+          <div *ngIf="searchUser.preferences && searchUser.preferences.length > 0" class="my-4">
+            <h5  class="my-4">Preferencias:</h5>
+            <cite *ngFor="let technologie of searchUser.preferences; let l = last" title="Preferencias">
+              <img pTooltip="{{technologie}}" class="mx-2 img-technologie" width="40px" height="40px" [src]="'assets/img/technologies/' + getIcon(technologie)" [alt]="technologie">
+            </cite> 
+          </div>
           <div class="row" *ngIf="searchUser.githubUsername">
             <div class="col-12">
               <p class="link">
@@ -57,7 +66,8 @@
               </p>
             </div>
           </div>
-          <p-button *ngIf="currentUser?._id === searchUser?._id" class="mb-3" routerLink="/user/update/{{searchUser._id}}" icon="pi pi-file-edit" type="button"
+          <p-button *ngIf="currentUser?._id === searchUser?._id" class="mb-3"
+            routerLink="/user/update/{{searchUser._id}}" icon="pi pi-file-edit" type="button"
             [style]="{ width: '100%' }" label="Editar" styleClass="p-button-help"></p-button>
           <div class="" *ngIf="!searchUser.githubUsername &&
           searchUser._id == currentUser?._id || !searchUser.gitlabUsername &&
@@ -67,11 +77,12 @@
               <div class="row">
                 <div class="col-12 col-sm-12 col-dm-4 col-lg-4 col-xl-3 mb-3 mb-sm-3" *ngIf="!visibleInputGithub && !searchUser.githubUsername &&
                 searchUser._id == currentUser?._id">
-                  <p-button type="button" iconPos="right" icon="bi bi-github" [style]="{ width: '100%' }"
-                    label="Vincular con github" class="github" styleClass="p-button-secondary"
-                    (click)="linkInputUserWithGithub()"></p-button>
+                  <p-button type="button" *ngIf="!visibleInputGithub && !searchUser.githubUsername" iconPos="right"
+                    icon="bi bi-github" [style]="{ width: '100%' }" label="Vincular con github" class="github"
+                    styleClass="p-button-secondary" (click)="linkInputUserWithGithub()"></p-button>
                 </div>
-                <div class="col-12 col-sm-12 col-dm-8 col-lg-8 col-xl-9 " *ngIf="!visibleInputGitlab">
+                <div class="col-12 col-sm-12 col-dm-8 col-lg-8 col-xl-9 "
+                  *ngIf="!visibleInputGitlab && !searchUser.gitlabUsername">
                   <p-button type="button" iconPos="right" icon="fa-brands fa-square-gitlab" [style]="{ width: '100%' }"
                     label="Vincular con gitlab" class="github" styleClass="p-button-danger"
                     (click)="linkInputUserWithGitlab()"></p-button>
@@ -129,28 +140,32 @@
           </div>
           <div *ngIf="!spinnerMetric">
             <div class="row mt-3">
-              <div [ngClass]="{'col-12  ': searchUser.githubUsername && !searchUser.gitlabUsername,
-                              'col-12 col-sm-6 border-right'  : searchUser.githubUsername && searchUser.gitlabUsername}" class="border-right "
-                *ngIf="searchUser.githubUsername" >
+              <div
+                [ngClass]="{'col-12  ': searchUser.githubUsername && !searchUser.gitlabUsername,
+                              'col-12 col-sm-6 border-right'  : searchUser.githubUsername && searchUser.gitlabUsername}"
+                class="border-right " *ngIf="searchUser.githubUsername">
                 <h3 class="text-center">Github</h3>
                 <app-chart-doughnut *ngIf="languagesUserGithub" [data]="languagesUserGithub"></app-chart-doughnut>
               </div>
               <div [ngClass]="{'col-12 col-sm-12': searchUser.githubUsername && !searchUser.gitlabUsername,
-              'col-12 col-sm-6 '  : searchUser.githubUsername && searchUser.gitlabUsername}"  *ngIf="searchUser.gitlabUsername">
+              'col-12 col-sm-6 '  : searchUser.githubUsername && searchUser.gitlabUsername}"
+                *ngIf="searchUser.gitlabUsername">
                 <h3 class="text-center">Gitlab</h3>
                 <app-chart-doughnut *ngIf="languagesUserGitlab" [data]="languagesUserGitlab"></app-chart-doughnut>
               </div>
             </div>
             <div class="row mt-3">
               <div [ngClass]="{'col-12 col-sm-12': searchUser.githubUsername && !searchUser.gitlabUsername,
-              'col-12 col-sm-6  border-right'  : searchUser.githubUsername && searchUser.gitlabUsername}"  *ngIf="searchUser.githubUsername">
-              <h3 class="text-center">Github</h3> 
-              <app-chart-bar *ngIf="repositorysCommitsGithub" [data]="repositorysCommitsGithub"></app-chart-bar>
+              'col-12 col-sm-6  border-right'  : searchUser.githubUsername && searchUser.gitlabUsername}"
+                *ngIf="searchUser.githubUsername">
+                <h3 class="text-center">Github</h3>
+                <app-chart-bar *ngIf="repositorysCommitsGithub" [data]="repositorysCommitsGithub"></app-chart-bar>
               </div>
               <div [ngClass]="{'col-12 col-sm-12': searchUser.githubUsername && !searchUser.gitlabUsername,
-              'col-12 col-sm-6 '  : searchUser.githubUsername && searchUser.gitlabUsername}"  *ngIf="searchUser.gitlabUsername">
-              <h3 class="text-center">Gitlab</h3>  
-              <app-chart-bar *ngIf="repositorysCommitsGitlab" [data]="repositorysCommitsGitlab"></app-chart-bar>
+              'col-12 col-sm-6 '  : searchUser.githubUsername && searchUser.gitlabUsername}"
+                *ngIf="searchUser.gitlabUsername">
+                <h3 class="text-center">Gitlab</h3>
+                <app-chart-bar *ngIf="repositorysCommitsGitlab" [data]="repositorysCommitsGitlab"></app-chart-bar>
               </div>
             </div>
           </div>

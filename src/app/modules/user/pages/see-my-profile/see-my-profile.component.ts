@@ -10,6 +10,7 @@ import { ChartDoughnutData } from 'src/app/shared/models/model-metric/DoughnutMe
 import { MailInvitation } from 'src/app/shared/models/model-mail-invitation/model-mail-invitation.interface';
 import { Project } from 'src/app/shared/models/project/project.class';
 import { ProjectService } from 'src/app/api/services/project/project.service';
+import { TechnologiesService } from 'src/app/api/services/data/technologies.service';
 
 @Component({
   selector: 'app-see-my-profile',
@@ -51,7 +52,8 @@ export class SeeMyProfileComponent {
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
     private userService: UserService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private technologiesService:TechnologiesService
   ) {}
 
   async ngOnInit() {
@@ -80,6 +82,10 @@ export class SeeMyProfileComponent {
       { severity: 'info', detail: 'No se encontraron proyectos' },
     ];
     this.spinner = false;
+  }
+
+  getIcon(technologie:string){
+    return this.technologiesService.getIcon(technologie);
   }
 
   linkInputUserWithGithub() {
@@ -239,7 +245,7 @@ export class SeeMyProfileComponent {
     let commitsGitlab = [];
 
     if (this.searchUser?.gitlabUsername) {
-      this.commitsByUser.gitlabMetrics.commitCounts.forEach((project) => {
+      this.commitsByUser?.gitlabMetrics?.commitCounts.forEach((project) => {
         nameRepositorysGitlab.push(project.nameRepository);
         commitsGitlab.push(project.quantityCommits);
       });

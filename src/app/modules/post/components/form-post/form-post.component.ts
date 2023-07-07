@@ -9,6 +9,7 @@ import {
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { DataService } from 'src/app/api/services/data/data.service';
+import { UserService } from 'src/app/api/services/user/user.service';
 import { Item } from 'src/app/shared/models/model-forms/item-form.interface';
 import { Post } from 'src/app/shared/models/post/post.class';
 import { User } from 'src/app/shared/models/user/user.class';
@@ -39,14 +40,23 @@ export class FormPostComponent implements OnInit {
 
   editor: string = '';
 
+  currentUser: User = localStorage.getItem('user') != "undefined" ? JSON.parse(localStorage.getItem('user')) : undefined;
+
+  searchUser:User = new User();
+
   constructor(
     private dataService: DataService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private userService:UserService
   ) {}
 
   ngOnInit(): void {
     this.getTechnologies();
     this.startFrom();
+  }
+
+  async getCurrentUser(){
+    this.searchUser = await this.userService.detailsUserAsync(this.currentUser._id);
   }
 
   changeModeCodeBlock() {
@@ -86,7 +96,7 @@ export class FormPostComponent implements OnInit {
       ]),
       project: new FormControl(this.post.project, []),
       technologies: new FormControl(this.post.technologies, [
-        Validators.required,
+        Validators.required,Validators.maxLength(3)
       ]),
     });
   }
@@ -99,9 +109,6 @@ export class FormPostComponent implements OnInit {
     this.newPost.author = this.user._id;
     this.newPost.technologies = this.form.get('technologies').value;
     this.newPost.messages = [];
-
-    console.log(this.newPost);
-    
 
     this.emitPost.emit(this.newPost);
   }
