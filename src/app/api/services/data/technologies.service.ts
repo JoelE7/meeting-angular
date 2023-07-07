@@ -76,7 +76,7 @@ export class TechnologiesService {
     },
     {
       technologie: "C#",
-      icon : "c#.ico"
+      icon : "cllar.ico"
     },
     {
       technologie: "Go",
@@ -158,6 +158,6 @@ export class TechnologiesService {
 
   getIcon(tecnologie:string){
     let icon = this.icons.find(language => language.technologie === tecnologie)
-    return icon.icon;
+    return icon?.icon;
   }
 }

@@ -65,6 +65,8 @@ export class SeeMyProfileComponent {
     let { id } = this.activatedRoute.snapshot.params;
     this.id = id;
     this.searchUser = await this.userService.detailsUserAsync(id);
+    console.log(this.searchUser);
+    
     this.userReceptor = this.searchUser;
     if (this.currentUser) {
       this.currentUser = await this.userService.detailsUserAsync(
