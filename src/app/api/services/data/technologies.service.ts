@@ -32,7 +32,7 @@ export class TechnologiesService {
     },
     {
       technologie: "Spring",
-      icon : "spring.ico"
+      icon : "spring-framework.ico"
     },
     {
       technologie: "Nodejs",
@@ -144,7 +144,7 @@ export class TechnologiesService {
     },
     {
       technologie: "Visual Basic",
-      icon : ""
+      icon : "windows.ico"
     },
     {
       technologie: "Svelte",
