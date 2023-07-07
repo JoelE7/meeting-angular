@@ -158,7 +158,6 @@ export class FormProjectComponent implements OnInit{
         Validators.min(1),
         Validators.max(10)
       ]),
-      lider: new FormControl(this.project.leader ? true : false, []),
       repository: new FormControl(this.project.urlRepository ? this.project.urlRepository  : "", []),
       requestSupport: new FormControl(this.project.requestSupport || false, []),
       validateSystem : new FormControl(this.project.validateSystem ? true : false,[]),
@@ -176,7 +175,7 @@ export class FormProjectComponent implements OnInit{
     this.newproject.amountParticipants =
       this.form.get('amountParticipants').value;
     //this.newproject.status = this.form.get('status').value;
-    this.newproject.leader = this.form.get('lider').value ? this.currentUser._id : "";
+    this.newproject.leader = this.currentUser._id;
     this.newproject.validateSystem = this.form.get('validateSystem').value;
     this.newproject.technologies = this.form.get('technologies').value;
     //this.newproject.requestSupport = this.form.get('requestSupport').value;
