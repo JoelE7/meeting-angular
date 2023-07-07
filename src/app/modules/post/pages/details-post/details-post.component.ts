@@ -68,8 +68,6 @@ export class DetailsPostComponent {
     this.postService.detailsPost(id).subscribe({
       next: (post) => {
         this.searchPost = post;
-        console.log(this.searchPost);
-        
       },
       error: (err) => {
         this.messageService.add({

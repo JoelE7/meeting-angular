@@ -87,8 +87,6 @@ export class ListPostComponent implements OnInit {
   getTechnologies() {
     this.dataService.getTechnologies().subscribe({
       next: (data) => {
-        console.log(data);
-        
         for (let i = 0; i < data.technologies.length; i++) {
           this.technologies.push({
             label: data.technologies[i],
@@ -113,8 +111,6 @@ export class ListPostComponent implements OnInit {
     this.query = this.filtersService.getFilters();
     this.query.method = this.filters.method;
     this.spinner = true;
-    console.log(this.query);
-    
     this.getAllPosts();
   }
 

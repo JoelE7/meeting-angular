@@ -17,7 +17,6 @@ export class AdvancementMembersComponent implements OnInit,DoCheck{
   userSearch = 0;
 
   ngOnInit(): void {
-    console.log(this.members);
   }
 
   ngDoCheck(): void {
