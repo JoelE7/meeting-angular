@@ -74,7 +74,7 @@ export class FormProjectComponent implements OnInit{
         value: 'Web',
       },
       {
-        type: 'Movil',
+        type: 'Móvil',
         value: 'Mobile',
       },
       {

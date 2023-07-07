@@ -111,7 +111,7 @@ export class ListProjectComponent implements OnInit {
               value: 'Web',
             },
             {
-              label: 'Movil',
+              label: 'Móvil',
               value: 'Mobile',
             },
             {

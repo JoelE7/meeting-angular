@@ -37,7 +37,7 @@ export class DetailsPostComponent {
     private messageService: MessageService,
     private postService: PostService,
     private userService: UserService,
-    private technologiesService:TechnologiesService
+    private technologiesService: TechnologiesService
   ) {}
 
   ngOnInit(): void {
@@ -49,7 +49,7 @@ export class DetailsPostComponent {
     }
   }
 
-  getIcon(technologie:string){
+  getIcon(technologie: string) {
     return this.technologiesService.getIcon(technologie);
   }
 
@@ -69,7 +69,6 @@ export class DetailsPostComponent {
       next: (post) => {
         this.searchPost = post;
         console.log(post);
-        
       },
       error: (err) => {
         this.messageService.add({
@@ -78,9 +77,9 @@ export class DetailsPostComponent {
           detail: err.error ? err.error.message : 'Ups! ocurrio un error',
         });
       },
-      complete : ()=>{
+      complete: () => {
         this.spinner = false;
-      }
+      },
     });
   }
 
@@ -98,7 +97,7 @@ export class DetailsPostComponent {
         this.messageService.add({
           severity: 'success',
           summary: 'Hecho!',
-          detail: 'Tu comentario se envio con exito',
+          detail: 'Tu comentario se envió con éxito',
         });
       },
       error: (err) => {

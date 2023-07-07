@@ -12,7 +12,7 @@ Component;
   templateUrl: './create-project.component.html',
   styleUrls: ['./create-project.component.css'],
 })
-export class CreateProjectComponent implements OnInit{
+export class CreateProjectComponent implements OnInit {
   newProject: Project = new Project();
   spinner = true;
 
@@ -32,7 +32,7 @@ export class CreateProjectComponent implements OnInit{
         this.messageService.add({
           severity: 'success',
           summary: 'Creado',
-          detail: '¡El Proyecto fue creado con exito!',
+          detail: '¡El Proyecto fue creado con éxito!',
         });
         this.router.navigate(['/project/list-project']);
       },
