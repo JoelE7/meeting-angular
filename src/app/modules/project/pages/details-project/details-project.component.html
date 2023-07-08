@@ -29,7 +29,8 @@
         searchProject.name }}</a></span>
     <div class="card shadow-sm" style="width: 100%; min-height: 700px">
       <app-banner [title]="searchProject.name" [subtitle]="'Aplicación ' + searchProject.type" [short]="true"
-        [roleUser]="searchProject.roleUser" [project]="searchProject" [updateProject]="searchProject.leader._id === currentUser?._id ? true : false"> 
+        [roleUser]="searchProject.roleUser" [project]="searchProject"
+        [updateProject]="searchProject.leader._id === currentUser?._id ? true : false">
       </app-banner>
       <p-tabView class="p-3" [scrollable]="true" [(activeIndex)]="activeIndex">
         <p-tabPanel [cache]="false" header="Datos del proyecto">
@@ -74,7 +75,8 @@
               <p><b>Tecnologías:</b></p>
               <ul>
                 <li *ngFor="let tecnologie of searchProject.technologies">
-                  <img pTooltip="{{tecnologie}}" class="mx-2 img-technologie" width="25px" height="25px" [src]="'assets/img/technologies/' + getIcon(tecnologie)" [alt]="tecnologie">
+                  <img pTooltip="{{tecnologie}}" class="mx-2 img-technologie" width="25px" height="25px"
+                    [src]="'assets/img/technologies/' + getIcon(tecnologie)" [alt]="tecnologie">
                 </li>
               </ul>
             </div>
@@ -118,14 +120,15 @@
                 <label for="repository">Ingresa el link del repositorio</label>
                 <input type="url" [(ngModel)]="linkRepositoryProject" class="form-control" id="repository-link" />
                 <p-button (click)="linkProjectToRepository()" type="button" [style]="{ width: '100%' }"
-                  label="Vincular repositorio" class="mt-3 mb-2 me-2" styleClass="p-button-outlined p-button-help"></p-button>
+                  label="Vincular repositorio" class="mt-3 mb-2 me-2"
+                  styleClass="p-button-outlined p-button-help"></p-button>
                 <p-button (click)="backLinkToRepository()" type="button" [style]="{ width: '100%' }" label="Cancelar"
                   class="mt-3 " styleClass="p-button-help"></p-button>
               </div>
             </div>
           </div>
         </p-tabPanel>
-       
+
         <p-tabPanel header="Colaborar" *ngIf="!userExistProject">
           <app-support-collaborate (eventEmitterSupportJoinProject)="joinAProject($event)"></app-support-collaborate>
         </p-tabPanel>
@@ -139,8 +142,8 @@
             <hr />
             <div class="row" *ngIf="searchProject.leader;else notLider">
               <div class="col">
-                <app-project-member (eventEmitterUserProgress)="seeProgressMember($event)"
-                  [user]="searchProject.leader" [githubRepo]="searchProject.urlRepository"></app-project-member>
+                <app-project-member (eventEmitterUserProgress)="seeProgressMember($event)" [user]="searchProject.leader"
+                  [githubRepo]="searchProject.urlRepository"></app-project-member>
               </div>
             </div>
             <div class="row">
@@ -162,7 +165,8 @@
             <div class="row" *ngIf="searchProject.participants.length > 0;else notParticipants">
               <div class="col">
                 <app-project-member (eventEmitterUserProgress)="seeProgressMember($event)"
-                  *ngFor="let member of searchProject.participants" [user]="member" [githubRepo]="searchProject.urlRepository"></app-project-member>
+                  *ngFor="let member of searchProject.participants" [user]="member"
+                  [githubRepo]="searchProject.urlRepository"></app-project-member>
               </div>
             </div>
             <div class="row">
@@ -184,7 +188,8 @@
             <div class="row" *ngIf="searchProject.supports.length > 0;else notSupports">
               <div class="col">
                 <app-project-member (eventEmitterUserProgress)="seeProgressMember($event)"
-                  *ngFor="let memberSupport of searchProject.supports" [user]="memberSupport" [githubRepo]="searchProject.urlRepository"></app-project-member>
+                  *ngFor="let memberSupport of searchProject.supports" [user]="memberSupport"
+                  [githubRepo]="searchProject.urlRepository"></app-project-member>
               </div>
             </div>
             <div class="row">
@@ -207,9 +212,18 @@
               </div>
             </div>
             <div class="row mt-3">
-              <div class="col-12">
-                <app-advancement-members *ngIf="commitActivity" [members]="commitActivity"></app-advancement-members>
+              <div class="card text-center" *ngIf="!commitActivity;else advancement">
+                <span>
+                  <p-progressSpinner></p-progressSpinner>
+                </span>
+                <br />
+                <span class="text-center">Cargando...</span>
               </div>
+              <ng-template #advancement>
+                <div class="col-12">
+                  <app-advancement-members *ngIf="commitActivity" [members]="commitActivity"></app-advancement-members>
+                </div>
+              </ng-template>
             </div>
           </div>
         </p-tabPanel>
@@ -222,28 +236,30 @@
             <span class="text-center">Cargando...</span>
           </div>
           <div *ngIf="!spinnerMetric && !messageErrorRepository;else errorRepository">
-          <div class="row" *ngIf="!spinnerMetric">
-            <div class="col-12">
-              <h5 class="mx-3">Commits del proyecto:</h5>
-              <app-chart-bar *ngIf="data" [data]="data"></app-chart-bar>
+            <div class="row" *ngIf="!spinnerMetric">
+              <div class="col-12">
+                <h5 class="mx-3">Commits del proyecto:</h5>
+                <app-chart-bar *ngIf="data" [data]="data"></app-chart-bar>
+              </div>
+            </div>
+            <div class="row" *ngIf="!spinnerMetric">
+              <div class="col-12">
+                <app-char-radar *ngIf="dataRadar" [data]="dataRadar"></app-char-radar>
+              </div>
             </div>
           </div>
-          <div class="row" *ngIf="!spinnerMetric">
-            <div class="col-12">
-              <app-char-radar *ngIf="dataRadar" [data]="dataRadar"></app-char-radar>
-            </div> 
-          </div>
-        </div>
-        <ng-template #errorRepository>
-          <div class="row" *ngIf="messageErrorRepository">
-            <div class="col-12">
-              <p-messages [value]="[{ severity: 'error', detail: 'El repositorio de este proyecto es inválido, no se pueden obtener métricas.' }]" [enableService]="false"
-              [closable]="false"></p-messages>
+          <ng-template #errorRepository>
+            <div class="row" *ngIf="messageErrorRepository">
+              <div class="col-12">
+                <p-messages
+                  [value]="[{ severity: 'error', detail: 'El repositorio de este proyecto es inválido, no se pueden obtener métricas.' }]"
+                  [enableService]="false" [closable]="false"></p-messages>
+              </div>
             </div>
-          </div>
-        </ng-template>
+          </ng-template>
         </p-tabPanel>
-        <p-tabPanel header="Solicitudes" *ngIf="searchProject.leader._id === currentUser?._id && !searchProject.validateSystem">
+        <p-tabPanel header="Solicitudes"
+          *ngIf="searchProject.leader._id === currentUser?._id && !searchProject.validateSystem">
           <div class="row" *ngIf="searchProject.requests.length > 0;else notRequest">
             <div class="col">
               <app-request-member (eventEmitterUserRequest)="userRequestResponsesLeader($event)"
@@ -273,29 +289,31 @@
         </p-tabPanel>
         <div class="row mt-3">
           <div class="col-12 btnInd">
-            <p-button class=" mb-3 me-2 mb-sm-3 me-sm-2 me-md-2" *ngIf="currentUser" type="button" styleClass="p-button-outlined p-button-help"
-              label="Sugerir Proyecto" [style]="{ heigth: '30px !important' }"
-              (click)="invitationProjectPopUp()"></p-button>
-            <p-button class=" me-sm-2 me-md-2" (click)="joinAProject()" *ngIf="searchProject.validateSystem && !userExistProject" type="button" [style]="{ width: '100%' }"
-              label="Unirse al Proyecto"  styleClass="p-button-help"></p-button>
+            <p-button class=" mb-3 me-2 mb-sm-3 me-sm-2 me-md-2" *ngIf="currentUser" type="button"
+              styleClass="p-button-outlined p-button-help" label="Sugerir Proyecto"
+              [style]="{ heigth: '30px !important' }" (click)="invitationProjectPopUp()"></p-button>
+            <p-button class=" me-sm-2 me-md-2" (click)="joinAProject()"
+              *ngIf="searchProject.validateSystem && !userExistProject" type="button" [style]="{ width: '100%' }"
+              label="Unirse al Proyecto" styleClass="p-button-help"></p-button>
             <p-button class=" me-sm-2 me-md-2" type="button" styleClass="p-button-help" label="Finalizar Proyecto"
               *ngIf="
                 currentUser &&
                 searchProject?.leader?._id === currentUser._id &&
                 searchProject.status != 'Done'
               " [style]="{ heigth: '30px !important' }" (click)="showFinishProjectPopUp()"></p-button>
-              <p-button class="me-sm-2 me-md-2" (click)="
-              leaveProjectConfirm()" type="button" styleClass="p-button-help"
-                label="Abandonar proyecto" *ngIf="this.searchProject.leader._id != currentUser?._id && userExistProject"
-                [style]="{ heigth: '30px !important' }"></p-button>
-                <p-button class="btnInd me-sm-2 me-md-2" (click)="
+            <p-button class="me-sm-2 me-md-2" (click)="
+              leaveProjectConfirm()" type="button" styleClass="p-button-help" label="Abandonar proyecto"
+              *ngIf="this.searchProject.leader._id != currentUser?._id && userExistProject"
+              [style]="{ heigth: '30px !important' }"></p-button>
+            <p-button class="btnInd me-sm-2 me-md-2" (click)="
                 cancelRequestToJoinTheProject()" type="button" styleClass="p-button-outlined p-button-help"
-                  label="Cancelar solicitud" [loading]="cancelRequestProjectSpinner" *ngIf="!searchProject.validateSystem && userExistSendRequest && !userExistProject"
-                  [style]="{ heigth: '30px !important' }"></p-button>
-                  <p-button class="btnInd  me-sm-2 me-md-2" (click)="
-                  sendRequestToJoinTheProject()" type="button" styleClass="p-button-help"
-                    label="Enviar solicitud"  *ngIf="!searchProject.validateSystem && !userExistSendRequest && !userExistProject && currentUser"
-                    [style]="{ heigth: '30px !important' }" [loading]="sendRequestProjectSpinner" ></p-button>
+              label="Cancelar solicitud" [loading]="cancelRequestProjectSpinner"
+              *ngIf="!searchProject.validateSystem && userExistSendRequest && !userExistProject"
+              [style]="{ heigth: '30px !important' }"></p-button>
+            <p-button class="btnInd  me-sm-2 me-md-2" (click)="
+                  sendRequestToJoinTheProject()" type="button" styleClass="p-button-help" label="Enviar solicitud"
+              *ngIf="!searchProject.validateSystem && !userExistSendRequest && !userExistProject && currentUser"
+              [style]="{ heigth: '30px !important' }" [loading]="sendRequestProjectSpinner"></p-button>
           </div>
         </div>
       </p-tabView>

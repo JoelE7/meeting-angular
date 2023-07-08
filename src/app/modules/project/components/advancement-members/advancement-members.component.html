@@ -1,4 +1,11 @@
-<p-accordion [activeIndex]="activeIndex">
+<div class="card text-center" *ngIf="members.length == 0">
+    <span>
+      <p-progressSpinner></p-progressSpinner>
+    </span>
+    <br />
+    <span class="text-center">Cargando...</span>
+  </div>
+<p-accordion [activeIndex]="activeIndex" *ngIf="members.length >0">
     <p-accordionTab *ngFor="let user of members" [header]="user.developerUsername">
         <ng-template #accordionHeaderTemplate>
             <div class="user-info">
