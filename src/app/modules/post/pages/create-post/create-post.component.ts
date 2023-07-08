@@ -38,9 +38,7 @@ async getUser(){
 } 
 
 createPost(post: Post) {
-  this.newPost = post;
- 
-  this.postService.createPost(this.newPost).subscribe(
+  this.postService.createPost(post).subscribe(
     (resp) => {
       this.messageService.add({
         severity: 'success',
