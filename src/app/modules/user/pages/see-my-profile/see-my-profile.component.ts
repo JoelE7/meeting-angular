@@ -53,7 +53,7 @@ export class SeeMyProfileComponent {
     private messageService: MessageService,
     private userService: UserService,
     private projectService: ProjectService,
-    private technologiesService:TechnologiesService
+    private technologiesService: TechnologiesService
   ) {}
 
   async ngOnInit() {
@@ -65,13 +65,12 @@ export class SeeMyProfileComponent {
     let { id } = this.activatedRoute.snapshot.params;
     this.id = id;
     this.searchUser = await this.userService.detailsUserAsync(id);
-    console.log(this.searchUser);
-    
+
     this.userReceptor = this.searchUser;
     if (this.currentUser) {
-      this.currentUser = await this.userService.detailsUserAsync(
-        this.currentUser?._id
-      );
+      // this.currentUser = await this.userService.detailsUserAsync(
+      //   this.currentUser?._id
+      // );
       this.idCurrentUser = this.currentUser._id;
     }
 
@@ -86,7 +85,7 @@ export class SeeMyProfileComponent {
     this.spinner = false;
   }
 
-  getIcon(technologie:string){
+  getIcon(technologie: string) {
     return this.technologiesService.getIcon(technologie);
   }
 
@@ -140,6 +139,9 @@ export class SeeMyProfileComponent {
     );
   }
 
+  messagErrorGitHubMetrics = '';
+  messagErrorGitLabMetrics = '';
+
   async linkUsertWithGitlab() {
     if (this.userNameGitlab == '') {
       this.messageService.add({
@@ -178,53 +180,66 @@ export class SeeMyProfileComponent {
   languagesUserGithub: any;
   languagesUserGitlab: any;
 
+  githubError: boolean = false;
+  gitlabError: boolean = false;
+  gitlabCommitError: boolean = false;
+  githubCommitError: boolean = false;
+
   async getLanguagesGithub() {
     this.languagesMetric = await this.userService.getLanguagesGithub(
       this.searchUser._id
     );
 
-    if (
-      this.searchUser?.githubUsername &&
-      this.languagesMetric.githubLanguages
-    ) {
-      let languagesGithub = [];
-      let quantityRepositoryByLanguageGithub = [];
+    if (this.searchUser.githubUsername) {
+      if (this.languagesMetric?.githubLanguages) {
+        let languagesGithub = [];
+        let quantityRepositoryByLanguageGithub = [];
 
-      this.languagesMetric.githubLanguages.forEach((lang: any) => {
-        languagesGithub.push(lang.technology);
-        quantityRepositoryByLanguageGithub.push(lang.quantity);
-      });
+        this.languagesMetric.githubLanguages.forEach((lang: any) => {
+          languagesGithub.push(lang.technology);
+          quantityRepositoryByLanguageGithub.push(lang.quantity);
+        });
 
-      this.languagesUserGithub = {
-        labels: languagesGithub,
-        datasets: [
-          {
-            data: quantityRepositoryByLanguageGithub,
-          },
-        ],
-      };
+        this.languagesUserGithub = {
+          labels: languagesGithub,
+          datasets: [
+            {
+              data: quantityRepositoryByLanguageGithub,
+            },
+          ],
+        };
+      } else {
+        if (this.languagesMetric?.githubLanguages == false) {
+          this.githubError = true;
+        }
+      }
     }
 
-    if (
-      this.currentUser?.gitlabUsername &&
-      this.languagesMetric.gitlabLanguages
-    ) {
-      let languagesGitlab = [];
-      let quantityRepositoryByLanguageGitlab = [];
+    if (this.searchUser.gitlabUsername) {
+      if (
+        this.languagesMetric?.gitlabLanguages
+      ) {
+        let languagesGitlab = [];
+        let quantityRepositoryByLanguageGitlab = [];
 
-      this.languagesMetric.gitlabLanguages.forEach((lang: any) => {
-        languagesGitlab.push(lang.technology);
-        quantityRepositoryByLanguageGitlab.push(lang.quantity);
-      });
+        this.languagesMetric.gitlabLanguages.forEach((lang: any) => {
+          languagesGitlab.push(lang.technology);
+          quantityRepositoryByLanguageGitlab.push(lang.quantity);
+        });
 
-      this.languagesUserGitlab = {
-        labels: languagesGitlab,
-        datasets: [
-          {
-            data: quantityRepositoryByLanguageGitlab,
-          },
-        ],
-      };
+        this.languagesUserGitlab = {
+          labels: languagesGitlab,
+          datasets: [
+            {
+              data: quantityRepositoryByLanguageGitlab,
+            },
+          ],
+        };
+      } else {
+        if (this.languagesMetric?.gitlabLanguages == false) {
+          this.gitlabError = true;
+        }
+      }
     }
   }
 
@@ -236,29 +251,55 @@ export class SeeMyProfileComponent {
     let nameRepositorysGithub = [];
     let commitsGithub = [];
 
-    if (this.searchUser?.githubUsername && this.commitsByUser) {
-      this.commitsByUser.githubMetrics.commitCounts.forEach((project) => {
-        nameRepositorysGithub.push(project.nameRepository);
-        commitsGithub.push(project.quantityCommits);
-      });
+    if (this.commitsByUser) {
+      if (this.searchUser?.githubUsername && this.commitsByUser.githubMetrics) {
+        this.commitsByUser.githubMetrics.commitCounts.forEach((project) => {
+          nameRepositorysGithub.push(project.nameRepository);
+          commitsGithub.push(project.quantityCommits);
+        });
+      } else {
+        if (this.commitsByUser.githubMetrics == false) {
+          this.githubCommitError = true;
+        }
+      }
+
+      let nameRepositorysGitlab = [];
+      let commitsGitlab = [];
+
+      if (this.searchUser?.gitlabUsername) {
+        if (this.commitsByUser?.gitlabMetrics) {
+          this.commitsByUser?.gitlabMetrics?.commitCounts.forEach((project) => {
+            nameRepositorysGitlab.push(project.nameRepository);
+            commitsGitlab.push(project.quantityCommits);
+          });
+        } else {
+          if (this.commitsByUser.gitlabMetrics == false) {
+            this.gitlabCommitError = true;
+          }
+        }
+      }
+
+      this.getMetricGrafic(
+        nameRepositorysGithub,
+        commitsGithub,
+        nameRepositorysGitlab,
+        commitsGitlab
+      );
+    } else {
     }
 
-    let nameRepositorysGitlab = [];
-    let commitsGitlab = [];
-
-    if (this.searchUser?.gitlabUsername) {
-      this.commitsByUser?.gitlabMetrics?.commitCounts.forEach((project) => {
-        nameRepositorysGitlab.push(project.nameRepository);
-        commitsGitlab.push(project.quantityCommits);
-      });
+    if(this.githubCommitError && this.githubError){
+      this.messagErrorGitHubMetrics = 'El usuario de github no fue encontrado, verifica que sea correcto o actualizalo.';
+    }else {
+      this.messagErrorGitHubMetrics = ""
+    }
+    
+    if(this.gitlabCommitError && this.gitlabError){
+      this.messagErrorGitLabMetrics = 'El usuario de gitlab no fue encontrado, verifica que sea correcto o actualizalo.';
+    }else{
+      this.messagErrorGitLabMetrics = ""
     }
 
-    this.getMetricGrafic(
-      nameRepositorysGithub,
-      commitsGithub,
-      nameRepositorysGitlab,
-      commitsGitlab
-    );
     this.spinnerMetric = false;
   }
 

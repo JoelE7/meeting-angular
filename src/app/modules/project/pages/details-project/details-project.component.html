@@ -28,7 +28,7 @@
       <a routerLink="/project/details-project/1" class="text-secondary" style="text-decoration: none">{{
         searchProject.name }}</a></span>
     <div class="card shadow-sm" style="width: 100%; min-height: 700px">
-      <app-banner [title]="searchProject.name" [subtitle]="'Aplicacion ' + searchProject.type" [short]="true"
+      <app-banner [title]="searchProject.name" [subtitle]="'Aplicación ' + searchProject.type" [short]="true"
         [roleUser]="searchProject.roleUser" [project]="searchProject" [updateProject]="searchProject.leader._id === currentUser?._id ? true : false"> 
       </app-banner>
       <p-tabView class="p-3" [scrollable]="true" [(activeIndex)]="activeIndex">
@@ -221,6 +221,7 @@
             <br>
             <span class="text-center">Cargando...</span>
           </div>
+          <div *ngIf="!spinnerMetric && !messageErrorRepository;else errorRepository">
           <div class="row" *ngIf="!spinnerMetric">
             <div class="col-12">
               <h5 class="mx-3">Commits del proyecto:</h5>
@@ -230,8 +231,17 @@
           <div class="row" *ngIf="!spinnerMetric">
             <div class="col-12">
               <app-char-radar *ngIf="dataRadar" [data]="dataRadar"></app-char-radar>
+            </div> 
+          </div>
+        </div>
+        <ng-template #errorRepository>
+          <div class="row" *ngIf="messageErrorRepository">
+            <div class="col-12">
+              <p-messages [value]="[{ severity: 'error', detail: 'El repositorio de este proyecto es inválido, no se pueden obtener métricas.' }]" [enableService]="false"
+              [closable]="false"></p-messages>
             </div>
           </div>
+        </ng-template>
         </p-tabPanel>
         <p-tabPanel header="Solicitudes" *ngIf="searchProject.leader._id === currentUser?._id && !searchProject.validateSystem">
           <div class="row" *ngIf="searchProject.requests.length > 0;else notRequest">

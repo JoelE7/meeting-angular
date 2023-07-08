@@ -36,6 +36,7 @@ describe('AuthService', () => {
     const req:TestRequest = httpClient.expectOne(`${environment.apiUrl}/users/login`)
 
     expect(req.request.method).toEqual('POST')
+    expect(req.request.body).toEqual(userMock)
 
     req.flush(userMock);
 
@@ -51,7 +52,7 @@ describe('AuthService', () => {
     const req:TestRequest = httpClient.expectOne(`${environment.apiUrl}/users`)
 
     expect(req.request.method).toEqual('POST')
-
+    expect(req.request.body).toEqual(userMock)
     req.flush({});
 
   })

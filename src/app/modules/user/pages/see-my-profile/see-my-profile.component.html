@@ -31,7 +31,7 @@
         <p-tabPanel header="Mi Perfil" id="tableHeader">
           <div *ngIf="searchUser.technologies && searchUser.technologies.length > 0">
             <h5>Tecnologías:</h5>
-            <div >
+            <div>
               <app-technologies *ngIf="searchUser.technologies.length > 0"
                 [technologies]="searchUser.technologies"></app-technologies>
             </div>
@@ -41,10 +41,11 @@
           <p>Accenture</p>
 
           <div *ngIf="searchUser.preferences && searchUser.preferences.length > 0" class="my-4">
-            <h5  class="my-4">Preferencias:</h5>
+            <h5 class="my-4">Preferencias:</h5>
             <cite *ngFor="let technologie of searchUser.preferences; let l = last" title="Preferencias">
-              <img pTooltip="{{technologie}}" class="mx-2 img-technologie" width="40px" height="40px" [src]="'assets/img/technologies/' + getIcon(technologie)" [alt]="technologie">
-            </cite> 
+              <img pTooltip="{{technologie}}" class="mx-2 img-technologie" width="40px" height="40px"
+                [src]="'assets/img/technologies/' + getIcon(technologie)" [alt]="technologie">
+            </cite>
           </div>
           <div class="row" *ngIf="searchUser.githubUsername">
             <div class="col-12">
@@ -139,36 +140,65 @@
             <span class="text-center">Cargando...</span>
           </div>
           <div *ngIf="!spinnerMetric">
-            <div class="row mt-3">
-              <div
-                [ngClass]="{'col-12  ': searchUser.githubUsername && !searchUser.gitlabUsername,
+            <div>
+              <div class="row mt-3">
+                <div
+                  [ngClass]="{'col-12  ': searchUser.githubUsername && !searchUser.gitlabUsername,
                               'col-12 col-sm-6 border-right'  : searchUser.githubUsername && searchUser.gitlabUsername}"
-                class="border-right " *ngIf="searchUser.githubUsername">
-                <h3 class="text-center">Github</h3>
-                <app-chart-doughnut *ngIf="languagesUserGithub" [data]="languagesUserGithub"></app-chart-doughnut>
+                  class="border-right"
+                  *ngIf="searchUser.githubUsername && languagesUserGithub;else githubErr">
+                  <h3 class="text-center">Github</h3>
+                  <app-chart-doughnut *ngIf="languagesUserGithub" [data]="languagesUserGithub"></app-chart-doughnut>
+                </div>
+                <ng-template #githubErr>
+                  <div [ngClass]="{'col-12  ': searchUser.githubUsername && !searchUser.gitlabUsername,
+                  'col-12 col-sm-6 border-right'  : searchUser.githubUsername && searchUser.gitlabUsername}"
+                  *ngIf="githubCommitError == true && githubError == true" 
+                    class="border-right ">
+                    <h3 class="text-center">Github</h3>
+                    <p-messages [value]="[{ severity: 'error', detail: 'El usuario de github no fue encontrado, verifica que sea correcto o actualizalo.' }]" [enableService]="false"
+                      [closable]="false"></p-messages>
+                  </div>
+                </ng-template>
+                <div [ngClass]="{'col-12 col-sm-12': searchUser.githubUsername && !searchUser.gitlabUsername,
+                      'col-12 col-sm-6 '  : searchUser.githubUsername && searchUser.gitlabUsername}"
+                  *ngIf="searchUser.gitlabUsername && languagesUserGitlab;else gitlabErr">
+                  <h3 class="text-center">Gitlab</h3>
+                  <app-chart-doughnut *ngIf="languagesUserGitlab" [data]="languagesUserGitlab"></app-chart-doughnut>
+                </div>
+                <ng-template #gitlabErr>
+                  <div [ngClass]="{'col-12 col-sm-12': searchUser.githubUsername && !searchUser.gitlabUsername,
+                       'col-12 col-sm-6 '  : searchUser.githubUsername && searchUser.gitlabUsername}"
+                       *ngIf="gitlabCommitError == true && gitlabError == true">
+                    <h3 class="text-center" >Gitlab</h3>
+                    <p-messages [value]="[{ severity: 'error', detail: 'El usuario de gitlab no fue encontrado, verifica que sea correcto o actualizalo.' }]" [enableService]="false"
+                      [closable]="false"></p-messages>
+                  </div>
+                </ng-template>
               </div>
-              <div [ngClass]="{'col-12 col-sm-12': searchUser.githubUsername && !searchUser.gitlabUsername,
-              'col-12 col-sm-6 '  : searchUser.githubUsername && searchUser.gitlabUsername}"
-                *ngIf="searchUser.gitlabUsername">
-                <h3 class="text-center">Gitlab</h3>
-                <app-chart-doughnut *ngIf="languagesUserGitlab" [data]="languagesUserGitlab"></app-chart-doughnut>
+              <div class="row mt-3">
+                <div [ngClass]="{'col-12 col-sm-12': searchUser.githubUsername && !searchUser.gitlabUsername,
+                     'col-12 col-sm-6  border-right'  : searchUser.githubUsername && searchUser.gitlabUsername,
+                      'offset-sm-0 offset-lg-6 col-12 col-sm-6' : searchUser.githubUsername && !searchUser.gitlabUsername && gitlabCommitError && gitlabError}" 
+                  *ngIf="searchUser.githubUsername && repositorysCommitsGithub">
+                  <h3 class="text-center">Github</h3>
+                  <app-chart-bar *ngIf="repositorysCommitsGithub" [data]="repositorysCommitsGithub"></app-chart-bar>
+                </div>
+                <div [ngClass]="{'col-12 col-sm-12': searchUser.githubUsername && !searchUser.gitlabUsername && !githubCommitError && !githubError,
+              'col-12 col-sm-6'  : searchUser.githubUsername && searchUser.gitlabUsername && !githubCommitError && !githubError,
+              'col-sm-6' : searchUser.githubUsername && !searchUser.gitlabUsername && githubCommitError && githubError}"
+                  *ngIf=" searchUser.gitlabUsername && repositorysCommitsGitlab">
+                  <h3 class="text-center">Gitlab</h3>
+                  <app-chart-bar *ngIf="repositorysCommitsGitlab" [data]="repositorysCommitsGitlab"></app-chart-bar>
+                </div>
               </div>
             </div>
-            <div class="row mt-3">
-              <div [ngClass]="{'col-12 col-sm-12': searchUser.githubUsername && !searchUser.gitlabUsername,
-              'col-12 col-sm-6  border-right'  : searchUser.githubUsername && searchUser.gitlabUsername}"
-                *ngIf="searchUser.githubUsername">
-                <h3 class="text-center">Github</h3>
-                <app-chart-bar *ngIf="repositorysCommitsGithub" [data]="repositorysCommitsGithub"></app-chart-bar>
-              </div>
-              <div [ngClass]="{'col-12 col-sm-12': searchUser.githubUsername && !searchUser.gitlabUsername,
-              'col-12 col-sm-6 '  : searchUser.githubUsername && searchUser.gitlabUsername}"
-                *ngIf="searchUser.gitlabUsername">
-                <h3 class="text-center">Gitlab</h3>
-                <app-chart-bar *ngIf="repositorysCommitsGitlab" [data]="repositorysCommitsGitlab"></app-chart-bar>
-              </div>
-            </div>
+            <!-- <ng-template #errorMetric>
+              <p-messages [value]="[{ severity: 'error', detail: messagErrorMetrics }]" [enableService]="false"
+                [closable]="false"></p-messages>
+            </ng-template> -->
           </div>
+
         </p-tabPanel>
         <p-tabPanel header="Contacto">
           <div class="row">

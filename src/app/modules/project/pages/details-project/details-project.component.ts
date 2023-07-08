@@ -201,10 +201,15 @@ export class DetailsProjectComponent implements OnInit {
     this.advancement = false;
   }
 
+  messageErrorRepository = false;
+
   async getMetricByProject() {
     this.metricProject = await this.projectService.getMetricByProject(
       this.searchProject._id
     );
+
+
+    if(this.metricProject){
 
     /**Commits de los integrantes del proyecto (últimos 3) */
     this.commitActivity = this.metricProject?.commitActivity;
@@ -226,6 +231,10 @@ export class DetailsProjectComponent implements OnInit {
         this.metricProject?.contributionDistributionByType
       );
     }
+  }else{
+    this.messageErrorRepository = true;
+  }
+
 
     this.spinnerMetric = false;
   }

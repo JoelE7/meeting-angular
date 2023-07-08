@@ -179,6 +179,7 @@ export class FormProjectComponent implements OnInit{
     this.newproject.leader = this.currentUser._id;
     this.newproject.validateSystem = this.form.get('validateSystem').value;
     this.newproject.technologies = this.form.get('technologies').value;
+    this.newproject.urlRepository = this.form.get('repository').value;
     //this.newproject.requestSupport = this.form.get('requestSupport').value;
 
     this.emitProject.emit(this.newproject);
