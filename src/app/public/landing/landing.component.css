@@ -6,10 +6,18 @@
   margin: auto;
 }
 
+.pulgarcito{
+  margin-right: 50px;
+}
+
+
+
+
+
 @media screen and (min-width: 1100px) {
   #page2 {
     min-height: 90vh !important;
-  } 
+  }
 
   #page3 img {
     width: 350px !important;
@@ -18,9 +26,13 @@
 }
 
 @media screen and (max-width: 1100px) {
+  .pulgarcito{
+    margin-right: 0px;
+  }
+
 #page2 {
   min-height: 80vh !important;
-}  
+}
  /* #page3 {
   min-height: 140vh !important;
 }  */
@@ -51,7 +63,7 @@
   #page3 img {
     width: 300px !important;
     height: 250px !important;
-  } 
+  }
   #page5 div {
     width: 100% !important;
   }
@@ -60,6 +72,10 @@
   #page3 img {
     width: 250px !important;
     height: 250px !important;
+  }
+
+  .pulgarcito{
+    margin-right: 50px;
   }
 }
 @media screen and (min-width: 992px) {
@@ -74,7 +90,7 @@
   }
    #page4{
     min-height: 90vh !important;
-  } 
+  }
 }
 @media screen and (max-width: 767px) {
   #page3 img {
@@ -84,6 +100,9 @@
 }
 
 @media screen and (max-width: 600px) {
+  .pulgarcito{
+    margin-right: 0px;
+  }
   #page1 {
     height: 100% !important;
     min-height: 0vh !important;
@@ -99,13 +118,12 @@
   }
  #page2 {
   min-height: 60vh !important;
-}  
+}
   #page2 img {
-    
+
     margin: auto;
-    /* margin-left: 20px; */
-    width: 200px !important;
-    height: 200px !important;
+    width: 150px !important;
+    height: 150px !important;
   }
   #page2 h1 {
     font-size: 35px !important;
@@ -119,7 +137,7 @@
   #page3 {
     height: 100% !important;
   }
-   
+
 
   #page3 h1 {
     font-size: 35px !important;
