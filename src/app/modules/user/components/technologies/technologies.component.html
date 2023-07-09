@@ -1,9 +1,13 @@
 <p-carousel
   [value]="technologies"
-  [numVisible]="7"
+  [numVisible]="3"
   [numScroll]="3"
-  [circular]="true"
+  [circular]="false"
   [autoplayInterval]="5000"
+  [showIndicators]="false"
+  [showNavigators]="false"
+  orientation="horizontal"
+  
 >
   <ng-template let-technologie pTemplate="item" let-rowIndex="rowIndex">
     <div class="item-technologie m-2 text-center py-5 px-3">

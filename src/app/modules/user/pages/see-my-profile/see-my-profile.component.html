@@ -31,9 +31,11 @@
         <p-tabPanel header="Mi Perfil" id="tableHeader">
           <div *ngIf="searchUser.technologies && searchUser.technologies.length > 0">
             <h5>Tecnologías:</h5>
-            <div>
-              <app-technologies *ngIf="searchUser.technologies.length > 0"
-                [technologies]="searchUser.technologies"></app-technologies>
+            <div class="row">
+              <div class="col 12">
+                <app-technologies *ngIf="searchUser.technologies.length > 0"
+                  [technologies]="searchUser.technologies"></app-technologies>
+              </div>
             </div>
           </div>
           <h5>Experiencia Laboral:</h5>
@@ -94,7 +96,7 @@
                 </p>
               </div>
               <div class="row mt-3" *ngIf="visibleInputGithub">
-                <div class="col-6">
+                <div class="col-sm-12 col-lg-6">
                   <label for="github">Ingresa tu nombre de usuario en github</label>
                   <input type="url" [(ngModel)]="userNameGithub" class="form-control" id="github-link" />
                   <p-button (click)="linkUsertWithGithub()" type="button" [style]="{ width: '100%' }"
@@ -106,7 +108,7 @@
 
               <div class="row mt-3" *ngIf="visibleInputGitlab && !searchUser.gitlabUsername &&
               searchUser._id == currentUser?._id">
-                <div class="col-6">
+                <div class="col-sm-12 col-lg-6">
                   <label for="gitlab">Ingresa tu nombre de usuario en gitlab</label>
                   <input type="url" [(ngModel)]="userNameGitlab" class="form-control" id="github-link" />
                   <p-button (click)="linkUsertWithGitlab()" type="button" [style]="{ width: '100%' }"

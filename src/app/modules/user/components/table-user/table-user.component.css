@@ -50,6 +50,11 @@
   position: sticky;
   left:0 ;
  }
+
+ p-table tbody tr .sticky {
+  background-color: #fff;
+ }
+
 }
 
 @media (max-width: 1200px) {

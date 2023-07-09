@@ -18,39 +18,43 @@
     <ng-template pTemplate="body" let-developer let-rowIndex="rowIndex">
       <tr [ngClass]="{'row-accessories': currentUser?._id === developer._id}">
         <td class="text-center fw-bold">{{rowIndex + 1 + (paginate * 10 - 10)}}</td>
-        <td >
-          <div class="developer-avatar d-flex flex-column w-100 h-100 justify-content-center align-items-center" *ngIf="developer.level === 'Trainee'">
+        <td>
+          <div class="developer-avatar d-flex flex-column w-100 h-100 justify-content-center align-items-center"
+            *ngIf="developer.level === 'Trainee'">
             <p-avatar *ngIf="currentUser?._id === developer._id;else trainee" image="assets/img/stormtrooper.png" pBadge
-             severity="danger">
+              severity="danger">
             </p-avatar>
             <p class="m-0 text-center">Trainee</p>
             <ng-template #trainee>
-               <p-avatar image="assets/img/stormtrooper.png" size="xlarge" severity="danger"></p-avatar>
+              <p-avatar image="assets/img/stormtrooper.png" size="xlarge" severity="danger"></p-avatar>
             </ng-template>
           </div>
-          <div class="developer-avatar d-flex flex-column w-100 h-100 justify-content-center align-items-center" *ngIf="developer.level === 'Junior'">
+          <div class="developer-avatar d-flex flex-column w-100 h-100 justify-content-center align-items-center"
+            *ngIf="developer.level === 'Junior'">
             <p-avatar class="p-avatar-icon" *ngIf="currentUser?._id === developer._id; else junior"
               image="assets/img/chewbacca.png" pBadge severity="danger">
-              </p-avatar>
+            </p-avatar>
             <p class="m-0 text-center">Junior</p>
             <ng-template #junior>
-               <p-avatar image="assets/img/chewbacca.png" size="xlarge"  severity="danger"></p-avatar>
+              <p-avatar image="assets/img/chewbacca.png" size="xlarge" severity="danger"></p-avatar>
             </ng-template>
           </div>
-          <div class="developer-avatar d-flex flex-column w-100 h-100 justify-content-center align-items-center" *ngIf="developer.level === 'Semi Senior'">
+          <div class="developer-avatar d-flex flex-column w-100 h-100 justify-content-center align-items-center"
+            *ngIf="developer.level === 'Semi Senior'">
             <p-avatar *ngIf="currentUser?._id === developer._id;else semisenior" image="assets/img/Darth-Vader.png"
               pBadge severity="danger"></p-avatar>
             <p class="m-0 text-center">Semi Senior</p>
             <ng-template #semisenior>
-               <p-avatar image="assets/img/darth-vader.png" size="xlarge" severity="danger"></p-avatar>
+              <p-avatar image="assets/img/darth-vader.png" size="xlarge" severity="danger"></p-avatar>
             </ng-template>
           </div>
-          <div class="developer-avatar d-flex flex-column w-100 h-100 justify-content-center align-items-center" *ngIf="developer.level === 'Senior'">
-            <p-avatar *ngIf="currentUser?._id === developer._id;else senior" image="assets/img/baby-yoda.png"   pBadge
+          <div class="developer-avatar d-flex flex-column w-100 h-100 justify-content-center align-items-center"
+            *ngIf="developer.level === 'Senior'">
+            <p-avatar *ngIf="currentUser?._id === developer._id;else senior" image="assets/img/baby-yoda.png" pBadge
               severity="danger"></p-avatar>
             <p class="m-0 text-center">Senior</p>
             <ng-template #senior>
-              <p-avatar  image="assets/img/baby-yoda.png" size="xlarge"  severity="danger"></p-avatar> 
+              <p-avatar image="assets/img/baby-yoda.png" size="xlarge" severity="danger"></p-avatar>
             </ng-template>
           </div>
 
@@ -60,10 +64,14 @@
           <ul class="developer-skills d-inline" *ngFor="let technologie of developer.technologies let i = index">
             <li class="text-center">
               <div class="d-flex flex-column w-100 h-100 justify-content-center align-items-center">
-                <p-avatar image="assets/img/stormtrooper.png" pTooltip="Trainee" *ngIf="technologie.experience === 'Trainee'"></p-avatar>
-                <p-avatar image="assets/img/chewbacca.png" pTooltip="Junior" *ngIf="technologie.experience === 'Junior'"></p-avatar>
-                <p-avatar image="assets/img/darth-vader.png" pTooltip="Semi Senior" *ngIf="technologie.experience === 'Semi Senior'"></p-avatar>
-                <p-avatar image="assets/img/baby-yoda.png" pTooltip="Senior" *ngIf="technologie.experience === 'Senior'"></p-avatar>
+                <p-avatar image="assets/img/stormtrooper.png" pTooltip="Trainee"
+                  *ngIf="technologie.experience === 'Trainee'"></p-avatar>
+                <p-avatar image="assets/img/chewbacca.png" pTooltip="Junior"
+                  *ngIf="technologie.experience === 'Junior'"></p-avatar>
+                <p-avatar image="assets/img/darth-vader.png" pTooltip="Semi Senior"
+                  *ngIf="technologie.experience === 'Semi Senior'"></p-avatar>
+                <p-avatar image="assets/img/baby-yoda.png" pTooltip="Senior"
+                  *ngIf="technologie.experience === 'Senior'"></p-avatar>
                 {{technologie.nameTechnologie}}
               </div>
             </li>
@@ -71,7 +79,8 @@
         </td>
         <ng-template #preferences>
           <td class="text-center">
-            <ul class="developer-skills d-inline" *ngFor="let technologie of developer.preferences.slice(0,3) let i = index">
+            <ul class="developer-skills d-inline"
+              *ngFor="let technologie of developer.preferences.slice(0,3) let i = index">
               <li class="text-center">
                 <div class="d-flex flex-column w-100 h-100 justify-content-center align-items-center">
                   <p-avatar image="assets/img/stormtrooper.png" pTooltip="Trainee"></p-avatar>
@@ -84,13 +93,18 @@
 
         <td class="text-center">{{ developer.score }}</td>
         <td *ngIf="currentUser" class="btnes text-center">
-          <p-button *ngIf="currentUser._id != developer._id && developer.mailEnabled" (click)="showModalContact(developer)" type="button" pTooltip="Contactar" icon="pi pi-envelope"
-            styleClass="p-button-rounded p-button-help p-button-outlined" class="mx-2"></p-button>
-          <p-button *ngIf="currentUser._id == developer._id || !developer.mailEnabled" [disabled]="true" type="button" icon="pi pi-times" pTooltip="Este usuario no quiere recibir mails"
-            styleClass="p-button-rounded p-button-help p-button-outlined" class="mx-2"></p-button>
-          <p-button (click)="seeProfile(developer._id)" type="button" pTooltip="Ver perfil" icon="pi pi-eye"
-            styleClass="p-button-rounded p-button-help p-button-outlined"
-            [routerLink]="'/user/see-profile/' + developer._id"></p-button>
+          <div class="d-flex flex-row w-100 h-100 justify-content-center">
+            <p-button *ngIf="currentUser._id != developer._id && developer.mailEnabled"
+              (click)="showModalContact(developer)" type="button" pTooltip="Contactar" icon="pi pi-envelope"
+              styleClass="p-button-rounded p-button-help p-button-outlined" class="mx-2"></p-button>
+            <p-button *ngIf="currentUser._id == developer._id || !developer.mailEnabled" [disabled]="true" type="button"
+              icon="pi pi-times" pTooltip="Este usuario no quiere recibir mails"
+              styleClass="p-button-rounded p-button-help p-button-outlined" class="mx-2"></p-button>
+            <p-button (click)="seeProfile(developer._id)" type="button" pTooltip="Ver perfil" icon="pi pi-eye"
+              styleClass="p-button-rounded p-button-help p-button-outlined"
+              [routerLink]="'/user/see-profile/' + developer._id"></p-button>
+          </div>
+
         </td>
       </tr>
     </ng-template>
