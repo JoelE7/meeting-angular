@@ -35,7 +35,7 @@
                 <div class="row">
                     <div class="offset-1 col-10">
                         <p-button type="submit" class="d-block" id="submit" [disabled]="form.invalid" [style]="{'width' : '100%'}"
-                            label="Ingresar" styleClass="p-button-help"></p-button>
+                            label="Ingresar" [loading]="spinnerLogin" styleClass="p-button-help"></p-button>
                     </div>
                     <div class="offset-1 col-10 mt-3">
                         <p class="text-dark text-center link">¿No tienes una cuenta?

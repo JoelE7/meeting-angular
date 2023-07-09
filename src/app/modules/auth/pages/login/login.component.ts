@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit {
   userLogin: User = new User();
   form: FormGroup;
 
+  spinnerLogin = false;
+
   constructor(
     private router: Router,
     private messageService: MessageService,
@@ -29,6 +31,8 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
+    this.spinnerLogin = true;
+
     this.userLogin.email = this.form.get('email').value;
     this.userLogin.password = this.form.get('pass').value;
 
@@ -43,6 +47,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('user', JSON.stringify(data.user));
         this.router.navigate(['/home']);
         this.authService.setLogin(true);
+        this.spinnerLogin = false;
       },
       (err) => {
         this.messageService.add({

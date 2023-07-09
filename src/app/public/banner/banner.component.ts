@@ -36,11 +36,14 @@ export class BannerComponent {
   @Input()
   project:Project;
 
+  spinnerPdf = false;
+
   constructor(private templateService:TemplatesService,private pdfService:PdfService,private messageService:MessageService){
 
   }
 
   generatePdf(){ 
+    this.spinnerPdf = true;
     this.pdfService.downloadCertificate(this.templateService.downloadCertificate(this.project,this.currentUser,this.selectPdfAccordingToRole())).subscribe({
       next : (data)=>{
         let dowload = URL.createObjectURL(data);
@@ -48,6 +51,8 @@ export class BannerComponent {
         link.href = dowload;
         link.download = `Certificado proyecto - ${this.project.name}`;
         link.click();
+        this.spinnerPdf = false;
+
       },
       error : (err)=>{
         this.messageService.add({
