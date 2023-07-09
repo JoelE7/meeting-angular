@@ -1,5 +1,5 @@
 <p-dialog (onHide)="hiddenPopUpModalContact()" header="Redactar mensaje" *ngIf="currentUser && userReceptor._id"
-  [(visible)]="visibleModalContact" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+  [(visible)]="visibleModalContact" [modal]="true" [style]="{ width: '90vw' }" [draggable]="false" [resizable]="false">
   <app-modal-contact [userEmisor]="currentUser" [userReceptor]="userReceptor"
     (emitContact)="sendMailContact($event)"></app-modal-contact>
 </p-dialog>

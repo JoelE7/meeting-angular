@@ -9,12 +9,12 @@
 
 <div *ngIf="!spinner">
 <!-- modal de enviar sugerencia a un comocido sobre ese post -->
-<p-dialog header="Redactar mensaje" *ngIf="currentUser && searchPost._id" [(visible)]="visibleModalSuggest" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+<p-dialog header="Redactar mensaje" *ngIf="currentUser && searchPost._id" [(visible)]="visibleModalSuggest" [modal]="true" [style]="{ width: '90vw' }" [draggable]="false" [resizable]="false">
    <app-modal-suggest [post]="searchPost" [userEmisor]="currentUser" [userReceptor]="searchPost.author" (emitContact)="sendMailSuggestPost($event)"></app-modal-suggest>
 </p-dialog>
 
 <!-- modal de contactar a ese usuario -->
-<p-dialog header="Redactar mensaje" *ngIf="currentUser && userReceptor._id" [(visible)]="visibleModalContact" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+<p-dialog header="Redactar mensaje" *ngIf="currentUser && userReceptor._id" [(visible)]="visibleModalContact" [modal]="true" [style]="{ width: '90vw' }" [draggable]="false" [resizable]="false">
   <app-modal-contact [userEmisor]="currentUser" [userReceptor]="userReceptor" (emitContact)="sendMailContact($event)"></app-modal-contact>
 </p-dialog>
 

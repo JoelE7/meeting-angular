@@ -1,18 +1,14 @@
-<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+<p-confirmDialog [style]="{width: '90vw'}"></p-confirmDialog>
 
-<div class="row">
-  <div class="col-12">
-    <p-dialog [header]="'Finalizar proyecto'" [(visible)]="visiblePopUpScore" *ngIf="visiblePopUpScore">
+    <p-dialog  [style]="{ width: '90vw' }"  [header]="'Finalizar proyecto'" [(visible)]="visiblePopUpScore" *ngIf="visiblePopUpScore">
       <app-modal-score [users]="searchProject.participants"
         (eventEmitterHiddenPopUpScore)="finishProjectHiddenPopUp($event)"
         (eventEmitterScoreUsers)="finishProject($event)"></app-modal-score>
     </p-dialog>
-  </div>
-</div>
 
 
 <p-dialog header="Redactar mensaje" *ngIf="currentUser && searchProject._id" [(visible)]="visiblePopUpInvitationProject"
-  [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+  [modal]="true" [style]="{ width: '90vw' }" [draggable]="false" [resizable]="false">
   <app-modal-invitation-project [project]="searchProject" [userEmisor]="currentUser"
     (emitContact)="sendMailSuggestProject($event)"></app-modal-invitation-project>
 </p-dialog>

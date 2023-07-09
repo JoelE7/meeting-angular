@@ -1,5 +1,5 @@
 <p-dialog header="Redactar mensaje" (onHide)="hiddenPopUpInvitation()" *ngIf="currentUser && userReceptor._id"
-  [(visible)]="visibleModalInvitation" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false"
+  [(visible)]="visibleModalInvitation" [modal]="true" [style]="{ width: '90vw' }" [draggable]="false"
   [resizable]="false">
   <app-modal-invitation [userEmisor]="currentUser" [userReceptor]="userReceptor"
     (emitContact)="sendMailInvitation($event)"></app-modal-invitation>
