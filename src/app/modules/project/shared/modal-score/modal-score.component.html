@@ -1,8 +1,8 @@
 <form [formGroup]="form" (ngSubmit)="submitScore()" *ngIf="users.length > 0"> 
     <div class="container">
         <div class="row">
-            <div class="col">
-                <p-table [value]="users" [tableStyle]="{'min-width': '50rem'}">
+            <div class="col-12">
+                <p-table [value]="users">
                     <ng-template pTemplate="header" let-columns>
                         <tr>
                             <th class="text-dark">Integrante</th>
@@ -11,7 +11,7 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-rowIndex="rowIndex" let-user>
                         <tr>
-                            <td>Ezequiel Sanson</td>
+                            <td>{{user.name}}</td>
                             <td formArrayName="starArray">
                                 <div [formGroupName]="rowIndex">
                                     <p-rating [cancel]="false" formControlName="star"></p-rating>
