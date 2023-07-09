@@ -7,7 +7,7 @@
   [showIndicators]="false"
   [showNavigators]="false"
   orientation="horizontal"
-  
+
 >
   <ng-template let-technologie pTemplate="item" let-rowIndex="rowIndex">
     <div class="item-technologie m-2 text-center py-5 px-3">
@@ -16,7 +16,7 @@
         <p-avatar image="assets/img/chewbacca.png" pTooltip="Junior" *ngIf="technologie.experience === 'Junior'"></p-avatar>
         <p-avatar image="assets/img/darth-vader.png" pTooltip="Semi Senior" *ngIf="technologie.experience === 'Semi Senior'"></p-avatar>
         <p-avatar image="assets/img/baby-yoda.png" pTooltip="Senior" *ngIf="technologie.experience === 'Senior'"></p-avatar>
-        <h6 class="mt-0 mb-3">{{ technologie.nameTechnologie }}</h6>
+        <h6 class="mt-0 mb-3 name-tech">{{ technologie.nameTechnologie }}</h6>
         <!-- <i class="{{technologie.icon}}"></i>  -->
         <!-- <h4 class="mb-1">{{ technologie.level }}</h4> -->
       </div>

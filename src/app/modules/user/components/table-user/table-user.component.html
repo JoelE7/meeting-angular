@@ -59,7 +59,7 @@
           </div>
 
         </td>
-        <td class="text-center sticky">{{ developer.name }}</td>
+        <td class="text-center sticky" [ngClass]="{'row-accessories': currentUser?._id === developer._id}">{{ developer.name }}</td>
         <td class="text-center" *ngIf="developer.technologies.length > 0;else preferences">
           <ul class="developer-skills d-inline" *ngFor="let technologie of developer.technologies let i = index">
             <li class="text-center">
@@ -104,7 +104,6 @@
               styleClass="p-button-rounded p-button-help p-button-outlined"
               [routerLink]="'/user/see-profile/' + developer._id"></p-button>
           </div>
-
         </td>
       </tr>
     </ng-template>

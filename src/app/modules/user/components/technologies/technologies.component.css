@@ -12,11 +12,16 @@
 }
 
 /* hasta 375 sea menor a 767px */
-@media (max-width: 375px) {
+@media (max-width: 430px) {
   .item-technologie {
     text-align: center;
     align-items: center;
     border: 1px solid #c42e6c !important;
-    /* height: 25px; */
+    padding: 10px !important;
+  }
+
+  .name-tech{
+    font-size: 10px;
+    margin-bottom: 0 !important;
   }
 }

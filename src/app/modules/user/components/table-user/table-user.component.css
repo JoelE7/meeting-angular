@@ -1,6 +1,5 @@
 .row-accessories {
-  background-color:#f1b3cd!important;
- 
+  background-color:#f1b3cd !important;
 }
 
 .developer-avatar {
@@ -9,10 +8,10 @@
 }
 .developer-avatar img {
   width: 50px;
- height: 50px;
- border-radius: 50%;
- border: 1px solid rgb(71, 71, 71);
- object-fit: cover;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid rgb(71, 71, 71);
+  object-fit: cover;
 }
 
 .developer-skills {
@@ -34,9 +33,9 @@
 }
 
 .p-datatable .p-datatable-thead tr th {
-   border: 1px solid #c42e6c;
-   background-color: #c42e6c !important;
-   color: #fff;
+  border: 1px solid #c42e6c;
+  background-color: #c42e6c !important;
+  color: #fff;
 }
 
 .p-dialog .p-dialog-header {
@@ -46,21 +45,21 @@
 
 /* desde 991.98px sea menor a 991.98px */
 @media (max-width: 991.98px) {
- .p-datatable .sticky{
-  position: sticky;
-  left:0 ;
- }
 
- p-table tbody tr .sticky {
-  background-color: #fff;
- }
-
-}
-
-@media (max-width: 1200px) {
-  .btnes {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .p-datatable .sticky{
+    position: sticky;
+    left:0 ;
   }
+
+  p-table tbody tr .sticky {
+    background-color: #fff;
+    border-bottom: 1px solid rgb(224, 224, 224) !important;
+    border-right: 1px solid rgb(224, 224, 224) !important;
+  }
+
+  p-table tbody tr .sticky .row-accessories {
+    background-color:#f1b3cd !important;
+  }
+
 }
+
