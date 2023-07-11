@@ -25,7 +25,7 @@
 }
 
 .min-height{
-  min-height: 400px !important;
+  min-height: 550px !important;
   display:flex;
 
 flex-direction:column;
