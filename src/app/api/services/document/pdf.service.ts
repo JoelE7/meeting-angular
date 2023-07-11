@@ -31,4 +31,23 @@ export class PdfService {
       );
   }
 
+  dowload(html:any){
+    let headers = new HttpHeaders();
+    // headers = headers.append(
+    //   'Authorization',
+    //   'Bearer ' + localStorage.getItem('token')
+    // );
+
+    return this.http
+      .get(
+        'assets/pdf/certificado.pdf',
+        { headers: headers, responseType: "blob" }
+      )
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
 }

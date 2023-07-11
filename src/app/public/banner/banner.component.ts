@@ -39,22 +39,41 @@ export class BannerComponent {
 
   spinnerPdf = false;
 
-  constructor(private templateService:TemplatesService,private pdfService:PdfService,private messageService:MessageService,private http:HttpClient){
+  constructor(private templateService:TemplatesService,private pdfService:PdfService,private messageService:MessageService){
 
   }
 
   generatePdf(){ 
     this.spinnerPdf = true;
-    const filePath = '/assets/pdf/certificado.pdf';
-    this.http.get(filePath, { responseType: 'blob' }).subscribe((blob: Blob) => {
-      const downloadURL = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = downloadURL;
-      link.download = 'certificado-meeting.pdf';
-      link.click();
-      URL.revokeObjectURL(downloadURL);
-      this.spinnerPdf = false;
-    });
+    // const filePath = '/assets/pdf/certificado.pdf';
+    // this.http.get(filePath, { responseType: 'blob' }).subscribe((blob: Blob) => {
+    //   const downloadURL = URL.createObjectURL(blob);
+    //   const link = document.createElement('a');
+    //   link.href = downloadURL;
+    //   link.download = 'certificado-meeting.pdf';
+    //   link.click();
+    //   URL.revokeObjectURL(downloadURL);
+    //   this.spinnerPdf = false;
+    // });
+
+    this.pdfService.dowload("").subscribe(({
+      next : (data)=>{
+        const downloadURL = URL.createObjectURL(data);
+        const link = document.createElement('a');
+        link.href = downloadURL;
+        link.download = `Certificado proyecto - ${this.project.name}`;
+        link.click();
+        URL.revokeObjectURL(downloadURL);
+        this.spinnerPdf = false;
+      },
+      error : (err)=>{
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error ? err.error.message : 'Ups! ocurrio un error',
+        });
+      }
+    }))
 
 
     // this.pdfService.downloadCertificate(this.templateService.downloadCertificate(this.project,this.currentUser,this.selectPdfAccordingToRole())).subscribe({

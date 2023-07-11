@@ -23,3 +23,20 @@
   background-color: #c42e6c !important;
   border: 1px solid #ad2c73 !important;
 }
+
+.min-height{
+  min-height: 400px !important;
+  display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+}
+
+@media screen and (max-width: 600px) {
+  .min-height{
+    min-height: 0 !important;
+  }
+}

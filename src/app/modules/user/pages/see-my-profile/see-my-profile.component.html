@@ -4,7 +4,7 @@
   <app-modal-invitation [userEmisor]="currentUser" [userReceptor]="userReceptor"
     (emitContact)="sendMailInvitation($event)"></app-modal-invitation>
 </p-dialog>
-<div class="card text-center" *ngIf="spinner">
+<div class="card text-center min-height" *ngIf="spinner">
   <span>
     <p-progressSpinner></p-progressSpinner>
   </span>
