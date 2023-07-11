@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class LandingComponent {
 
+  logMessage() {
+    console.log(); // Console.log vacío
+  }  
 }
