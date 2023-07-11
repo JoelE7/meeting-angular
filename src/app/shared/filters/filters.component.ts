@@ -31,7 +31,7 @@ export class FiltersComponent {
       //   col: 'col-12 col-md-6 mt-3 mt-md-2',
       //   title: 'Input text 1',
       //   inputStyle: {
-      //     // 'margin-left' : "5px"
+          // 'margin-left' : "5px"
       //   },
       //   order: 1,
       //   inputClass: 'form-control ml-5',
