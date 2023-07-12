@@ -145,7 +145,7 @@
               <div class="row mt-3">
                 <div
                   [ngClass]="{'col-12  ': searchUser.githubUsername && !searchUser.gitlabUsername,
-                              'col-12 col-sm-6 border-right'  : searchUser.githubUsername && searchUser.gitlabUsername}"
+                              'col-12 col-sm-12 col-lg-6 border-right'  : searchUser.githubUsername && searchUser.gitlabUsername}"
                   class="border-right"
                   *ngIf="searchUser.githubUsername && languagesUserGithub;else githubErr">
                   <h3 class="text-center">Github</h3>
@@ -153,41 +153,45 @@
                 </div>
                 <ng-template #githubErr>
                   <div [ngClass]="{'col-12  ': searchUser.githubUsername && !searchUser.gitlabUsername,
-                  'col-12 col-sm-6 border-right'  : searchUser.githubUsername && searchUser.gitlabUsername}"
+                  'col-12 col-sm-12 col-lg-6 border-right'  : searchUser.githubUsername && searchUser.gitlabUsername}"
                   *ngIf="githubCommitError == true && githubError == true" 
                     class="border-right ">
                     <h3 class="text-center">Github</h3>
-                    <p-messages [value]="[{ severity: 'error', detail: 'El usuario de github no fue encontrado, verifica que sea correcto o actualizalo.' }]" [enableService]="false"
+                    <p-messages *ngIf="currentUser._id == searchUser._id" [value]="[{ severity: 'error', detail: 'El usuario de github no fue encontrado, verifica que sea correcto o actualizalo.' }]" [enableService]="false"
+                      [closable]="false"></p-messages>
+                    <p-messages *ngIf="currentUser._id != searchUser._id" [value]="[{ severity: 'error', detail: 'El usuario de github de está persona tiene un error, no se pudieron obtener las estadísticas'}]" [enableService]="false"
                       [closable]="false"></p-messages>
                   </div>
                 </ng-template>
                 <div [ngClass]="{'col-12 col-sm-12': searchUser.githubUsername && !searchUser.gitlabUsername,
-                      'col-12 col-sm-6 '  : searchUser.githubUsername && searchUser.gitlabUsername}"
+                      'col-12 col-sm-12 col-lg-6 '  : searchUser.githubUsername && searchUser.gitlabUsername}"
                   *ngIf="searchUser.gitlabUsername && languagesUserGitlab;else gitlabErr">
                   <h3 class="text-center">Gitlab</h3>
                   <app-chart-doughnut *ngIf="languagesUserGitlab" [data]="languagesUserGitlab"></app-chart-doughnut>
                 </div>
                 <ng-template #gitlabErr>
                   <div [ngClass]="{'col-12 col-sm-12': searchUser.githubUsername && !searchUser.gitlabUsername,
-                       'col-12 col-sm-6 '  : searchUser.githubUsername && searchUser.gitlabUsername}"
+                       'col-12 col-sm-12 col-lg-6'  : searchUser.githubUsername && searchUser.gitlabUsername}"
                        *ngIf="gitlabCommitError == true && gitlabError == true">
                     <h3 class="text-center" >Gitlab</h3>
-                    <p-messages [value]="[{ severity: 'error', detail: 'El usuario de gitlab no fue encontrado, verifica que sea correcto o actualizalo.' }]" [enableService]="false"
+                    <p-messages *ngIf="currentUser._id == searchUser._id" [value]="[{ severity: 'error', detail: 'El usuario de gitlab no fue encontrado, verifica que sea correcto o actualizalo.' }]" [enableService]="false"
+                      [closable]="false"></p-messages>
+                      <p-messages *ngIf="currentUser._id != searchUser._id" [value]="[{ severity: 'error', detail: 'El usuario de gitlab de está persona tiene un error, no se pudieron obtener las estadísticas'}]" [enableService]="false"
                       [closable]="false"></p-messages>
                   </div>
                 </ng-template>
               </div>
               <div class="row mt-3">
                 <div [ngClass]="{'col-12 col-sm-12': searchUser.githubUsername && !searchUser.gitlabUsername,
-                     'col-12 col-sm-6  border-right'  : searchUser.githubUsername && searchUser.gitlabUsername,
-                      'offset-sm-0 offset-lg-6 col-12 col-sm-6' : searchUser.githubUsername && !searchUser.gitlabUsername && gitlabCommitError && gitlabError}" 
+                     'col-12 col-sm-12 col-lg-6  border-right'  : searchUser.githubUsername && searchUser.gitlabUsername,
+                     }" 
                   *ngIf="searchUser.githubUsername && repositorysCommitsGithub">
                   <h3 class="text-center">Github</h3>
                   <app-chart-bar *ngIf="repositorysCommitsGithub" [data]="repositorysCommitsGithub"></app-chart-bar>
                 </div>
                 <div [ngClass]="{'col-12 col-sm-12': searchUser.githubUsername && !searchUser.gitlabUsername && !githubCommitError && !githubError,
-              'col-12 col-sm-6'  : searchUser.githubUsername && searchUser.gitlabUsername && !githubCommitError && !githubError,
-              'col-sm-6' : searchUser.githubUsername && !searchUser.gitlabUsername && githubCommitError && githubError}"
+              'col-12 col-sm-12 col-lg-6'  : searchUser.githubUsername && searchUser.gitlabUsername && !githubCommitError && !githubError,
+             }"
                   *ngIf=" searchUser.gitlabUsername && repositorysCommitsGitlab">
                   <h3 class="text-center">Gitlab</h3>
                   <app-chart-bar *ngIf="repositorysCommitsGitlab" [data]="repositorysCommitsGitlab"></app-chart-bar>
